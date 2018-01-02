@@ -24,6 +24,8 @@ public abstract class Square {
 		this.color = color;
 	}
 
+	public abstract void squareLogic(Player p);
+	
 	public String getNavn() {
 		return name;
 	}
@@ -47,13 +49,6 @@ public abstract class Square {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
-	
-	
-	
-	public abstract void squareLogic(Player p, PlayerList playerlist, Out out, Gui gui);
-	
-	
 
 	
 }
