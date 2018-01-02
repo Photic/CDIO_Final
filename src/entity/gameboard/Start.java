@@ -14,9 +14,9 @@ public class Start extends Square {
 	}
 
 	@Override
-	public void squareLogic(Player p, PlayerList playerlist, Out out, Gui gui) 
+	public void squareLogic(Player p) 
 	{
-		
+		// Går over start
 	}
 
 	
