@@ -15,10 +15,9 @@ public class Territory extends Square {
 
 	private String rent;
 	private boolean isOwned;
-	private Player owner;
+	private String owner;
 
-	public Territory(String name, String description, Color color) 
-	{
+	public Territory(String name, String description, Color color) {
 		super(name, description, color);
 		this.isOwned = false;
 	}
@@ -27,9 +26,16 @@ public class Territory extends Square {
 	 * If the territory is owned, get and the owner is not the player landing there, make him pay rent.
 	 */
 	@Override
-	public void squareLogic(Player p) 
-	{
+	public void squareLogic(Player p) {
 		
+	}
+
+	public String getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player p) {
+		this.owner = p.getName();
 	}
 	
 }
