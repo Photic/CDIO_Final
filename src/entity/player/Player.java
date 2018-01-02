@@ -1,4 +1,4 @@
-package entity;
+package entity.player;
 
 
 /**
@@ -10,34 +10,18 @@ public class Player {
 		
 	
 	private String name;
-	private int money, position, walkedSquares;
+	private int position, walkedSquares;
 	private boolean isDead, inJail;
+	private Account account = new Account();
 
-	public Player(String n, int startMoney)
+	public Player(String n)
 	{
 		this.name = n;
-		this.money = startMoney;
 		this.isDead = false;
 		this.inJail = false;
 		this.position = 0;
 		this.walkedSquares = 0;
 	}
-
-	/**
-	 * Roll 2 dice and return the sum of their facevalues.
-	 * @param die1
-	 * @param die2
-	 * @return
-	 * Sum of facevalues.
-	 */
-	public int rollDice(Die die1, Die die2) 
-	{
-		die1.rollDie();
-		die2.rollDie();
-		setWalkedSquares(walkedSquares + (die1.getFaceValue()+die2.getFaceValue()));
-		return die1.getFaceValue()+die2.getFaceValue();
-	}
-	
 	
 	//--------------------------------------------------------
 	//
@@ -51,12 +35,12 @@ public class Player {
 
 	public int getBalance() 
 	{
-		return money;
+		return account.getBalance();
 	}
 
-	public void setBalance(int score) 
+	public void setBalance(int credit) 
 	{
-		this.money = score;
+		account.setBalance(credit);
 	}	
 
 	public boolean isDead() {

@@ -1,7 +1,7 @@
 package entity.deck;
 
-import entity.Player;
-import entity.PlayerList;
+import entity.player.Player;
+import entity.player.PlayerList;
 
 public class MovePlayer extends Card {
 

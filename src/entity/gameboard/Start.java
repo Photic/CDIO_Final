@@ -1,11 +1,8 @@
 package entity.gameboard;
 
 import java.awt.Color;
-
-import boundary.Gui;
-import boundary.Out;
-import entity.Player;
-import entity.PlayerList;
+import entity.player.Player;
+import entity.player.PlayerList;
 
 public class Start extends Square {
 	

@@ -1,16 +1,16 @@
 package entity.deck;
 
-import entity.Player;
-import entity.PlayerList;
+import entity.player.Player;
+import entity.player.PlayerList;
 
 public class PayMoney extends Card {
 
 	private String description;
-	private int money;
+	private int credit;
 	
 	public PayMoney(String description, int action) {
 		super(description, action);
-		this.money = action;
+		this.credit = action;
 		this.description = description;
 	}
 
@@ -19,13 +19,13 @@ public class PayMoney extends Card {
 	 */
 	@Override
 	public void cardFunction(Player p, PlayerList plist) {
-		if (money == 0)
+		if (credit == 0)
 		{
 			ekstra();
 		}
 		else
 		{
-			p.setBalance(p.getBalance()-money);
+			p.setBalance(-credit);
 		}
 	}
 	

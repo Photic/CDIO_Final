@@ -1,7 +1,10 @@
 package entity.deck;
 
-public class Deck {
+import entity.player.Player;
+import entity.player.PlayerList;
 
+public class Deck {
+	
 	public Card[] deck = {
 			new RecieveMoney("“Det er deres fødselsdag. Modtag af hver medspiller kr. 200.”", 0),
 			new RecieveMoney("“Værdien af egen avl fra nyttehaven udgør kr. 200, som De modtager af banken.”", 200),
@@ -25,9 +28,9 @@ public class Deck {
 			new PayMoney("“Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr. hus, kr. 2.300 per hotel”", 0),
 			new PayMoney("“Oliepriserne er steget, og De skal betale: kr. 500 pr. hus, kr. 2.000 per. hotel”", 0),
 			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
-						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 0),
+						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 1),
 			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
-						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 0),
+						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 1),
 			new JailCard("“Gå i fængsel. Ryk direkte til fængslet. "
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 0),
 			new JailCard("“Gå i fængsel. Ryk direkte til fængslet. "
@@ -41,5 +44,38 @@ public class Deck {
 			new MovePlayer("“Ryk frem til Grønningen. Hvis De passerer “Start”, indkassér da kr. 4.000.”", 4000),
 			new MovePlayer("“Ryk frem til Frederiksberg Allé. Hvis De passerer “Start, indkassér kr. 4.000.”", 0)
 	};
+	
+	/**
+	 * Function to shuffle any objevt array.
+	 * @param deck
+	 */
+	public void shuffleCards() {
+		for (int i = 0; i < this.deck.length; i++) {
+			int s = i + (int)(Math.random() * (this.deck.length - i));
+			Card temp = this.deck[s];
+			this.deck[s] = this.deck[i];
+			this.deck[i] = temp;
+		}
+	}
+	
+	/**
+	 * Pick a card from the top of the deck.
+	 * @param pickCardFromDeck
+	 */
+	public void pickACard(Player p, PlayerList plist) {
+		this.deck[0].cardFunction(p, plist);
+		
+		Card[] tempDeck = new Card[this.deck.length];
+		tempDeck[this.deck.length-1] = this.deck[0];
+		
+		for (int i = 0; i < this.deck.length-1; i++)
+			tempDeck[i] = this.deck[i+1];
+		
+		this.deck = tempDeck;
+	}
+	
+	public Card getCard(int a) {
+		return deck[a];
+	}
 	
 }

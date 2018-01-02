@@ -1,7 +1,7 @@
 package entity.deck;
 
-import entity.Player;
-import entity.PlayerList;
+import entity.player.Player;
+import entity.player.PlayerList;
 
 public class JailCard extends Card {
 	
@@ -19,7 +19,14 @@ public class JailCard extends Card {
 	 */
 	@Override
 	public void cardFunction(Player p, PlayerList plist) {
-		
+		if (action == 0)
+		{
+			// Some code that allows the player to keep at card to get out of jail.
+		}
+		else if (action == 1)
+		{
+			// Some code that puts the player in jail,
+		}
 	}
 
 	/**
