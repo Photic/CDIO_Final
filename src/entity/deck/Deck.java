@@ -21,7 +21,7 @@ public class Deck {
 			new PayMoney("“Betal kr. 3.000 for reperation af Deres vogn.”", 3000),
 			new PayMoney("“De modtager “Matador-legatet for værdi trængende”, stort kr. 40.000. "
 						+ "Ved værdig trængende forstås, at Deres formue, d.v.s. "
-						+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 40_000),
+						+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 0),
 			new PayMoney("“Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr. hus, kr. 2.300 per hotel”", 0),
 			new PayMoney("“Oliepriserne er steget, og De skal betale: kr. 500 pr. hus, kr. 2.000 per. hotel”", 0),
 			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "

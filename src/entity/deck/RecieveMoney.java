@@ -15,6 +15,9 @@ public class RecieveMoney extends Card {
 		this.description = description;
 	}
 
+	/**
+	 * Abstract override, extended from Card.
+	 */
 	@Override
 	public void cardFunction(Player p, PlayerList plist) {
 		if (money == 0)
