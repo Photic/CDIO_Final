@@ -1,19 +1,19 @@
 package entity.deck;
 
 import entity.Player;
+import entity.PlayerList;
 
 public abstract class Card {
 	
 	/**
 	 * Constructor
-	 * @param name
 	 * @param description
-	 * @param money
+	 * @param action
 	 */
-	public Card(String name, String description, int money) {
-		// Abstract class to create a card
+	public Card(String description, int action) {
+		// Abstract class to create a card type
 	}
 
-	public abstract void cardFunction(Player p);
+	public abstract void cardFunction(Player p, PlayerList plist);
 	
 }

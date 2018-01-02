@@ -1,17 +1,17 @@
 package entity.deck;
 
 import entity.Player;
+import entity.PlayerList;
 
 public class JailCard extends Card {
-
-	public JailCard(String name, String description, int money) {
-		super(name, description, money);
+	
+	public JailCard(String description, int action) {
+		super(description, action);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void cardFunction(Player p) {
-		// TODO Auto-generated method stub
+	public void cardFunction(Player p, PlayerList plist) {
 		
 	}
 
