@@ -21,15 +21,15 @@ public class GameBoard {
 	private final Square[] squares = 
 		{
 			new Start("Start", "Modtag kr. 4.000", standard),
-			new Territory("Rødovervej", "kr. 1.200", white),
+			new Territory("Rødovervej", "kr. 1.200", blue),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Hvidovrevej", "kr. 1.200", white),
+			new Territory("Hvidovrevej", "kr. 1.200", blue),
 			new Tax("Betal inkomstskat", "10% eller kr. 4.000", standard),
 			new ShippingCompany("Rederiet Lindinger A/S", "kr. 4.000", standard),
-			new Territory("Roskildevej", "kr. 2.000", red),
+			new Territory("Roskildevej", "kr. 2.000", pink),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Valby Langgade", "kr. 2.000", red),
-			new Territory("Allégade", "kr. 2.400", red),
+			new Territory("Valby Langgade", "kr. 2.000", pink),
+			new Territory("Allégade", "kr. 2.400", pink),
 			new Jail("Fængsel", "På Besøg", standard),
 			new Territory("Frederiksberg Allé", "kr. 2.800", green),
 			new Company("Coca-Cola", "kr. 3.000", standard),
@@ -57,9 +57,9 @@ public class GameBoard {
 			new Territory("Nygade", "kr. 6.400", yellow),
 			new ShippingCompany("Skandinavisk Linietrafik", "kr. 4.000", standard),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Frederiksberggade", "kr. 7.000", brown),
+			new Territory("Frederiksberggade", "kr. 7.000", purple),
 			new Tax2_0("Ekstraordinær statsskat", "betal kr. 2.000", standard),
-			new Territory("Rådhuspladsen", "kr. 8.000", brown)
+			new Territory("Rådhuspladsen", "kr. 8.000", purple)
 		};
 
 	public Square getField(int a)
