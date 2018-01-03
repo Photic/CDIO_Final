@@ -26,9 +26,7 @@ public class Territory extends Field {
 		
 	}
 
-	/**
-	 * If the territory is owned, get and the owner is not the player landing there, make him pay rent.
-	 */
+	
 	@Override
 	public void squareLogic(Player p) {
 		
@@ -37,6 +35,10 @@ public class Territory extends Field {
 	
 	public void addHouse() {
 		this.houses++;
+	}
+	
+	public void removeHouse() {
+		this.houses--;
 	}
 	
 	
