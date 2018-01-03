@@ -25,13 +25,12 @@ public class testingCards {
 	
 	@After
 	public void teardown() {
-		for (int i = 1; i < this.deck.getLength(); i++) 
-			if (this.deck.getCard(0) != this.deck.getCard(i))
-				this.countAfter++;
-		
-		assertEquals(this.deck.getLength()-1, this.countAfter);
+		// Not sure what to put here yet.
 	}
 	
+	/**
+	 * Testing the pickACard function, and ending the test with seeing if all cards are still unique.
+	 */
 	@Test
 	public void test01() {
 	
@@ -45,12 +44,30 @@ public class testingCards {
 		
 		assertEquals(10_000, this.countBefore);
 		
+		for (int i = 1; i < this.deck.getLength(); i++) 
+			if (this.deck.getCard(0) != this.deck.getCard(i))
+				this.countAfter++;
+		
+		assertEquals(this.deck.getLength()-1, this.countAfter);
+		
 	}
 	
+	/**
+	 * Testing the shuffleCards function, and ending the test with seeing if all cards are still unique.
+	 */
 	@Test
 	void test02()
 	{
+		for (int i = 0; i < 10_000; i++) {
+			this.deck.shuffleCards();
+		}
 		
+		for (int i = 1; i < this.deck.getLength(); i++) 
+			if (this.deck.getCard(0) != this.deck.getCard(i))
+				this.countAfter++;
+		
+		assertEquals(this.deck.getLength()-1, this.countAfter);
+	
 	}
 
 }
