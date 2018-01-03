@@ -47,8 +47,12 @@ public class PlayerList {
 		}										
 	}
 	
+	/**
+	 * Announse the winner
+	 * @param s
+	 */
 	public void winner(String s) {
-		System.out.println("Winner is " + s);
+		System.out.println("Winner is " + s); // Skal outputte til GUI når vi når dertil.
 	}
 	
 	public Player getPlayer(int n) {
