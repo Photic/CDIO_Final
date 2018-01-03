@@ -21,6 +21,7 @@ public class Deck {
 			new PayMoney("“De har kørt frem for “Fuld Stop”. Betal kr. 1.000 i bøde.”", 1000),
 			new PayMoney("“Betal Dere bilforsikring kr. 1.000.”", 1000),
 			new PayMoney("“De har modtaget Deres tandlægeregning. Betal kr. 2.000.”", 2000),
+			new PayMoney("“De har modtaget Deres tandlægeregning. Betal kr. 2.000.”", 2000),
 			new PayMoney("“Betal kr. 3.000 for reperation af Deres vogn.”", 3000),
 			new PayMoney("“De modtager “Matador-legatet for værdi trængende”, stort kr. 40.000. "
 						+ "Ved værdig trængende forstås, at Deres formue, d.v.s. "
@@ -35,6 +36,8 @@ public class Deck {
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 0),
 			new JailCard("“Gå i fængsel. Ryk direkte til fængslet. "
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 0),
+			new MovePlayer("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
+						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 0),
 			new MovePlayer("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
 						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 0),
 			new MovePlayer("“Ryk tre felter tilbage.”", 3),
