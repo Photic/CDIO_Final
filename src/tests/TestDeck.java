@@ -36,7 +36,7 @@ public class TestDeck {
 	
 		for (int i = 0; i < 10_000; i++) {
 			String temp = this.deck.getCard(0).getDescription();
-			this.deck.pickACard(this.plist.getSpecificPlayer(0), this.plist);
+			this.deck.pickACard(this.plist.getPlayer(0), this.plist);
 			
 			if (temp == this.deck.getCard(this.deck.getLength()-1).getDescription())
 				this.countBefore++;

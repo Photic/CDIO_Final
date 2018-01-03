@@ -9,6 +9,8 @@ public class PlayerList {
 
 	private Player[] players;
 	
+	
+	
 	public PlayerList(int antal, String[] names) 
 	{
 		players = new Player[antal];
@@ -17,13 +19,20 @@ public class PlayerList {
 			players[i]= new Player(names[i]);
 	}	
 	
-	public Player getSpecificPlayer(int n) {
+	public Player getPlayer(int n) {
 		return players[n];
 	}
 	
 	public int getLength() {
 		return players.length;
 	}
+	
+	
+	//--------------------------------------------------------
+	//
+	//                   Getters & Setters!
+	//
+	//--------------------------------------------------------
 	
 	public Player[] getList() {
 		return players;

@@ -4,7 +4,15 @@ public class Account {
 	
 	private int balance = 30000;
 	private int actives = 0;
+	private int antiJailCards = 0;
 	
+	
+	
+	//--------------------------------------------------------
+	//
+	//                   Getters & Setters!
+	//
+	//--------------------------------------------------------
 	
 	public int getActives() {
 		return actives;
@@ -21,8 +29,6 @@ public class Account {
 	public void setAntiJailCards(int antiJailCards) {
 		this.antiJailCards = antiJailCards;
 	}
-
-	private int antiJailCards = 0;
 
 	public int getBalance() {
 		return balance;

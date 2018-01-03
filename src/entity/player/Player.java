@@ -12,18 +12,20 @@ public class Player {
 	private String name, id;
 
 
-	private int position, walkedSquares;
+	private int position;
 	private boolean turn, bankrupt, inJail;
-	private Account account = new Account();
+	private Account account;
 
 	public Player(String n)
 	{
 		this.name = n;
+		this.account = new Account();
 		this.bankrupt = false;
 		this.inJail = false;
 		this.position = 0;
-		this.walkedSquares = 0;
 	}
+	
+	
 	
 	//--------------------------------------------------------
 	//

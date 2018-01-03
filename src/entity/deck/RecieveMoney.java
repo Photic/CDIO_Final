@@ -38,9 +38,9 @@ public class RecieveMoney extends Card {
 	 */
 	private void birthday(Player p, PlayerList plist) {
 		for (int i = 0; i < plist.getLength(); i++) {
-			if (plist.getSpecificPlayer(i).getName() != p.getName()) {
+			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.setBalance(200);
-				plist.getSpecificPlayer(i).setBalance(-200);
+				plist.getPlayer(i).setBalance(-200);
 			}
 		}
 	}
