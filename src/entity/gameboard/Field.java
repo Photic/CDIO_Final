@@ -14,16 +14,16 @@ public abstract class Field {
 	private String description;
 	private Color color;
 	
-	public Field(String navn, String description, Color color)
+	public Field(String name, String description, Color color)
 	{
-		this.name = navn;
+		this.name = name;
 		this.description = description;
 		this.color = color;
 	}
 
 	public abstract void squareLogic(Player p);
 	
-	public String getNavn() {
+	public String getName() {
 		return name;
 	}
 

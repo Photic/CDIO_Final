@@ -26,6 +26,7 @@ public class GameBoard {
 	 */
 	private int[] rødovrevej = {50, 250, 750, 2250, 4000, 6000};
 
+	
 	private final Field[] squares = 
 		{
 			new Start("Start", "Modtag kr. 4.000", standard),
@@ -33,7 +34,7 @@ public class GameBoard {
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Hvidovrevej", "kr. 1.200", blue),
 			new Tax("Betal inkomstskat", "10% eller kr. 4.000", standard),
-			new ShippingCompany("Rederiet Lindinger A/S", "kr. 4.000", standard),
+			new Shipping("Rederiet Lindinger A/S", "kr. 4.000", standard),
 			new Territory("Roskildevej", "kr. 2.000", pink),
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Valby Langgade", "kr. 2.000", pink),
@@ -43,7 +44,7 @@ public class GameBoard {
 			new Company("Coca-Cola", "kr. 3.000", standard),
 			new Territory("Büllowsvej", "kr. 2.800", green),
 			new Territory("GL. Kongevej", "kr. 3.200", green),
-			new ShippingCompany("Grenaa-Hundested", "kr. 4.800", standard),
+			new Shipping("Grenaa-Hundested", "kr. 4.800", standard),
 			new Territory("Bernstorffsvej", "kr. 3.600", grey),
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Hellerupvej", "kr. 3.600", grey),
@@ -53,7 +54,7 @@ public class GameBoard {
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Østerbrogade", "kr. 4.400", red),
 			new Territory("Grønningen", "kr. 4.800", red),
-			new ShippingCompany("Mols-Linien A/S", "kr. 4.000", standard),
+			new Shipping("Mols-Linien A/S", "kr. 4.000", standard),
 			new Territory("Bredegade", "kr. 5.200", white),
 			new Territory("Kgs. Nytorv", "kr. 5.200", white),
 			new Company("Faxe Bryggeri", "kr. 3.000", standard),
@@ -63,7 +64,7 @@ public class GameBoard {
 			new Territory("Vimmelskaftet", "kr. 6.000", yellow),
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Nygade", "kr. 6.400", yellow),
-			new ShippingCompany("Skandinavisk Linietrafik", "kr. 4.000", standard),
+			new Shipping("Skandinavisk Linietrafik", "kr. 4.000", standard),
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Frederiksberggade", "kr. 7.000", purple),
 			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard),

@@ -1,6 +1,7 @@
 package boundary;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 import entity.DiceCup;
 import entity.gameboard.GameBoard;
@@ -9,6 +10,7 @@ import entity.player.PlayerList;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class GUINew {
@@ -22,11 +24,12 @@ public class GUINew {
 	public void defineGUI(GameBoard gameboard) {
 		GUI_Field[] gui_fields = new GUI_Field[gameboard.getSize()];
 
-		for (int i = 0; i < gameboard.getSize() - 1; i++) {
+		for (int i = 0; i < gameboard.getSize(); i++) {
 
-			gui_fields[i].setTitle(gameboard.getField(i).getNavn());
+			gui_fields[i] = new GUI_Street();
+			gui_fields[i].setTitle(gameboard.getField(i).getName());
 			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
-			gui_fields[i].setDescription(gameboard.getField(i).getNavn());
+			gui_fields[i].setDescription(gameboard.getField(i).getName());
 			gui_fields[i].setBackGroundColor(gameboard.getField(i).getColor());
 
 		}
@@ -36,7 +39,7 @@ public class GUINew {
 	}
 	
 
-	public PlayerList registerPlayerCount() {
+	public PlayerList registerPlayers() {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};
 		String[] carColors = {"Rød", "Gul", "Grøn", "Blå", "Pink", "Sort"};
@@ -44,13 +47,37 @@ public class GUINew {
 		String nop = gui.getUserSelection("Hvor mange spillere er vi?", nopArray);
 		GUI_Car gui_car;
 
+		
 		playerCount = Integer.parseInt(nop);
 		
 		String[] names = new String[playerCount];
 
+		
+		
 		for (int i = 1; i <= playerCount + 1; i++) {
 			String name = gui.getUserString("Spiller " + i + "' navn?");
-			names[i] = name;
+			
+			
+			if (!(Arrays.asList(names).contains(name))) {
+				names[i] = name;
+			} else {
+				int count = 2;
+				while(true) {
+					if (!(Arrays.asList(names).contains(name + "_" + count))) {
+						names[i] = name + "_" + count;
+						break;
+					}
+					count++;
+					if(count>playerCount+2) {
+						break;
+					}
+				}
+			}
+			
+			
+			
+			
+
 			gui_car = new GUI_Car();
 			
 			currentCarColor = carColors[i];
