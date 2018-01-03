@@ -5,8 +5,8 @@ import entity.player.PlayerList;
 
 public class MovePlayer extends Card {
 
-	private String description;
-	private int newPosistion;
+	protected String description;
+	protected int newPosistion;
 	
 	public MovePlayer(String description, int action) {
 		super(description, action);
@@ -22,11 +22,4 @@ public class MovePlayer extends Card {
 		p.setPosition(p.getPosition()+newPosistion);
 	}
 
-	/**
-	 * GUI Description
-	 * @return
-	 */
-	public String getDescription() {
-		return description;
-	}
 }

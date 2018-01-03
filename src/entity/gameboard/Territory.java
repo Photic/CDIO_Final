@@ -1,8 +1,8 @@
 package entity.gameboard;
 
 import java.awt.Color;
+
 import entity.player.Player;
-import entity.player.PlayerList;
 
 /**
  * The territory describes the squares players can own and pay rent to.
@@ -11,28 +11,22 @@ import entity.player.PlayerList;
 public class Territory extends Field {
 
 	private int[] rent;
-
-
 	private int price, houses;
 	private boolean isOwned;
 	private String ownerName;
 
 	public Territory(String name, String description, Color color, int price, int[] rent) {
 		super(name, description, color);
-		
 		this.isOwned = false;
 		this.price = price;
 		this.rent = rent;
-		
 	}
 
-	
 	@Override
 	public void squareLogic(Player p) {
 		
 	}
 
-	
 	public void addHouse() {
 		this.houses++;
 	}
@@ -43,24 +37,21 @@ public class Territory extends Field {
 	
 	public void setOwner(Player p) {
 		this.ownerName = p.getName();
+		setOwned(true);
 	}
 	
 	public int getRent() {
 		return this.rent[houses];
 	}
 	
-	
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
-	
 	public String getOwner() {
 		return ownerName;
 	}
-
-
 
 	public int getHouses() {
 		return houses;
@@ -85,8 +76,5 @@ public class Territory extends Field {
 	public String getOwnerName() {
 		return ownerName;
 	}
-	
-
-	
 	
 }

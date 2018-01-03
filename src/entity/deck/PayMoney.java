@@ -5,8 +5,8 @@ import entity.player.PlayerList;
 
 public class PayMoney extends Card {
 
-	private String description;
-	private int credit;
+	protected String description;
+	protected int credit;
 	
 	public PayMoney(String description, int action) {
 		super(description, action);
@@ -48,13 +48,4 @@ public class PayMoney extends Card {
 			break;
 		}
 	}
-
-	/**
-	 * GUI Description
-	 * @return
-	 */
-	public String getDescription() {
-		return description;
-	}
-	
 }

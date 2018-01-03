@@ -5,11 +5,10 @@ import entity.player.PlayerList;
 
 public class RecieveMoney extends Card {
 
-	private String description;
-	private final int credit;
+	protected String description;
+	protected int credit;
 	
 	public RecieveMoney(String description, int action) {
-		
 		super(description, action);
 		this.credit = action;
 		this.description = description;
@@ -46,13 +45,5 @@ public class RecieveMoney extends Card {
 				plist.getPlayer(i).setBalance(plist.getPlayer(i).getBalance() - 200);
 			}
 		}
-	}
-
-	/**
-	 * GUI Description
-	 * @return
-	 */
-	public String getDescription() {
-		return description;
 	}
 }

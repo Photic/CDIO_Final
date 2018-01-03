@@ -5,8 +5,8 @@ import entity.player.PlayerList;
 
 public class JailCard extends Card {
 	
-	private String description;
-	private int action;
+	protected String description;
+	protected int action;
 	
 	public JailCard(String description, int action) {
 		super(description, action);
@@ -28,12 +28,5 @@ public class JailCard extends Card {
 			// Some code that puts the player in jail,
 		}
 	}
-
-	/**
-	 * GUI Description
-	 * @return
-	 */
-	public String getDescription() {
-		return description;
-	}
+	
 }
