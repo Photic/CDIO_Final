@@ -2,10 +2,25 @@ package entity.player;
 
 public class Account {
 	
-	private int balance = 30000;
-	private int actives = 0;
-	private int antiJailCards = 0;
+	private int balance;
+	private int actives;
+	private int antiJailCards;
 	
+
+	public Account() {
+		this.balance = 30000;
+		this.actives = 0;
+		this.antiJailCards = 0;
+	}
+	
+	
+	public void addJailCard() {
+		this.antiJailCards = this.antiJailCards++;
+	}
+	
+	public void removeJailCard() {
+		this.antiJailCards = this.antiJailCards--;
+	}
 	
 	
 	//--------------------------------------------------------
@@ -22,14 +37,6 @@ public class Account {
 		this.actives = actives;
 	}
 
-	public int getAntiJailCards() {
-		return antiJailCards;
-	}
-
-	public void setAntiJailCards(int antiJailCards) {
-		this.antiJailCards = antiJailCards;
-	}
-
 	public int getBalance() {
 		return balance;
 	}
@@ -38,5 +45,8 @@ public class Account {
 		this.balance = this.balance + credit;
 	}
 	
+	public int getAntiJailCards() {
+		return antiJailCards;
+	}
 
 }

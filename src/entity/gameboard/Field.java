@@ -8,13 +8,13 @@ import entity.player.PlayerList;
  * The abstract class square, used through polymorphism to loop through squares on the gameboard.
  *
  */
-public abstract class Square {
+public abstract class Field {
 
 	private String name;
 	private String description;
 	private Color color;
 	
-	public Square(String navn, String description, Color color)
+	public Field(String navn, String description, Color color)
 	{
 		this.name = navn;
 		this.description = description;

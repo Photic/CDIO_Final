@@ -4,21 +4,21 @@ import java.awt.Color;
 
 public class GameBoard {
 
-	Color standard = new Color(208, 251, 230);
-	Color purple = new Color(179, 102, 255);
-	Color grey = new Color(230, 230, 230);
-	Color pink = new Color(255, 153, 255);
-	Color orange = new Color(255, 117, 26);
-	Color red = new Color(255, 51, 51);
-	Color yellow = new Color(255, 255, 77);
-	Color green = new Color(128, 255, 128);
-	Color blue = new Color(102, 217, 255);
-	Color turkies = new Color(31, 94, 90);
-	Color magenta = new Color (229, 70, 0);
-	Color white = new Color(255, 255, 255);
-	Color brown = new Color(153, 102, 0);
+	private Color standard = new Color(208, 251, 230);
+	private Color purple = new Color(179, 102, 255);
+	private Color grey = new Color(230, 230, 230);
+	private Color pink = new Color(255, 153, 255);
+	private Color orange = new Color(255, 117, 26);
+	private Color red = new Color(255, 51, 51);
+	private Color yellow = new Color(255, 255, 77);
+	private Color green = new Color(128, 255, 128);
+	private Color blue = new Color(102, 217, 255);
+	private Color turkies = new Color(31, 94, 90);
+	private Color magenta = new Color (229, 70, 0);
+	private Color white = new Color(255, 255, 255);
+	private Color brown = new Color(153, 102, 0);
 
-	private final Square[] squares = 
+	private final Field[] squares = 
 		{
 			new Start("Start", "Modtag kr. 4.000", standard),
 			new Territory("Rødovervej", "kr. 1.200", blue),
@@ -62,7 +62,7 @@ public class GameBoard {
 			new Territory("Rådhuspladsen", "kr. 8.000", purple)
 		};
 
-	public Square getField(int a)
+	public Field getField(int a)
 	{
 		return squares[a];
 	}

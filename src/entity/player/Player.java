@@ -70,13 +70,6 @@ public class Player {
 		this.inJail = inJail;
 	}
 
-	public int getWalkedSquares() {
-		return walkedSquares;
-	}
-
-	public void setWalkedSquares(int walkedSquares) {
-		this.walkedSquares = walkedSquares;
-	}
 	public String getId() {
 		return id;
 	}

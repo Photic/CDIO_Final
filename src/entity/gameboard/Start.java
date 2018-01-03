@@ -4,7 +4,7 @@ import java.awt.Color;
 import entity.player.Player;
 import entity.player.PlayerList;
 
-public class Start extends Square {
+public class Start extends Field {
 	
 	public Start(String navn, String description, Color color) {
 		super(navn, description, color);

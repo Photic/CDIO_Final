@@ -8,15 +8,22 @@ import entity.player.PlayerList;
  * The territory describes the squares players can own and pay rent to.
  *
  */
-public class Territory extends Square {
+public class Territory extends Field {
 
-	private String rent;
+	private int[] rent;
+
+
+	private int price, houses;
 	private boolean isOwned;
-	private String owner;
+	private String ownerName;
 
-	public Territory(String name, String description, Color color) {
+	public Territory(String name, String description, Color color, int price, int[] rent) {
 		super(name, description, color);
+		
 		this.isOwned = false;
+		this.price = price;
+		this.rent = rent;
+		
 	}
 
 	/**
@@ -28,11 +35,40 @@ public class Territory extends Square {
 	}
 
 	public String getOwner() {
-		return owner;
+		return ownerName;
 	}
 
 	public void setOwner(Player p) {
-		this.owner = p.getName();
+		this.ownerName = p.getName();
 	}
+
+	public int getHouses() {
+		return houses;
+	}
+
+	public void setHouses(int houses) {
+		this.houses = houses;
+	}
+
+	public boolean isOwned() {
+		return isOwned;
+	}
+
+	public void setOwned(boolean isOwned) {
+		this.isOwned = isOwned;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+	
+	public int getRent() {
+		return this.rent[houses];
+	}
+	
 	
 }
