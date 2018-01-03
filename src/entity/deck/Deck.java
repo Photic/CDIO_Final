@@ -47,7 +47,7 @@ public class Deck {
 	
 	/**
 	 * Function to shuffle any objevt array.
-	 * @param deck
+	 * @param collectionOfCards
 	 */
 	public void shuffleCards() {
 		for (int i = 0; i < this.deck.length; i++) {
@@ -74,8 +74,20 @@ public class Deck {
 		this.deck = tempDeck;
 	}
 	
+	/**
+	 * Gives a specifik card.
+	 * @param a
+	 * @return
+	 */
 	public Card getCard(int a) {
-		return deck[a];
+		return this.deck[a];
 	}
 	
+	/**
+	 * Get length of array.
+	 * @return
+	 */
+	public int getLength() {
+		return this.deck.length;
+	}
 }
