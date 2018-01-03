@@ -34,6 +34,14 @@ public class Territory extends Field {
 		
 	}
 
+	
+	public void addHouse() {
+		this.houses++;
+	}
+	
+	
+	
+	
 	public String getOwner() {
 		return ownerName;
 	}

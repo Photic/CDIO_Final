@@ -15,11 +15,11 @@ public class Account {
 	
 	
 	public void addJailCard() {
-		this.antiJailCards = this.antiJailCards++;
+		this.antiJailCards++;
 	}
 	
 	public void removeJailCard() {
-		this.antiJailCards = this.antiJailCards--;
+		this.antiJailCards--;
 	}
 	
 	
