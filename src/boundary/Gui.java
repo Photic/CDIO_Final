@@ -3,14 +3,14 @@ package boundary;
 
 import java.awt.Color;
 
-import desktop_codebehind.Car;
-import desktop_fields.Field;
-import desktop_fields.Street;
-import desktop_resources.GUI;
+
 import entity.Die;
-import entity.Player;
-import entity.PlayerList;
-import entity.squares.GameBoard;
+import entity.gameboard.GameBoard;
+import entity.player.Player;
+import entity.player.PlayerList;
+import gui_fields.GUI_Field;
+import gui_fields.GUI_Street;
+import gui_main.GUI;
 
 
 
@@ -30,12 +30,11 @@ public class Gui {
 	 * An instance of the gameboard class, used to set up the gameboard visually
 	 */
 	public void defineGUI(GameBoard gameboard) {
-		Field[] fields = new Field[gameboard.getSize()];
-		
+		private GUI_Field[] fields = new GUI_Field[40];
 		
 		
 		for (int i = 0; i <= gameboard.getSize()-1; i++) {
-			fields[i] = new Street.Builder()
+			fields[i] = new GUI_Street();
 					.setTitle(gameboard.getField(i).getNavn())
 					.setDescription(gameboard.getField(i).getNavn())
 					.setSubText(gameboard.getField(i).getDescription())
