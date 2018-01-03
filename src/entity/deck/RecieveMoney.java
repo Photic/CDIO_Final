@@ -37,9 +37,7 @@ public class RecieveMoney extends Card {
 	 * @param plist
 	 */
 	private void birthday(Player p, PlayerList plist) {
-		
 		// implementer, at døde spillere ikke tælles med.
-		
 		for (int i = 0; i < plist.getLength(); i++) {
 			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.setBalance(p.getBalance() + 200);

@@ -5,6 +5,9 @@ import entity.player.PlayerList;
 
 public class Deck {
 	
+	/**
+	 * Makes a complete deck of cards.
+	 */
 	public Card[] deck = {
 			new RecieveMoney("“Det er deres fødselsdag. Modtag af hver medspiller kr. 200.”", 0),
 			new RecieveMoney("“Værdien af egen avl fra nyttehaven udgør kr. 200, som De modtager af banken.”", 200),
