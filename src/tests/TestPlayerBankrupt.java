@@ -29,7 +29,7 @@ class TestPlayerBankrupt {
 		System.out.println(Arrays.toString(plist.getList()));
 		
 		for (int i = 0; i <= plist.getLength(); i++) {
-			plist.getPlayer(0).setDead(true);
+			plist.getPlayer(0).setBankrupt(true);
 			System.out.println("Removing player " + plist.getPlayer(0).getName());
 			plist.removePlayer(plist);
 			System.out.println(Arrays.toString(plist.getList()));
@@ -38,7 +38,7 @@ class TestPlayerBankrupt {
 		}
 		
 		System.out.println("Removing player " + plist.getPlayer(0).getName());
-		plist.getPlayer(0).setDead(true);
+		plist.getPlayer(0).setBankrupt(true);
 		plist.removePlayer(plist);
 		
 	}
@@ -47,7 +47,7 @@ class TestPlayerBankrupt {
 	void testForRandomPlayer() {
 		
 		for (int i = 0; i < plist.getLength(); i++) {
-			plist.getPlayer((int)(Math.random()*plist.getLength())).setDead(true);
+			plist.getPlayer((int)(Math.random()*plist.getLength())).setBankrupt(true);
 			assertEquals(this.count, plist.getLength());
 		}
 		

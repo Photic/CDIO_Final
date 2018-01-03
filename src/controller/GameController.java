@@ -127,7 +127,7 @@ public class GameController {
 			for (int i = 0; i<playerList.getLength(); i++) { // Loop through the players.
 
 
-				if(playerList.getSpecificPlayer(i).isDead()==true){ //If the player is dead, nothing happens.	
+				if(playerList.getSpecificPlayer(i).isBankrupt()==true){ //If the player is dead, nothing happens.	
 
 				} else {
 
@@ -223,7 +223,7 @@ public class GameController {
 	 * @param i
 	 */
 	private void updateDead(int i) {
-		if (playerList.getSpecificPlayer(i).isDead()) 
+		if (playerList.getSpecificPlayer(i).isBankrupt()) 
 		{
 			amountDead++;
 			removeDead(playerList.getSpecificPlayer(i), i);
@@ -282,7 +282,7 @@ public class GameController {
 		gui.removeDeadPlayer(player);
 		for (int p = 0; p<gameboard.getSize();p++) 
 		{
-			if (playerList.getSpecificPlayer(i).isDead())
+			if (playerList.getSpecificPlayer(i).isBankrupt())
 			{
 				if (gameboard.getField(p) instanceof Territory)
 				{
@@ -306,7 +306,7 @@ public class GameController {
 		if (amountDead == playerList.getLength()-1)
 		{
 			for (int o = 0; o<playerList.getLength(); o++) {
-				if (!(playerList.getSpecificPlayer(o).isDead())) {
+				if (!(playerList.getSpecificPlayer(o).isBankrupt())) {
 					out.announceWinner(playerList.getSpecificPlayer(o));
 				}
 			}

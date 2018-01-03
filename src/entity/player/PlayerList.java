@@ -14,8 +14,7 @@ public class PlayerList {
 	 * @param antal
 	 * @param names
 	 */
-	public PlayerList(int antal, String[] names) 
-	{
+	public PlayerList(int antal, String[] names) {
 		this.players = new Player[antal];
 		
 		for (int i = 0;i < antal;i++)
@@ -33,7 +32,7 @@ public class PlayerList {
 		
 		if (removeOnePlayer.length >= 2) {
 			for (int i = 0; i <= removeOnePlayer.length; i++) {
-				if (plist.getPlayer(i).isDead() == false) {
+				if (plist.getPlayer(i).isBankrupt() == false) {
 					removeOnePlayer[this.count] = plist.getPlayer(i);
 						this.count++;
 				}
@@ -42,7 +41,7 @@ public class PlayerList {
 		}
 		else {
 			for (int i = 0; i < plist.getLength(); i++) {
-				if (plist.getPlayer(i).isDead() == false)
+				if (plist.getPlayer(i).isBankrupt() == false)
 					winner(plist.getPlayer(i).getName());
 			}
 		}										
@@ -70,8 +69,7 @@ public class PlayerList {
 		return players;
 	}
 	
-	public void setList(Player[] playerList)
-	{
+	public void setList(Player[] playerList) {
 		this.players = playerList;
 	}
 
