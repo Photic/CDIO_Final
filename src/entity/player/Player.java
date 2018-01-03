@@ -9,15 +9,15 @@ package entity.player;
 public class Player {
 		
 	
-	private String name;
+	private String name, id;
 	private int position, walkedSquares;
-	private boolean isDead, inJail;
+	private boolean turn, bankrupt, inJail;
 	private Account account = new Account();
 
 	public Player(String n)
 	{
 		this.name = n;
-		this.isDead = false;
+		this.bankrupt = false;
 		this.inJail = false;
 		this.position = 0;
 		this.walkedSquares = 0;
@@ -44,11 +44,11 @@ public class Player {
 	}	
 
 	public boolean isDead() {
-		return isDead;
+		return bankrupt;
 	}
 
 	public void setDead(boolean isDead) {
-		this.isDead = isDead;
+		this.bankrupt = isDead;
 	}
 	public int getPosition() {
 		return position;
