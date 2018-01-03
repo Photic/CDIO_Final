@@ -10,6 +10,8 @@ public class Player {
 		
 	
 	private String name, id;
+
+
 	private int position, walkedSquares;
 	private boolean turn, bankrupt, inJail;
 	private Account account = new Account();
@@ -72,6 +74,37 @@ public class Player {
 
 	public void setWalkedSquares(int walkedSquares) {
 		this.walkedSquares = walkedSquares;
+	}
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public boolean isTurn() {
+		return turn;
+	}
+
+	public void setTurn(boolean turn) {
+		this.turn = turn;
+	}
+
+	public boolean isBankrupt() {
+		return bankrupt;
+	}
+
+	public void setBankrupt(boolean bankrupt) {
+		this.bankrupt = bankrupt;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
 }
