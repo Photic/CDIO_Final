@@ -4,14 +4,9 @@ import entity.player.Player;
 import entity.player.PlayerList;
 
 public class PayMoney extends Card {
-
-	protected String description;
-	protected int credit;
 	
 	public PayMoney(String description, int action) {
 		super(description, action);
-		this.credit = action;
-		this.description = description;
 	}
 
 	/**
@@ -19,13 +14,13 @@ public class PayMoney extends Card {
 	 */
 	@Override
 	public void cardFunction(Player p, PlayerList plist) {
-		if (credit == 0)
+		if (this.action == 0)
 		{
 			ekstra();
 		}
 		else
 		{
-			p.setBalance(-credit);
+			p.setBalance(-this.action);
 		}
 	}
 	
@@ -33,7 +28,7 @@ public class PayMoney extends Card {
 	 * Function build to handle special cards.
 	 */
 	public void ekstra() {
-		switch (description.charAt(1)) {
+		switch (this.description.charAt(1)) {
 		case 'D':
 			// Code der indtager alle værdier og ændre på spillerens balance.
 			break;

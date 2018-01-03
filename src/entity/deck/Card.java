@@ -5,8 +5,8 @@ import entity.player.PlayerList;
 
 public abstract class Card {
 	
-	private String description;
-	private int action;
+	protected String description;
+	protected int action;
 	
 	/**
 	 *  Abstract class to create a card types.

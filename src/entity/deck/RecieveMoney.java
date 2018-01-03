@@ -4,14 +4,9 @@ import entity.player.Player;
 import entity.player.PlayerList;
 
 public class RecieveMoney extends Card {
-
-	protected String description;
-	protected int credit;
 	
 	public RecieveMoney(String description, int action) {
 		super(description, action);
-		this.credit = action;
-		this.description = description;
 	}
 
 	/**
@@ -19,13 +14,13 @@ public class RecieveMoney extends Card {
 	 */
 	@Override
 	public void cardFunction(Player p, PlayerList plist) {
-		if (credit == 0)
+		if (this.action == 0)
 		{
 			birthday(p, plist);
 		}
 		else
 		{
-			p.setBalance(p.getBalance() + credit);
+			p.setBalance(p.getBalance() + this.action);
 		}
 	}
 
@@ -36,9 +31,6 @@ public class RecieveMoney extends Card {
 	 * @param plist
 	 */
 	private void birthday(Player p, PlayerList plist) {
-		
-		// implementer, at døde spillere ikke tælles med.
-		
 		for (int i = 0; i < plist.getLength(); i++) {
 			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.setBalance(p.getBalance() + 200);
