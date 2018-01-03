@@ -1,5 +1,6 @@
 package entity.deck;
 
+import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -13,7 +14,7 @@ public class RecieveMoney extends Card {
 	 * Abstract override, extended from Card.
 	 */
 	@Override
-	public void cardFunction(Player p, PlayerList plist) {
+	public void cardFunction(Player p, PlayerList plist, GameBoard gameboard) {
 		if (this.action == 0)
 		{
 			birthday(p, plist);

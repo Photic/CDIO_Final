@@ -37,15 +37,15 @@ public class Deck {
 			new JailCard("“Gå i fængsel. Ryk direkte til fængslet. "
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 0),
 			new MovePlayer("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
-						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 0),
+						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 1),
 			new MovePlayer("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
-						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 0),
-			new MovePlayer("“Ryk tre felter tilbage.”", 3),
-			new MovePlayer("“Ryk frem til “Start””", 0),
-			new MovePlayer("“Tag med Mols-Linien - Flyt brikken frem, og hvis De passerer “Start”, inkassér da kr. 4.000.”", 4000),
-			new MovePlayer("“Tag ind på Rådhuspladsen.”", 0),
-			new MovePlayer("“Ryk frem til Grønningen. Hvis De passerer “Start”, indkassér da kr. 4.000.”", 4000),
-			new MovePlayer("“Ryk frem til Frederiksberg Allé. Hvis De passerer “Start, indkassér kr. 4.000.”", 0)
+						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 1),
+			new MovePlayer("“Ryk tre felter tilbage.”", 2),
+			new MovePlayer("“Ryk frem til “Start””", 3),
+			new MovePlayer("“Tag med Mols-Linien - Flyt brikken frem, og hvis De passerer “Start”, inkassér da kr. 4.000.”", 4),
+			new MovePlayer("“Tag ind på Rådhuspladsen.”", 5),
+			new MovePlayer("“Ryk frem til Grønningen. Hvis De passerer “Start”, indkassér da kr. 4.000.”", 6),
+			new MovePlayer("“Ryk frem til Frederiksberg Allé. Hvis De passerer “Start, indkassér kr. 4.000.”", 7)
 	};
 	
 	/**
@@ -66,7 +66,7 @@ public class Deck {
 	 * @param pickCardFromDeck
 	 */
 	public void pickACard(Player p, PlayerList plist) {
-		this.deck[0].cardFunction(p, plist);
+		this.deck[0].cardFunction(p, plist, null);
 		
 		Card[] tempDeck = new Card[this.deck.length];
 		tempDeck[this.deck.length-1] = this.deck[0];

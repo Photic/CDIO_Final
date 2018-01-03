@@ -70,13 +70,11 @@ public class GameBoard {
 			new Territory("Rådhuspladsen", "kr. 8.000", purple)
 		};
 
-	public Field getField(int a)
-	{
+	public Field getField(int a) {
 		return squares[a];
 	}
 
-	public int getSize() 
-	{
+	public int getLength() {
 		return squares.length;
 	}
 	

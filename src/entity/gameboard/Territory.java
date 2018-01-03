@@ -9,11 +9,8 @@ import entity.player.Player;
  *
  */
 public class Territory extends Field {
-
-	private int[] rent;
-	private int price, houses;
-	private boolean isOwned;
-	private String ownerName;
+	
+	private int houses;
 
 	public Territory(String name, String description, Color color, int price, int[] rent) {
 		super(name, description, color);
@@ -26,6 +23,12 @@ public class Territory extends Field {
 	public void squareLogic(Player p) {
 		
 	}
+	
+	@Override
+	public int getRent() {
+		return this.rent[houses];
+	}
+	
 
 	public void addHouse() {
 		this.houses++;
@@ -37,11 +40,6 @@ public class Territory extends Field {
 	
 	public void setOwner(Player p) {
 		this.ownerName = p.getName();
-		setOwned(true);
-	}
-	
-	public int getRent() {
-		return this.rent[houses];
 	}
 	
 	//--------------------------------------------------------
@@ -59,14 +57,6 @@ public class Territory extends Field {
 
 	public void setHouses(int houses) {
 		this.houses = houses;
-	}
-
-	public boolean isOwned() {
-		return isOwned;
-	}
-
-	public void setOwned(boolean isOwned) {
-		this.isOwned = isOwned;
 	}
 
 	public int getPrice() {

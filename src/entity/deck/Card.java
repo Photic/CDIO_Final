@@ -1,5 +1,6 @@
 package entity.deck;
 
+import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -28,6 +29,6 @@ public abstract class Card {
 		return this.action;
 	}
 
-	public abstract void cardFunction(Player p, PlayerList plist);
+	public abstract void cardFunction(Player p, PlayerList plist, GameBoard gameboard);
 	
 }
