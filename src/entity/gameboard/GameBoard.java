@@ -4,6 +4,9 @@ import java.awt.Color;
 
 public class GameBoard {
 
+	/**
+	 * Colors
+	 */
 	private Color standard = new Color(208, 251, 230);
 	private Color purple = new Color(179, 102, 255);
 	private Color grey = new Color(230, 230, 230);
@@ -17,11 +20,16 @@ public class GameBoard {
 	private Color magenta = new Color (229, 70, 0);
 	private Color white = new Color(255, 255, 255);
 	private Color brown = new Color(153, 102, 0);
+	
+	/**
+	 * Colors
+	 */
+	private int[] rødovrevej = {50, 250, 750, 2250, 4000, 6000};
 
 	private final Field[] squares = 
 		{
 			new Start("Start", "Modtag kr. 4.000", standard),
-			new Territory("Rødovervej", "kr. 1.200", blue),
+			new Territory("Rødovervej", "kr. 1.200", blue, 1200, rødovrevej),
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Hvidovrevej", "kr. 1.200", blue),
 			new Tax("Betal inkomstskat", "10% eller kr. 4.000", standard),
