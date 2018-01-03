@@ -1,7 +1,5 @@
 package entity.player;
 
-import java.util.Arrays;
-
 /**
  * A playerlist containing all the players. Primary used to loop through players.
  *
@@ -29,7 +27,7 @@ public class PlayerList {
 	 * @param p
 	 * @param plist
 	 */
-	public void removePlayer(Player p, PlayerList plist) {
+	public void removePlayer(PlayerList plist) {
 		Player[] removeOnePlayer = new Player[plist.getLength()-1];
 		this.count = 0;
 		
@@ -47,15 +45,11 @@ public class PlayerList {
 				if (plist.getPlayer(i).isDead() == false)
 					winner(plist.getPlayer(i).getName());
 			}
-		}
-		
-				
-						
-						
+		}										
 	}
 	
 	public void winner(String s) {
-		System.out.println("Winner is" + s);
+		System.out.println("Winner is " + s);
 	}
 	
 	public Player getPlayer(int n) {

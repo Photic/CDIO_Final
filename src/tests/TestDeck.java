@@ -1,9 +1,8 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import entity.deck.Deck;
 import entity.player.PlayerList;
@@ -16,7 +15,7 @@ class TestDeck {
 	int countBefore;
 	int countAfter;
 	
-	@Before
+	@BeforeEach
 	void setup() {
 		this.deck = new Deck();
 		this.countBefore = 0;
