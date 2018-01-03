@@ -49,7 +49,7 @@ public class Deck {
 	};
 	
 	/**
-	 * Function to shuffle any objevt array.
+	 * Function to shuffle any object array.
 	 * @param collectionOfCards
 	 */
 	public void shuffleCards() {

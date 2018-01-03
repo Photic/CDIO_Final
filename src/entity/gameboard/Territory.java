@@ -41,16 +41,26 @@ public class Territory extends Field {
 		this.houses--;
 	}
 	
+	public void setOwner(Player p) {
+		this.ownerName = p.getName();
+	}
+	
+	public int getRent() {
+		return this.rent[houses];
+	}
 	
 	
+	//--------------------------------------------------------
+	//
+	//                   Getters & Setters!
+	//
+	//--------------------------------------------------------
 	
 	public String getOwner() {
 		return ownerName;
 	}
 
-	public void setOwner(Player p) {
-		this.ownerName = p.getName();
-	}
+
 
 	public int getHouses() {
 		return houses;
@@ -76,9 +86,7 @@ public class Territory extends Field {
 		return ownerName;
 	}
 	
-	public int getRent() {
-		return this.rent[houses];
-	}
+
 	
 	
 }

@@ -58,7 +58,7 @@ public class GameBoard {
 			new ShippingCompany("Skandinavisk Linietrafik", "kr. 4.000", standard),
 			new Chance("Prøv Lykken", "", standard),
 			new Territory("Frederiksberggade", "kr. 7.000", purple),
-			new Tax2_0("Ekstraordinær statsskat", "betal kr. 2.000", standard),
+			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard),
 			new Territory("Rådhuspladsen", "kr. 8.000", purple)
 		};
 
