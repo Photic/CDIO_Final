@@ -8,23 +8,23 @@ import org.junit.jupiter.api.Test;
 import entity.deck.Deck;
 import entity.player.PlayerList;
 
-public class TestDeck {
+class TestDeck {
 	
 	String[] names = {"Stephan","Mathias","Steen"};
 	PlayerList plist = new PlayerList(3, names);
-	Deck deck = new Deck();
+	Deck deck;
 	int countBefore;
 	int countAfter;
 	
 	@Before
-	public void setup() {
+	void setup() {
 		this.deck = new Deck();
 		this.countBefore = 0;
 		this.countAfter = 0;
 	}
 	
 	@After
-	public void teardown() {
+	void teardown() {
 		// Not sure what to put here yet.
 	}
 	
@@ -32,7 +32,7 @@ public class TestDeck {
 	 * Testing the pickACard function, and ending the test with seeing if all cards are still unique.
 	 */
 	@Test
-	public void testpickACard() {
+	void testpickACard() {
 	
 		for (int i = 0; i < 10_000; i++) {
 			String temp = this.deck.getCard(0).getDescription();
