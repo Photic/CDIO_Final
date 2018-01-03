@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import entity.deck.Deck;
 import entity.player.PlayerList;
 
-public class testingCards {
+public class TestDeck {
 	
 	String[] names = {"Stephan","Mathias","Steen"};
 	PlayerList plist = new PlayerList(3, names);
@@ -32,7 +32,7 @@ public class testingCards {
 	 * Testing the pickACard function, and ending the test with seeing if all cards are still unique.
 	 */
 	@Test
-	public void test01() {
+	public void testpickACard() {
 	
 		for (int i = 0; i < 10_000; i++) {
 			String temp = this.deck.getCard(0).getDescription();
@@ -56,7 +56,7 @@ public class testingCards {
 	 * Testing the shuffleCards function, and ending the test with seeing if all cards are still unique.
 	 */
 	@Test
-	void test02()
+	void testshuffleCards()
 	{
 		for (int i = 0; i < 10_000; i++) {
 			this.deck.shuffleCards();
