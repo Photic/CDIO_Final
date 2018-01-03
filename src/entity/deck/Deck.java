@@ -82,7 +82,7 @@ public class Deck {
 	
 	/**
 	 * Gives a specifik card.
-	 * @param a
+	 * @param a is and integer describing a specific card.
 	 * @return
 	 */
 	public Card getCard(int a) {
