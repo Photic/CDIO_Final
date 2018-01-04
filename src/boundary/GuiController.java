@@ -211,13 +211,15 @@ public class GuiController {
 				gui.getFields()[newPosition].setCar(gui_players[i], true);
 			}
 		}
+		
+
 
 	}
 	
 	public void movePlayer(Player p, int diceSum) {
 		
 		int newPosition = (p.getPosition() + diceSum) % 40;
-		
+		int initPosition = (p.getPosition());
 		
 		for (int i = 0; i < gui_players.length; i++) {
 			
@@ -237,6 +239,18 @@ public class GuiController {
 					
 				}
 			}
+			
+
+		}
+		
+		if (initPosition > newPosition) {
+			
+			
+			p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
+			updateBalance(p);
+			gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
+			
+			
 		}
 
 	}

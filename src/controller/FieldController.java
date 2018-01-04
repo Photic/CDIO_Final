@@ -1,6 +1,7 @@
 package controller;
 
 import boundary.GuiController;
+import entity.gameboard.Company;
 import entity.gameboard.Field;
 import entity.gameboard.Tax;
 import entity.gameboard.Territory;
@@ -23,10 +24,17 @@ public class FieldController {
 
 
 		if (field instanceof Territory) {
+			
 			territoryLogic(field, gui, p);
+			
 		} else if (field instanceof Tax) {
 
 			taxLogic(field, gui, p);
+			
+		} else if (field instanceof Company) {
+			
+			
+			
 		}
 
 
@@ -93,6 +101,12 @@ public class FieldController {
 			
 		}
 
+	}
+	
+	private void companyLogic(Field field, GuiController gui, Player p) {
+		
+		
+		
 	}
 
 
