@@ -1,7 +1,6 @@
 package boundary;
 
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.Random;
 
 import entity.DiceCup;
@@ -108,6 +107,13 @@ public class GUINew {
 		gui.showMessage("Du er landet på en grund der kan købes.");
 		
 		return gui.getUserLeftButtonPressed("Du er landet på en grund der kan købes", "Køb", "Gør Intet");
+		
+	}
+	
+	public void setOwnerText(Player p) {
+		
+		gui.getFields()[p.getPosition()].setSubText(p.getName());
+		
 		
 	}
 	

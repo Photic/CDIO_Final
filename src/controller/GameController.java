@@ -18,6 +18,7 @@ public class GameController {
 
 	private GUINew gui;
 	private PlayerList playerList;
+	private FieldController fc;
 	private GameBoard gameboard;
 	private DiceCup dicecup;
 	private int playerCount, newPosition;
@@ -32,6 +33,7 @@ public class GameController {
 		gameboard = new GameBoard();
 		playing = true;
 		dicecup = new DiceCup();
+		fc = new FieldController();
 
 	}
 
@@ -42,13 +44,9 @@ public class GameController {
 	{
 		initGui();
 		
-		
-
 		while(playing) {
 			gameLoop();
 		}
-		
-		
 		
 	}
 						
@@ -56,25 +54,18 @@ public class GameController {
 
 
 	private void gameLoop() {
+		Field currentField;
 		for (int i = 0; i < playerList.getLength(); i++) {
 			gui.rollDiceMessage();
 			dicecup.shake();
 			gui.showDice(dicecup);
 			gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
 			
-			Field currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
+			currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
 			
-			if (currentField instanceof Territory) {
-				boolean decision;
-				decision = gui.territoryDecision(currentField);
-				
-				if (decision == true) {
-					
-				} else {
-					
-				}
+			fc.evaluateField(currentField, gui, playerList.getPlayer(i));
+			
 
-			}
 		}
 	}
 
