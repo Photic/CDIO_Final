@@ -1,6 +1,7 @@
 package boundary;
 
 import java.awt.Color;
+import java.util.Arrays;
 
 import entity.DiceCup;
 import entity.gameboard.GameBoard;
@@ -9,6 +10,7 @@ import entity.player.PlayerList;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
+import gui_fields.GUI_Street;
 import gui_main.GUI;
 
 public class GUINew {
@@ -20,13 +22,15 @@ public class GUINew {
 	
 
 	public void defineGUI(GameBoard gameboard) {
-		GUI_Field[] gui_fields = new GUI_Field[gameboard.getSize()];
+		GUI_Field[] gui_fields = new GUI_Field[gameboard.getLength()];
 
-		for (int i = 0; i < gameboard.getSize() - 1; i++) {
+		for (int i = 0; i < gameboard.getLength(); i++) {
 
-			gui_fields[i].setTitle(gameboard.getField(i).getNavn());
+			
+			gui_fields[i] = new GUI_Street();
+			gui_fields[i].setTitle(gameboard.getField(i).getName());
 			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
-			gui_fields[i].setDescription(gameboard.getField(i).getNavn());
+			gui_fields[i].setDescription(gameboard.getField(i).getName());
 			gui_fields[i].setBackGroundColor(gameboard.getField(i).getColor());
 
 		}
@@ -50,10 +54,10 @@ public class GUINew {
 
 		for (int i = 1; i <= playerCount + 1; i++) {
 			String name = gui.getUserString("Spiller " + i + "' navn?");
-			names[i] = name;
+			names[i-1] = name;
 			gui_car = new GUI_Car();
 			
-			currentCarColor = carColors[i];
+			currentCarColor = carColors[i-1];
 			if (currentCarColor == "rød") {
 				gui_car.setPrimaryColor(Color.red);
 			} else if (currentCarColor == "Gul"){
@@ -68,7 +72,32 @@ public class GUINew {
 				gui_car.setPrimaryColor(Color.black);			
 			}
 			
-			gui_players[i] = new GUI_Player(name, 30000, gui_car);
+
+			
+			
+			
+			if (!(Arrays.asList(names).contains(name))) {
+				names[i-1] = name;
+			} else {
+				int count = 2;
+				while(true) {
+					if (!(Arrays.asList(names).contains(name + "_" + count))) {
+						names[i-1] = name + "_" + count;
+						break;
+					}
+					count++;
+					if(count == 7) {
+						break;
+					}
+				}
+			}
+			
+			
+			
+			gui_players[i-1] = new GUI_Player(names[i-1], 30000, gui_car);
+			
+			
+			
 			
 		}
 
@@ -79,47 +108,7 @@ public class GUINew {
 	}
 
 
-//	public void createCars(int playerCount) {
-//		String currentCarColor;
-//		String[] carColors = {"Rød", "Gul", "Grøn", "Blå", "Pink", "Sort"};
-//		GUI_Car gui_car;
-//
-//		for (int i = 0; i < playerCount; i++) {
-//			currentCarColor = gui.getUserSelection("Vælg ønskede bilfarve ", carColors);
-//			gui_car = new GUI_Car();
-//
-//
-//			if (currentCarColor == "rød") {
-//				gui_car.setPrimaryColor(Color.red);
-//			} else if (currentCarColor == "Gul"){
-//				gui_car.setPrimaryColor(Color.yellow);			
-//			} else if (currentCarColor == "Grøn"){
-//				gui_car.setPrimaryColor(Color.green);			
-//			} else if (currentCarColor == "Blå"){
-//				gui_car.setPrimaryColor(Color.blue);			
-//			} else if (currentCarColor == "Pink"){
-//				gui_car.setPrimaryColor(Color.pink);			
-//			} else if (currentCarColor == "Sort"){
-//				gui_car.setPrimaryColor(Color.black);			
-//			}
-//
-//			gui_cars[i] = gui_car;
-//
-//			String[] temp = new String[carColors.length - 1];
-//
-//			for (int j = 0; j < temp.length; j++) {
-//				if (!(carColors[j] == currentCarColor)) {
-//					temp[j] = carColors[j];
-//				}
-//			} 
-//
-//			carColors = temp;
-//
-//		}
-//
-//	}
-
-	public void placePlaver(PlayerList plist) {
+	public void placePlayer(PlayerList plist) {
 
 
 
