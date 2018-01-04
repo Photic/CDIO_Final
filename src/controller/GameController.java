@@ -43,6 +43,7 @@ public class GameController {
 		
 		gui.defineGUI(gameboard);
 		playerList = gui.registerPlayerCount();
+		gui.placePlayer();
 		
 //		askForNames(); // Ask for player names
 //
