@@ -166,9 +166,17 @@ public class GUINew {
 				gui_players[i].setBalance(p.getBalance());
 			}
 		}
+	}
+	
+	
+	//fix så den virker
+	public void updateBalance(PlayerList plist) {
 
-
-
+//		for (int i = 0; i < gui_players.length; i++) {
+//			if (gui_players[i].getName() == p.getName()) {
+//				gui_players[i].setBalance(p.getBalance());
+//			}
+//		}
 	}
 
 	public void setDice(DiceCup dc) {
