@@ -26,26 +26,6 @@ public abstract class Field {
 
 	public abstract void squareLogic(Player p);
 	
-	public String getOwnerName() {
-		return this.ownerName;
-	}
-	
-	public int getPrice() {
-		return this.price;
-	}
-
-	public int getRent() {
-		return this.rent[0];
-	}
-	
-	public int getHouses() {
-		return this.houses;
-	}
-	
-	public int getHousePrice() {
-		return housePrice;
-	}
-	
 	public String getName() {
 		return this.name;
 	}
@@ -69,6 +49,14 @@ public abstract class Field {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+	
+	
+	/*
+	 * Fields you are able to own.
+	 */
+	public String getOwnerName() {
+		return this.ownerName;
+	}
 
 	public void setOwner() {
 		this.isOwned = true;
@@ -81,4 +69,25 @@ public abstract class Field {
 	public void removeOwner() {
 		this.isOwned = false;
 	}
+	
+	
+	/*
+	 * Get Prices on able price fields.
+	 */
+	public int getPrice() {
+		return this.price;
+	}
+
+	public int getRent() {
+		return this.rent[0];
+	}
+	
+	public int getHouses() {
+		return this.houses;
+	}
+	
+	public int getHousePrice() {
+		return housePrice;
+	}
+	
 }
