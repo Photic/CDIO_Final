@@ -51,20 +51,20 @@ public class GameBoard {
 			new Territory("Østerbrogade", "kr. 4.400", red, 4400, 3000, new int[] {350, 1800, 5000, 14000, 17500, 21000}),				// 23
 			new Territory("Grønningen", "kr. 4.800", red, 4400, 3000, new int[] {400, 2000, 6000, 15000, 18500, 22000}),					// 24
 			new Shipping("Mols-Linien A/S", "kr. 4.000", standard, 4000),																	// 25
-			new Territory("Bredegade", "kr. 5.200", white, 5200, 3000, new int [] {450, 2200, 6600, 16000, 19500, 23000}),
-			new Territory("Kgs. Nytorv", "kr. 5.200", white, 5200, 3000, new int[] {450, 2200, 6600, 16000, 19500, 23000}),
-			new Company("Faxe Bryggeri", "kr. 3.000", standard, 3000),
-			new Territory("Østergade", "kr. 5.600", white, 5600, 3000, new int[] {500, 2400, 7200, 17000, 20500, 24000}),
-			new GoToJail("De Fængsles", "Du mister din tur", standard),
-			new Territory("Amagertorv", "kr. 6.000", yellow, 6000, 4000, new int[] {550, 2600, 7800, 18000, 22000, 25000}),
-			new Territory("Vimmelskaftet", "kr. 6.000", yellow, 6000, 4000, new int[] {550, 2600, 7800, 18000, 22000, 25000}),
-			new Chance("Prøv Lykken", "", standard),
-			new Territory("Nygade", "kr. 6.400", yellow, 6400, 4000, new int[] {600, 3000, 9000, 20000, 24000, 28000}),
-			new Shipping("Skandinavisk Linietrafik", "kr. 4.000", standard, 4000),
-			new Chance("Prøv Lykken", "", standard),
-			new Territory("Frederiksberggade", "kr. 7.000", purple, 7000, 4000, new int[] {700, 3500, 10000, 22000, 26000, 30000}),
-			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard),
-			new Territory("Rådhuspladsen", "kr. 8.000", purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000})
+			new Territory("Bredegade", "kr. 5.200", white, 5200, 3000, new int [] {450, 2200, 6600, 16000, 19500, 23000}),				// 26
+			new Territory("Kgs. Nytorv", "kr. 5.200", white, 5200, 3000, new int[] {450, 2200, 6600, 16000, 19500, 23000}),				// 27
+			new Company("Faxe Bryggeri", "kr. 3.000", standard, 3000),																	// 28
+			new Territory("Østergade", "kr. 5.600", white, 5600, 3000, new int[] {500, 2400, 7200, 17000, 20500, 24000}),					// 29
+			new GoToJail("De Fængsles", "Du mister din tur", standard),																	// 30
+			new Territory("Amagertorv", "kr. 6.000", yellow, 6000, 4000, new int[] {550, 2600, 7800, 18000, 22000, 25000}),				// 31
+			new Territory("Vimmelskaftet", "kr. 6.000", yellow, 6000, 4000, new int[] {550, 2600, 7800, 18000, 22000, 25000}),				// 32
+			new Chance("Prøv Lykken", "", standard),																						// 33
+			new Territory("Nygade", "kr. 6.400", yellow, 6400, 4000, new int[] {600, 3000, 9000, 20000, 24000, 28000}),					// 34
+			new Shipping("Skandinavisk Linietrafik", "kr. 4.000", standard, 4000),														// 35
+			new Chance("Prøv Lykken", "", standard),																						// 36
+			new Territory("Frederiksberggade", "kr. 7.000", purple, 7000, 4000, new int[] {700, 3500, 10000, 22000, 26000, 30000}),		// 37
+			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard),																// 38
+			new Territory("Rådhuspladsen", "kr. 8.000", purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000})				// 39
 			
 		};
 

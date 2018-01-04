@@ -31,14 +31,6 @@ public class Player {
 		return name;
 	}
 
-	public int getBalance() {
-		return account.getBalance();
-	}
-
-	public void setBalance(int credit) {
-		account.addBalance(credit);
-	}	
-
 	public boolean isBankrupt() {
 		return bankrupt;
 	}

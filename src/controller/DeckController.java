@@ -2,6 +2,7 @@ package controller;
 
 import entity.deck.Card;
 import entity.deck.Deck;
+import entity.deck.RecieveMoneyCard;
 import entity.gameboard.GameBoard;
 import entity.gameboard.Shipping;
 import entity.player.Player;
@@ -18,10 +19,37 @@ public class DeckController {
 	
 	public void chanceField(Player p, PlayerList plist) {
 		
-		Card picked = deck.pickACard();
+		Card cardPicked = deck.pickACard();
+		
+		if (cardPicked instanceof RecieveMoneyCard) {
+			recieveMoneyCard(p);
+		}
 		
 	}
 
+	public void recieveMoneyCard(Player p) {
+		p.getAccount().addBalance(deck.pickACard().getAdvancedAmount());
+	}
+
+	/**
+	 * If the player, taken from the PlayerList is not the player recieving the card, 
+	 * give money to the card holder and remove money from the PlayerList player. 
+	 * @param p
+	 * @param plist
+	 */
+	private void birthday(Player p, PlayerList plist) {
+		for (int i = 0; i < plist.getLength(); i++) {
+			if (plist.getPlayer(i).getName() != p.getName()) {
+				p.setBalance(200);
+				plist.getPlayer(i).setBalance(-200);
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * Makes sure to move the player to the nearest Shipping.
@@ -84,35 +112,7 @@ public class DeckController {
 		}
 	}
 	
-	/**
-	 * Abstract override, extended from Card.
-	 */
-	@Override
-	public void getCardFunction(Player p, PlayerList plist, GameBoard gameboard) {
-		if (this.action == 0)
-		{
-			birthday(p, plist);
-		}
-		else
-		{
-			p.addBalance(this.action);
-		}
-	}
 
-	/**
-	 * If the player, taken from the PlayerList is not the player recieving the card, 
-	 * give money to the card holder and remove money from the PlayerList player. 
-	 * @param p
-	 * @param plist
-	 */
-	private void birthday(Player p, PlayerList plist) {
-		for (int i = 0; i < plist.getLength(); i++) {
-			if (plist.getPlayer(i).getName() != p.getName()) {
-				p.setBalance(200);
-				plist.getPlayer(i).setBalance(-200);
-			}
-		}
-	}
 
 	
 }

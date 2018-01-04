@@ -4,8 +4,9 @@ public class AntiJailCard extends Card {
 
 	protected boolean cardIsOwned;
 	
-	public AntiJailCard(String description, int cardId) {
-		super(description, cardId);
+	public AntiJailCard(String description) {
+		super(description);
+		// TODO Auto-generated constructor stub
 	}
 
 	public boolean getIsOwnedStatus() {
