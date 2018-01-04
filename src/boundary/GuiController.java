@@ -181,25 +181,25 @@ public class GuiController {
 	 * The sum of dice
 	 * @throws InterruptedException 
 	 */
-//	public void movePlayer(Player p, int diceSum) {
-//		
-//		int prePosition = p.getPosition();
-//		
-//		
-//		for (int i = 0; i < gui_players.length; i++) {
-//			
-//			if (gui_players[i].getName() == p.getName()) {
-//				gui.getFields()[prePosition].setCar(gui_players[i], false);
-//				
-//				p.setPosition(p.getPosition() + diceSum);	
-//				int newPosition = p.getPosition();
-//
-//				
-//				gui.getFields()[newPosition].setCar(gui_players[i], true);
-//			}
-//		}
-//
-//	}
+	public void movePlayer(Player p, int diceSum, boolean test) {
+		
+		int prePosition = p.getPosition();
+		
+		
+		for (int i = 0; i < gui_players.length; i++) {
+			
+			if (gui_players[i].getName() == p.getName()) {
+				gui.getFields()[prePosition].setCar(gui_players[i], false);
+				
+				p.setPosition(p.getPosition() + diceSum);	
+				int newPosition = p.getPosition();
+
+				
+				gui.getFields()[newPosition].setCar(gui_players[i], true);
+			}
+		}
+
+	}
 	
 	public void movePlayer(Player p, int diceSum) {
 		
@@ -216,7 +216,7 @@ public class GuiController {
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
 					
 					try {
-						Thread.sleep(700);
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
