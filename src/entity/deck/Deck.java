@@ -1,5 +1,9 @@
 package entity.deck;
 
+import java.util.Arrays;
+
+import org.omg.Messaging.SyncScopeHelper;
+
 public class Deck {
 
 	public Card[] deck = {
@@ -63,11 +67,21 @@ public class Deck {
 	 * @param pickCardFromDeck
 	 */
 	public Card pickACard() {
-		Card[] tempDeck = new Card[getLength()];
+		Card firstCard = getCard(0);
+		Card[] tempCards = new Card[getLength()];
 		
+		for (int i = 1; i < getLength();) {
+				tempCards[i-1] = this.deck[i];
+				i++;
+		}
+		
+		tempCards[getLength()-1] = firstCard;
+		this.deck = tempCards;
+		
+		return firstCard;
 		
 	}
-
+	
 	/**
 	 * Gives a specifik card.
 	 * @param Takes a number 'a' and returns a specific card.
@@ -84,6 +98,7 @@ public class Deck {
 	public int getLength() {
 		return this.deck.length;
 	}
+
 	
 }
 
