@@ -2,6 +2,7 @@ package boundary;
 
 import java.awt.Color;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -135,17 +136,6 @@ public class GuiController {
 		
 		gui.getFields()[p.getPosition()].setSubText(p.getName());
 		
-		//Tilføj rent som en description
-		
-//		for (int i = 0; i < gui_players.length; i++) {
-//			
-//			if(gui_players[i].getName().equals(p.getName())) {
-//				
-//				gui.getFields()[p.getPosition()].setForeGroundColor(gui_players[i].getCar().getPrimaryColor());
-//			
-//			}
-//		}
-		
 		
 	}
 	
@@ -189,26 +179,56 @@ public class GuiController {
 	 * The player to be moved
 	 * @param diceSum
 	 * The sum of dice
+	 * @throws InterruptedException 
 	 */
+//	public void movePlayer(Player p, int diceSum) {
+//		
+//		int prePosition = p.getPosition();
+//		
+//		
+//		for (int i = 0; i < gui_players.length; i++) {
+//			
+//			if (gui_players[i].getName() == p.getName()) {
+//				gui.getFields()[prePosition].setCar(gui_players[i], false);
+//				
+//				p.setPosition(p.getPosition() + diceSum);	
+//				int newPosition = p.getPosition();
+//
+//				
+//				gui.getFields()[newPosition].setCar(gui_players[i], true);
+//			}
+//		}
+//
+//	}
+	
 	public void movePlayer(Player p, int diceSum) {
 		
-		int prePosition = p.getPosition();
+		int newPosition = p.getPosition() + diceSum;
 		
 		
 		for (int i = 0; i < gui_players.length; i++) {
 			
 			if (gui_players[i].getName() == p.getName()) {
-				gui.getFields()[prePosition].setCar(gui_players[i], false);
 				
-				p.setPosition(p.getPosition() + diceSum);	
-				int newPosition = p.getPosition();
-
-				
-				gui.getFields()[newPosition].setCar(gui_players[i], true);
+				while(p.getPosition() != newPosition) {
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+					p.setPosition(p.getPosition()+1);
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					
+					try {
+						Thread.sleep(700);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
 			}
 		}
 
 	}
+	
+	
 	
 	public void rollDiceMessage() {
 		gui.showMessage("Please roll the dice");
@@ -225,7 +245,7 @@ public class GuiController {
 
 		for (int i = 0; i < gui_players.length; i++) {
 			if (gui_players[i].getName() == p.getName()) {
-				gui_players[i].setBalance(p.getBalance());
+				gui_players[i].setBalance(p.getAccount().getBalance());
 			}
 		}
 	}
