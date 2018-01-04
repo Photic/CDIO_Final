@@ -2,9 +2,10 @@ package entity.deck;
 
 public abstract class Card {
 	
-	protected String description;
+	protected String description, specificCardOwner;
 	protected int actionOrAmount, advancedAmount;
-	
+	protected boolean cardIsOwned;
+
 	/**
 	 * Abstract class to create a card types.
 	 * @param description
@@ -14,8 +15,7 @@ public abstract class Card {
 		this.description = description;
 	}
 	
-	public String getDescription()
-	{
+	public String getDescription() {
 		return this.description;
 	}
 	
@@ -26,5 +26,23 @@ public abstract class Card {
 	public int getAdvancedAmount() {
 		return this.advancedAmount;
 	}
+	
+	public boolean isCardIsOwned() {
+		return cardIsOwned;
+	}
+	
+	public String getCardOwner() {
+		return this.specificCardOwner;
+	}
+	
+	public void addRemoveCardOwner(String pName, boolean owned) {
+		this.specificCardOwner = pName;
+		setCardIsOwned(owned);
+	}
+
+	public void setCardIsOwned(boolean cardIsOwned) {
+		this.cardIsOwned = cardIsOwned;
+	}
+	
 	
 }

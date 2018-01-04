@@ -47,6 +47,10 @@ public class Player {
 		this.position = position % GAMEBOARDLENGTH;
 	}
 	
+	public void setDirectPosistion(int posistion) {
+		this.position = posistion;
+	}
+	
 	public boolean isInJail() {
 		return inJail;
 	}

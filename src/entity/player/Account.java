@@ -1,22 +1,30 @@
 package entity.player;
 
+import entity.deck.Card;
+
 public class Account {
 	
-	private int balance, actives, antiJailCards, housesowned, hotelsowned;
-
+	private int balance, actives, housesowned, hotelsowned, amountOfCards;
+	private Card antiJailCard;
+	
 	public Account() {
 		this.balance = 30000;
 		this.actives = 0;
-		this.antiJailCards = 0;
 	}
 	
-	
-	public void addJailCard() {
-		this.antiJailCards++;
+	public void recieveAntiJaulCard(Card cardrecieved) {
+		this.setAntiJailCard(cardrecieved);
+		this.amountOfCards++;
 	}
 	
-	public void removeJailCard() {
-		this.antiJailCards--;
+	public void removeAntiJaulCard() {
+		if (this.amountOfCards > 1) {
+			this.amountOfCards--;
+		}
+		else {
+			this.amountOfCards--;
+			this.antiJailCard = null;
+		}
 	}
 	
 	/**
@@ -67,11 +75,6 @@ public class Account {
 		this.balance = balance;
 	}
 	
-	public int getAntiJailCards() {
-		return antiJailCards;
-	}
-
-
 	public int getHousesowned() {
 		return housesowned;
 	}
@@ -89,6 +92,14 @@ public class Account {
 
 	public void setHotelsowned(int hotelsowned) {
 		this.hotelsowned = this.hotelsowned + hotelsowned;
+	}
+
+	public Card getAntiJailCard() {
+		return antiJailCard;
+	}
+
+	public void setAntiJailCard(Card antiJailCard) {
+		this.antiJailCard = antiJailCard;
 	}
 
 }
