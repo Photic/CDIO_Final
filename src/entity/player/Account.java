@@ -1,7 +1,5 @@
 package entity.player;
 
-import entity.gameboard.GameBoard;
-
 public class Account {
 	
 	private int balance;
@@ -30,32 +28,17 @@ public class Account {
 	 * @param gameboard
 	 * @return
 	 */
-	public int getPlayerWorth(Player p, GameBoard gameboard) {
-		getPlayerActives(p, gameboard);
+	public int getPlayerWorth(Player p) {
 		return this.balance + this.actives;
 	}
 	
-	/**
-	 * Calculate the players actives. Use getActives to get the sum.
-	 * @param p
-	 * @param gameboard
-	 */
-	public void getPlayerActives(Player p, GameBoard gameboard) {
-		this.actives = 0;
-		for (int i = 0; i <= gameboard.getLength(); i++) {
-			if (gameboard.getField(i).getOwnerName() == p.getName()) {
-				addActives(gameboard.getField(i).getPrice());
-				addActives((gameboard.getField(i).getHouses())*(gameboard.getField(i).getHousePrice()));
-			}
-		}
+	public void addActives(int money) {
+		this.actives = this.actives + money;
 	}
 	
-	/**
-	 * Supporting function to getPlayerActives(Player p, GameBoard gameboard);
-	 * @param credit
-	 */
-	public void addActives(int credit) {
-		this.actives = this.actives + credit;
+	public void buyField(int price) {
+		setBalance(-price);
+		addActives(price);
 	}
 	
 	//--------------------------------------------------------
