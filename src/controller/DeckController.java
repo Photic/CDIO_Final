@@ -87,7 +87,7 @@ public class DeckController {
 		}
 		else
 		{
-			p.setBalance(p.getBalance()-this.action);
+			p.addBalance(p.getBalance()-this.action);
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class DeckController {
 		}
 		else
 		{
-			p.setBalance(this.action);
+			p.addBalance(this.action);
 		}
 	}
 

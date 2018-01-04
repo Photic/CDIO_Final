@@ -34,9 +34,17 @@ public class Account {
 	}
 	
 	public void buyField(int price) {
-		setBalance(-price);
+		addBalance(-price);
 		addActives(price);
 	}
+	
+//	public void payRent(int rent, Player owner) {
+//		
+//		owner.getAccount().setBalance(rent + owner.getAccount().getBalance());
+//		
+//		setBalance(getBalance() - rent);
+//		
+//	}
 	
 	//--------------------------------------------------------
 	//
@@ -51,8 +59,12 @@ public class Account {
 		return balance;
 	}
 
-	public void setBalance(int credit) {
+	public void addBalance(int credit) {
 		this.balance = this.balance + credit;
+	}
+	
+	public void setBalance(int balance) {
+		this.balance = balance;
 	}
 	
 	public int getAntiJailCards() {

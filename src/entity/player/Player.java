@@ -36,7 +36,7 @@ public class Player {
 	}
 
 	public void setBalance(int credit) {
-		account.setBalance(credit);
+		account.addBalance(credit);
 	}	
 
 	public boolean isBankrupt() {
