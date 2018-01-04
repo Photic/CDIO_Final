@@ -70,9 +70,8 @@ public class Deck {
 		Card firstCard = getCard(0);
 		Card[] tempCards = new Card[getLength()];
 		
-		for (int i = 1; i < getLength();) {
+		for (int i = 1; i < getLength(); i++) {
 				tempCards[i-1] = this.deck[i];
-				i++;
 		}
 		
 		tempCards[getLength()-1] = firstCard;

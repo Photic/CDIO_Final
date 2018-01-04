@@ -1,9 +1,12 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import entity.deck.Card;
 import entity.deck.Deck;
 import entity.player.PlayerList;
 
@@ -32,24 +35,20 @@ class TestDeck {
 	 */
 	@Test
 	void testpickACard() {
-	
-		System.out.println(this.deck.getLength());
+
+		Card firstCard = this.deck.getCard(0);
 		
-		for (int i = 0; i < 10_000; i++) {
-			String temp = this.deck.getCard(0).getDescription();
+		for (int i = 0; i < 32; i++) {
 			this.deck.pickACard();
-			
-			if (temp == this.deck.getCard(this.deck.getLength()-1).getDescription())
-				this.countBefore++;
 		}
 		
-		assertEquals(10_000, this.countBefore);
+		assertEquals(firstCard, this.deck.getCard(0));
 		
-		for (int i = 1; i <= this.deck.getLength(); i++) 
+		for (int i = 1; i <= this.deck.getLength()-1; i++) 
 			if (this.deck.getCard(0) != this.deck.getCard(i))
 				this.countAfter++;
 		
-		assertEquals(this.deck.getLength(), this.countAfter);
+		assertEquals(this.deck.getLength()-1, this.countAfter);
 		
 	}
 	
