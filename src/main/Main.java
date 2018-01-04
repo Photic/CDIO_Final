@@ -12,12 +12,11 @@ public class Main {
 //			System.out.println(deck.getCard(i).getDescription());
 //		
 		
-		
+	
 		
 		new GameController().gameControl();
 		
 		
 	}
 	
-
 }
