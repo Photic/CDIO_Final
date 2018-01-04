@@ -220,7 +220,7 @@ public class GuiController {
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
 					
 					try {
-						Thread.sleep(500);
+						Thread.sleep(300);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -246,14 +246,19 @@ public class GuiController {
 	
 	
 	/**
-	 * This is the second move method. 
+	 * This is the second move method. The player moves to a given square
+	 * 
 	 * 
 	 * @param p
-	 * @param diceSum
+	 * The player to be moved.
+	 * @param newPosition
+	 * The square position that the player needs to go to.
+	 * @param recieveStartMoney
+	 * A boolean describing wether or not the player should recievemoney if he passes start.
 	 */
-	public void movePlayerInstantly(Player p, int newPosition) {
+	public void movePlayerInstantly(Player p, int newPosition, boolean recieveStartMoney) {
 		
-		
+		int initPosition = p.getPosition();
 		for (int i = 0; i < gui_players.length; i++) {
 			
 			if (gui_players[i].getName() == p.getName()) {
@@ -275,6 +280,19 @@ public class GuiController {
 			
 
 		}
+		if (recieveStartMoney == true) {
+			if (initPosition > newPosition) {
+				
+				
+				p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
+				updateBalance(p);
+				gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
+				
+				
+			}
+		}
+
+		
 
 	}
 	
