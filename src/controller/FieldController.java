@@ -35,7 +35,7 @@ public class FieldController {
 	private void territoryLogic(Field field, GuiController gui, Player p) {
 
 		if(field.isOwned() == false) {
-			boolean decision = gui.territoryDecision(field);
+			boolean decision = gui.territoryDecision(field, p);
 
 			if (decision == true) {
 
@@ -51,7 +51,7 @@ public class FieldController {
 
 			}
 
-			gui.transaction(decision, field);
+			gui.transaction(decision, field, p);
 			
 		} else {
 			
@@ -60,7 +60,7 @@ public class FieldController {
 			field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent());
 			
 			
-			gui.payRent(field);
+			gui.payRent(field, p);
 			gui.updateBalance(p);
 			gui.updateBalance(field.getOwner());
 			
@@ -80,7 +80,6 @@ public class FieldController {
 				
 			} else {
 				
-				
 				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1));
 				gui.updateBalance(p);
 				
@@ -88,7 +87,7 @@ public class FieldController {
 			
 		} else {
 			
-			gui.taxMessage();
+			gui.taxMessage(p);
 			p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
 			gui.updateBalance(p);
 			

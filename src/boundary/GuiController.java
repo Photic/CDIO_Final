@@ -104,10 +104,10 @@ public class GuiController {
 
 	}
 
-	public boolean territoryDecision(Field field) {
-		gui.showMessage("Du er landet på en grund der kan købes.");
+	public boolean territoryDecision(Field field, Player p) {
+		gui.showMessage(p.getName() + ", du er landet på en grund der kan købes.");
 		
-		return gui.getUserLeftButtonPressed("Du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
+		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
 		
 	}
 	
@@ -118,28 +118,28 @@ public class GuiController {
 		
 	}
 	
-	public void taxMessage() {
+	public void taxMessage(Player p) {
 		
-		gui.showMessage("Du skal betale 2000 kroner i ekstraordinært skattebidrag.");
+		gui.showMessage(p.getName() +", du skal betale 2000 kroner i ekstraordinært skattebidrag.");
 		
 	}
 	
-	public void transaction(boolean b, Field field) {
+	public void transaction(boolean b, Field field, Player p) {
 		
 		if (b == true) {
 			
-			gui.showMessage("Du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
+			gui.showMessage(p.getName() + ", du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
 			
 		} else {
 			
-			gui.showMessage("Du valgt at lade vær med at købe " + field.getName());
+			gui.showMessage(p.getName() + ", du valgt at lade vær med at købe " + field.getName());
 			
 		}
 		
 	}
 	
-	public void payRent(Field field) {
-		gui.showMessage("Du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
+	public void payRent(Field field, Player p) {
+		gui.showMessage(p.getName() + ", du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
 		
 	}
 	
