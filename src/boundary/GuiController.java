@@ -216,7 +216,7 @@ public class GuiController {
 	
 	public void movePlayer(Player p, int diceSum) {
 		
-		int newPosition = p.getPosition() + diceSum;
+		int newPosition = (p.getPosition() + diceSum) % 40;
 		
 		
 		for (int i = 0; i < gui_players.length; i++) {
