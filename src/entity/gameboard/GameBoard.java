@@ -20,11 +20,14 @@ public class GameBoard {
 	private Color magenta = new Color (229, 70, 0);
 	private Color white = new Color(255, 255, 255);
 	private Color brown = new Color(153, 102, 0);
-	
-	
 
-	private final Field[] squares = 
+
+	/**
+	 * Creates the entire gameboard.
+	 */
+	private final Field[] fields = 
 		{
+
 			new Start("Start", "Modtag kr. 4.000", standard),																			// 0
 			new Territory("Rødovervej", "kr. 1.200", blue, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000}),						// 1
 			new Chance("Prøv Lykken", "", standard),																						// 2
@@ -66,14 +69,16 @@ public class GameBoard {
 			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard, 2000),																// 38
 			new Territory("Rådhuspladsen", "kr. 8.000", purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000})				// 39
 			
+
+			
 		};
 
 	public Field getField(int a) {
-		return squares[a];
+		return fields[a];
 	}
 
 	public int getLength() {
-		return squares.length;
+		return fields.length;
 	}
-	
+
 }
