@@ -5,7 +5,7 @@ public abstract class Card {
 	protected String description;
 	
 	/**
-	 *  Abstract class to create a card types.
+	 * Abstract class to create a card types.
 	 * @param description
 	 * @param action
 	 */
