@@ -119,10 +119,43 @@ public class GUINew {
 			gui.getFields()[0].setCar(gui_players[j], true);
 			gui.addPlayer(gui_players[j]);
 		}
+	}
+	
+	/**
+	 * 
+	 * @param p
+	 * The player to be moved
+	 * @param diceSum
+	 * The sum of dice
+	 */
+	public void movePlayer(Player p, int diceSum) {
+		
+		int prePosition = p.getPosition();
+		
+		
+		for (int i = 0; i < gui_players.length; i++) {
+			
+			if (gui_players[i].getName() == p.getName()) {
+				gui.getFields()[prePosition].setCar(gui_players[i], false);
+				
+				p.setPosition(p.getPosition() + diceSum);	
+				int newPosition = p.getPosition();
 
-
+				
+				gui.getFields()[newPosition].setCar(gui_players[i], true);
+			}
+		}
 
 	}
+	
+	public void rollDiceMessage() {
+		gui.showMessage("Please roll the dice");
+	}
+	
+	public void showDice(DiceCup dc) {
+		gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
+	}
+	
 
 
 
@@ -144,17 +177,7 @@ public class GUINew {
 
 	}
 
-	public void setNames(PlayerList plist) {
 
-
-
-	}
-
-	public void movePlayer(Player p, int index) {
-
-
-
-	}
 
 	public void setOwner(Player p) {
 
