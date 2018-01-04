@@ -11,10 +11,4 @@ public class Chance extends Field {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void squareLogic(Player p) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -2,8 +2,6 @@ package entity.gameboard;
 
 import java.awt.Color;
 
-import entity.player.Player;
-
 public class Shipping extends Field {
 
 	public Shipping(String navn, String description, Color color, int price) {
@@ -12,12 +10,4 @@ public class Shipping extends Field {
 		this.price = price; 
 	}
 
-	@Override
-	public void squareLogic(Player p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	
 }

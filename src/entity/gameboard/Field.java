@@ -14,7 +14,7 @@ public abstract class Field {
 	private String description;
 	private Color color;
 	protected boolean isOwned;
-	protected int price, housePrice, houses;
+	protected int price, housePrice, houses, hotels;
 	protected int[] rent;
 	protected String ownerName;
 	
@@ -23,8 +23,6 @@ public abstract class Field {
 		this.description = description;
 		this.color = color;
 	}
-
-	public abstract void squareLogic(Player p);
 	
 	public String getName() {
 		return this.name;

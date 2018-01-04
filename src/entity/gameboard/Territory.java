@@ -9,8 +9,6 @@ import entity.player.Player;
  *
  */
 public class Territory extends Field {
-	
-	private int houses;
 
 	public Territory(String name, String description, Color color, int price, int housePrice, int[] rent) {
 		super(name, description, color);
@@ -19,18 +17,12 @@ public class Territory extends Field {
 		this.housePrice = housePrice; 
 		this.rent = rent;
 	}
-
-	@Override
-	public void squareLogic(Player p) {
-		
-	}
 	
 	@Override
 	public int getRent() {
 		return this.rent[houses];
 	}
 	
-
 	public void addHouse() {
 		this.houses++;
 	}

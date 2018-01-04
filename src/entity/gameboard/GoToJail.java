@@ -9,16 +9,6 @@ public class GoToJail extends Field {
 	public GoToJail(String navn, String description, Color color) {
 		super(navn, description, color);
 	}
-
-	@Override
-	public void squareLogic(Player p) 
-	{
-		// Går over start
-	}
-
 	
-	
-
-
 
 }

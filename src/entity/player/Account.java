@@ -59,4 +59,24 @@ public class Account {
 		return antiJailCards;
 	}
 
+
+	public int getHousesowned() {
+		return housesowned;
+	}
+
+
+	public void setHousesowned(int housesowned) {
+		this.housesowned = this.hotelsowned + housesowned;
+	}
+
+
+	public int getHotelsowned() {
+		return hotelsowned;
+	}
+
+
+	public void setHotelsowned(int hotelsowned) {
+		this.hotelsowned = this.hotelsowned + hotelsowned;
+	}
+
 }
