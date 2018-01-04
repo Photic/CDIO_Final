@@ -20,11 +20,11 @@ public class Deck {
 			new PayMoneyCard("“De har modtaget Deres tandlægeregning. Betal kr. 2.000.”", 2000),
 			new PayMoneyCard("“De har modtaget Deres tandlægeregning. Betal kr. 2.000.”", 2000),
 			new PayMoneyCard("“Betal kr. 3.000 for reperation af Deres vogn.”", 3000),
-			new PayMoneyCardAdvanced("“De modtager “Matador-legatet for værdi trængende”, stort kr. 40.000. "
-						+ "Ved værdig trængende forstås, at Deres formue, d.v.s. "
-						+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 40_000, 15_000),
 			new PayMoneyCardAdvanced("“Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr. hus, kr. 2.300 per hotel”", 800, 2_300),
 			new PayMoneyCardAdvanced("“Oliepriserne er steget, og De skal betale: kr. 500 pr. hus, kr. 2.000 per. hotel”", 500, 2_000),
+			new PayMoneyCardSuperAdvanced("“De modtager “Matador-legatet for værdi trængende”, stort kr. 40.000. "
+					+ "Ved værdig trængende forstås, at Deres formue, d.v.s. "
+					+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 15_000, 40_000),
 			new AntiJailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
 						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”"),
 			new AntiJailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "

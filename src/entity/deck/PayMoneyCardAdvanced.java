@@ -2,10 +2,10 @@ package entity.deck;
 
 public class PayMoneyCardAdvanced extends Card {
 
-	public PayMoneyCardAdvanced(String description, int getMoney, int advanced) {
+	public PayMoneyCardAdvanced(String description, int amount, int advancedAmount) {
 		super(description);
-		this.actionOrAmount = getMoney;
-		this.advancedAmount = advanced;
+		this.actionOrAmount = amount;
+		this.advancedAmount = advancedAmount;
 	}
 
 }
