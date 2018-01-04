@@ -14,7 +14,7 @@ public abstract class Field {
 	private String description;
 	private Color color;
 	protected boolean isOwned;
-	protected int price;
+	protected int price, housePrice;
 	protected int[] rent;
 	protected String ownerName;
 	

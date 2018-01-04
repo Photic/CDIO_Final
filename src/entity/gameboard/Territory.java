@@ -12,10 +12,11 @@ public class Territory extends Field {
 	
 	private int houses;
 
-	public Territory(String name, String description, Color color, int price, int[] rent) {
+	public Territory(String name, String description, Color color, int price, int housePrice, int[] rent) {
 		super(name, description, color);
 		this.isOwned = false;
 		this.price = price;
+		this.housePrice = housePrice; 
 		this.rent = rent;
 	}
 
@@ -65,6 +66,10 @@ public class Territory extends Field {
 
 	public String getOwnerName() {
 		return ownerName;
+	}
+	
+	public int getHousePrice() {
+		return housePrice;
 	}
 	
 }
