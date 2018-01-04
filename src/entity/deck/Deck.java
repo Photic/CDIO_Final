@@ -28,13 +28,13 @@ public class Deck {
 						+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 1),
 			new PayMoney("“Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr. hus, kr. 2.300 per hotel”", 2),
 			new PayMoney("“Oliepriserne er steget, og De skal betale: kr. 500 pr. hus, kr. 2.000 per. hotel”", 3),
-			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
+			new AntiJailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
+						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", ),
+			new AntiJailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
 						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 1),
-			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
-						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 1),
-			new JailCard("“Gå i fængsel. Ryk direkte til fængslet. "
+			new GoToJailCard("“Gå i fængsel. Ryk direkte til fængslet. "
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 0),
-			new JailCard("“Gå i fængsel. Ryk direkte til fængslet. "
+			new GoToJailCard("“Gå i fængsel. Ryk direkte til fængslet. "
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 0),
 			new MovePlayer("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
 						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 1),
@@ -65,7 +65,7 @@ public class Deck {
 	 * Pick a card from the top of the deck.
 	 * @param pickCardFromDeck
 	 */
-	public void pickACard(Player p, PlayerList plist) {
+	public Card pickACard(Player p, PlayerList plist) {
 		this.deck[0].getCardFunction(p, plist, null);
 		
 		Card[] tempDeck = new Card[this.deck.length];
@@ -75,6 +75,8 @@ public class Deck {
 			tempDeck[i] = this.deck[i+1];
 		
 		this.deck = tempDeck;
+		
+		return this.deck[this.deck.length];
 	}
 	
 	/**
