@@ -1,6 +1,6 @@
 package controller;
 
-import boundary.GUINew;
+import boundary.GuiController;
 import entity.gameboard.Field;
 import entity.gameboard.Territory;
 import entity.player.Player;
@@ -17,7 +17,7 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GUINew gui, Player p) {
+	public void evaluateField(Field field, GuiController gui, Player p) {
 		
 		
 		
@@ -28,7 +28,7 @@ public class FieldController {
 		
 	}
 	
-	private void territoryLogic(Field field, GUINew gui, Player p) {
+	private void territoryLogic(Field field, GuiController gui, Player p) {
 		boolean decision = gui.territoryDecision(field);
 
 		

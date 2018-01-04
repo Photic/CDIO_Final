@@ -14,7 +14,7 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
-public class GUINew {
+public class GuiController {
 
 	private GUI gui;
 	private GUI_Player[] gui_players;
