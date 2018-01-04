@@ -203,7 +203,6 @@ public class GuiController {
 	
 	public void movePlayer(Player p, int diceSum) {
 		
-		int prePosition = p.getPosition();
 		int newPosition = p.getPosition() + diceSum;
 		
 		
@@ -212,9 +211,16 @@ public class GuiController {
 			if (gui_players[i].getName() == p.getName()) {
 				
 				while(p.getPosition() != newPosition) {
-					gui.getFields()[prePosition].setCar(gui_players[i], false);
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
-					gui.getFields()[newPosition].setCar(gui_players[i], true);
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					
+					try {
+						Thread.sleep(700);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 			}
