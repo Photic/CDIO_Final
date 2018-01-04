@@ -6,9 +6,9 @@ import entity.player.Player;
 
 public class Company extends Field {
 
-	public Company(String navn, String description, Color color) {
+	public Company(String navn, String description, Color color, int price) {
 		super(navn, description, color);
-		// TODO Auto-generated constructor stub
+		this.price = price; 
 	}
 
 	@Override
