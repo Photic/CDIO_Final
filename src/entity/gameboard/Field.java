@@ -14,6 +14,10 @@ public abstract class Field {
 	private String description;
 	private Color color;
 	protected boolean isOwned;
+	public void setOwned(boolean isOwned) {
+		this.isOwned = isOwned;
+	}
+
 	protected int price, housePrice, houses, hotels;
 	protected int[] rent;
 	protected String ownerName;

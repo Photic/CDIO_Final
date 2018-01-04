@@ -2,9 +2,10 @@ package controller;
 
 
 import boundary.GUINew;
-import boundary.Gui;
 import entity.DiceCup;
+import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
+import entity.gameboard.Territory;
 import entity.player.PlayerList;
 
 
@@ -17,6 +18,7 @@ public class GameController {
 
 	private GUINew gui;
 	private PlayerList playerList;
+	private FieldController fc;
 	private GameBoard gameboard;
 	private DiceCup dicecup;
 	private int playerCount, newPosition;
@@ -31,6 +33,7 @@ public class GameController {
 		gameboard = new GameBoard();
 		playing = true;
 		dicecup = new DiceCup();
+		fc = new FieldController();
 
 	}
 
@@ -40,36 +43,31 @@ public class GameController {
 	public void gameControl() 
 	{
 		initGui();
-
-		while(true) {
-			for (int i = 0; i < playerList.getLength(); i++) {
-				gui.rollDiceMessage();
-				dicecup.shake();
-				gui.showDice(dicecup);
-				gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
-
-			}
+		
+		while(playing) {
+			gameLoop();
 		}
+		
 	}
 						
 				
 
 
+	private void gameLoop() {
+		Field currentField;
+		for (int i = 0; i < playerList.getLength(); i++) {
+			gui.rollDiceMessage();
+			dicecup.shake();
+			gui.showDice(dicecup);
+			gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
+			
+			currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
+			
+			fc.evaluateField(currentField, gui, playerList.getPlayer(i));
+			
 
-
-
-
-
-
-//		askForNames(); // Ask for player names
-//
-//		setUpGui(); // Set up the gui
-//
-//		playGame(); // Play the game
-
-
-
-
+		}
+	}
 
 
 	private void initGui() {
@@ -79,107 +77,6 @@ public class GameController {
 	}
 
 
-
-	//
-	//
-	//
-	//	/**
-	//	 * This method asks for players names, and adds iditifiers if the names are the same.
-	//	 * @author Mathias
-	//	 */
-	//	
-	//	
-	//	private void askForNames() {
-	//		for (int i = 0; i<playerCount; i++) {
-	//			out.askForName(i+1);
-	//			do {currentName = keyboard.getString();
-	//			}
-	//			while (currentName.length()==0);
-	//
-	//			if (!(Arrays.asList(names).contains(currentName))) {
-	//				names[i] = currentName;
-	//			} else {
-	//				int count = 2;
-	//				while(true) {
-	//					if (!(Arrays.asList(names).contains(currentName + "_" + count))) {
-	//						names[i] = currentName + "_" + count;
-	//						break;
-	//					}
-	//					count++;
-	//					if(count == 7) {
-	//						break;
-	//					}
-	//				}
-	//			}
-	//
-	//		}
-	//
-	//		// Creates an array of players
-	//		playerList = new PlayerList(playerCount, names, rulebook.startMoney(playerCount));
-	//
-	//		// Showing a summary the players in the TUI.
-	//		out.printPlayerSummary(names);
-	//	}
-	//
-	//	/**
-	//	 * Set up the gui.
-	//	 */
-	//	private void setUpGui() {
-	//		//setting up the gui
-	//		gui.defineGUI(gameboard);
-	//		gui.setNames(playerList);
-	//		gui.placePlayers(playerList);
-	//	}
-	//
-	//	/**
-	//	 * Playing the game
-	//	 */
-	//	private void playGame() {
-	//
-	//		while(playing == true) // Keeps playing the game a winner is found.
-	//		{
-	//
-	//			checkWinner(); // First we check if a player has won.
-	//
-	//			for (int i = 0; i<playerList.getLength(); i++) { // Loop through the players.
-	//
-	//
-	//				if(playerList.getSpecificPlayer(i).isBankrupt()==true){ //If the player is dead, nothing happens.	
-	//
-	//				} else {
-	//
-	//					if(playerList.getSpecificPlayer(i).isInJail()) // If the player is in jail, he doesn't get his turn.
-	//					{
-	//						inJail(i);
-	//					} else { //This is the "normal" routine of the game.
-	//
-	//
-	//						rollDiceAndMove(i); // Roll the dice and get ready to move the player
-	//
-	//						checkStartPassed(i); // Check if the player passed start and then set his new position
-	//
-	//						rulebook.playerLands(gameboard, playerList.getSpecificPlayer(i), playerList, out); // Evaulate square logic on current square.
-	//
-	//						gui.movePlayer(playerList.getSpecificPlayer(i)); // Move the player on the GUI.
-	//
-	//						checkIfTerritory(i); // Check if its a territory, and do the special territory method if it is.
-	//
-	//						updateBalance(); // update player balances.
-	//						
-	//						gamelogic.checkIfDead(playerList.getSpecificPlayer(i), playerList);//Check if the current player died.
-	//
-	//						updateDead(i); // Update if the player died.
-	//					}
-	//				}
-	//			}
-	//			checkWinner();
-	//		}
-	//	}
-	//
-	//
-	//
-	//
-	//
 	//	/**
 	//	 * Check if the player passed start
 	//	 * @param i
