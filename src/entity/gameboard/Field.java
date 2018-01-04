@@ -14,7 +14,7 @@ public abstract class Field {
 	private String description;
 	private Color color;
 	protected boolean isOwned;
-	protected int price, housePrice;
+	protected int price, housePrice, houses;
 	protected int[] rent;
 	protected String ownerName;
 	
@@ -33,13 +33,17 @@ public abstract class Field {
 	public int getPrice() {
 		return this.price;
 	}
-	
-	/**
-	 * Get Basic rent.
-	 * @return
-	 */
+
 	public int getRent() {
 		return this.rent[0];
+	}
+	
+	public int getHouses() {
+		return this.houses;
+	}
+	
+	public int getHousePrice() {
+		return housePrice;
 	}
 	
 	public String getName() {

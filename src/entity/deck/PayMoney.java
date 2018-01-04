@@ -19,13 +19,13 @@ public class PayMoney extends Card {
 		{
 			switch (this.action) {
 			case 1:
-				MatadorGrant();
+				MatadorGrant(p);
 				break;
 			case 2:
-				IncreaseInTaxes();
+				IncreaseInTaxes(p);
 				break;
 			case 3:
-				Oilprices();
+				Oilprices(p);
 				break;
 			default:
 				System.err.println("Something went wrong in Card Sub Class PayMoney");
@@ -38,15 +38,15 @@ public class PayMoney extends Card {
 		}
 	}
 
-	private void MatadorGrant() {
-		
+	private void MatadorGrant(Player p) {
+		p.getAccount().getActives();
 	}
 	
-	private void IncreaseInTaxes() {
+	private void IncreaseInTaxes(Player p) {
 
 	}
 	
-	private void Oilprices() {
+	private void Oilprices(Player p) {
 
 	}
 
