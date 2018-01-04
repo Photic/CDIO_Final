@@ -22,13 +22,13 @@ public class DeckController {
 		Card cardPicked = deck.pickACard();
 		
 		if (cardPicked instanceof RecieveMoneyCard) {
-			recieveMoneyCard(p);
+			recieveMoneyCard(p, cardPicked.getAmount());
 		}
 		
 	}
 
-	public void recieveMoneyCard(Player p) {
-		p.getAccount().addBalance(deck.pickACard().getAdvancedAmount());
+	public void recieveMoneyCard(Player p, int amount) {
+		p.getAccount().addBalance(amount);
 	}
 
 	/**
