@@ -24,14 +24,14 @@ public class Account {
 		this.antiJailCards--;
 	}
 	
-	public void calculateActives(GameBoard gameboard) {
+	public void calculateActives(Player p, GameBoard gameboard) {
 		
 		this.actives = 0;
 		
 		for (int i = 0; i <= gameboard.getLength(); i++) {
 			if (gameboard.getField(i).getOwnerName() == p.getName()) {
 				addActives(gameboard.getField(i).getPrice());
-				addActives(gameboard.getField(i).get);
+				addActives((gameboard.getField(i).getHouses())*(gameboard.getField(i).getHousePrice()));
 			}
 		}
 	}
