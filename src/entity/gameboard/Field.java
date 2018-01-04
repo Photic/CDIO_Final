@@ -34,6 +34,10 @@ public abstract class Field {
 		return this.price;
 	}
 	
+	/**
+	 * Get Basic rent.
+	 * @return
+	 */
 	public int getRent() {
 		return this.rent[0];
 	}

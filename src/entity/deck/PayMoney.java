@@ -21,7 +21,7 @@ public class PayMoney extends Card {
 		}
 		else
 		{
-			p.setBalance(-this.action);
+			p.setBalance(p.getBalance()-this.action);
 		}
 	}
 	
