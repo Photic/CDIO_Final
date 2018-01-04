@@ -143,8 +143,8 @@ public class DeckController {
 	 * Send the player to prison.
 	 * @param p
 	 */
-	private void goToJail(Player p, int posistion) {
-		p.setDirectPosistion(posistion);
+	private void goToJail(Player p, int position) {
+		p.setPosition(position);
 		p.setInJail(true);
 	}
 
