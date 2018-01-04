@@ -24,19 +24,20 @@ public class Account {
 		this.antiJailCards--;
 	}
 	
-	public void calculateActives(Player p, GameBoard gameboard) {
+	public void calculateActives(GameBoard gameboard) {
 		
 		this.actives = 0;
 		
 		for (int i = 0; i <= gameboard.getLength(); i++) {
 			if (gameboard.getField(i).getOwnerName() == p.getName()) {
 				addActives(gameboard.getField(i).getPrice());
+				addActives(gameboard.getField(i).get);
 			}
 		}
 	}
 	
-	public void addActives(int actives) {
-		this.actives = this.actives + actives;
+	public void addActives(int credit) {
+		this.actives = this.actives + credit;
 	}
 	
 	//--------------------------------------------------------
