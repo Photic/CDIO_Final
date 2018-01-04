@@ -1,6 +1,5 @@
 package controller;
 
-import entity.deck.BirthdayCard;
 import entity.deck.Card;
 import entity.deck.Deck;
 import entity.gameboard.GameBoard;
@@ -20,14 +19,7 @@ public class DeckController {
 	public void chanceField(Player p, PlayerList plist) {
 		
 		Card picked = deck.pickACard();
-		switch () {
-		case :
-			
-			break;
-
-		default:
-			break;
-		}
+		
 	}
 
 	
