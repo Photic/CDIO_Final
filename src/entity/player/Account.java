@@ -4,12 +4,17 @@ import entity.deck.Card;
 
 public class Account {
 	
-	private int balance, actives, housesowned, hotelsowned, amountOfCards;
+
+	private int balance, actives, housesowned, hotelsowned, companies, shipping, amountOfCards;
 	private Card antiJailCard;
 	
+
 	public Account() {
 		this.balance = 30000;
 		this.actives = 0;
+		this.companies = 0;
+		this.shipping = 0;
+
 	}
 	
 	public void recieveAntiJaulCard(Card cardrecieved) {
@@ -93,6 +98,15 @@ public class Account {
 	public void setHotelsowned(int hotelsowned) {
 		this.hotelsowned = this.hotelsowned + hotelsowned;
 	}
+	
+	public int getCompanies() {
+		return companies;
+	}
+
+
+	public void setCompanies(int companies) {
+		this.companies = companies;
+	}
 
 	public Card getAntiJailCard() {
 		return antiJailCard;
@@ -100,6 +114,14 @@ public class Account {
 
 	public void setAntiJailCard(Card antiJailCard) {
 		this.antiJailCard = antiJailCard;
+	}
+
+	public int getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(int shipping) {
+		this.shipping = shipping;
 	}
 
 }
