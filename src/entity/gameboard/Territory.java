@@ -12,7 +12,7 @@ public class Territory extends Field {
 	
 	private int houses;
 
-	public Territory(String name, String description, Color color) {
+	public Territory(String name, String description, Color color, int price, int[] rent) {
 		super(name, description, color);
 		this.isOwned = false;
 		this.price = price;

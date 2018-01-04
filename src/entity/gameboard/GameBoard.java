@@ -24,50 +24,50 @@ public class GameBoard {
 	/**
 	 * Colors
 	 */
-	private int[] rødovrevej = {50, 250, 750, 2250, 4000, 6000};
 
 	private final Field[] squares = 
 		{
 			new Start("Start", "Modtag kr. 4.000", standard),
-			new Territory("Rødovervej", "kr. 1.200", blue),
+			new Territory("Rødovervej", "kr. 1.200", blue, 1200, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Hvidovrevej", "kr. 1.200", blue),
+			new Territory("Hvidovrevej", "kr. 1.200", blue), 1200, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Tax("Betal inkomstskat", "10% eller kr. 4.000", standard),
 			new Shipping("Rederiet Lindinger A/S", "kr. 4.000", standard),
-			new Territory("Roskildevej", "kr. 2.000", pink),
+			new Territory("Roskildevej", "kr. 2.000", pink), 2000, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Valby Langgade", "kr. 2.000", pink),
-			new Territory("Allégade", "kr. 2.400", pink),
+			new Territory("Valby Langgade", "kr. 2.000", pink, 2000, new int[] {50, 250, 750, 2250, 4000, 6000}),
+			new Territory("Allégade", "kr. 2.400", pink, 2400, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Jail("Fængsel", "På Besøg", standard),
-			new Territory("Frederiksberg Allé", "kr. 2.800", green),
+			new Territory("Frederiksberg Allé", "kr. 2.800", green, 2800, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Company("Coca-Cola", "kr. 3.000", standard),
-			new Territory("Büllowsvej", "kr. 2.800", green),
-			new Territory("GL. Kongevej", "kr. 3.200", green),
+			new Territory("Büllowsvej", "kr. 2.800", green, 2800, new int[] {50, 250, 750, 2250, 4000, 6000}),
+			new Territory("GL. Kongevej", "kr. 3.200", green, 3200, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Shipping("Grenaa-Hundested", "kr. 4.800", standard),
-			new Territory("Bernstorffsvej", "kr. 3.600", grey),
+			new Territory("Bernstorffsvej", "kr. 3.600", grey, 3600, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Hellerupvej", "kr. 3.600", grey),
-			new Territory("Strandvej", "kr. 4.000", grey),
+			new Territory("Hellerupvej", "kr. 3.600", grey, 3600, new int[] {50, 250, 750, 2250, 4000, 6000}),
+			new Territory("Strandvej", "kr. 4.000", grey, 4000, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Parking("Parkering", "Den Danske Bank", standard),
-			new Territory("Trianglen", "kr. 4.400", red),
+			new Territory("Trianglen", "kr. 4.400", red, 4400, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Østerbrogade", "kr. 4.400", red),
-			new Territory("Grønningen", "kr. 4.800", red),
+			new Territory("Østerbrogade", "kr. 4.400", red, 4400, new int[] {50, 250, 750, 2250, 4000, 6000}),
+			new Territory("Grønningen", "kr. 4.800", red, 4400, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Shipping("Mols-Linien A/S", "kr. 4.000", standard),
-			new Territory("Bredegade", "kr. 5.200", white),
-			new Territory("Kgs. Nytorv", "kr. 5.200", white),
+			new Territory("Bredegade", "kr. 5.200", white, 5200, new int [] {50, 250, 750, 2250, 4000, 6000}),
+			new Territory("Kgs. Nytorv", "kr. 5.200", white, 5200, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Company("Faxe Bryggeri", "kr. 3.000", standard),
-			new Territory("Østergade", "kr. 5.600", white),
+			new Territory("Østergade", "kr. 5.600", white, 5600, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new GoToJail("De Fængsles", "Du mister din tur", standard),
-			new Territory("Amagertorv", "kr. 6.000", yellow),
-			new Territory("Vimmelskaftet", "kr. 6.000", yellow),
+			new Territory("Amagertorv", "kr. 6.000", yellow, 6000, new int[] {50, 250, 750, 2250, 4000, 6000}),
+			new Territory("Vimmelskaftet", "kr. 6.000", yellow, 6000, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Nygade", "kr. 6.400", yellow),
+			new Territory("Nygade", "kr. 6.400", yellow, 6400, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Shipping("Skandinavisk Linietrafik", "kr. 4.000", standard),
 			new Chance("Prøv Lykken", "", standard),
-			new Territory("Frederiksberggade", "kr. 7.000", purple),
+			new Territory("Frederiksberggade", "kr. 7.000", purple, 7000, new int[] {50, 250, 750, 2250, 4000, 6000}),
 			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard),
-			new Territory("Rådhuspladsen", "kr. 8.000", purple)
+			new Territory("Rådhuspladsen", "kr. 8.000", purple, 8000, new int[] {50, 250, 750, 2250, 4000, 6000})
+			
 		};
 
 	public Field getField(int a) {
