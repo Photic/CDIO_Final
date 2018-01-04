@@ -9,7 +9,7 @@ public class GameBoard {
 	 */
 	private Color standard = new Color(208, 251, 230);
 	private Color purple = new Color(179, 102, 255);
-	private Color grey = new Color(230, 230, 230);
+	private Color grey = new Color(128, 128, 128);
 	private Color pink = new Color(255, 153, 255);
 	private Color orange = new Color(255, 117, 26);
 	private Color red = new Color(255, 51, 51);
