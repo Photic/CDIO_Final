@@ -2,10 +2,7 @@ package entity.player;
 
 public class Account {
 	
-	private int balance;
-	private int actives;
-	private int antiJailCards;
-	
+	private int balance, actives, antiJailCards, housesowned, hotelsowned;
 
 	public Account() {
 		this.balance = 30000;
