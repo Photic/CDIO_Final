@@ -33,9 +33,11 @@ class TestDeck {
 	@Test
 	void testpickACard() {
 	
+		System.out.println(this.deck.getLength());
+		
 		for (int i = 0; i < 10_000; i++) {
 			String temp = this.deck.getCard(0).getDescription();
-			this.deck.pickACard(this.plist.getPlayer(0), this.plist);
+			this.deck.pickACard();
 			
 			if (temp == this.deck.getCard(this.deck.getLength()-1).getDescription())
 				this.countBefore++;
@@ -43,11 +45,11 @@ class TestDeck {
 		
 		assertEquals(10_000, this.countBefore);
 		
-		for (int i = 1; i < this.deck.getLength(); i++) 
+		for (int i = 1; i <= this.deck.getLength(); i++) 
 			if (this.deck.getCard(0) != this.deck.getCard(i))
 				this.countAfter++;
 		
-		assertEquals(this.deck.getLength()-1, this.countAfter);
+		assertEquals(this.deck.getLength(), this.countAfter);
 		
 	}
 	

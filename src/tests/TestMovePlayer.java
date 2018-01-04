@@ -1,9 +1,7 @@
 package tests;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import entity.deck.Deck;
+import entity.gameboard.GameBoard;
 import entity.player.PlayerList;
 
 class TestMovePlayer {
@@ -13,19 +11,15 @@ class TestMovePlayer {
 	Deck deck = new Deck();
 	GameBoard gameboard = new GameBoard();
 	
-	@BeforeEach
-	void setUp() {
-		
-	}
-
-	@Test
-	void test() {
-		plist.getPlayer(0).setPosition(3);
-		
-		deck.getCard(24).getCardFunction(plist.getPlayer(0), plist, gameboard);
-		
-		System.out.println(deck.getCard(24).getDescription());
-		
-	}
+//	@BeforeEach
+//	void setUp() {
+//		
+//	}
+//
+//	@Test
+//	void test() {
+//
+//		
+//	}
 
 }

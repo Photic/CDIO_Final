@@ -63,15 +63,9 @@ public class Deck {
 	 * @param pickCardFromDeck
 	 */
 	public Card pickACard() {
-		Card[] tempDeck = new Card[this.deck.length];
-		tempDeck[this.deck.length-1] = this.deck[0];
+		Card[] tempDeck = new Card[getLength()];
 		
-		for (int i = 0; i < this.deck.length-1; i++)
-			tempDeck[i] = this.deck[i+1];
 		
-		this.deck = tempDeck;
-		
-		return this.deck[this.deck.length];
 	}
 
 	/**
