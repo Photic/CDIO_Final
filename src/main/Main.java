@@ -11,8 +11,7 @@ public class Main {
 //		for (int i = 0; i < deck.getLength(); i++)
 //			System.out.println(deck.getCard(i).getDescription());
 //		
-		
-	
+
 		
 		new GameController().gameControl();
 		

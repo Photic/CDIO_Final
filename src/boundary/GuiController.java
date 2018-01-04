@@ -153,10 +153,17 @@ public class GuiController {
 		
 	}
 	
-	public void payRent(Field field, Player p) {
+	public void payRentMessege(Field field, Player p) {
 		gui.showMessage(p.getName() + ", du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
 		
 	}
+	
+	public void payRentShippingMessege(Field field, Player p) {
+		
+		gui.showMessage(p.getName() + ", du er landet på " + field.getOwnerName() + "'s rederi. " + field.getOwnerName() + " ejer " + field.getOwner().getAccount().getShipping() + " rederier. Derfor betaler du " + field.getRent() + " kroner i leje.");
+		
+	}
+	
 	
 	public void setOwnerText(Player p) {
 		

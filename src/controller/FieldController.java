@@ -3,6 +3,7 @@ package controller;
 import boundary.GuiController;
 import entity.gameboard.Company;
 import entity.gameboard.Field;
+import entity.gameboard.Shipping;
 import entity.gameboard.Tax;
 import entity.gameboard.Territory;
 import entity.player.Player;
@@ -10,6 +11,11 @@ import entity.player.Player;
 public class FieldController {
 
 
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * @param field
@@ -34,6 +40,10 @@ public class FieldController {
 		} else if (field instanceof Company) {
 			
 			companyLogic(field, gui, p, diceSum);
+			
+		} else if (field instanceof Shipping) {
+			
+			shippingLogic(field, gui, p);
 			
 		}
 
@@ -64,12 +74,14 @@ public class FieldController {
 		} else {
 			
 			if (field.getOwner().getName() != p.getName()) {
+				
+				//Vi skal huske at tjekke for om ejeren ejer alle i farve gruppen --> 2x getRent.
 			
 			p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent());
 			field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent());
 			
 			
-			gui.payRent(field, p);
+			gui.payRentMessege(field, p);
 			gui.updateBalance(p);
 			gui.updateBalance(field.getOwner());
 			}
@@ -179,13 +191,38 @@ public class FieldController {
 			
 			if (field.getOwnerName() != p.getName()) {
 				
-				switch(p.getAccount().getShipping()) 
+				if (field.getOwner().getAccount().getShipping() == 1) {
+					
+					int payment = 500;
+					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					
+				} else if (field.getOwner().getAccount().getShipping() == 2) {
+					
+					int payment = 1000;
+					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					
+				} else if (field.getOwner().getAccount().getShipping() == 3) {
+					
+					int payment = 2000;
+					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					
+					
+				} else if (field.getOwner().getAccount().getShipping() == 4) {
+					
+					int payment = 4000;
+					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					
+				}
 				
-				
+				gui.updateBalance(p);
+				gui.updateBalance(field.getOwner());
 				
 			} 
 		
 		}
+		
+	
+		
 	}
 
 
