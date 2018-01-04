@@ -10,9 +10,9 @@ import entity.player.PlayerList;
 
 public class DeckController {
 
-	protected Deck deck;
+	private Deck deck;
 	
-	protected DeckController() {
+	private DeckController() {
 		deck = new Deck();
 		deck.shuffleCards();
 	}

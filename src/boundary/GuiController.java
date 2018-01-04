@@ -125,7 +125,6 @@ public class GuiController {
 	}
 	
 	public void payRent(Field field) {
-		
 		gui.showMessage("Du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
 		
 	}
