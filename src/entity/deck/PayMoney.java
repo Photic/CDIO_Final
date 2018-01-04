@@ -18,14 +18,17 @@ public class PayMoney extends Card {
 		if (this.action < 4)
 		{
 			switch (this.action) {
-			case 1:
-				MatadorGrant(p);
+			case 1: // MatadorGrant
+				if (p.getAccount().getPlayerWorth(p) <= 15_000)
+					p.setBalance(40_000);
 				break;
-			case 2:
-				IncreaseInTaxes(p);
+			case 2: // Increase in taxes
+				p.setBalance(-(p.getAccount().getHousesowned()*800));
+				p.setBalance(-(p.getAccount().getHotelsowned()*2300));
 				break;
-			case 3:
-				Oilprices(p);
+			case 3: // Increase in Oil
+				p.setBalance(-(p.getAccount().getHousesowned()*500));
+				p.setBalance(-(p.getAccount().getHotelsowned()*2000));
 				break;
 			default:
 				System.err.println("Something went wrong in Card Sub Class PayMoney");
@@ -37,21 +40,5 @@ public class PayMoney extends Card {
 			p.setBalance(p.getBalance()-this.action);
 		}
 	}
-
-	private void MatadorGrant(Player p) {
-		if (p.getAccount().getPlayerWorth(p) <= 15_000)
-			p.setBalance(40_000);
-	}
-	
-	private void IncreaseInTaxes(Player p) {
-		
-	}
-	
-	private void Oilprices(Player p) {
-
-	}
-
-	
-	
 
 }
