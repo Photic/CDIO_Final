@@ -8,7 +8,7 @@ package entity.player;
  */
 public class Player {
 		
-	
+	private final int GAMEBOARDLENGTH = 40;
 	private String name, id;
 	private int position;
 	private boolean turn, bankrupt, inJail;
@@ -52,7 +52,7 @@ public class Player {
 	}
 
 	public void setPosition(int position) {
-		this.position = position;
+		this.position = position % GAMEBOARDLENGTH;
 	}
 	
 	public boolean isInJail() {
