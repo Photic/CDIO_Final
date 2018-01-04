@@ -11,7 +11,7 @@ class TestMovePlayer {
 	String[] names = {"Stephan","Mathias"};
 	PlayerList plist = new PlayerList(2, names);
 	Deck deck = new Deck();
-//	GameBoard gameboard = new GameBoard();
+	GameBoard gameboard = new GameBoard();
 	
 	@BeforeEach
 	void setUp() {
@@ -21,6 +21,8 @@ class TestMovePlayer {
 	@Test
 	void test() {
 		plist.getPlayer(0).setPosition(3);
+		
+		deck.getCard(24).cardFunction(plist.getPlayer(0), plist, gameboard);
 		
 		System.out.println(deck.getCard(24).getDescription());
 		

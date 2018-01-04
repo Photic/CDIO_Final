@@ -46,7 +46,7 @@ public class MovePlayer extends Card {
 	 * @param gameboard
 	 */
 	public void moveToNearestShipping(Player p, PlayerList plist, GameBoard gameboard) {
-		int countFields = 0;
+		int countFields = p.getPosition();
 		for (int i = p.getPosition(); i < gameboard.getLength(); i++) {
 			if (gameboard.getField(i).getClass() != gameboard.getField(5).getClass()) {
 				countFields++;
