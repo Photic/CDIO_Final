@@ -111,6 +111,19 @@ public class GuiController {
 		
 	}
 	
+	public boolean taxDecision(Field field) {
+		gui.showMessage("Du skal betale indkomstskat.");
+		
+		return gui.getUserLeftButtonPressed("Du kan enten betale 4000 kroner eller betale 10% af dine værdier.", "Betal 4000 kroner", "Betal 10% af dine værdier");
+		
+	}
+	
+	public void taxMessage() {
+		
+		gui.showMessage("Du skal betale 2000 kroner i ekstraordinært skattebidrag.");
+		
+	}
+	
 	public void transaction(boolean b, Field field) {
 		
 		if (b == true) {

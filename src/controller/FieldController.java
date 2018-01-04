@@ -26,7 +26,7 @@ public class FieldController {
 			territoryLogic(field, gui, p);
 		} else if (field instanceof Tax) {
 
-
+			taxLogic(field, gui, p);
 		}
 
 
@@ -52,6 +52,7 @@ public class FieldController {
 			}
 
 			gui.transaction(decision, field);
+			
 		} else {
 			
 			p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent());
@@ -66,9 +67,32 @@ public class FieldController {
 		}
 	}
 
-	private void taxlogic(Field field, GuiController gui, Player p) {
+	private void taxLogic(Field field, GuiController gui, Player p) {
 
-
+		if (field.getPrice() == 4000) {
+			
+			boolean dicision = gui.taxDecision(field);
+			
+			if (dicision == true) {
+				
+				p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
+				gui.updateBalance(p);
+				
+			} else {
+				
+				
+				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1));
+				gui.updateBalance(p);
+				
+			}
+			
+		} else {
+			
+			gui.taxMessage();
+			p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
+			gui.updateBalance(p);
+			
+		}
 
 	}
 

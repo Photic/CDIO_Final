@@ -29,7 +29,7 @@ public class GameBoard {
 			new Territory("Rødovervej", "kr. 1.200", blue, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000}),						// 1
 			new Chance("Prøv Lykken", "", standard),																						// 2
 			new Territory("Hvidovrevej", "kr. 1.200", blue, 1200,1000, new int[] {50, 250, 750, 2250, 4000, 6000}),						// 3
-			new Tax("Betal inkomstskat", "10% eller kr. 4.000", standard),																// 4
+			new Tax("Betal inkomstskat", "10% eller kr. 4.000", standard, 4000),																// 4
 			new Shipping("Rederiet Lindinger A/S", "kr. 4.000", standard, 4000),															// 5
 			new Territory("Roskildevej", "kr. 2.000", pink, 2000, 1000, new int[] {100, 600, 1800, 5400, 8000, 11000}),					// 6
 			new Chance("Prøv Lykken", "", standard),																						// 7
@@ -63,7 +63,7 @@ public class GameBoard {
 			new Shipping("Skandinavisk Linietrafik", "kr. 4.000", standard, 4000),														// 35
 			new Chance("Prøv Lykken", "", standard),																						// 36
 			new Territory("Frederiksberggade", "kr. 7.000", purple, 7000, 4000, new int[] {700, 3500, 10000, 22000, 26000, 30000}),		// 37
-			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard),																// 38
+			new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard, 2000),																// 38
 			new Territory("Rådhuspladsen", "kr. 8.000", purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000})				// 39
 			
 		};
