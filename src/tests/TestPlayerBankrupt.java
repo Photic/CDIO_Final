@@ -1,9 +1,13 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Arrays;
+
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import entity.player.PlayerList;
 
 class TestPlayerBankrupt {
@@ -25,18 +29,18 @@ class TestPlayerBankrupt {
 	
 	@Test
 	void testForPlayerZero() {
-	//	System.out.println(Arrays.toString(this.plist.getList()));
+		System.out.println(Arrays.toString(this.plist.getList()));
 		
 		for (int i = 0; i <= this.plist.getLength(); i++) {
 			this.plist.getPlayer(0).setBankrupt(true);
-	//		System.out.println("Removing player " + this.plist.getPlayer(0).getName());
+			System.out.println("Removing player " + this.plist.getPlayer(0).getName());
 			this.plist.removePlayer(this.plist);
-	//		System.out.println(Arrays.toString(this.plist.getList()));
+			System.out.println(Arrays.toString(this.plist.getList()));
 			this.count--;
 			assertEquals(this.count, this.plist.getLength());
 		}
 		
-	//	System.out.println("Removing player " + this.plist.getPlayer(0).getName());
+		System.out.println("Removing player " + this.plist.getPlayer(0).getName());
 		this.plist.getPlayer(0).setBankrupt(true);
 		this.plist.removePlayer(this.plist);
 		
