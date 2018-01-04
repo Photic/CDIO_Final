@@ -3,6 +3,10 @@ package controller;
 import entity.deck.AntiJailCard;
 import entity.deck.Card;
 import entity.deck.Deck;
+import entity.deck.GoToJailCard;
+import entity.deck.MovePlayerCard;
+import entity.deck.MovePlayerCardAdvanced;
+import entity.deck.MovePlayerCardSuperAdvanced;
 import entity.deck.PayMoneyCard;
 import entity.deck.PayMoneyCardAdvanced;
 import entity.deck.PayMoneyCardSuperAdvanced;
@@ -16,16 +20,23 @@ import entity.player.PlayerList;
 public class DeckController {
 
 	private Deck deck;
-	
+
 	private DeckController() {
-		deck = new Deck();
-		deck.shuffleCards();
+		this.deck = new Deck();
+		this.deck.shuffleCards();
 	}
-	
-	public String chanceField(Player p, PlayerList plist) {
-		
-		Card cardPicked = deck.pickACard();
-		
+
+	/**
+	 * Use when landing on a chanceField.
+	 * @param p
+	 * @param plist
+	 * @param gameboard
+	 * @return
+	 */
+	public String chanceField(Player p, PlayerList plist, GameBoard gameboard) {
+
+		Card cardPicked = this.deck.pickACard();
+
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
 		}
@@ -42,11 +53,23 @@ public class DeckController {
 			payMoneyCardSuperAdvanced(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
 		}
 		else if (cardPicked instanceof AntiJailCard) {
+			antiJailCard(p, cardPicked);
+		}
+		else if (cardPicked instanceof GoToJailCard) {
+			goToJail(p, cardPicked.getAmount());
+		}
+		else if (cardPicked instanceof MovePlayerCard) {
 			
 		}
-		
+		else if (cardPicked instanceof MovePlayerCardAdvanced) {
+			
+		}
+		else if (cardPicked instanceof MovePlayerCardSuperAdvanced) {
+			moverPlayerCardSuperAdvanced(p, gameboard);
+		}
+
 		return cardPicked.getDescription();
-		
+
 	}
 
 	/**
@@ -54,17 +77,17 @@ public class DeckController {
 	 * @param p
 	 * @param amount
 	 */
-	public void recieveMoneyCard(Player p, int amount) {
+	private void recieveMoneyCard(Player p, int amount) {
 		p.getAccount().addBalance(amount);
 	}
-	
+
 	/**
 	 * It is Player1's Birthday, get money from everyone else.
 	 * @param p
 	 * @param plist
 	 * @param amount
 	 */
-	public void recieveMoneyCardAdvanced(Player p, PlayerList plist, int amount) {
+	private void recieveMoneyCardAdvanced(Player p, PlayerList plist, int amount) {
 		for (int i = 0; i < plist.getLength(); i++) {
 			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.getAccount().addBalance(amount);
@@ -78,10 +101,10 @@ public class DeckController {
 	 * @param p
 	 * @param amount
 	 */
-	public void payMoneyCard(Player p, int amount) {
+	private void payMoneyCard(Player p, int amount) {
 		p.getAccount().addBalance(-amount);
 	}
-	
+
 	/**
 	 * Oil crises or Taxes
 	 * @param p
@@ -89,11 +112,11 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	public void payMoneyCardAdvanced(Player p, PlayerList plist, int amount, int advancedAmount) {
+	private void payMoneyCardAdvanced(Player p, PlayerList plist, int amount, int advancedAmount) {
 		p.getAccount().addBalance(-(p.getAccount().getHousesowned()*amount));
 		p.getAccount().addBalance(-(p.getAccount().getHotelsowned()*advancedAmount));
 	}
-	
+
 	/**
 	 * Checks players worth, then gives the player money if it is lower then the amount.
 	 * @param p
@@ -101,70 +124,54 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	public void payMoneyCardSuperAdvanced(Player p, PlayerList plist, int amount, int advancedAmount) {
+	private void payMoneyCardSuperAdvanced(Player p, PlayerList plist, int amount, int advancedAmount) {
 		if (p.getAccount().getPlayerWorth(p) <= amount)
 			p.getAccount().addBalance(advancedAmount);
 	}
-	
-	
-//	if (this.action < 4)
-//	{
-//		switch (this.action) {
-//		case 1: // MatadorGrant
 
-//			break;
-//		case 2: // Increase in taxes
-//		
-//			break;
-//		case 3: // Increase in Oil
-//			p.setBalance(-(p.getAccount().getHousesowned()*500));
-//			p.setBalance(-(p.getAccount().getHotelsowned()*2000));
-//			break;
-//		default:
-//			System.err.println("Something went wrong in Card Sub Class PayMoney");
-//			break;
-//		}
-//	}
-//	else
-//	{
-//		p.addBalance(p.getBalance()-this.action);
-//	}
-	
-	
-	
 	/**
-	 * Makes sure to move the player to the nearest Shipping.
+	 * Get an anti Jail card.
 	 * @param p
-	 * @param plist TODO
-	 * @param gameboard
+	 * @param cardPicked
 	 */
-	public void moveToNearestShipping(Player p, PlayerList plist, GameBoard gameboard) {
+	private void antiJailCard(Player p, Card cardPicked) {
+		this.deck.getCard(this.deck.getLength()).addRemoveCardOwner(p.getName(), true);
+		p.getAccount().recieveAntiJaulCard(cardPicked);
+	}
+
+	/**
+	 * Send the player to prison.
+	 * @param p
+	 */
+	private void goToJail(Player p, int posistion) {
+		p.setDirectPosistion(posistion);
+		p.setInJail(true);
+	}
+
+	
+	private void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard) {
 		int countFields = p.getPosition();
 		for (int i = p.getPosition(); i < gameboard.getLength(); i++) {
+			countFields++;
 			if (gameboard.getField(i) instanceof Shipping) {
-				countFields++;
-			}
-			else {
-				countFields++;
 				p.setPosition(countFields);
 			}
-				
 		}
-		
-		if (gameboard.getField(countFields).isOwned() == true) {
-			p.setBalance(p.getBalance()-(gameboard.getField(countFields).getRent()*2));
-			
-			for (int i = 0; i < plist.getLength(); i++)
-				if (plist.getPlayer(i).getName() == gameboard.getField(countFields).getOwnerName())
-					plist.getPlayer(i).setBalance(p.getBalance()+(gameboard.getField(countFields).getRent()*2));
-			
-		}
-		
+
 	}
 	
+	/**
+	 * Remove anti Jail card from Player
+	 * @param p
+	 */
+	public void removeantiJailCard(Player p) {
+		for (int i = 0; i <= deck.getLength(); i++) {
+			if (deck.getCard(i) instanceof AntiJailCard && p.getName() == deck.getCard(i).getCardOwner()) {
+				this.deck.getCard(i).addRemoveCardOwner(null, false);
+				p.getAccount().removeAntiJaulCard();
+				break;
+			}
+		}
+	}
 
-	
-
-
-	
 }

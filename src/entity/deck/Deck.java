@@ -30,19 +30,19 @@ public class Deck {
 			new AntiJailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
 						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”"),
 			new GoToJailCard("“Gå i fængsel. Ryk direkte til fængslet. "
-						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”"),
+						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 10),
 			new GoToJailCard("“Gå i fængsel. Ryk direkte til fængslet. "
-						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”"),
-			new MovePlayerCard("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
-						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 0),
-			new MovePlayerCard("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
-						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 0),
+						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 10),
 			new MovePlayerCard("“Ryk frem til “Start””", 0),
-			new MovePlayerCard("“Tag med Mols-Linien - Flyt brikken frem, og hvis De passerer “Start”, inkassér da kr. 4.000.”", 0),
-			new MovePlayerCard("“Tag ind på Rådhuspladsen.”", 0),
-			new MovePlayerCard("“Ryk frem til Grønningen. Hvis De passerer “Start”, indkassér da kr. 4.000.”", 0),
-			new MovePlayerCard("“Ryk frem til Frederiksberg Allé. Hvis De passerer “Start, indkassér kr. 4.000.”", 0),
-			new MovePlayerCardAdvanced("“Ryk tre felter tilbage.”", -3)
+			new MovePlayerCard("“Tag med Mols-Linien - Flyt brikken frem, og hvis De passerer “Start”, inkassér da kr. 4.000.”", 25),
+			new MovePlayerCard("“Tag ind på Rådhuspladsen.”", 39),
+			new MovePlayerCard("“Ryk frem til Grønningen. Hvis De passerer “Start”, indkassér da kr. 4.000.”", 24),
+			new MovePlayerCard("“Ryk frem til Frederiksberg Allé. Hvis De passerer “Start, indkassér kr. 4.000.”", 11),
+			new MovePlayerCardAdvanced("“Ryk tre felter tilbage.”", -3),
+			new MovePlayerCardSuperAdvanced("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
+					+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”"),
+			new MovePlayerCardSuperAdvanced("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
+					+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”")
 	};
 	
 	/**
