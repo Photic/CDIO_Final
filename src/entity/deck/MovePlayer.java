@@ -14,7 +14,7 @@ public class MovePlayer extends Card {
 	 * Abstract override, extended from Card.
 	 */
 	@Override
-	public void cardFunction(Player p, PlayerList plist, GameBoard gameboard) 
+	public void getCardFunction(Player p, PlayerList plist, GameBoard gameboard) 
 	{
 		switch (this.action) {
 		case 1:

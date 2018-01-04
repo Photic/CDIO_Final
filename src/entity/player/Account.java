@@ -1,5 +1,7 @@
 package entity.player;
 
+import entity.gameboard.GameBoard;
+
 public class Account {
 	
 	private int balance;
@@ -22,19 +24,28 @@ public class Account {
 		this.antiJailCards--;
 	}
 	
+	public void calculateActives(Player p, GameBoard gameboard) {
+		
+		this.actives = 0;
+		
+		for (int i = 0; i <= gameboard.getLength(); i++) {
+			if (gameboard.getField(i).getOwnerName() == p.getName()) {
+				addActives(gameboard.getField(i).getPrice());
+			}
+		}
+	}
+	
+	public void addActives(int actives) {
+		this.actives = this.actives + actives;
+	}
 	
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
-	
 	public int getActives() {
 		return actives;
-	}
-
-	public void setActives(int actives) {
-		this.actives = actives;
 	}
 
 	public int getBalance() {

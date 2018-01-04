@@ -25,9 +25,9 @@ public class Deck {
 			new PayMoney("“Betal kr. 3.000 for reperation af Deres vogn.”", 3000),
 			new PayMoney("“De modtager “Matador-legatet for værdi trængende”, stort kr. 40.000. "
 						+ "Ved værdig trængende forstås, at Deres formue, d.v.s. "
-						+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 0),
-			new PayMoney("“Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr. hus, kr. 2.300 per hotel”", 0),
-			new PayMoney("“Oliepriserne er steget, og De skal betale: kr. 500 pr. hus, kr. 2.000 per. hotel”", 0),
+						+ "Deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.”", 1),
+			new PayMoney("“Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr. hus, kr. 2.300 per hotel”", 2),
+			new PayMoney("“Oliepriserne er steget, og De skal betale: kr. 500 pr. hus, kr. 2.000 per. hotel”", 3),
 			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
 						+ "Dette kort kan opbevares, indtil De får brug for det, eller De kan sælge det.”", 1),
 			new JailCard("“I anledning af kongens fødselsdag benådes De herved for fængsel. "
@@ -66,7 +66,7 @@ public class Deck {
 	 * @param pickCardFromDeck
 	 */
 	public void pickACard(Player p, PlayerList plist) {
-		this.deck[0].cardFunction(p, plist, null);
+		this.deck[0].getCardFunction(p, plist, null);
 		
 		Card[] tempDeck = new Card[this.deck.length];
 		tempDeck[this.deck.length-1] = this.deck[0];

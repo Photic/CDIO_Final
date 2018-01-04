@@ -14,7 +14,7 @@ public class JailCard extends Card {
 	 * Abstract override, extended from Card.
 	 */
 	@Override
-	public void cardFunction(Player p, PlayerList plist, GameBoard gameboard) {
+	public void getCardFunction(Player p, PlayerList plist, GameBoard gameboard) {
 		if (this.action == 0)
 		{
 			// Some code that allows the player to keep at card to get out of jail.

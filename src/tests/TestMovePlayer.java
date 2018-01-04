@@ -22,7 +22,7 @@ class TestMovePlayer {
 	void test() {
 		plist.getPlayer(0).setPosition(3);
 		
-		deck.getCard(24).cardFunction(plist.getPlayer(0), plist, gameboard);
+		deck.getCard(24).getCardFunction(plist.getPlayer(0), plist, gameboard);
 		
 		System.out.println(deck.getCard(24).getDescription());
 		

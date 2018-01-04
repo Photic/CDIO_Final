@@ -29,6 +29,6 @@ public abstract class Card {
 		return this.action;
 	}
 
-	public abstract void cardFunction(Player p, PlayerList plist, GameBoard gameboard);
+	public abstract void getCardFunction(Player p, PlayerList plist, GameBoard gameboard);
 	
 }

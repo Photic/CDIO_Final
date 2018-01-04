@@ -14,34 +14,43 @@ public class PayMoney extends Card {
 	 * Abstract override, extended from Card.
 	 */
 	@Override
-	public void cardFunction(Player p, PlayerList plist, GameBoard gameboard) {
-		if (this.action == 0)
+	public void getCardFunction(Player p, PlayerList plist, GameBoard gameboard) {
+		if (this.action < 4)
 		{
-			ekstra();
+			switch (this.action) {
+			case 1:
+				MatadorGrant();
+				break;
+			case 2:
+				IncreaseInTaxes();
+				break;
+			case 3:
+				Oilprices();
+				break;
+			default:
+				System.err.println("Something went wrong in Card Sub Class PayMoney");
+				break;
+			}
 		}
 		else
 		{
 			p.setBalance(p.getBalance()-this.action);
 		}
 	}
-	
-	/**
-	 * Function build to handle special cards.
-	 */
-	public void ekstra() {
-		switch (this.description.charAt(1)) {
-		case 'D':
-			// Code der indtager alle værdier og ændre på spillerens balance.
-			break;
-		case 'E':
-			// Code der indtager alle værdier og ændre på spillerens balance.
-			break;
-		case 'O':
-			// Code der indtager alle værdier og ændre på spillerens balance.
-			break;
-		default:
-			System.err.println("Something went wrong in Card Sub Class PayMoney");
-			break;
-		}
+
+	private void MatadorGrant() {
+		
 	}
+	
+	private void IncreaseInTaxes() {
+
+	}
+	
+	private void Oilprices() {
+
+	}
+
+	
+	
+
 }

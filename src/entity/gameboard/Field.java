@@ -46,8 +46,8 @@ public abstract class Field {
 		return this.name;
 	}
 
-	public void setNavn(String navn) {
-		this.name = navn;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getDescription() {
