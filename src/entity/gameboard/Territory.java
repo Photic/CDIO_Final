@@ -10,6 +10,7 @@ import entity.player.Player;
  */
 public class Territory extends Field {
 
+	
 	public Territory(String name, String description, Color color, int price, int housePrice, int[] rent) {
 		super(name, description, color);
 		this.isOwned = false;
@@ -31,18 +32,12 @@ public class Territory extends Field {
 		this.houses--;
 	}
 	
-	public void setOwner(Player p) {
-		this.ownerName = p.getName();
-	}
-	
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
-	public String getOwner() {
-		return ownerName;
-	}
+
 
 	public int getHouses() {
 		return houses;

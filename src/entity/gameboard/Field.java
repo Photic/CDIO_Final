@@ -13,6 +13,9 @@ public abstract class Field {
 	private String name;
 	private String description;
 	private Color color;
+	protected Player owner;
+
+
 	protected boolean isOwned;
 	public void setOwned(boolean isOwned) {
 		this.isOwned = isOwned;
@@ -63,8 +66,14 @@ public abstract class Field {
 	public void setOwnerName(String nameOfOwner) {
 		this.ownerName = nameOfOwner;
 	}
+	
+	public Player getOwner() {
+		return owner;
+	}
 
 	public void setOwner(Player p) {
+		
+		this.owner = p;
 		this.isOwned = true;
 		setOwnerName(p.getName());
 	}

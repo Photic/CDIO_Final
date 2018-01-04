@@ -106,13 +106,46 @@ public class GuiController {
 	public boolean territoryDecision(Field field) {
 		gui.showMessage("Du er landet på en grund der kan købes.");
 		
-		return gui.getUserLeftButtonPressed("Du er landet på en grund der kan købes", "Køb", "Gør Intet");
+		return gui.getUserLeftButtonPressed("Du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
+		
+	}
+	
+	public void transaction(boolean b, Field field) {
+		
+		if (b == true) {
+			
+			gui.showMessage("Du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
+			
+		} else {
+			
+			gui.showMessage("Du valgt at lade vær med at købe " + field.getName());
+			
+		}
+		
+	}
+	
+	public void payRent(Field field) {
+		
+		gui.showMessage("Du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
 		
 	}
 	
 	public void setOwnerText(Player p) {
 		
+		gui.getFields()[p.getPosition()].setDescription(gui.getFields()[p.getPosition()].getSubText());
+		
 		gui.getFields()[p.getPosition()].setSubText(p.getName());
+		
+		//Tilføj rent som en description
+		
+//		for (int i = 0; i < gui_players.length; i++) {
+//			
+//			if(gui_players[i].getName().equals(p.getName())) {
+//				
+//				gui.getFields()[p.getPosition()].setForeGroundColor(gui_players[i].getCar().getPrimaryColor());
+//			
+//			}
+//		}
 		
 		
 	}
