@@ -1,7 +1,7 @@
 package controller;
 
 
-import boundary.GUINew;
+import boundary.GuiController;
 import entity.DiceCup;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
@@ -16,7 +16,7 @@ import entity.player.PlayerList;
 public class GameController {
 
 
-	private GUINew gui;
+	private GuiController gui;
 	private PlayerList playerList;
 	private FieldController fc;
 	private GameBoard gameboard;
@@ -29,7 +29,7 @@ public class GameController {
 	 */
 	public GameController() 
 	{
-		gui = new GUINew();
+		gui = new GuiController();
 		gameboard = new GameBoard();
 		playing = true;
 		dicecup = new DiceCup();
