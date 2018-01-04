@@ -111,10 +111,17 @@ public class GuiController {
 		
 	}
 	
-	public boolean taxDecision(Field field) {
+	public boolean companyDecision(Field field, Player p) {
+		
+		gui.showMessage(p.getName() + ", du er landet på en virksomhed der kan købes.");
+		
+		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe virksomheden eller lade vær.", "Køb", "Gør intet");
+	}
+	
+	public boolean taxDecision(Field field, Player p) {
 		gui.showMessage("Du skal betale indkomstskat.");
 		
-		return gui.getUserLeftButtonPressed("Du kan enten betale 4000 kroner eller betale 10% af dine værdier.", "Betal 4000 kroner", "Betal 10% af dine værdier");
+		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten betale 4000 kroner eller betale 10% af dine værdier.", "Betal 4000 kroner", "Betal 10% af dine værdier");
 		
 	}
 	
