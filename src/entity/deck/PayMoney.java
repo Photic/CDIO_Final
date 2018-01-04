@@ -19,7 +19,7 @@ public class PayMoney extends Card {
 		{
 			switch (this.action) {
 			case 1:
-				MatadorGrant(p, gameboard);
+				MatadorGrant(p);
 				break;
 			case 2:
 				IncreaseInTaxes(p);
@@ -38,10 +38,9 @@ public class PayMoney extends Card {
 		}
 	}
 
-	private void MatadorGrant(Player p, GameBoard gameboard) {
-		if (p.getAccount().getPlayerWorth(p, gameboard) <= 15_000) {
+	private void MatadorGrant(Player p) {
+		if (p.getAccount().getPlayerWorth(p) <= 15_000)
 			p.setBalance(40_000);
-		}
 	}
 	
 	private void IncreaseInTaxes(Player p) {
