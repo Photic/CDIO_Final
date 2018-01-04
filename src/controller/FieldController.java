@@ -1,6 +1,7 @@
 package controller;
 
 import boundary.GuiController;
+import entity.gameboard.Company;
 import entity.gameboard.Field;
 import entity.gameboard.Tax;
 import entity.gameboard.Territory;
@@ -23,10 +24,17 @@ public class FieldController {
 
 
 		if (field instanceof Territory) {
+			
 			territoryLogic(field, gui, p);
+			
 		} else if (field instanceof Tax) {
 
-
+			taxLogic(field, gui, p);
+			
+		} else if (field instanceof Company) {
+			
+			
+			
 		}
 
 
@@ -35,7 +43,7 @@ public class FieldController {
 	private void territoryLogic(Field field, GuiController gui, Player p) {
 
 		if(field.isOwned() == false) {
-			boolean decision = gui.territoryDecision(field);
+			boolean decision = gui.territoryDecision(field, p);
 
 			if (decision == true) {
 
@@ -51,7 +59,8 @@ public class FieldController {
 
 			}
 
-			gui.transaction(decision, field);
+			gui.transaction(decision, field, p);
+			
 		} else {
 			
 			p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent());
@@ -59,17 +68,45 @@ public class FieldController {
 			field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent());
 			
 			
-			gui.payRent(field);
+			gui.payRent(field, p);
 			gui.updateBalance(p);
 			gui.updateBalance(field.getOwner());
 			
 		}
 	}
 
-	private void taxlogic(Field field, GuiController gui, Player p) {
+	private void taxLogic(Field field, GuiController gui, Player p) {
 
+		if (field.getPrice() == 4000) {
+			
+			boolean dicision = gui.taxDecision(field);
+			
+			if (dicision == true) {
+				
+				p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
+				gui.updateBalance(p);
+				
+			} else {
+				
+				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1));
+				gui.updateBalance(p);
+				
+			}
+			
+		} else {
+			
+			gui.taxMessage(p);
+			p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
+			gui.updateBalance(p);
+			
+		}
 
-
+	}
+	
+	private void companyLogic(Field field, GuiController gui, Player p) {
+		
+		
+		
 	}
 
 

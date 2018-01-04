@@ -104,29 +104,42 @@ public class GuiController {
 
 	}
 
-	public boolean territoryDecision(Field field) {
-		gui.showMessage("Du er landet på en grund der kan købes.");
+	public boolean territoryDecision(Field field, Player p) {
+		gui.showMessage(p.getName() + ", du er landet på en grund der kan købes.");
 		
-		return gui.getUserLeftButtonPressed("Du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
+		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
 		
 	}
 	
-	public void transaction(boolean b, Field field) {
+	public boolean taxDecision(Field field) {
+		gui.showMessage("Du skal betale indkomstskat.");
+		
+		return gui.getUserLeftButtonPressed("Du kan enten betale 4000 kroner eller betale 10% af dine værdier.", "Betal 4000 kroner", "Betal 10% af dine værdier");
+		
+	}
+	
+	public void taxMessage(Player p) {
+		
+		gui.showMessage(p.getName() +", du skal betale 2000 kroner i ekstraordinært skattebidrag.");
+		
+	}
+	
+	public void transaction(boolean b, Field field, Player p) {
 		
 		if (b == true) {
 			
-			gui.showMessage("Du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
+			gui.showMessage(p.getName() + ", du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
 			
 		} else {
 			
-			gui.showMessage("Du valgt at lade vær med at købe " + field.getName());
+			gui.showMessage(p.getName() + ", du valgt at lade vær med at købe " + field.getName());
 			
 		}
 		
 	}
 	
-	public void payRent(Field field) {
-		gui.showMessage("Du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
+	public void payRent(Field field, Player p) {
+		gui.showMessage(p.getName() + ", du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getRent() + " kroner i leje.");
 		
 	}
 	
@@ -181,30 +194,32 @@ public class GuiController {
 	 * The sum of dice
 	 * @throws InterruptedException 
 	 */
-//	public void movePlayer(Player p, int diceSum) {
-//		
-//		int prePosition = p.getPosition();
-//		
-//		
-//		for (int i = 0; i < gui_players.length; i++) {
-//			
-//			if (gui_players[i].getName() == p.getName()) {
-//				gui.getFields()[prePosition].setCar(gui_players[i], false);
-//				
-//				p.setPosition(p.getPosition() + diceSum);	
-//				int newPosition = p.getPosition();
-//
-//				
-//				gui.getFields()[newPosition].setCar(gui_players[i], true);
-//			}
-//		}
-//
-//	}
+	public void movePlayer(Player p, int diceSum, boolean test) {
+		
+		int prePosition = p.getPosition();
+		
+		
+		for (int i = 0; i < gui_players.length; i++) {
+			
+			if (gui_players[i].getName() == p.getName()) {
+				gui.getFields()[prePosition].setCar(gui_players[i], false);
+				
+				p.setPosition(p.getPosition() + diceSum);	
+				int newPosition = p.getPosition();
+
+				
+				gui.getFields()[newPosition].setCar(gui_players[i], true);
+			}
+		}
+		
+
+
+	}
 	
 	public void movePlayer(Player p, int diceSum) {
 		
-		int newPosition = p.getPosition() + diceSum;
-		
+		int newPosition = (p.getPosition() + diceSum) % 40;
+		int initPosition = (p.getPosition());
 		
 		for (int i = 0; i < gui_players.length; i++) {
 			
@@ -216,7 +231,7 @@ public class GuiController {
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
 					
 					try {
-						Thread.sleep(700);
+						Thread.sleep(500);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -224,6 +239,18 @@ public class GuiController {
 					
 				}
 			}
+			
+
+		}
+		
+		if (initPosition > newPosition) {
+			
+			
+			p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
+			updateBalance(p);
+			gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
+			
+			
 		}
 
 	}
