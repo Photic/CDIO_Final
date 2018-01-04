@@ -18,15 +18,15 @@ public class GUINew {
 	private GUI gui;
 	private GUI_Player[] gui_players;
 	private int playerCount;
-	
-	
+
+
 
 	public void defineGUI(GameBoard gameboard) {
 		GUI_Field[] gui_fields = new GUI_Field[gameboard.getLength()];
 
 		for (int i = 0; i < gameboard.getLength(); i++) {
 
-			
+
 			gui_fields[i] = new GUI_Street();
 			gui_fields[i].setTitle(gameboard.getField(i).getName());
 			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
@@ -38,7 +38,7 @@ public class GUINew {
 		gui = new GUI(gui_fields);
 
 	}
-	
+
 
 	public PlayerList registerPlayerCount() {
 
@@ -49,15 +49,16 @@ public class GUINew {
 		GUI_Car gui_car;
 
 		playerCount = Integer.parseInt(nop);
-		
-		String[] names = new String[playerCount];
 
-		for (int i = 1; i <= playerCount + 1; i++) {
-			String name = gui.getUserString("Spiller " + i + "' navn?");
-			names[i-1] = name;
+		String[] names = new String[playerCount];
+		gui_players = new GUI_Player[playerCount];
+
+		for (int i = 0; i <= playerCount - 1; i++) {
+			int index = i + 1;
+			String name = gui.getUserString("Spiller " + index + "' navn?");
 			gui_car = new GUI_Car();
-			
-			currentCarColor = carColors[i-1];
+
+			currentCarColor = carColors[i];
 			if (currentCarColor == "rød") {
 				gui_car.setPrimaryColor(Color.red);
 			} else if (currentCarColor == "Gul"){
@@ -71,18 +72,18 @@ public class GUINew {
 			} else if (currentCarColor == "Sort"){
 				gui_car.setPrimaryColor(Color.black);			
 			}
-			
 
-			
-			
-			
+
+
+
+			// lav array selv
 			if (!(Arrays.asList(names).contains(name))) {
-				names[i-1] = name;
+				names[i] = name;
 			} else {
 				int count = 2;
 				while(true) {
 					if (!(Arrays.asList(names).contains(name + "_" + count))) {
-						names[i-1] = name + "_" + count;
+						names[i] = name + "_" + count;
 						break;
 					}
 					count++;
@@ -91,20 +92,27 @@ public class GUINew {
 					}
 				}
 			}
-			
-			
-			
-			gui_players[i-1] = new GUI_Player(names[i-1], 30000, gui_car);
-			
-			
-			
-			
+
+
+
+			gui_players[i] = new GUI_Player(names[i], 30000, gui_car);
+
+
+
+
+		}
+		PlayerList playerList = new PlayerList(playerCount, names);
+
+		String output = "";
+		for (int i = 0; i < playerList.getLength(); i++) {
+			output = output + playerList.getPlayer(i).getName() + ", ";
+
 		}
 
-		PlayerList playerList = new PlayerList(playerCount, names);
-		
+		gui.showMessage(output);
+
 		return playerList;
-		
+
 	}
 
 
@@ -123,7 +131,7 @@ public class GUINew {
 				gui_players[i].setBalance(p.getBalance());
 			}
 		}
-		
+
 
 
 	}
