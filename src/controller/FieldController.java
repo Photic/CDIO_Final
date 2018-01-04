@@ -19,7 +19,7 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GuiController gui, Player p) {
+	public void evaluateField(Field field, GuiController gui, Player p, int diceSum) {
 
 
 
@@ -33,7 +33,7 @@ public class FieldController {
 			
 		} else if (field instanceof Company) {
 			
-			
+			companyLogic(field, gui, p, diceSum);
 			
 		}
 
@@ -63,15 +63,16 @@ public class FieldController {
 			
 		} else {
 			
+			if (field.getOwner().getName() != p.getName()) {
+			
 			p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent());
-			System.out.println(p.getAccount().getBalance() - field.getRent());
 			field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent());
 			
 			
 			gui.payRent(field, p);
 			gui.updateBalance(p);
 			gui.updateBalance(field.getOwner());
-			
+			}
 		}
 	}
 
@@ -79,7 +80,7 @@ public class FieldController {
 
 		if (field.getPrice() == 4000) {
 			
-			boolean dicision = gui.taxDecision(field);
+			boolean dicision = gui.taxDecision(field, p);
 			
 			if (dicision == true) {
 				
@@ -103,12 +104,89 @@ public class FieldController {
 
 	}
 	
-	private void companyLogic(Field field, GuiController gui, Player p) {
+	private void companyLogic(Field field, GuiController gui, Player p, int diceSum) {
 		
-		
+		if(field.isOwned() == false) {
+			boolean decision = gui.companyDecision(field, p);
+
+			if (decision == true) {
+
+				p.getAccount().buyField(field.getPrice());
+				gui.updateBalance(p);
+
+				p.getAccount().setCompanies(p.getAccount().getCompanies() + 1);
+				field.setOwner(p);
+				field.setOwned(true);
+				gui.setOwnerText(p);
+
+
+			} else {
+
+			}
+
+			gui.transaction(decision, field, p);
+			
+		} else {
+			
+			if (field.getOwner().getName() != p.getName()) {
+				
+				int payment;
+				if (field.getOwner().getAccount().getCompanies() == 1) {
+					payment = (100 * diceSum);
+					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + payment);				
+				} else {
+					payment = (200 * diceSum);
+					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + payment);
+				}
+				
+				gui.updateBalance(p);
+				gui.updateBalance(field.getOwner());
+				
+			}
+			
+
+			
+		}
 		
 	}
 
+	
+	private void shippingLogic(Field field, GuiController gui, Player p) {
+		
+		if(field.isOwned() == false) {
+			boolean decision = gui.shippingDecision(field, p);
+
+			if (decision == true) {
+
+				p.getAccount().buyField(field.getPrice());
+				gui.updateBalance(p);
+
+				p.getAccount().setCompanies(p.getAccount().getShipping() + 1);
+				field.setOwner(p);
+				field.setOwned(true);
+				gui.setOwnerText(p);
+
+
+			} else {
+
+			}
+
+			gui.transaction(decision, field, p);
+			
+		} else {
+			
+			if (field.getOwnerName() != p.getName()) {
+				
+				switch(p.getAccount().getShipping()) 
+				
+				
+				
+			} 
+		
+		}
+	}
 
 
 
