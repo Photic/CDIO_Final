@@ -3,16 +3,7 @@ package entity.deck;
 
 	
 public class Deck {
-	
-	public String[] fulldeck = { 
-			"BirthdayCard", 
-			"RecieveMoneyCard", 
-			"PayMoneyCard", 
-			"AntiJailCard", 
-			"GoToJailCard", 
-			"MovePlayerCard" 
-			};
-	
+
 	public Card[] deck = {
 			new RecieveMoneyCard("“Værdien af egen avl fra nyttehaven udgør kr. 200, som De modtager af banken.”", 1, 200),
 			new RecieveMoneyCard("“De har vundet i klasselotteriet. Modtag kr. 500.”", 1, 500),
@@ -45,11 +36,11 @@ public class Deck {
 			new GoToJailCard("“Gå i fængsel. Ryk direkte til fængslet. "
 						+ "Selv om De passerer “Start”, indkasserer De ikke kr. 4.000.”", 6),
 			new MovePlayerCard("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
-						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 7),
+						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 7, 0),
 			new MovePlayerCard("“Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, "
-						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 7),
+						+ "han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan De købe det af banken.”", 7, 0),
 			new MovePlayerCard("“Ryk frem til “Start””", 8, 0),
-			new MovePlayerCard("“Tag med Mols-Linien - Flyt brikken frem, og hvis De passerer “Start”, inkassér da kr. 4.000.”", 8),
+			new MovePlayerCard("“Tag med Mols-Linien - Flyt brikken frem, og hvis De passerer “Start”, inkassér da kr. 4.000.”", 8 ,),
 			new MovePlayerCard("“Tag ind på Rådhuspladsen.”", 8),
 			new MovePlayerCard("“Ryk frem til Grønningen. Hvis De passerer “Start”, indkassér da kr. 4.000.”", 8),
 			new MovePlayerCard("“Ryk frem til Frederiksberg Allé. Hvis De passerer “Start, indkassér kr. 4.000.”", 8),

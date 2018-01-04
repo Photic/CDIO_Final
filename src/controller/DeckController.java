@@ -20,7 +20,7 @@ public class DeckController {
 	public void chanceField(Player p, PlayerList plist) {
 		
 		Card picked = deck.pickACard();
-		switch (picked.getDescription()) {
+		switch () {
 		case :
 			
 			break;
