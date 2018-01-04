@@ -24,10 +24,24 @@ public class Account {
 		this.antiJailCards--;
 	}
 	
-	public void calculateActives(Player p, GameBoard gameboard) {
-		
+	/**
+	 * Calculates Player Worth and returns the sum.
+	 * @param p
+	 * @param gameboard
+	 * @return
+	 */
+	public int getPlayerWorth(Player p, GameBoard gameboard) {
+		getPlayerActives(p, gameboard);
+		return this.balance + this.actives;
+	}
+	
+	/**
+	 * Calculate the players actives. Use getActives to get the sum.
+	 * @param p
+	 * @param gameboard
+	 */
+	public void getPlayerActives(Player p, GameBoard gameboard) {
 		this.actives = 0;
-		
 		for (int i = 0; i <= gameboard.getLength(); i++) {
 			if (gameboard.getField(i).getOwnerName() == p.getName()) {
 				addActives(gameboard.getField(i).getPrice());
@@ -36,6 +50,10 @@ public class Account {
 		}
 	}
 	
+	/**
+	 * Supporting function to getPlayerActives(Player p, GameBoard gameboard);
+	 * @param credit
+	 */
 	public void addActives(int credit) {
 		this.actives = this.actives + credit;
 	}
