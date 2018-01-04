@@ -3,7 +3,7 @@ package entity.deck;
 public abstract class Card {
 	
 	protected String description;
-	protected int cardId;
+	protected int cardId, actionOrAmount, advancedAmount;
 	
 	/**
 	 * Abstract class to create a card types.
@@ -22,6 +22,14 @@ public abstract class Card {
 	
 	public int getCardId() {
 		return this.cardId;
+	}
+	
+	public int getAmount() {
+		return this.actionOrAmount;
+	}
+	
+	public int getAdvancedAmount() {
+		return this.advancedAmount;
 	}
 	
 }
