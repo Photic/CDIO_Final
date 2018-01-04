@@ -155,9 +155,37 @@ public class FieldController {
 	
 	private void shippingLogic(Field field, GuiController gui, Player p) {
 		
+		if(field.isOwned() == false) {
+			boolean decision = gui.shippingDecision(field, p);
+
+			if (decision == true) {
+
+				p.getAccount().buyField(field.getPrice());
+				gui.updateBalance(p);
+
+				p.getAccount().setCompanies(p.getAccount().getShipping() + 1);
+				field.setOwner(p);
+				field.setOwned(true);
+				gui.setOwnerText(p);
+
+
+			} else {
+
+			}
+
+			gui.transaction(decision, field, p);
+			
+		} else {
+			
+			if (field.getOwnerName() != p.getName()) {
+				
+				switch(p.getAccount().getShipping()) 
+				
+				
+				
+			} 
 		
-		
-		
+		}
 	}
 
 

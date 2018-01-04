@@ -118,6 +118,14 @@ public class GuiController {
 		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe virksomheden eller lade vær.", "Køb", "Gør intet");
 	}
 	
+	public boolean shippingDecision(Field field, Player p) {
+		
+		gui.showMessage(p.getName() + ", du er landet på et rederi der kan købes.");
+		
+		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe rederiet eller lade vær.", "Køb", "Gør intet");
+		
+	}
+	
 	public boolean taxDecision(Field field, Player p) {
 		gui.showMessage("Du skal betale indkomstskat.");
 		
