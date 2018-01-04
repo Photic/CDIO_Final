@@ -186,36 +186,18 @@ public class GuiController {
 		}
 	}
 	
+
 	/**
+	 * This is the main move method. It moves the player to a new position given the dicesum.
+	 * 
+	 * The plyaer recieves 4000 if he passes start.
+	 * 
 	 * 
 	 * @param p
-	 * The player to be moved
+	 * The player to be moved.
 	 * @param diceSum
-	 * The sum of dice
-	 * @throws InterruptedException 
+	 * The sum of the dice
 	 */
-	public void movePlayer(Player p, int diceSum, boolean test) {
-		
-		int prePosition = p.getPosition();
-		
-		
-		for (int i = 0; i < gui_players.length; i++) {
-			
-			if (gui_players[i].getName() == p.getName()) {
-				gui.getFields()[prePosition].setCar(gui_players[i], false);
-				
-				p.setPosition(p.getPosition() + diceSum);	
-				int newPosition = p.getPosition();
-
-				
-				gui.getFields()[newPosition].setCar(gui_players[i], true);
-			}
-		}
-		
-
-
-	}
-	
 	public void movePlayer(Player p, int diceSum) {
 		
 		int newPosition = (p.getPosition() + diceSum) % 40;
@@ -251,6 +233,40 @@ public class GuiController {
 			gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
 			
 			
+		}
+
+	}
+	
+	
+	/**
+	 * This is the second move method. 
+	 * 
+	 * @param p
+	 * @param diceSum
+	 */
+	public void movePlayerInstantly(Player p, int newPosition) {
+		
+		
+		for (int i = 0; i < gui_players.length; i++) {
+			
+			if (gui_players[i].getName() == p.getName()) {
+				
+				while(p.getPosition() != newPosition) {
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+					p.setPosition(p.getPosition()+1);
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			}
+			
+
 		}
 
 	}
