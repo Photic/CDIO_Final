@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 import entity.DiceCup;
+import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
@@ -67,20 +68,15 @@ public class GUINew {
 			
 			gui_car.setPrimaryColor(new Color (color[0], color[1], color[2]));
 			
-			
-			
 
-
-
-
-			// lav array selv
-			if (!(Arrays.asList(names).contains(name))) {
+			if (!(contains(names, name))) {
 				names[i] = name;
 			} else {
 				int count = 2;
 				while(true) {
-					if (!(Arrays.asList(names).contains(name + "_" + count))) {
-						names[i] = name + "_" + count;
+					String newName = name + "_" + count;
+					if (!(contains(names, newName))) {
+						names[i] = newName;
 						break;
 					}
 					count++;
@@ -91,11 +87,7 @@ public class GUINew {
 			}
 
 
-
 			gui_players[i] = new GUI_Player(names[i], 30000, gui_car);
-			
-
-
 
 		}
 		PlayerList playerList = new PlayerList(playerCount, names);
@@ -112,7 +104,39 @@ public class GUINew {
 
 	}
 
+	public boolean territoryDecision(Field field) {
+		gui.showMessage("Du er landet på en grund der kan købes.");
+		
+		return gui.getUserLeftButtonPressed("Du er landet på en grund der kan købes", "Køb", "Gør Intet");
+		
+	}
+	
+	
+	/**
+	 * Check if the name is in the array of names
+	 * @param names
+	 * the array of names
+	 * @param name
+	 * the name to be checked
+	 * @return
+	 * True or False
+	 */
+	private boolean contains(String[] names, String name) {
+		
+		boolean output = false;
 
+		for (int i = 0; i < names.length; i++) {
+			if (names[i] != null) {
+				if (names[i].toLowerCase().equals(name.toLowerCase())) {
+					output = true;
+				}
+			}
+		}
+		return output;
+	}
+	
+	
+	
 	public void placePlayer() {
 
 		for (int j = 0; j < gui_players.length; j++) {
