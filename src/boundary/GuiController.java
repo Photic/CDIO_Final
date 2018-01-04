@@ -225,7 +225,7 @@ public class GuiController {
 
 		for (int i = 0; i < gui_players.length; i++) {
 			if (gui_players[i].getName() == p.getName()) {
-				gui_players[i].setBalance(p.getBalance());
+				gui_players[i].setBalance(p.getAccount().getBalance());
 			}
 		}
 	}
