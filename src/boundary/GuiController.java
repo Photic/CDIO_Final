@@ -301,6 +301,47 @@ public class GuiController {
 
 	}
 	
+	/**
+	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
+	 * 
+	 * 
+	 * @param p
+	 * The player to be moved.
+	 * @param diceSum
+	 * The amount to be moved
+	 */
+	public void movePlayerBackwards(Player p, int diceSum) {
+		
+		int newPosition = (p.getPosition() + diceSum) % 40;
+		int initPosition = (p.getPosition());
+		
+		for (int i = 0; i < gui_players.length; i++) {
+			
+			if (gui_players[i].getName() == p.getName()) {
+				
+				while(p.getPosition() != newPosition) {
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+					if (p.getPosition() != 0) {
+						p.setPosition(p.getPosition()-1);
+					} else {
+						p.setPosition(39);
+					}
+					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					
+					try {
+						Thread.sleep(300);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			}
+			
+
+		}
+	}
+	
 	
 	/**
 	 * This is the second move method. The player moves to a given square
