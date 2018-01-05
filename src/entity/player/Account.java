@@ -6,6 +6,8 @@ public class Account {
 	
 
 	private int balance, actives, housesowned, hotelsowned, companies, shipping, amountOfCards;
+
+
 	private Card antiJailCard;
 	
 
@@ -124,6 +126,14 @@ public class Account {
 
 	public void setShipping(int shipping) {
 		this.shipping = shipping;
+	}
+	
+	public int getAmountOfCards() {
+		return amountOfCards;
+	}
+
+	public void setAmountOfCards(int amountOfCards) {
+		this.amountOfCards = amountOfCards;
 	}
 
 }

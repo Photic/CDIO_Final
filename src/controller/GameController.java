@@ -9,6 +9,7 @@ import entity.DiceCup;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
 import entity.gameboard.Territory;
+import entity.player.Player;
 import entity.player.PlayerList;
 
 
@@ -27,7 +28,7 @@ public class GameController {
 	private DeckController dc;
 	private boolean playing;
 	private TextReader textReader;
-	
+
 	private int alivePlayers;
 
 	/**
@@ -53,43 +54,43 @@ public class GameController {
 	{
 		initGui();
 		alivePlayers = playerList.getLength();
-		
-		
+
+
 		while(playing) {
 			if (alivePlayers == 1) {
-				
+
 				for (int i = 0; i < playerList.getLength(); i++) {
 					if (playerList.getPlayer(i).isBankrupt() == false) {
 						gui.showWinner(playerList.getPlayer(i));
 					}
-					
+
 				}
-				
+
 			} else {
 				gameLoop();
 			}
 
 		}
-		
+
 	}
-						
-				
+
+
 
 
 	private void gameLoop() {
 		Field currentField;
-		
+
 		for (int i = 0; i < playerList.getLength(); i++) {
-			
-			
+
+
 			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
 				gui.rollDiceMessage();
 				dicecup.shake();
 				gui.showDice(dicecup);
 				gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
-				
+
 				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
-				
+
 				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc, gameboard, playerList);
 			}
 
@@ -97,7 +98,7 @@ public class GameController {
 				playerList.getPlayer(i).setBankrupt(true);
 				gui.removeBankrupted(playerList.getPlayer(i), gameboard);
 				alivePlayers--;
-				
+
 			}
 
 		}
@@ -108,6 +109,35 @@ public class GameController {
 		gui.defineGUI(gameboard);
 		playerList = gui.registerPlayerCount();
 		gui.placePlayer();
+	}
+
+	private void jailDecision(GuiController gui, Player p) {
+
+		if (p.isInJail() == true) {
+			int decision = gui.inJailDecision(p);
+
+			if (decision == 1) {
+
+				p.getAccount().addBalance(-1000);
+				p.setInJail(false);
+				gui.updateBalance(p);
+
+			} else if (decision == 2) {
+
+				dicecup.shake();
+
+				if (dicecup.equalsDice() == true) {
+					p.setInJail(false);
+
+				}
+
+			} else if (decision == 3) {
+				p.getAccount().removeAntiJaulCard();
+				p.setInJail(false);
+			}
+
+		}
+
 	}
 
 

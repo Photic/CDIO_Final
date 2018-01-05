@@ -30,6 +30,24 @@ public class DiceCup {
 		return this.d1.getValue() + this.d2.getValue();
 	}
 	
+	public boolean equalsDice() {
+		
+		boolean equals;
+		
+		if (this.d1.getValue() == this.d2.getValue()) {
+			
+			equals = true;
+			
+		} else {
+			
+			equals = false;
+			
+		}
+		
+		return equals;
+		
+	}
+	
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
