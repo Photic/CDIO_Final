@@ -14,11 +14,13 @@ public class TestDice
 	@Before
 	public void setUp() throws Exception 
 	{
+		// Needs Tekst
 	}
 
 	@After
 	public void tearDown() throws Exception 
 	{
+		// Needs tekst
 	}
 
 	@Test

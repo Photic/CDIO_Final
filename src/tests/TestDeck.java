@@ -6,25 +6,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import boundary.TextReader;
 import entity.deck.Card;
 import entity.deck.Deck;
-import entity.player.PlayerList;
 
-public class TestDeck {
-	
-	String[] names = {"Stephan","Mathias","Steen"};
-	PlayerList plist = new PlayerList(3, names);
-	TextReader text = new TextReader();
-	Deck deck;
-	int countBefore;
-	int countAfter;
+public class TestDeck extends ConstructorForJUnit {
 	
 	@Before
 	public void setup() {
-		this.deck = new Deck(text);
-		this.countBefore = 0;
-		this.countAfter = 0;
+		this.deck = new Deck(this.text);
+		this.count = 0;
+		this.ekstraCount = 0;
 	}
 	
 	@After
@@ -48,9 +39,9 @@ public class TestDeck {
 		
 		for (int i = 1; i <= this.deck.getLength()-1; i++) 
 			if (this.deck.getCard(0) != this.deck.getCard(i))
-				this.countAfter++;
+				this.ekstraCount++;
 		
-		assertEquals(this.deck.getLength()-1, this.countAfter);
+		assertEquals(this.deck.getLength()-1, this.ekstraCount);
 		
 	}
 	
@@ -66,9 +57,9 @@ public class TestDeck {
 		
 		for (int i = 1; i < this.deck.getLength(); i++) 
 			if (this.deck.getCard(0) != this.deck.getCard(i))
-				this.countAfter++;
+				this.ekstraCount++;
 		
-		assertEquals(this.deck.getLength()-1, this.countAfter);
+		assertEquals(this.deck.getLength()-1, this.ekstraCount);
 	
 	}
 

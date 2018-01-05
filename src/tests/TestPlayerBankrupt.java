@@ -10,12 +10,8 @@ import org.junit.Test;
 
 import entity.player.PlayerList;
 
-public class TestPlayerBankrupt {
+public class TestPlayerBankrupt extends ConstructorForJUnit {
 
-	String[] names = {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
-	PlayerList plist;
-	int count;
-	
 	@Before
 	public void setup() {
 		this.plist = new PlayerList(6, names);
