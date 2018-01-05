@@ -2,7 +2,6 @@ package boundary;
 
 import java.awt.Color;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -110,6 +109,8 @@ public class GuiController {
 		for (int i = 0; i < gui_players.length; i++) {
 			if (gui_players[i].getName() == p.getName()) {
 				gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+				gui_players[i].setBalance(0);
+				
 			}
 		}
 		

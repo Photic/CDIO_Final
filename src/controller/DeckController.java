@@ -60,10 +60,10 @@ public class DeckController {
 			goToJail(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
-
+			moverPlayerCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCardAdvanced) {
-
+			moverPlayerCardAdvanced(p, gameboard, gui);
 		}
 		else if (cardPicked instanceof MovePlayerCardSuperAdvanced) {
 			moverPlayerCardSuperAdvanced(p, gameboard, gui);
@@ -141,7 +141,7 @@ public class DeckController {
 	}
 
 	/**
-	 * Send the player to prison.
+	 * Sents the player to prison.
 	 * @param p
 	 */
 	private void goToJail(Player p, int newPosition, GuiController gui) {
@@ -149,12 +149,18 @@ public class DeckController {
 		p.setInJail(true);
 	}
 
-	private void moverPlayerCard(Player p, GameBoard gameboard, GuiController gui) {
-		
+	/**
+	 * Standard move player card.
+	 * @param p
+	 * @param newPosition
+	 * @param gui
+	 */
+	private void moverPlayerCard(Player p, int newPosition, GuiController gui) {
+		gui.movePlayerInstantly(p, newPosition, true);
 	}
 
 	private void moverPlayerCardAdvanced(Player p, GameBoard gameboard, GuiController gui) {
-	
+		
 	}
 	
 	
