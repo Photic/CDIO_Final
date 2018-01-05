@@ -46,8 +46,6 @@ public class Deck {
 				new MovePlayerCardSuperAdvanced(description[24]),
 				new MovePlayerCardSuperAdvanced(description[25])
 		};
-		
-		
 	}
 
 
