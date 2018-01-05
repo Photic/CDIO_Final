@@ -1,5 +1,6 @@
 package tests;
 
+import boundary.GuiController;
 import boundary.TextReader;
 import controller.DeckController;
 import entity.deck.Deck;
@@ -13,7 +14,7 @@ public abstract class ConstructorForJUnit {
 	protected TextReader text;
 	protected Deck deck;
 	protected DeckController dc;
-	protected GuiController 
+	protected GuiController gui;
 
 	public ConstructorForJUnit() {
 		this.names = new String[] {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
@@ -21,6 +22,7 @@ public abstract class ConstructorForJUnit {
 		this.text = new TextReader();
 		this.deck = new Deck(this.text);
 		this.dc = new DeckController(this.text);
+		this.gui = new GuiController();
 	}
 	
 }
