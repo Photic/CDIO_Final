@@ -57,7 +57,7 @@ public class DeckController {
 			antiJailCard(p, cardPicked);
 		}
 		else if (cardPicked instanceof GoToJailCard) {
-			goToJail(p, cardPicked.getAmount());
+			goToJail(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
 
@@ -144,8 +144,8 @@ public class DeckController {
 	 * Send the player to prison.
 	 * @param p
 	 */
-	private void goToJail(Player p, int position) {
-		p.setPosition(position);
+	private void goToJail(Player p, int newPosition, GuiController gui) {
+		gui.movePlayerInstantly(p, newPosition, false);
 		p.setInJail(true);
 	}
 
