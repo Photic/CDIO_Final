@@ -229,5 +229,12 @@ public class FieldController {
 	}
 
 
+	public void jailLogic(Field field, GuiController gui, Player p) {
+		gui.visitJailMessege(field, p);
+		
+	}
+	
+	
+	
 
 }
