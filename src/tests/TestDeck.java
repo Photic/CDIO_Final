@@ -1,9 +1,12 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import boundary.TextReader;
 import entity.deck.Card;
 import entity.deck.Deck;
 import entity.player.PlayerList;
@@ -12,13 +15,14 @@ class TestDeck {
 	
 	String[] names = {"Stephan","Mathias","Steen"};
 	PlayerList plist = new PlayerList(3, names);
+	TextReader text = new TextReader();
 	Deck deck;
 	int countBefore;
 	int countAfter;
 	
 	@Before
 	void setup() {
-		this.deck = new Deck();
+		this.deck = new Deck(text);
 		this.countBefore = 0;
 		this.countAfter = 0;
 	}
