@@ -94,7 +94,11 @@ public abstract class Field {
 		return this.price;
 	}
 
-	public int getRent() {
+	public int[] getRent() {
+		return this.rent;
+	}
+	
+	public int getCurrentRent() {
 		return this.rent[0];
 	}
 	

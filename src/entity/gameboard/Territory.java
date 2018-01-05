@@ -20,7 +20,7 @@ public class Territory extends Field {
 	}
 	
 	@Override
-	public int getRent() {
+	public int getCurrentRent() {
 		return this.rent[houses];
 	}
 	
