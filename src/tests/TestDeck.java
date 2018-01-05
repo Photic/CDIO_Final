@@ -1,11 +1,9 @@
 package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.After;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import entity.deck.Card;
 import entity.deck.Deck;
 import entity.player.PlayerList;
