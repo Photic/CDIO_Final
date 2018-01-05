@@ -36,12 +36,13 @@ public class GameController {
 	 */
 	public GameController() throws IOException 
 	{
+		textReader = new TextReader();
 		gui = new GuiController();
 		gameboard = new GameBoard(textReader);
 		playing = true;
 		dicecup = new DiceCup();
 		fc = new FieldController(textReader);
-		textReader = new TextReader();
+
 		dc = new DeckController(textReader);
 
 	}
