@@ -1,10 +1,13 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
+import boundary.TextReader;
+import entity.deck.Card;
 import entity.deck.Deck;
 import entity.player.PlayerList;
 
@@ -12,13 +15,14 @@ public class TestDeck {
 	
 	String[] names = {"Stephan","Mathias","Steen"};
 	PlayerList plist = new PlayerList(3, names);
-	Deck deck = new Deck();
+	TextReader text = new TextReader();
+	Deck deck;
 	int countBefore;
 	int countAfter;
 	
 	@Before
 	public void setup() {
-		this.deck = new Deck();
+		this.deck = new Deck(text);
 		this.countBefore = 0;
 		this.countAfter = 0;
 	}
@@ -33,18 +37,16 @@ public class TestDeck {
 	 */
 	@Test
 	public void testpickACard() {
-	
-		for (int i = 0; i < 10_000; i++) {
-			String temp = this.deck.getCard(0).getDescription();
-			this.deck.pickACard(this.plist.getPlayer(0), this.plist);
-			
-			if (temp == this.deck.getCard(this.deck.getLength()-1).getDescription())
-				this.countBefore++;
+
+		Card firstCard = this.deck.getCard(0);
+		
+		for (int i = 0; i < 32; i++) {
+			this.deck.pickACard();
 		}
 		
-		assertEquals(10_000, this.countBefore);
+		assertEquals(firstCard, this.deck.getCard(0));
 		
-		for (int i = 1; i < this.deck.getLength(); i++) 
+		for (int i = 1; i <= this.deck.getLength()-1; i++) 
 			if (this.deck.getCard(0) != this.deck.getCard(i))
 				this.countAfter++;
 		
@@ -56,7 +58,7 @@ public class TestDeck {
 	 * Testing the shuffleCards function, and ending the test with seeing if all cards are still unique.
 	 */
 	@Test
-	void testshuffleCards()
+	public void testshuffleCards()
 	{
 		for (int i = 0; i < 10_000; i++) {
 			this.deck.shuffleCards();

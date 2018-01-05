@@ -8,58 +8,43 @@ package entity.player;
  */
 public class Player {
 		
-	
+	private final int GAMEBOARDLENGTH = 40;
 	private String name, id;
-
-
 	private int position;
 	private boolean turn, bankrupt, inJail;
 	private Account account;
 
-	public Player(String n)
-	{
+	public Player(String n) {
 		this.name = n;
 		this.account = new Account();
 		this.bankrupt = false;
 		this.inJail = false;
 		this.position = 0;
 	}
-	
-	
-	
+
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
-	public String getName() 
-	{
+	public String getName() {
 		return name;
 	}
 
-	public int getBalance() 
-	{
-		return account.getBalance();
-	}
-
-	public void setBalance(int credit) 
-	{
-		account.setBalance(credit);
-	}	
-
-	public boolean isDead() {
+	public boolean isBankrupt() {
 		return bankrupt;
 	}
 
-	public void setDead(boolean isDead) {
+	public void setBankrupt(boolean isDead) {
 		this.bankrupt = isDead;
 	}
+	
 	public int getPosition() {
 		return position;
 	}
 
 	public void setPosition(int position) {
-		this.position = position;
+		this.position = position % GAMEBOARDLENGTH;
 	}
 	
 	public boolean isInJail() {
@@ -86,20 +71,8 @@ public class Player {
 		this.turn = turn;
 	}
 
-	public boolean isBankrupt() {
-		return bankrupt;
-	}
-
-	public void setBankrupt(boolean bankrupt) {
-		this.bankrupt = bankrupt;
-	}
-
 	public Account getAccount() {
 		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 	
 }

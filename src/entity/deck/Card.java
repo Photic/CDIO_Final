@@ -1,33 +1,48 @@
 package entity.deck;
 
-import entity.player.Player;
-import entity.player.PlayerList;
-
 public abstract class Card {
 	
-	private String description;
-	private int action;
-	
+	protected String description, specificCardOwner;
+	protected int actionOrAmount, advancedAmount;
+	protected boolean cardIsOwned;
+
 	/**
-	 *  Abstract class to create a card types.
+	 * Abstract class to create a card types.
 	 * @param description
 	 * @param action
 	 */
-	public Card(String description, int action) {
+	public Card(String description) {
 		this.description = description;
-		this.action = action;
 	}
 	
-	public String getDescription()
-	{
+	public String getDescription() {
 		return this.description;
 	}
 	
-	public int getAction()
-	{
-		return this.action;
+	public int getAmount() {
+		return this.actionOrAmount;
+	}
+	
+	public int getAdvancedAmount() {
+		return this.advancedAmount;
+	}
+	
+	public boolean isCardIsOwned() {
+		return cardIsOwned;
+	}
+	
+	public String getCardOwner() {
+		return this.specificCardOwner;
+	}
+	
+	public void addRemoveCardOwner(String pName, boolean owned) {
+		this.specificCardOwner = pName;
+		setCardIsOwned(owned);
 	}
 
-	public abstract void cardFunction(Player p, PlayerList plist);
+	public void setCardIsOwned(boolean cardIsOwned) {
+		this.cardIsOwned = cardIsOwned;
+	}
+	
 	
 }
