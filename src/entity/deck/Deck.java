@@ -6,15 +6,17 @@ import boundary.TextReader;
 
 public class Deck {
 	
-	TextReader Writer = new TextReader();
-	String[] description = Writer.textFromFile("DescriptionsChanceCards.txt");
+	private String[] description;
 	
-	public Deck() throws IOException {
-		
+	public Deck(TextReader text){
+		try {
+			this.description = text.textFromFile("DescriptionsChanceCards.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	
-
 	public Card[] deck = {
 			new RecieveMoneyCard(description[1], 200),
 			new RecieveMoneyCard(description[2], 500),
