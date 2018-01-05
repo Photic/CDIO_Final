@@ -42,7 +42,7 @@ public class GameBoard {
 				new Company("Coca-Cola", "kr. 3.000", standard, 3000),																		// 12
 				new Territory("Büllowsvej", "kr. 2.800", green, 2800, 2000, new int[] {200, 1000, 3000, 9000, 12500, 15000}),					// 13
 				new Territory("GL. Kongevej", "kr. 3.200", green, 3200, 2000, new int[] {250, 1250, 3750, 10000, 14000, 18000}),				// 14
-				new Shipping("Grenaa-Hundested", "kr. 4.800", standard, 4000),																// 15
+				new Shipping("Grenaa-Hundested", "kr. 4.000", standard, 4000),																// 15
 				new Territory("Bernstorffsvej", "kr. 3.600", grey, 3600, 2000, new int[] {300, 1400, 4000, 11000, 15000, 19000}),				// 16
 				new Chance("Prøv Lykken", "", standard),																						// 17
 				new Territory("Hellerupvej", "kr. 3.600", grey, 3600, 2000, new int[] {300, 1400, 4000, 11000, 15000, 19000}),					// 18
