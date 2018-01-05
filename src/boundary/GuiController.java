@@ -114,11 +114,10 @@ public class GuiController {
 				
 				for (int j = 0; j < gb.getLength(); j++) {
 					
-					if (gb.getField(j).getOwnerName() == p.getName()) {
+					if (gb.getField(j).getOwner().getName() == p.getName()) {
 						
 						gb.getField(j).setOwned(false);
 						gb.getField(j).setOwner(null);
-						gb.getField(j).setOwnerName(null);
 						
 					}
 					
