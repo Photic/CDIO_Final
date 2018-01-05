@@ -37,12 +37,13 @@ public class GameController {
 	 */
 	public GameController() throws IOException 
 	{
+		textReader = new TextReader();
 		gui = new GuiController();
-		gameboard = new GameBoard();
+		gameboard = new GameBoard(textReader);
 		playing = true;
 		dicecup = new DiceCup();
-		fc = new FieldController();
-		textReader = new TextReader();
+		fc = new FieldController(textReader);
+
 		dc = new DeckController(textReader);
 
 	}
@@ -78,20 +79,32 @@ public class GameController {
 
 
 	private void gameLoop() {
-		Field currentField;
+
+		boolean decision;
 
 		for (int i = 0; i < playerList.getLength(); i++) {
 
 
 			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
-				gui.rollDiceMessage();
-				dicecup.shake();
-				gui.showDice(dicecup);
-				gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
+				if (playerList.getPlayer(i).getAccount().getTerritories() == 0) {
+					gui.rollDiceMessage(playerList.getPlayer(i));
+					takeTurn(playerList.getPlayer(i));
+					
+				} else {
+					decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
+					
+					if (decision == true) {
+						
+						takeTurn(playerList.getPlayer(i));
+						
+					} else {
+						
+					}
+					
+					
+				}
+				
 
-				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
-
-				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc, gameboard, playerList);
 			}
 
 			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
@@ -109,6 +122,17 @@ public class GameController {
 		gui.defineGUI(gameboard);
 		playerList = gui.registerPlayerCount();
 		gui.placePlayer();
+	}
+	
+	private void takeTurn(Player p) {
+		Field currentField;
+		dicecup.shake();
+		gui.showDice(dicecup);
+		gui.movePlayer(p, dicecup.sum());
+		
+		currentField = gameboard.getField(p.getPosition());
+		
+		fc.evaluateField(currentField, gui, p, dicecup.sum(), dc, gameboard, playerList);
 	}
 
 	private void jailDecision(GuiController gui, Player p) {

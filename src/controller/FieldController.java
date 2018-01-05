@@ -1,6 +1,9 @@
 package controller;
 
+import java.io.IOException;
+
 import boundary.GuiController;
+import boundary.TextReader;
 import entity.gameboard.Chance;
 import entity.gameboard.Company;
 import entity.gameboard.Field;
@@ -16,12 +19,11 @@ import entity.player.PlayerList;
 
 public class FieldController {
 
-
+	private GameBoard gameBoard;
 	
-	public FieldController() {
-		
-		
-	}
+	public FieldController(TextReader name) {
+			this.gameBoard = new GameBoard(name);
+		}
 	
 	
 	
@@ -83,6 +85,7 @@ public class FieldController {
 			if (decision == true) {
 
 				p.getAccount().buyField(field.getPrice());
+				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1));
 				gui.updateBalance(p);
 
 				field.setOwner(p);

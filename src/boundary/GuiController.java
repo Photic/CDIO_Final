@@ -459,12 +459,21 @@ public class GuiController {
 
 	}
 
+	
+	
+	public void rollDiceMessage(Player p) {
+		//gui.showMessage(p.getName() + " please roll the dice");
+		gui.getUserButtonPressed(p.getName() + ", kast terningerne", "KAST!");
 
-
-	public void rollDiceMessage() {
-		gui.showMessage("Please roll the dice");
 	}
 
+	
+	public boolean rollDiceMessageUpdated(Player p) {
+		
+		
+		return gui.getUserLeftButtonPressed("Vil du kaste terningerne eller ordne dine grunde?", "KAST!", "Grunde");
+	}
+	
 	public void showDice(DiceCup dc) {
 		gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
 	}
@@ -481,16 +490,6 @@ public class GuiController {
 		}
 	}
 
-
-	//fix så den virker
-	public void updateBalance(PlayerList plist) {
-
-		//		for (int i = 0; i < gui_players.length; i++) {
-		//			if (gui_players[i].getName() == p.getName()) {
-		//				gui_players[i].setBalance(p.getBalance());
-		//			}
-		//		}
-	}
 
 	public void setDice(DiceCup dc) {
 

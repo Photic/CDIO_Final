@@ -15,6 +15,7 @@ import entity.deck.PayMoneyCardSuperAdvanced;
 import entity.deck.RecieveMoneyCard;
 import entity.deck.RecieveMoneyCardAdvanced;
 import entity.gameboard.GameBoard;
+import entity.gameboard.Shipping;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -177,6 +178,21 @@ public class DeckController {
 	 * @param gui
 	 */
 	private void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
+		int calculateNewPosition = 0;
+		int i = 0;
+		for (i = p.getPosition(); i < gameboard.getLength(); i++) {
+			if (!(gameboard.getField(i) instanceof Shipping)) {
+				calculateNewPosition++;
+			}
+		}
+		calculateNewPosition++;
+		gui.movePlayer(p, calculateNewPosition);
+		
+		if (gameboard.getField(i).isOwned() == true) {
+			int payRecieve = (gameboard.getField(i).getRent()[gameboard.getField(i).getOwner().getAccount().getShipping()]*2);
+			p.getAccount().addBalance(-payRecieve);
+			gameboard.getField(i).getOwner().getAccount().addBalance(payRecieve);
+		}
 		
 	}
 
