@@ -3,7 +3,6 @@ package main;
 import java.io.IOException;
 
 import controller.GameController;
-import entity.deck.Deck;
 
 public class Main {
 

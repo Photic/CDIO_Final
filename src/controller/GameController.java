@@ -39,11 +39,10 @@ public class GameController {
 	{
 		textReader = new TextReader();
 		gui = new GuiController();
-		gameboard = new GameBoard(textReader, textReader);
+		gameboard = new GameBoard(textReader);
 		playing = true;
 		dicecup = new DiceCup();
-		fc = new FieldController(textReader, textReader);
-
+		fc = new FieldController(textReader);
 		dc = new DeckController(textReader);
 
 	}

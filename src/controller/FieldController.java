@@ -1,7 +1,5 @@
 package controller;
 
-import java.io.IOException;
-
 import boundary.GuiController;
 import boundary.TextReader;
 import entity.gameboard.Chance;
@@ -21,8 +19,8 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 	
-	public FieldController(TextReader name, TextReader description) {
-			this.gameBoard = new GameBoard(name, description);
+	public FieldController(TextReader name) {
+			this.gameBoard = new GameBoard(name);
 		}
 	
 	
