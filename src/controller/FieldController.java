@@ -77,8 +77,8 @@ public class FieldController {
 				
 				//Vi skal huske at tjekke for om ejeren ejer alle i farve gruppen --> 2x getRent.
 			
-			p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent());
-			field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent());
+			p.getAccount().setBalance(p.getAccount().getBalance() - field.getCurrentRent());
+			field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getCurrentRent());
 			
 			
 			gui.payRentMessege(field, p);
