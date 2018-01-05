@@ -178,21 +178,23 @@ public class DeckController {
 	 * @param gui
 	 */
 	public void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
+		int iMod = 0;
 		int calculateNewPosition = 0;
-		int i = 0;
-		for (i = p.getPosition(); i < Integer.MAX_VALUE; i++) {
-			if (!(gameboard.getField(i%40) instanceof Shipping)) {
-				calculateNewPosition++;
+		int i;
+		for (i = p.getPosition(); i < gameboard.getLength()*2; i++) {
+			iMod = i%gameboard.getLength();
+			if ((gameboard.getField(iMod) instanceof Shipping)) {
+				break;
 			}
+			calculateNewPosition++;
 		}
-		calculateNewPosition++;
 		System.out.println(calculateNewPosition);
 		gui.movePlayer(p, calculateNewPosition);
 		
-		if (gameboard.getField(i%40).isOwned() == true) {
-			int payRecieve = (gameboard.getField(i%40).getRent()[gameboard.getField(i%40).getOwner().getAccount().getShipping()]*2);
+		if (gameboard.getField(iMod).isOwned() == true) {
+			int payRecieve = (gameboard.getField(iMod).getRent()[gameboard.getField(iMod).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
-			gameboard.getField(i).getOwner().getAccount().addBalance(payRecieve);
+			gameboard.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
 		}
 		
 	}
