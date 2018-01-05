@@ -141,7 +141,7 @@ public class DeckController {
 	}
 
 	/**
-	 * Send the player to prison.
+	 * Sents the player to prison.
 	 * @param p
 	 */
 	private void goToJail(Player p, int newPosition, GuiController gui) {
@@ -149,6 +149,12 @@ public class DeckController {
 		p.setInJail(true);
 	}
 
+	/**
+	 * Standard move player card.
+	 * @param p
+	 * @param newPosition
+	 * @param gui
+	 */
 	private void moverPlayerCard(Player p, int newPosition, GuiController gui) {
 		gui.movePlayerInstantly(p, newPosition, true);
 	}

@@ -14,13 +14,7 @@ public abstract class Field {
 	private String description;
 	private Color color;
 	protected Player owner;
-
-
 	protected boolean isOwned;
-	public void setOwned(boolean isOwned) {
-		this.isOwned = isOwned;
-	}
-
 	protected int price, housePrice, houses, hotels;
 	protected int[] rent;
 	protected String ownerName;
@@ -55,10 +49,13 @@ public abstract class Field {
 		this.color = color;
 	}
 	
-	
 	/*
 	 * Fields you are able to own.
 	 */
+	public void setOwned(boolean isOwned) {
+		this.isOwned = isOwned;
+	}
+	
 	public String getOwnerName() {
 		return this.ownerName;
 	}
@@ -71,13 +68,6 @@ public abstract class Field {
 		return owner;
 	}
 
-	public void setOwner(Player p) {
-		
-		this.owner = p;
-		this.isOwned = true;
-		setOwnerName(p.getName());
-	}
-	
 	public Boolean isOwned() {
 		return this.isOwned;
 	}
