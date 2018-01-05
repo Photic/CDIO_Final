@@ -28,13 +28,7 @@ public class GameBoard {
 	private String[] fieldName;
 	private String[] fieldDescription;
 
-<<<<<<< HEAD
 	public GameBoard(TextReader name) {
-=======
-
-	public GameBoard(TextReader name, TextReader description) {
-
->>>>>>> d2b2e4430cdfeab05b707e69abe750ce8eaa32ce
 		try {
 			this.fieldName = name.textFromFile("FieldNames.txt");
 			this.fieldDescription = name.textFromFile("FieldDescriptions.txt");
@@ -88,12 +82,6 @@ public class GameBoard {
 				};
 		
 	}
-
-
-
-
-
-
 
 	/**
 	 * Creates the entire gameboard.
