@@ -149,6 +149,13 @@ public class DeckController {
 		p.setInJail(true);
 	}
 
+	private void moverPlayerCard(Player p, GameBoard gameboard, GuiController gui) {
+		
+	}
+
+	private void moverPlayerCardAdvanced(Player p, GameBoard gameboard, GuiController gui) {
+	
+	}
 	
 	
 	/**
@@ -158,16 +165,7 @@ public class DeckController {
 	 * @param gui
 	 */
 	private void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
-		int countFields = p.getPosition();
-		for (int i = p.getPosition(); i < gameboard.getLength(); i++) {
-			countFields++;
-
-			if (gameboard.getField(i) instanceof Shipping) {
-				gui.movePlayer(p, countFields+1);
-				break;
-			}
-		}
-
+		
 	}
 
 	/**
