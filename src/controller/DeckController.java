@@ -166,7 +166,7 @@ public class DeckController {
 	 * @param gui
 	 */
 	private void moverPlayerCardAdvanced(Player p, int newPosition, GuiController gui) {
-		gui.movePlayerBackwords(p, newPosition);
+		gui.movePlayerBackwards(p, newPosition);
 	}
 	
 	
