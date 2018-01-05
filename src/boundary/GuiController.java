@@ -224,9 +224,7 @@ public class GuiController {
 	}
 
 	public void chanceMessege(String chanceMessege) {
-
 		gui.displayChanceCard(chanceMessege);
-
 	}
 
 	public void setOwnerText(Player p) {

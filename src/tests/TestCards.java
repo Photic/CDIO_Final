@@ -18,13 +18,12 @@ public class TestCards extends ConstructorForJUnit {
 	}
 
 	@Test
-	public void test() throws IOException {
-		
-//		this.textReader.printArray(this.textReader.textFromFile("DescriptionsChanceCards.txt"));
+	public void description() throws IOException {
 		
 		for (int i = 0; i < this.deck.getLength(); i++) {
 			try {
-				if (this.textReader.textFromFile("DescriptionsChanceCards.txt")[i] == this.deck.getCard(i).getDescription()) {
+//				System.out.println(this.textReader.textFromFile("DescriptionsChanceCards.txt")[i] + " ----AND---- " + this.deck.pickACard().getDescription());
+				if (this.textReader.textFromFile("DescriptionsChanceCards.txt")[i] == this.deck.pickACard().getDescription()) {
 					this.count++;
 				}
 			} catch (IOException e) {
