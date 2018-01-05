@@ -6,11 +6,11 @@ import boundary.TextReader;
 
 public class Deck {
 	
-	String[] description;
+	TextReader Writer = new TextReader();
+	String[] description = Writer.textFromFile("DescriptionsChanceCards.txt");
 	
 	public Deck() throws IOException {
-		TextReader Writer = new TextReader(); 
-		String [] description = Writer.textFromFile("DescriptionsChanceCards.txt");
+		
 	}
 	
 	
