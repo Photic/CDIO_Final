@@ -105,6 +105,8 @@ public class GameController {
 				}
 				
 
+			} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
+				jailDecision(gui, playerList.getPlayer(i));
 			}
 
 			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
