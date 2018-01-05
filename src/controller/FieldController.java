@@ -83,6 +83,7 @@ public class FieldController {
 			if (decision == true) {
 
 				p.getAccount().buyField(field.getPrice());
+				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1));
 				gui.updateBalance(p);
 
 				field.setOwner(p);

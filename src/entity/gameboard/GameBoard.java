@@ -13,6 +13,8 @@ public class GameBoard {
 	private Color pink = new Color(255, 153, 255);
 	private Color orange = new Color(255, 117, 26);
 	private Color red = new Color(255, 51, 51);
+	
+
 	private Color yellow = new Color(255, 255, 77);
 	private Color green = new Color(128, 255, 128);
 	private Color blue = new Color(102, 217, 255);
@@ -88,6 +90,148 @@ public class GameBoard {
 
 	public int getLength() {
 		return fields.length;
+	}
+	
+	public Color getPurple() {
+		return purple;
+	}
+
+
+
+	public void setPurple(Color purple) {
+		this.purple = purple;
+	}
+
+
+
+	public Color getGrey() {
+		return grey;
+	}
+
+
+
+	public void setGrey(Color grey) {
+		this.grey = grey;
+	}
+
+
+
+	public Color getPink() {
+		return pink;
+	}
+
+
+
+	public void setPink(Color pink) {
+		this.pink = pink;
+	}
+
+
+
+	public Color getOrange() {
+		return orange;
+	}
+
+
+
+	public void setOrange(Color orange) {
+		this.orange = orange;
+	}
+
+
+
+	public Color getRed() {
+		return red;
+	}
+
+
+
+	public void setRed(Color red) {
+		this.red = red;
+	}
+
+
+
+	public Color getYellow() {
+		return yellow;
+	}
+
+
+
+	public void setYellow(Color yellow) {
+		this.yellow = yellow;
+	}
+
+
+
+	public Color getGreen() {
+		return green;
+	}
+
+
+
+	public void setGreen(Color green) {
+		this.green = green;
+	}
+
+
+
+	public Color getBlue() {
+		return blue;
+	}
+
+
+
+	public void setBlue(Color blue) {
+		this.blue = blue;
+	}
+
+
+
+	public Color getTurkies() {
+		return turkies;
+	}
+
+
+
+	public void setTurkies(Color turkies) {
+		this.turkies = turkies;
+	}
+
+
+
+	public Color getMagenta() {
+		return magenta;
+	}
+
+
+
+	public void setMagenta(Color magenta) {
+		this.magenta = magenta;
+	}
+
+
+
+	public Color getWhite() {
+		return white;
+	}
+
+
+
+	public void setWhite(Color white) {
+		this.white = white;
+	}
+
+
+
+	public Color getBrown() {
+		return brown;
+	}
+
+
+
+	public void setBrown(Color brown) {
+		this.brown = brown;
 	}
 
 }

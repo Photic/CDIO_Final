@@ -1,21 +1,50 @@
 package entity.player;
 
+
+import java.awt.Color;
+
 import entity.deck.Card;
+import entity.gameboard.Field;
+import entity.gameboard.GameBoard;
 
 public class Account {
 	
 
-	private int balance, actives, housesowned, hotelsowned, companies, shipping, amountOfCards;
+	private int balance, actives, housesowned, hotelsowned, companies, shipping, territoriesOwned, amountOfCards;
+
+
 	private Card antiJailCard;
 	
+	
+	private Field[] blueFields;
+	
+
+	private Field[] pinkFields;
+	private Field[] greenFields;
+	private Field[] greyFields;
+	private Field[] redFields;
+	private Field[] whiteFields;
+	private Field[] yellowFields;
+	private Field[] purpleFields;
 
 	public Account() {
 		this.balance = 30000;
 		this.actives = 0;
 		this.companies = 0;
 		this.shipping = 0;
+		this.territoriesOwned = 0;
 		this.housesowned = 0;
 		this.hotelsowned = 0;
+		
+		blueFields = new Field[] {null, null};
+		pinkFields = new Field[] {null, null, null};
+		greenFields = new Field[] {null, null, null};
+		greyFields = new Field[] {null, null, null};
+		redFields = new Field[] {null, null, null};
+		whiteFields = new Field[] {null, null, null};
+		yellowFields = new Field[] {null, null, null};
+		purpleFields = new Field[] {null, null};
+		
 
 	}
 	
@@ -32,6 +61,37 @@ public class Account {
 			this.amountOfCards--;
 			this.antiJailCard = null;
 		}
+	}
+	
+	public void addField(Field field, GameBoard gb) {
+		
+		if (field.getColor() == gb.getRed()) {
+			for (int i = 0; i < redFields.length; i++) {
+				if (redFields[i] != null) {
+					this.redFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getBlue()) {
+			for (int i = 0; i < blueFields.length; i++) {
+				if (blueFields[i] != null) {
+					this.blueFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getMagenta()) {
+			for (int i = 0; i < pinkFields.length; i++) {
+				if (pinkFields[i] != null) {
+					this.pinkFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getGreen()) {
+			for (int i = 0; i < greenFields.length; i++) {
+				if (greenFields[i] != null) {
+					this.greenFields[i] = field;
+				}
+			}
+		}
+		
+		
 	}
 	
 	/**
@@ -125,5 +185,77 @@ public class Account {
 	public void setShipping(int shipping) {
 		this.shipping = shipping;
 	}
+	public int getTerritories() {
+		return territoriesOwned;
+	}
 
+	public void setTerritories(int territories) {
+		this.territoriesOwned = territories;
+	}
+
+	public Field[] getBlueFields() {
+		return blueFields;
+	}
+
+	public void setBlueFields(Field[] blueFields) {
+		this.blueFields = blueFields;
+	}
+
+	public Field[] getPinkFields() {
+		return pinkFields;
+	}
+
+	public void setPinkFields(Field[] pinkFields) {
+		this.pinkFields = pinkFields;
+	}
+
+	public Field[] getGreenFields() {
+		return greenFields;
+	}
+
+	public void setGreenFields(Field[] greenFields) {
+		this.greenFields = greenFields;
+	}
+
+	public Field[] getGreyFields() {
+		return greyFields;
+	}
+
+	public void setGreyFields(Field[] greyFields) {
+		this.greyFields = greyFields;
+	}
+
+	public Field[] getRedFields() {
+		return redFields;
+	}
+
+	public void setRedFields(Field[] redFields) {
+		this.redFields = redFields;
+	}
+
+	public Field[] getWhiteFields() {
+		return whiteFields;
+	}
+
+	public void setWhiteFields(Field[] whiteFields) {
+		this.whiteFields = whiteFields;
+	}
+
+	public Field[] getYellowFields() {
+		return yellowFields;
+	}
+
+	public void setYellowFields(Field[] yellowFields) {
+		this.yellowFields = yellowFields;
+	}
+
+	public Field[] getPurpleFields() {
+		return purpleFields;
+	}
+
+	public void setPurpleFields(Field[] purpleFields) {
+		this.purpleFields = purpleFields;
+	}
+	
+	
 }
