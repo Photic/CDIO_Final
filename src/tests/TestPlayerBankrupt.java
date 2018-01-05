@@ -1,34 +1,34 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import entity.player.PlayerList;
 
-class TestPlayerBankrupt {
+public class TestPlayerBankrupt {
 
 	String[] names = {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
 	PlayerList plist;
 	int count;
 	
-	@BeforeEach
-	void setup() {
+	@Before
+	public void setup() {
 		this.plist = new PlayerList(6, names);
 		this.count = 6;
 	}
 	
 	@After
-	void teardown() {
+	public void teardown() {
 		// No code yet
 	}
 	
 	@Test
-	void testForPlayerZero() {
+	public void testForPlayerZero() {
 		System.out.println(Arrays.toString(this.plist.getList()));
 		
 		for (int i = 0; i <= this.plist.getLength(); i++) {
@@ -47,7 +47,7 @@ class TestPlayerBankrupt {
 	}
 	
 	@Test
-	void testForRandomPlayer() {
+	public void testForRandomPlayer() {
 		for (int i = 0; i <= this.plist.getLength(); i++) {
 			this.plist.getPlayer((int)(Math.random()*this.plist.getLength())).setBankrupt(true);
 			this.plist.removePlayer(this.plist);
