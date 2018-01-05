@@ -179,6 +179,10 @@ public class GuiController {
 		
 	}
 	
+	public void visitJailMessege(Field field, Player p) {
+		gui.showMessage(p.getName() + ", du er på besøg i fængslet. Hyg dig!");
+	}
+	
 	
 	public void setOwnerText(Player p) {
 		
