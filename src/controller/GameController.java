@@ -84,7 +84,7 @@ public class GameController {
 				
 				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
 				
-				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc);
+				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc, gameboard, playerList);
 			}
 
 			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
