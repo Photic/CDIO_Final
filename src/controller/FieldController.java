@@ -21,8 +21,8 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 	
-	public FieldController(TextReader name) {
-			this.gameBoard = new GameBoard(name);
+	public FieldController(TextReader name, TextReader description) {
+			this.gameBoard = new GameBoard(name, description);
 		}
 	
 	
