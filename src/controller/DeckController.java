@@ -22,8 +22,8 @@ public class DeckController {
 
 	private Deck deck;
 
-	public DeckController(TextReader text) {
-		this.deck = new Deck(text);
+	public DeckController(String[] description) {
+		this.deck = new Deck(description);
 		this.deck.shuffleCards();
 	}
 
@@ -166,7 +166,7 @@ public class DeckController {
 	 * @param gui
 	 */
 	private void moverPlayerCardAdvanced(Player p, int newPosition, GuiController gui) {
-		gui.movePlayerBackwords(p, newPosition);
+		gui.movePlayerBackwards(p, newPosition);
 	}
 	
 	

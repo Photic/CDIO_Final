@@ -1,6 +1,8 @@
 package controller;
 
 
+import java.io.IOException;
+
 import boundary.GuiController;
 import boundary.TextReader;
 import entity.DiceCup;
@@ -30,15 +32,22 @@ public class GameController {
 
 	/**
 	 * Constructor setting up the gamecontroller.
+	 * @throws IOException 
 	 */
-	public GameController() 
+	public GameController() throws IOException 
 	{
 		gui = new GuiController();
 		gameboard = new GameBoard();
 		playing = true;
 		dicecup = new DiceCup();
 		fc = new FieldController();
-		dc = new DeckController(textReader);
+		textReader = new TextReader();
+		String[] dcDescription = new TextReader().textFromFile("DescriptionsChanceCards.txt");
+////		String[] dcDescription = new String[32];
+//		for (int i = 0; i < dcDescription.length; i++) {
+//			dcDescription[i] = "Test";
+//		}
+		dc = new DeckController(dcDescription);
 
 	}
 

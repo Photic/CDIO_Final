@@ -49,9 +49,6 @@ public class TextReader {
 		}
 		
 		
-		
-		
-		
 		/**
 		 * Hjælpefunktion til main metoden.
 		 * @param fileName
