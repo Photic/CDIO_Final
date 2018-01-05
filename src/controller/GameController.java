@@ -37,10 +37,10 @@ public class GameController {
 	public GameController() throws IOException 
 	{
 		gui = new GuiController();
-		gameboard = new GameBoard();
+		gameboard = new GameBoard(textReader);
 		playing = true;
 		dicecup = new DiceCup();
-		fc = new FieldController();
+		fc = new FieldController(textReader);
 		textReader = new TextReader();
 		dc = new DeckController(textReader);
 
