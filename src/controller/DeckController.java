@@ -181,7 +181,7 @@ public class DeckController {
 		int calculateNewPosition = 0;
 		int i = 0;
 		for (i = p.getPosition(); i < gameboard.getLength(); i++) {
-			if (!(gameboard.getField(i) instanceof Shipping)) {
+			if (!(gameboard.getField(i%gameboard.getLength()) instanceof Shipping)) {
 				calculateNewPosition++;
 			}
 		}
