@@ -276,7 +276,9 @@ public class FieldController {
 	
 	private void chanceLogic(Field field, GuiController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
 		
+		gui.chanceMessege(dc.chanceField(p, plist, gameboard, gui));
 		dc.chanceField(p, plist, gameboard, gui);
+		
 		
 	}
  
