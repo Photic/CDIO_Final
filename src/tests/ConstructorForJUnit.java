@@ -11,7 +11,7 @@ public abstract class ConstructorForJUnit {
 	protected String[] names;
 	protected PlayerList plist;
 	protected int count, ekstraCount;
-	protected TextReader text;
+	protected TextReader textReader;
 	protected Deck deck;
 	protected DeckController dc;
 	protected GuiController gui;
@@ -19,9 +19,9 @@ public abstract class ConstructorForJUnit {
 	public ConstructorForJUnit() {
 		this.names = new String[] {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
 		this.plist = new PlayerList(6, names);
-		this.text = new TextReader();
-		this.deck = new Deck(this.text);
-		this.dc = new DeckController(this.text);
+		this.textReader = new TextReader();
+		this.deck = new Deck(this.textReader);
+		this.dc = new DeckController(this.textReader);
 		this.gui = new GuiController();
 	}
 	

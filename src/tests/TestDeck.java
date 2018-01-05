@@ -13,7 +13,7 @@ public class TestDeck extends ConstructorForJUnit {
 	
 	@Before
 	public void setup() {
-		this.deck = new Deck(this.text);
+		this.deck = new Deck(this.textReader);
 		this.count = 0;
 		this.ekstraCount = 0;
 	}

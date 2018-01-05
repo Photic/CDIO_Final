@@ -16,8 +16,6 @@ public class GameBoard {
 	private Color pink = new Color(255, 153, 255);
 	private Color orange = new Color(255, 117, 26);
 	private Color red = new Color(255, 51, 51);
-
-
 	private Color yellow = new Color(255, 255, 77);
 	private Color green = new Color(128, 255, 128);
 	private Color blue = new Color(102, 217, 255);
@@ -29,9 +27,7 @@ public class GameBoard {
 	private Field[] fields;
 	private String[] fieldName;
 
-
 	public GameBoard(TextReader name) {
-
 		try {
 			this.fieldName = name.textFromFile("FieldNames.txt");
 		} catch (IOException e) {
@@ -82,8 +78,7 @@ public class GameBoard {
 						new Tax(fieldName[38], "betal kr. 2.000", standard, 2000),														// 38
 						new Territory(fieldName[39], "kr. 8.000", purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000})				// 39
 				};
-
-
+		
 	}
 
 
