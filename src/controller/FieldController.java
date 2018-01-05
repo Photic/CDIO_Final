@@ -175,7 +175,7 @@ public class FieldController {
 				p.getAccount().buyField(field.getPrice());
 				gui.updateBalance(p);
 
-				p.getAccount().setCompanies(p.getAccount().getShipping() + 1);
+				p.getAccount().setShipping(p.getAccount().getShipping() + 1);
 				field.setOwner(p);
 				field.setOwned(true);
 				gui.setOwnerText(p);
@@ -193,23 +193,27 @@ public class FieldController {
 				
 				if (field.getOwner().getAccount().getShipping() == 1) {
 					
+					gui.payRentShippingMessege(field, p);
 					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[0]);
 					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
 					
 				} else if (field.getOwner().getAccount().getShipping() == 2) {
 					
+					gui.payRentShippingMessege(field, p);
 					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[1]);
 					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[1]);
 					
 				} else if (field.getOwner().getAccount().getShipping() == 3) {
 					
+					gui.payRentShippingMessege(field, p);
 					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[2]);
-					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[2]);
 					
 				} else if (field.getOwner().getAccount().getShipping() == 4) {
 					
+					gui.payRentShippingMessege(field, p);
 					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[3]);
-					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[3]);
 				}
 			
 				
