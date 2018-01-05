@@ -54,16 +54,24 @@ public class GameController {
 
 	private void gameLoop() {
 		Field currentField;
+		
 		for (int i = 0; i < playerList.getLength(); i++) {
-			gui.rollDiceMessage();
-			dicecup.shake();
-			gui.showDice(dicecup);
-			gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
 			
-			currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
-			
-			fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum());
-			
+			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
+				gui.rollDiceMessage();
+				dicecup.shake();
+				gui.showDice(dicecup);
+				gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
+				
+				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
+				
+				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum());
+			}
+
+			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
+				playerList.getPlayer(i).setBankrupt(true);
+				gui.removeBankrupted(playerList.getPlayer(i));
+			}
 
 		}
 	}

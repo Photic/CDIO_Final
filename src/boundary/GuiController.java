@@ -104,6 +104,20 @@ public class GuiController {
 
 	}
 
+	
+	public void removeBankrupted(Player p) {
+		
+		for (int i = 0; i < gui_players.length; i++) {
+			if (gui_players[i].getName() == p.getName()) {
+				gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+			}
+		}
+		
+		
+	}
+	
+	
+	
 	public boolean territoryDecision(Field field, Player p) {
 		gui.showMessage(p.getName() + ", du er landet på en grund der kan købes.");
 		
