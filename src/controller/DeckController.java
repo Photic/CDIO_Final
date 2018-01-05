@@ -177,7 +177,7 @@ public class DeckController {
 	 * @param gameboard
 	 * @param gui
 	 */
-	private void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
+	public void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
 		int calculateNewPosition = 0;
 		int i = 0;
 		for (i = p.getPosition(); i < gameboard.getLength(); i++) {
@@ -186,6 +186,7 @@ public class DeckController {
 			}
 		}
 		calculateNewPosition++;
+		System.out.println(calculateNewPosition);
 		gui.movePlayer(p, calculateNewPosition);
 		
 		if (gameboard.getField(i).isOwned() == true) {

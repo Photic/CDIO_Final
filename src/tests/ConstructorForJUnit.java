@@ -4,6 +4,7 @@ import boundary.GuiController;
 import boundary.TextReader;
 import controller.DeckController;
 import entity.deck.Deck;
+import entity.gameboard.GameBoard;
 import entity.player.PlayerList;
 
 public abstract class ConstructorForJUnit {
@@ -15,6 +16,7 @@ public abstract class ConstructorForJUnit {
 	protected Deck deck;
 	protected DeckController dc;
 	protected GuiController gui;
+	protected GameBoard gameboard;
 
 	public ConstructorForJUnit() {
 		this.names = new String[] {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
@@ -23,6 +25,7 @@ public abstract class ConstructorForJUnit {
 		this.deck = new Deck(this.textReader);
 		this.dc = new DeckController(this.textReader);
 		this.gui = new GuiController();
+		this.gameboard = new GameBoard(this.textReader);
 	}
 	
 }
