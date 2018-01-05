@@ -22,7 +22,7 @@ public class DeckController {
 
 	private Deck deck;
 
-	private DeckController() {
+	public DeckController() {
 		this.deck = new Deck();
 		this.deck.shuffleCards();
 	}

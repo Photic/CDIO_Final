@@ -21,6 +21,7 @@ public class GameController {
 	private FieldController fc;
 	private GameBoard gameboard;
 	private DiceCup dicecup;
+	private DeckController dc;
 	private boolean playing;
 	
 	private int alivePlayers;
@@ -35,6 +36,7 @@ public class GameController {
 		playing = true;
 		dicecup = new DiceCup();
 		fc = new FieldController();
+		dc = new DeckController();
 
 	}
 
@@ -82,7 +84,7 @@ public class GameController {
 				
 				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
 				
-				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum());
+				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc);
 			}
 
 			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {

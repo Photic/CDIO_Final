@@ -31,7 +31,7 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GuiController gui, Player p, int diceSum) {
+	public void evaluateField(Field field, GuiController gui, Player p, int diceSum, DeckController dc) {
 
 
 
@@ -264,6 +264,12 @@ public class FieldController {
 	private void parkingLogic(Field field, GuiController gui, Player p) {
 		
 		gui.parkingMessege(field, p);
+		
+	}
+	
+	private void chanceLogic(Field field, GuiController gui, ) {
+		
+		
 		
 	}
  
