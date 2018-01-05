@@ -22,8 +22,8 @@ public class DeckController {
 
 	private Deck deck;
 
-	public DeckController(String[] description) {
-		this.deck = new Deck(description);
+	public DeckController(TextReader text) {
+		this.deck = new Deck(text);
 		this.deck.shuffleCards();
 	}
 

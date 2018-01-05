@@ -42,12 +42,7 @@ public class GameController {
 		dicecup = new DiceCup();
 		fc = new FieldController();
 		textReader = new TextReader();
-		String[] dcDescription = new TextReader().textFromFile("DescriptionsChanceCards.txt");
-////		String[] dcDescription = new String[32];
-//		for (int i = 0; i < dcDescription.length; i++) {
-//			dcDescription[i] = "Test";
-//		}
-		dc = new DeckController(dcDescription);
+		dc = new DeckController(textReader);
 
 	}
 

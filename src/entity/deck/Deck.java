@@ -9,8 +9,13 @@ public class Deck {
 	private String[] description;
 	private Card[] deck;
 
-	public Deck(String[] description){
-		this.description = description;
+	public Deck(TextReader text) {
+		try {
+			this.description = text.textFromFile("DescriptionsChanceCards.txt");
+		} catch (IOException e) {
+			System.err.println("Something went wrong when trieng to import Text from TextReader in Deck");
+			e.printStackTrace();
+		}
 
 		this.deck = new Card[] {
 				new RecieveMoneyCard(description[1], 200),
@@ -47,8 +52,6 @@ public class Deck {
 				new MovePlayerCardSuperAdvanced(description[25])
 		};
 	}
-
-
 
 	/**
 	 * Function to shuffle any object array.
