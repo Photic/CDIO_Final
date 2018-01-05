@@ -3,6 +3,9 @@ package controller;
 import boundary.GuiController;
 import entity.gameboard.Company;
 import entity.gameboard.Field;
+import entity.gameboard.GoToJail;
+import entity.gameboard.Jail;
+import entity.gameboard.Parking;
 import entity.gameboard.Shipping;
 import entity.gameboard.Tax;
 import entity.gameboard.Territory;
@@ -12,7 +15,10 @@ public class FieldController {
 
 
 	
-	
+	public FieldController() {
+		
+		
+	}
 	
 	
 	
@@ -44,6 +50,18 @@ public class FieldController {
 		} else if (field instanceof Shipping) {
 			
 			shippingLogic(field, gui, p);
+			
+		} else if (field instanceof Jail) {
+			
+			jailLogic(field, gui, p);
+			
+		} else if (field instanceof GoToJail) {
+			
+			goToJailLogic(field, gui, p);
+			
+		} else if (field instanceof Parking) {
+			
+			parkingLogic(field, gui, p);
 			
 		}
 
@@ -229,12 +247,24 @@ public class FieldController {
 	}
 
 
-	public void jailLogic(Field field, GuiController gui, Player p) {
+	private void jailLogic(Field field, GuiController gui, Player p) {
+		
 		gui.visitJailMessege(field, p);
 		
 	}
 	
+	private void goToJailLogic(Field field, GuiController gui, Player p) {
+		
+		gui.goToJailMessege(field, p);
+		p.setInJail(true);
+		gui.movePlayerInstantly(p, 10, false);
+		
+	}
 	
-	
-
+	private void parkingLogic(Field field, GuiController gui, Player p) {
+		
+		gui.parkingMessege(field, p);
+		
+	}
+ 
 }

@@ -211,6 +211,18 @@ public class GuiController {
 	}
 	
 	
+	public void goToJailMessege(Field field, Player p) {
+		
+		gui.showMessage(p.getName() + ", du er blevet anholdt og ryger en tur i fængsel.");
+		
+	}
+	
+	public void parkingMessege(Field field, Player p) {
+		
+		gui.showMessage(p.getName() + ", du er parkeret og er klar til at spise frokost. Nyd maden!");
+		
+	}
+	
 	public void setOwnerText(Player p) {
 		
 		gui.getFields()[p.getPosition()].setDescription(gui.getFields()[p.getPosition()].getSubText());
