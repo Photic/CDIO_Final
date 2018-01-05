@@ -1,8 +1,10 @@
 package controller;
 
 import boundary.GuiController;
+import entity.gameboard.Chance;
 import entity.gameboard.Company;
 import entity.gameboard.Field;
+import entity.gameboard.GameBoard;
 import entity.gameboard.GoToJail;
 import entity.gameboard.Jail;
 import entity.gameboard.Parking;
@@ -10,6 +12,7 @@ import entity.gameboard.Shipping;
 import entity.gameboard.Tax;
 import entity.gameboard.Territory;
 import entity.player.Player;
+import entity.player.PlayerList;
 
 public class FieldController {
 
@@ -31,9 +34,9 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GuiController gui, Player p, int diceSum, DeckController dc) {
+	public void evaluateField(Field field, GuiController gui, Player p, int diceSum, DeckController dc, GameBoard gameboard, PlayerList plist) {
 
-
+		
 
 		if (field instanceof Territory) {
 			
@@ -62,6 +65,10 @@ public class FieldController {
 		} else if (field instanceof Parking) {
 			
 			parkingLogic(field, gui, p);
+			
+		} else if (field instanceof Chance) {
+			
+			chanceLogic(field, gui, p, dc, plist, gameboard);
 			
 		}
 
@@ -267,9 +274,9 @@ public class FieldController {
 		
 	}
 	
-	private void chanceLogic(Field field, GuiController gui, ) {
+	private void chanceLogic(Field field, GuiController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
 		
-		
+		dc.chanceField(p, plist, gameboard, gui);
 		
 	}
  
