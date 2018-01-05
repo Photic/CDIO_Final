@@ -114,12 +114,16 @@ public class GuiController {
 				
 				for (int j = 0; j < gb.getLength(); j++) {
 					
-					if (gb.getField(j).getOwner().getName() == p.getName()) {
-						
-						gb.getField(j).setOwned(false);
-						gb.getField(j).setOwner(null);
-						
+					if (gb.getField(j).getOwner() != null) {
+						if (gb.getField(j).getOwner().getName() == p.getName()) {
+							
+							gb.getField(j).setOwned(false);
+							gb.getField(j).setOwner(null);
+							gui.getFields()[j].setSubText(gui.getFields()[j].getDescription());
+							
+						}
 					}
+
 					
 				}
 				
