@@ -104,16 +104,39 @@ public class GuiController {
 	}
 
 	
-	public void removeBankrupted(Player p) {
+	public void removeBankrupted(Player p, GameBoard gb) {
 		
 		for (int i = 0; i < gui_players.length; i++) {
 			if (gui_players[i].getName() == p.getName()) {
 				gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 				gui_players[i].setBalance(0);
 				
+				
+				for (int j = 0; j < gb.getLength(); j++) {
+					
+					if (gb.getField(j).getOwnerName() == p.getName()) {
+						
+						gb.getField(j).setOwned(false);
+						gb.getField(j).setOwner(null);
+						gb.getField(j).setOwnerName(null);
+						
+					}
+					
+				}
+				
+				
 			}
 		}
 		
+		
+	}
+	
+	
+	public void showWinner(Player p) {
+		
+		String output = p.getName() + " har vundet, Tillykke!!";
+		
+		gui.showMessage(output);
 		
 	}
 	
