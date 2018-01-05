@@ -63,7 +63,7 @@ public class DeckController {
 			moverPlayerCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCardAdvanced) {
-			moverPlayerCardAdvanced(p, gameboard, gui);
+			moverPlayerCardAdvanced(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCardSuperAdvanced) {
 			moverPlayerCardSuperAdvanced(p, gameboard, gui);
@@ -159,8 +159,14 @@ public class DeckController {
 		gui.movePlayerInstantly(p, newPosition, true);
 	}
 
-	private void moverPlayerCardAdvanced(Player p, GameBoard gameboard, GuiController gui) {
-		
+	/**
+	 * Move the player back depending on card value.
+	 * @param p
+	 * @param newPosition
+	 * @param gui
+	 */
+	private void moverPlayerCardAdvanced(Player p, int newPosition, GuiController gui) {
+		gui.movePlayerBackwords(p, newPosition);
 	}
 	
 	
