@@ -18,7 +18,7 @@ class TestDeck {
 	
 	@BeforeEach
 	void setup() {
-		this.deck = new Deck();
+//		this.deck = new Deck();
 		this.countBefore = 0;
 		this.countAfter = 0;
 	}
