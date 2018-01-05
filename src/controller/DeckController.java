@@ -180,8 +180,8 @@ public class DeckController {
 	public void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
 		int calculateNewPosition = 0;
 		int i = 0;
-		for (i = p.getPosition(); i < gameboard.getLength(); i++) {
-			if (!(gameboard.getField(i%gameboard.getLength()) instanceof Shipping)) {
+		for (i = p.getPosition(); i < Integer.MAX_VALUE; i++) {
+			if (!(gameboard.getField(i%40) instanceof Shipping)) {
 				calculateNewPosition++;
 			}
 		}
@@ -189,8 +189,8 @@ public class DeckController {
 		System.out.println(calculateNewPosition);
 		gui.movePlayer(p, calculateNewPosition);
 		
-		if (gameboard.getField(i).isOwned() == true) {
-			int payRecieve = (gameboard.getField(i).getRent()[gameboard.getField(i).getOwner().getAccount().getShipping()]*2);
+		if (gameboard.getField(i%40).isOwned() == true) {
+			int payRecieve = (gameboard.getField(i%40).getRent()[gameboard.getField(i%40).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
 			gameboard.getField(i).getOwner().getAccount().addBalance(payRecieve);
 		}

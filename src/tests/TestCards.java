@@ -1,9 +1,5 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +32,7 @@ public class TestCards extends ConstructorForJUnit {
 	
 	@Test
 	public void testCardShipping() {
-		this.plist.getPlayer(0).setPosition(39);
+		this.plist.getPlayer(0).setPosition(38);
 		this.dc.moverPlayerCardSuperAdvanced(plist.getPlayer(0), gameboard, gui);
 	}
 

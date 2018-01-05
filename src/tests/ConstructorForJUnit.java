@@ -24,7 +24,6 @@ public abstract class ConstructorForJUnit {
 		this.textReader = new TextReader();
 		this.deck = new Deck(this.textReader);
 		this.dc = new DeckController(this.textReader);
-		this.gui = new GuiController();
 		this.gameboard = new GameBoard(this.textReader);
 	}
 	

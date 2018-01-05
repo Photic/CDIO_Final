@@ -44,7 +44,7 @@ public class Deck {
 				new GoToJailCard(description[23], 10),
 				new MovePlayerCardSuperAdvanced(description[24]),
 				new MovePlayerCardSuperAdvanced(description[25]),
-				new MovePlayerCardAdvanced(description[26], -3),
+				new MovePlayerCardAdvanced(description[26], 3),
 				new MovePlayerCard(description[27], 0),
 				new MovePlayerCard(description[28], 25),
 				new MovePlayerCard(description[29], 39),
