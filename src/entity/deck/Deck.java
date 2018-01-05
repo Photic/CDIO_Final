@@ -1,13 +1,20 @@
 package entity.deck;
 
+import java.io.IOException;
+
 import boundary.TextReader;
 
 public class Deck {
-
+	
 	private String[] description;
 	
 	public Deck(TextReader text){
-		this.description = text;
+		try {
+			this.description = text.textFromFile("DescriptionsChanceCards.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Card[] deck = {
