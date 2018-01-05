@@ -17,7 +17,6 @@ public abstract class Field {
 	protected boolean isOwned;
 	protected int price, housePrice, houses, hotels;
 	protected int[] rent;
-	protected String ownerName;
 	
 	public Field(String name, String description, Color color) {
 		this.name = name;
@@ -56,12 +55,8 @@ public abstract class Field {
 		this.isOwned = isOwned;
 	}
 	
-	public String getOwnerName() {
-		return this.ownerName;
-	}
-	
-	public void setOwnerName(String nameOfOwner) {
-		this.ownerName = nameOfOwner;
+	public void setOwner(Player owner) {
+		this.owner = owner;
 	}
 	
 	public Player getOwner() {

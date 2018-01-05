@@ -50,10 +50,6 @@ public class Territory extends Field {
 	public int getPrice() {
 		return price;
 	}
-
-	public String getOwnerName() {
-		return ownerName;
-	}
 	
 	public int getHousePrice() {
 		return housePrice;

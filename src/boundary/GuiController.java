@@ -104,16 +104,43 @@ public class GuiController {
 	}
 
 	
-	public void removeBankrupted(Player p) {
+	public void removeBankrupted(Player p, GameBoard gb) {
 		
 		for (int i = 0; i < gui_players.length; i++) {
 			if (gui_players[i].getName() == p.getName()) {
 				gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 				gui_players[i].setBalance(0);
 				
+				
+				for (int j = 0; j < gb.getLength(); j++) {
+					
+					if (gb.getField(j).getOwner() != null) {
+						if (gb.getField(j).getOwner().getName() == p.getName()) {
+							
+							gb.getField(j).setOwned(false);
+							gb.getField(j).setOwner(null);
+							gui.getFields()[j].setSubText(gui.getFields()[j].getDescription());
+							gui.getFields()[j].setDescription(gui.getFields()[j].getTitle());
+							
+						}
+					}
+
+					
+				}
+				
+				
 			}
 		}
 		
+		
+	}
+	
+	
+	public void showWinner(Player p) {
+		
+		String output = p.getName() + " har vundet, Tillykke!!";
+		
+		gui.showMessage(output);
 		
 	}
 	
@@ -169,13 +196,13 @@ public class GuiController {
 	}
 	
 	public void payRentMessege(Field field, Player p) {
-		gui.showMessage(p.getName() + ", du er landet på " + field.getOwnerName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getCurrentRent() + " kroner i leje.");
+		gui.showMessage(p.getName() + ", du er landet på " + field.getOwner().getName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getCurrentRent() + " kroner i leje.");
 		
 	}
 	
 	public void payRentShippingMessege(Field field, Player p) {
 		
-		gui.showMessage(p.getName() + ", du er landet på " + field.getOwnerName() + "'s rederi. " + field.getOwnerName() + " ejer " + field.getOwner().getAccount().getShipping() + " rederier. Derfor betaler du " + field.getRent()[field.getOwner().getAccount().getShipping() - 1] + " kroner i leje.");
+		gui.showMessage(p.getName() + ", du er landet på " + field.getOwner().getName() + "'s rederi. " + field.getOwner().getName() + " ejer " + field.getOwner().getAccount().getShipping() + " rederier. Derfor betaler du " + field.getRent()[field.getOwner().getAccount().getShipping() - 1] + " kroner i leje.");
 		
 	}
 	

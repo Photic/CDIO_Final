@@ -189,7 +189,7 @@ public class FieldController {
 			
 		} else {
 			
-			if (field.getOwnerName() != p.getName()) {
+			if (field.getOwner().getName() != p.getName()) {
 				
 				if (field.getOwner().getAccount().getShipping() == 1) {
 					

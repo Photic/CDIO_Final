@@ -22,6 +22,8 @@ public class GameController {
 	private GameBoard gameboard;
 	private DiceCup dicecup;
 	private boolean playing;
+	
+	private int alivePlayers;
 
 	/**
 	 * Constructor setting up the gamecontroller.
@@ -42,9 +44,23 @@ public class GameController {
 	public void gameControl() 
 	{
 		initGui();
+		alivePlayers = playerList.getLength();
+		
 		
 		while(playing) {
-			gameLoop();
+			if (alivePlayers == 1) {
+				
+				for (int i = 0; i < playerList.getLength(); i++) {
+					if (playerList.getPlayer(i).isBankrupt() == false) {
+						gui.showWinner(playerList.getPlayer(i));
+					}
+					
+				}
+				
+			} else {
+				gameLoop();
+			}
+
 		}
 		
 	}
@@ -56,6 +72,7 @@ public class GameController {
 		Field currentField;
 		
 		for (int i = 0; i < playerList.getLength(); i++) {
+			
 			
 			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
 				gui.rollDiceMessage();
@@ -70,7 +87,9 @@ public class GameController {
 
 			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
 				playerList.getPlayer(i).setBankrupt(true);
-				gui.removeBankrupted(playerList.getPlayer(i));
+				gui.removeBankrupted(playerList.getPlayer(i), gameboard);
+				alivePlayers--;
+				
 			}
 
 		}
