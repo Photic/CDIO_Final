@@ -193,26 +193,25 @@ public class FieldController {
 				
 				if (field.getOwner().getAccount().getShipping() == 1) {
 					
-					int payment = 500;
-					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[0]);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
 					
 				} else if (field.getOwner().getAccount().getShipping() == 2) {
 					
-					int payment = 1000;
-					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
+					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[1]);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[1]);
 					
 				} else if (field.getOwner().getAccount().getShipping() == 3) {
 					
-					int payment = 2000;
-					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
-					
+					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[2]);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
 					
 				} else if (field.getOwner().getAccount().getShipping() == 4) {
 					
-					int payment = 4000;
-					p.getAccount().setBalance(p.getAccount().getBalance() - payment);
-					
+					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[3]);
+					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
 				}
+			
 				
 				gui.updateBalance(p);
 				gui.updateBalance(field.getOwner());
