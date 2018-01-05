@@ -14,6 +14,8 @@ public class Account {
 		this.actives = 0;
 		this.companies = 0;
 		this.shipping = 0;
+		this.housesowned = 0;
+		this.hotelsowned = 0;
 
 	}
 	

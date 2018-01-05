@@ -69,6 +69,8 @@ public class GameBoard {
 					new Tax("Ekstraordinær statsskat", "betal kr. 2.000", standard, 2000),														// 38
 					new Territory("Rådhuspladsen", "kr. 8.000", purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000})				// 39
 			};
+		
+		Field[] blueFields = {fields[1], fields[3]};
 
 		
 		
