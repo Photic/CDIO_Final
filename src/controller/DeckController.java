@@ -1,6 +1,7 @@
 package controller;
 
 import boundary.GuiController;
+import boundary.TextReader;
 import entity.deck.AntiJailCard;
 import entity.deck.Card;
 import entity.deck.Deck;
@@ -14,7 +15,6 @@ import entity.deck.PayMoneyCardSuperAdvanced;
 import entity.deck.RecieveMoneyCard;
 import entity.deck.RecieveMoneyCardAdvanced;
 import entity.gameboard.GameBoard;
-import entity.gameboard.Shipping;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -22,8 +22,8 @@ public class DeckController {
 
 	private Deck deck;
 
-	public DeckController() {
-		this.deck = new Deck();
+	public DeckController(TextReader text) {
+		this.deck = new Deck(text);
 		this.deck.shuffleCards();
 	}
 

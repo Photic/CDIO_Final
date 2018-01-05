@@ -1,20 +1,15 @@
 package entity.deck;
 
-import java.io.IOException;
-
 import boundary.TextReader;
 
 public class Deck {
+
+	private String[] description;
 	
-	TextReader Writer = new TextReader();
-	String[] description = Writer.textFromFile("DescriptionsChanceCards.txt");
-	
-	public Deck() throws IOException {
-		
+	public Deck(TextReader text){
+		this.description = text;
 	}
 	
-	
-
 	public Card[] deck = {
 			new RecieveMoneyCard(description[1], 200),
 			new RecieveMoneyCard(description[2], 500),
