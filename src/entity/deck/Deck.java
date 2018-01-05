@@ -63,17 +63,20 @@ public class Deck {
 	 * @param pickCardFromDeck
 	 */
 	public Card pickACard() {
-		Card[] tempDeck = new Card[this.deck.length];
-		tempDeck[this.deck.length-1] = this.deck[0];
+		Card firstCard = getCard(0);
+		Card[] tempCards = new Card[getLength()];
 		
-		for (int i = 0; i < this.deck.length-1; i++)
-			tempDeck[i] = this.deck[i+1];
+		for (int i = 1; i < getLength(); i++) {
+				tempCards[i-1] = this.deck[i];
+		}
 		
-		this.deck = tempDeck;
+		tempCards[getLength()-1] = firstCard;
+		this.deck = tempCards;
 		
-		return this.deck[this.deck.length];
+		return firstCard;
+		
 	}
-
+	
 	/**
 	 * Gives a specifik card.
 	 * @param Takes a number 'a' and returns a specific card.
@@ -90,6 +93,7 @@ public class Deck {
 	public int getLength() {
 		return this.deck.length;
 	}
+
 	
 }
 

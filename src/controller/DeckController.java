@@ -1,5 +1,6 @@
 package controller;
 
+import boundary.GuiController;
 import entity.deck.AntiJailCard;
 import entity.deck.Card;
 import entity.deck.Deck;
@@ -33,7 +34,7 @@ public class DeckController {
 	 * @param gameboard
 	 * @return
 	 */
-	public String chanceField(Player p, PlayerList plist, GameBoard gameboard) {
+	public String chanceField(Player p, PlayerList plist, GameBoard gameboard, GuiController gui) {
 
 		Card cardPicked = this.deck.pickACard();
 
@@ -59,13 +60,13 @@ public class DeckController {
 			goToJail(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
-			
+
 		}
 		else if (cardPicked instanceof MovePlayerCardAdvanced) {
-			
+
 		}
 		else if (cardPicked instanceof MovePlayerCardSuperAdvanced) {
-			moverPlayerCardSuperAdvanced(p, gameboard);
+			moverPlayerCardSuperAdvanced(p, gameboard, gui);
 		}
 
 		return cardPicked.getDescription();
@@ -149,17 +150,26 @@ public class DeckController {
 	}
 
 	
-	private void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard) {
+	
+	/**
+	 * Move player to the nearest Shipping field.
+	 * @param p
+	 * @param gameboard
+	 * @param gui
+	 */
+	private void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
 		int countFields = p.getPosition();
 		for (int i = p.getPosition(); i < gameboard.getLength(); i++) {
 			countFields++;
+
 			if (gameboard.getField(i) instanceof Shipping) {
-				p.setPosition(countFields);
+				gui.movePlayer(p, countFields+1);
+				break;
 			}
 		}
 
 	}
-	
+
 	/**
 	 * Remove anti Jail card from Player
 	 * @param p
