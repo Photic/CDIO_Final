@@ -7,13 +7,13 @@ import entity.deck.Card;
 import entity.deck.Deck;
 import entity.deck.GoToJailCard;
 import entity.deck.MovePlayerCard;
-import entity.deck.MovePlayerCardAdvanced;
-import entity.deck.MovePlayerCardSuperAdvanced;
+import entity.deck.MovePlayerBackCard;
+import entity.deck.MovePlayerToNearestShippingCard;
 import entity.deck.PayMoneyCard;
-import entity.deck.PayMoneyCardAdvanced;
-import entity.deck.PayMoneyCardSuperAdvanced;
+import entity.deck.PayMoneyPrHouseHotelCard;
+import entity.deck.GetMoneyIfWorthIsLowCard;
 import entity.deck.RecieveMoneyCard;
-import entity.deck.RecieveMoneyCardAdvanced;
+import entity.deck.BirthdayCard;
 import entity.gameboard.GameBoard;
 import entity.gameboard.Shipping;
 import entity.player.Player;
@@ -42,16 +42,16 @@ public class DeckController {
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
 		}
-		else if (cardPicked instanceof RecieveMoneyCardAdvanced) {
+		else if (cardPicked instanceof BirthdayCard) {
 			recieveMoneyCardAdvanced(p, plist, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof PayMoneyCard) {
 			payMoneyCard(p, cardPicked.getAmount());
 		}
-		else if (cardPicked instanceof PayMoneyCardAdvanced) {
+		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
 			payMoneyCardAdvanced(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
 		}
-		else if (cardPicked instanceof PayMoneyCardSuperAdvanced) {
+		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
 			payMoneyCardSuperAdvanced(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
 		}
 		else if (cardPicked instanceof AntiJailCard) {
@@ -63,10 +63,10 @@ public class DeckController {
 		else if (cardPicked instanceof MovePlayerCard) {
 			moverPlayerCard(p, cardPicked.getAmount(), gui);
 		}
-		else if (cardPicked instanceof MovePlayerCardAdvanced) {
+		else if (cardPicked instanceof MovePlayerBackCard) {
 			moverPlayerCardAdvanced(p, cardPicked.getAmount(), gui);
 		}
-		else if (cardPicked instanceof MovePlayerCardSuperAdvanced) {
+		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
 			moverPlayerCardSuperAdvanced(p, gameboard, gui);
 		}
 
