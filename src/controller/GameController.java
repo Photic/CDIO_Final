@@ -9,6 +9,7 @@ import entity.DiceCup;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
 import entity.gameboard.Territory;
+import entity.player.Player;
 import entity.player.PlayerList;
 
 
@@ -27,7 +28,7 @@ public class GameController {
 	private DeckController dc;
 	private boolean playing;
 	private TextReader textReader;
-	
+
 	private int alivePlayers;
 
 	/**
@@ -36,12 +37,13 @@ public class GameController {
 	 */
 	public GameController() throws IOException 
 	{
+		textReader = new TextReader();
 		gui = new GuiController();
 		gameboard = new GameBoard(textReader);
 		playing = true;
 		dicecup = new DiceCup();
 		fc = new FieldController(textReader);
-		textReader = new TextReader();
+
 		dc = new DeckController(textReader);
 
 	}
@@ -53,51 +55,65 @@ public class GameController {
 	{
 		initGui();
 		alivePlayers = playerList.getLength();
-		
-		
+
+
 		while(playing) {
 			if (alivePlayers == 1) {
-				
+
 				for (int i = 0; i < playerList.getLength(); i++) {
 					if (playerList.getPlayer(i).isBankrupt() == false) {
 						gui.showWinner(playerList.getPlayer(i));
 					}
-					
+
 				}
-				
+
 			} else {
 				gameLoop();
 			}
 
 		}
-		
+
 	}
-						
-				
+
+
 
 
 	private void gameLoop() {
-		Field currentField;
-		
+
+		boolean decision;
+
 		for (int i = 0; i < playerList.getLength(); i++) {
-			
-			
+
+
 			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
-				gui.rollDiceMessage();
-				dicecup.shake();
-				gui.showDice(dicecup);
-				gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
+				if (playerList.getPlayer(i).getAccount().getTerritories() == 0) {
+					gui.rollDiceMessage(playerList.getPlayer(i));
+					takeTurn(playerList.getPlayer(i));
+					
+				} else {
+					decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
+					
+					if (decision == true) {
+						
+						takeTurn(playerList.getPlayer(i));
+						
+					} else {
+						
+					}
+					
+					
+				}
 				
-				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
-				
-				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc, gameboard, playerList);
+
+			} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
+				jailDecision(gui, playerList.getPlayer(i));
 			}
 
 			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
 				playerList.getPlayer(i).setBankrupt(true);
 				gui.removeBankrupted(playerList.getPlayer(i), gameboard);
 				alivePlayers--;
-				
+
 			}
 
 		}
@@ -108,6 +124,46 @@ public class GameController {
 		gui.defineGUI(gameboard);
 		playerList = gui.registerPlayerCount();
 		gui.placePlayer();
+	}
+	
+	private void takeTurn(Player p) {
+		Field currentField;
+		dicecup.shake();
+		gui.showDice(dicecup);
+		gui.movePlayer(p, dicecup.sum());
+		
+		currentField = gameboard.getField(p.getPosition());
+		
+		fc.evaluateField(currentField, gui, p, dicecup.sum(), dc, gameboard, playerList);
+	}
+
+	private void jailDecision(GuiController gui, Player p) {
+
+		if (p.isInJail() == true) {
+			int decision = gui.inJailDecision(p);
+
+			if (decision == 1) {
+
+				p.getAccount().addBalance(-1000);
+				p.setInJail(false);
+				gui.updateBalance(p);
+
+			} else if (decision == 2) {
+
+				dicecup.shake();
+
+				if (dicecup.equalsDice() == true) {
+					p.setInJail(false);
+
+				}
+
+			} else if (decision == 3) {
+				p.getAccount().removeAntiJaulCard();
+				p.setInJail(false);
+			}
+
+		}
+
 	}
 
 

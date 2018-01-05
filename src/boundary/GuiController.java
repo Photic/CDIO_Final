@@ -49,24 +49,24 @@ public class GuiController {
 		String name;
 
 		int index;
-		
+
 		this.playerCount = Integer.parseInt(nop);
 		String[] names = new String[playerCount];
 		this.gui_players = new GUI_Player[playerCount];
 
 		for (int i = 0; i <= playerCount - 1; i++) {
 			index = i + 1;
-			
+
 			name = gui.getUserString("Spiller " + index + "' navn?");
-			
-			
+
+
 			gui_car = new GUI_Car();
 
-			
+
 			int[] color = randomColorGenerator();
-			
+
 			gui_car.setPrimaryColor(new Color (color[0], color[1], color[2]));
-			
+
 
 			if (!(contains(names, name))) {
 				names[i] = name;
@@ -103,142 +103,185 @@ public class GuiController {
 
 	}
 
-	
+
 	public void removeBankrupted(Player p, GameBoard gb) {
-		
+
 		for (int i = 0; i < gui_players.length; i++) {
 			if (gui_players[i].getName() == p.getName()) {
 				gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 				gui_players[i].setBalance(0);
-				
-				
+
+
 				for (int j = 0; j < gb.getLength(); j++) {
-					
+
 					if (gb.getField(j).getOwner() != null) {
 						if (gb.getField(j).getOwner().getName() == p.getName()) {
-							
+
 							gb.getField(j).setOwned(false);
 							gb.getField(j).setOwner(null);
 							gui.getFields()[j].setSubText(gui.getFields()[j].getDescription());
 							gui.getFields()[j].setDescription(gui.getFields()[j].getTitle());
-							
+
 						}
 					}
 
-					
+
 				}
-				
-				
+
+
 			}
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	public void showWinner(Player p) {
-		
+
 		String output = p.getName() + " har vundet, Tillykke!!";
-		
+
 		gui.showMessage(output);
-		
+
 	}
-	
-	
-	
+
+
+
 	public boolean territoryDecision(Field field, Player p) {
 		gui.showMessage(p.getName() + ", du er landet på en grund der kan købes.");
-		
+
 		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
-		
+
 	}
-	
+
 	public boolean companyDecision(Field field, Player p) {
-		
+
 		gui.showMessage(p.getName() + ", du er landet på en virksomhed der kan købes.");
-		
+
 		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe virksomheden eller lade vær.", "Køb", "Gør intet");
 	}
-	
+
 	public boolean shippingDecision(Field field, Player p) {
-		
+
 		gui.showMessage(p.getName() + ", du er landet på et rederi der kan købes.");
-		
+
 		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe rederiet eller lade vær.", "Køb", "Gør intet");
-		
+
 	}
-	
+
 	public boolean taxDecision(Field field, Player p) {
 		gui.showMessage("Du skal betale indkomstskat.");
-		
+
 		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten betale 4000 kroner eller betale 10% af dine værdier.", "Betal 4000 kroner", "Betal 10% af dine værdier");
-		
+
 	}
-	
+
 	public void taxMessage(Player p) {
-		
+
 		gui.showMessage(p.getName() +", du skal betale 2000 kroner i ekstraordinært skattebidrag.");
-		
+
 	}
-	
+
 	public void transaction(boolean b, Field field, Player p) {
-		
+
 		if (b == true) {
-			
+
 			gui.showMessage(p.getName() + ", du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
-			
+
 		} else {
-			
+
 			gui.showMessage(p.getName() + ", du valgt at lade vær med at købe " + field.getName());
-			
+
 		}
-		
+
 	}
-	
+
 	public void payRentMessege(Field field, Player p) {
 		gui.showMessage(p.getName() + ", du er landet på " + field.getOwner().getName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getCurrentRent() + " kroner i leje.");
-		
+
 	}
-	
+
 	public void payRentShippingMessege(Field field, Player p) {
-		
+
 		gui.showMessage(p.getName() + ", du er landet på " + field.getOwner().getName() + "'s rederi. " + field.getOwner().getName() + " ejer " + field.getOwner().getAccount().getShipping() + " rederier. Derfor betaler du " + field.getRent()[field.getOwner().getAccount().getShipping() - 1] + " kroner i leje.");
-		
+
 	}
-	
+
 	public void visitJailMessege(Field field, Player p) {
 		gui.showMessage(p.getName() + ", du er på besøg i fængslet. Hyg dig!");
 	}
-	
-	
+
+
 	public void goToJailMessege(Field field, Player p) {
-		
+
 		gui.showMessage(p.getName() + ", du er blevet anholdt og ryger en tur i fængsel.");
-		
+
 	}
-	
+
 	public void parkingMessege(Field field, Player p) {
-		
+
 		gui.showMessage(p.getName() + ", du er parkeret og er klar til at spise frokost. Nyd maden!");
-		
+
 	}
-	
+
 	public void chanceMessege(String chanceMessege) {
-		
+
 		gui.displayChanceCard(chanceMessege);
-		
+
 	}
-	
+
 	public void setOwnerText(Player p) {
-		
+
 		gui.getFields()[p.getPosition()].setDescription(gui.getFields()[p.getPosition()].getSubText());
-		
+
 		gui.getFields()[p.getPosition()].setSubText(p.getName());
-		
-		
+
+
 	}
-	
-	
+
+	public int inJailDecision(Player p) {
+
+		int decision = 0;
+
+		if(p.getAccount().getAmountOfCards()>0) {
+
+			String[] jailDecision = {"1. Betal 1000 kroner", "2. Slå 2 ens", "3.Brug dit 'Kom ud af fængsel'- kort"};
+
+			String decisionMade = gui.getUserSelection("Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel", jailDecision);
+
+			if (decisionMade == "1. Betal 1000 kroner") {
+
+				decision = 1;
+
+			} else if (decisionMade == "2. Slå 2 ens") {
+
+				decision = 2;
+
+			} else if (decisionMade == "3.Brug dit 'Kom ud af fængsel'- kort") {
+
+				decision = 3;
+
+			}
+
+		}
+		else {
+			String[] jailDecision = {"1. Betal 1000 kroner", "2. Slå 2 ens"};
+
+			String decisionMade = gui.getUserSelection("Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel", jailDecision);
+
+			if (decisionMade == "1. Betal 1000 kroner") {
+
+				decision = 1;
+
+			} else if (decisionMade == "2. Slå 2 ens") {
+
+				decision = 2;
+			}
+		}
+		return decision;
+
+	}
+
+
 	/**
 	 * Check if the name is in the array of names
 	 * @param names
@@ -249,7 +292,7 @@ public class GuiController {
 	 * True or False
 	 */
 	private boolean contains(String[] names, String name) {
-		
+
 		boolean output = false;
 
 		for (int i = 0; i < names.length; i++) {
@@ -261,9 +304,9 @@ public class GuiController {
 		}
 		return output;
 	}
-	
-	
-	
+
+
+
 	public void placePlayer() {
 
 		for (int j = 0; j < gui_players.length; j++) {
@@ -271,7 +314,7 @@ public class GuiController {
 			gui.addPlayer(gui_players[j]);
 		}
 	}
-	
+
 
 	/**
 	 * This is the main move method. It moves the player to a new position given the dicesum.
@@ -285,44 +328,44 @@ public class GuiController {
 	 * The sum of the dice
 	 */
 	public void movePlayer(Player p, int diceSum) {
-		
+
 		int newPosition = (p.getPosition() + diceSum) % 40;
 		int initPosition = (p.getPosition());
-		
+
 		for (int i = 0; i < gui_players.length; i++) {
-			
+
 			if (gui_players[i].getName() == p.getName()) {
-				
+
 				while(p.getPosition() != newPosition) {
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
-					
+
 					try {
 						Thread.sleep(300);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				}
 			}
-			
+
 
 		}
-		
+
 		if (initPosition > newPosition) {
-			
-			
+
+
 			p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 			updateBalance(p);
 			gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
-			
-			
+
+
 		}
 
 	}
-	
+
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
 	 * 
@@ -333,14 +376,14 @@ public class GuiController {
 	 * The amount to be moved
 	 */
 	public void movePlayerBackwards(Player p, int diceSum) {
-		
+
 		int newPosition = (p.getPosition() + diceSum) % 40;
 		int initPosition = (p.getPosition());
-		
+
 		for (int i = 0; i < gui_players.length; i++) {
-			
+
 			if (gui_players[i].getName() == p.getName()) {
-				
+
 				while(p.getPosition() != newPosition) {
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 					if (p.getPosition() != 0) {
@@ -349,22 +392,22 @@ public class GuiController {
 						p.setPosition(39);
 					}
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
-					
+
 					try {
 						Thread.sleep(300);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				}
 			}
-			
+
 
 		}
 	}
-	
-	
+
+
 	/**
 	 * This is the second move method. The player moves to a given square
 	 * 
@@ -377,55 +420,64 @@ public class GuiController {
 	 * A boolean describing wether or not the player should recievemoney if he passes start.
 	 */
 	public void movePlayerInstantly(Player p, int newPosition, boolean recieveStartMoney) {
-		
+
 		int initPosition = p.getPosition();
 		for (int i = 0; i < gui_players.length; i++) {
-			
+
 			if (gui_players[i].getName() == p.getName()) {
-				
+
 				while(p.getPosition() != newPosition) {
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
 					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
-					
+
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 				}
 			}
-			
+
 
 		}
 		if (recieveStartMoney == true) {
 			if (initPosition > newPosition) {
-				
-				
+
+
 				p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 				updateBalance(p);
 				gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
-				
-				
+
+
 			}
 		}
 
-		
+
 
 	}
+
 	
 	
+	public void rollDiceMessage(Player p) {
+		//gui.showMessage(p.getName() + " please roll the dice");
+		gui.getUserButtonPressed(p.getName() + ", kast terningerne", "KAST!");
+
+	}
+
 	
-	public void rollDiceMessage() {
-		gui.showMessage("Please roll the dice");
+	public boolean rollDiceMessageUpdated(Player p) {
+		
+		
+		return gui.getUserLeftButtonPressed("Vil du kaste terningerne eller ordne dine grunde?", "KAST!", "Grunde");
 	}
 	
 	public void showDice(DiceCup dc) {
 		gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
 	}
-	
+
 
 
 
@@ -437,17 +489,7 @@ public class GuiController {
 			}
 		}
 	}
-	
-	
-	//fix så den virker
-	public void updateBalance(PlayerList plist) {
 
-//		for (int i = 0; i < gui_players.length; i++) {
-//			if (gui_players[i].getName() == p.getName()) {
-//				gui_players[i].setBalance(p.getBalance());
-//			}
-//		}
-	}
 
 	public void setDice(DiceCup dc) {
 
@@ -474,16 +516,16 @@ public class GuiController {
 
 
 	}
-	
+
 	//Generer tilfældige farver til bilerne
 	private int[] randomColorGenerator() {
 		int[] rgb = new int[3];
 		Random rng = new Random();
-		
+
 		for (int i = 0; i < rgb.length; i++) {
 			rgb[i] = rng.nextInt(255);
 		}
-		
+
 		return rgb;
 	}
 

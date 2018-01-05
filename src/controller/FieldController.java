@@ -42,7 +42,7 @@ public class FieldController {
 
 		if (field instanceof Territory) {
 			
-			territoryLogic(field, gui, p);
+			territoryLogic(field, gui, p, gameboard);
 			
 		} else if (field instanceof Tax) {
 
@@ -77,7 +77,7 @@ public class FieldController {
 
 	}
 
-	private void territoryLogic(Field field, GuiController gui, Player p) {
+	private void territoryLogic(Field field, GuiController gui, Player p, GameBoard gb) {
 
 		if(field.isOwned() == false) {
 			boolean decision = gui.territoryDecision(field, p);
@@ -85,6 +85,9 @@ public class FieldController {
 			if (decision == true) {
 
 				p.getAccount().buyField(field.getPrice());
+				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1));
+				p.getAccount().addField(field, gb);
+				
 				gui.updateBalance(p);
 
 				field.setOwner(p);
@@ -280,6 +283,12 @@ public class FieldController {
 		
 		gui.chanceMessege(dc.chanceField(p, plist, gameboard, gui));
 		dc.chanceField(p, plist, gameboard, gui);
+		
+		for (int i = 0; i < plist.getLength(); i++) {
+			
+			gui.updateBalance(plist.getPlayer(i));
+			
+		}
 		
 		
 	}
