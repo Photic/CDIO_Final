@@ -22,7 +22,7 @@ public class TestCards extends ConstructorForJUnit {
 		
 		for (int i = 0; i < this.deck.getLength(); i++) {
 			try {
-//				System.out.println(this.textReader.textFromFile("DescriptionsChanceCards.txt")[i] + " ----AND---- " + this.deck.pickACard().getDescription());
+				System.out.println(this.textReader.textFromFile("DescriptionsChanceCards.txt")[i] + " ----AND---- " + this.deck.pickACard().getDescription());
 				if (this.textReader.textFromFile("DescriptionsChanceCards.txt")[i] == this.deck.pickACard().getDescription()) {
 					this.count++;
 				}
