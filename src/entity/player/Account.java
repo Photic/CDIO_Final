@@ -89,6 +89,36 @@ public class Account {
 					this.greenFields[i] = field;
 				}
 			}
+		} else	if (field.getColor() == gb.getGrey()) {
+			for (int i = 0; i < greyFields.length; i++) {
+				if (greyFields[i] != null) {
+					this.greyFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getRed()) {
+			for (int i = 0; i < redFields.length; i++) {
+				if (redFields[i] != null) {
+					this.redFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getWhite()) {
+			for (int i = 0; i < whiteFields.length; i++) {
+				if (whiteFields[i] != null) {
+					this.whiteFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getYellow()) {
+			for (int i = 0; i < yellowFields.length; i++) {
+				if (yellowFields[i] != null) {
+					this.yellowFields[i] = field;
+				}
+			}
+		} else	if (field.getColor() == gb.getPurple()) {
+			for (int i = 0; i < purpleFields.length; i++) {
+				if (purpleFields[i] != null) {
+					this.purpleFields[i] = field;
+				}
+			}
 		}
 		
 		
