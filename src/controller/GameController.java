@@ -146,19 +146,30 @@ public class GameController {
 				p.getAccount().addBalance(-1000);
 				p.setInJail(false);
 				gui.updateBalance(p);
+				gui.jailFreePay(p);
 
 			} else if (decision == 2) {
 
 				dicecup.shake();
+				gui.showDice(dicecup);
 
-				if (dicecup.equalsDice() == true) {
-					p.setInJail(false);
-
-				}
+					if (dicecup.equalsDice() == true) {
+						
+						p.setInJail(false);
+						gui.jailEqualsTrue(p);
+					
+					} else {
+						
+						gui.jailEqualsFalse(p);
+						
+					}
 
 			} else if (decision == 3) {
+				
 				p.getAccount().removeAntiJaulCard();
 				p.setInJail(false);
+				gui.antiJailUsed(p);
+				
 			}
 
 		}

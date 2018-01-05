@@ -264,7 +264,7 @@ public class GuiController {
 		else {
 			String[] jailDecision = {"1. Betal 1000 kroner", "2. Slå 2 ens"};
 
-			String decisionMade = gui.getUserSelection("Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel", jailDecision);
+			String decisionMade = gui.getUserSelection(p.getName() + ", du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel", jailDecision);
 
 			if (decisionMade == "1. Betal 1000 kroner") {
 
@@ -276,6 +276,30 @@ public class GuiController {
 			}
 		}
 		return decision;
+
+	}
+	
+	public void jailFreePay(Player p) {
+
+		gui.showMessage(p.getName() + ", du har betalt 1000 kroner for at komme ud af fængsel. Du er hermed løsladt.");
+
+	}
+	
+	public void jailEqualsTrue(Player p) {
+
+		gui.showMessage(p.getName() + ", du har slået to ens, og er hermed løsladt.");
+
+	}
+	
+	public void jailEqualsFalse(Player p) {
+
+		gui.showMessage(p.getName() + ", du har ikke slået to ens, og er hermed stadig i fængsel.");
+
+	}
+	
+	public void antiJailUsed(Player p) {
+
+		gui.showMessage(p.getName() + ", du har et chancekort til at komme ud af fængsel. Du er hermed løsladt.");
 
 	}
 

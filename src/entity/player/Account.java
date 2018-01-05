@@ -11,7 +11,9 @@ public class Account {
 	
 
 
-	private int balance, actives, housesowned, hotelsowned, companies, shipping, territoriesOwned, amountOfCards;
+	private int balance, actives, housesowned, hotelsowned, companies, shipping, territoriesOwned;
+	
+	private int amountOfCards = 1;
 
 
 
