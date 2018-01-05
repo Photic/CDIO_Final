@@ -2,6 +2,7 @@ package controller;
 
 
 import boundary.GuiController;
+import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
@@ -23,6 +24,7 @@ public class GameController {
 	private DiceCup dicecup;
 	private DeckController dc;
 	private boolean playing;
+	private TextReader textReader;
 	
 	private int alivePlayers;
 
@@ -36,7 +38,7 @@ public class GameController {
 		playing = true;
 		dicecup = new DiceCup();
 		fc = new FieldController();
-		dc = new DeckController();
+		dc = new DeckController(textReader);
 
 	}
 
