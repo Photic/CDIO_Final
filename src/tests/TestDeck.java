@@ -1,30 +1,34 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import boundary.TextReader;
 import entity.deck.Card;
 import entity.deck.Deck;
 import entity.player.PlayerList;
 
-class TestDeck {
+public class TestDeck {
 	
 	String[] names = {"Stephan","Mathias","Steen"};
 	PlayerList plist = new PlayerList(3, names);
+	TextReader text = new TextReader();
 	Deck deck;
 	int countBefore;
 	int countAfter;
 	
 	@Before
-	void setup() {
-		this.deck = new Deck();
+	public void setup() {
+		this.deck = new Deck(text);
 		this.countBefore = 0;
 		this.countAfter = 0;
 	}
 	
 	@After
-	void teardown() {
+	public void teardown() {
 		// Not sure what to put here yet.
 	}
 	
@@ -32,7 +36,7 @@ class TestDeck {
 	 * Testing the pickACard function, and ending the test with seeing if all cards are still unique.
 	 */
 	@Test
-	void testpickACard() {
+	public void testpickACard() {
 
 		Card firstCard = this.deck.getCard(0);
 		
@@ -54,7 +58,7 @@ class TestDeck {
 	 * Testing the shuffleCards function, and ending the test with seeing if all cards are still unique.
 	 */
 	@Test
-	void testshuffleCards()
+	public void testshuffleCards()
 	{
 		for (int i = 0; i < 10_000; i++) {
 			this.deck.shuffleCards();
