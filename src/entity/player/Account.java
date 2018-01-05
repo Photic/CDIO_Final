@@ -10,7 +10,7 @@ public class Account {
 	
 
 	public Account() {
-		this.balance = 300;
+		this.balance = 30000;
 		this.actives = 0;
 		this.companies = 0;
 		this.shipping = 0;

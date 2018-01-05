@@ -120,6 +120,7 @@ public class GuiController {
 							gb.getField(j).setOwned(false);
 							gb.getField(j).setOwner(null);
 							gui.getFields()[j].setSubText(gui.getFields()[j].getDescription());
+							gui.getFields()[j].setDescription(gui.getFields()[j].getTitle());
 							
 						}
 					}
