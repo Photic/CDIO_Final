@@ -70,6 +70,10 @@ public class GameController {
 	 */
 	private void gameLoop() {
 
+		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
+//		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+//		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		
 
 		if (alivePlayers == 1) {
 			for (int i = 0; i < playerList.getLength(); i++) 

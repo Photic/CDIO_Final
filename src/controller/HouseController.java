@@ -28,10 +28,12 @@ public class HouseController {
 			} else {
 				// or if he decides to manage properties, find out exactly what he wants.
 				
-				option = gui.territoryOptions();
+				option = gui.territoryOptions(playerList.getPlayer(i));
 				
 				if (option == 1) {
-					gui.showOwnedTerritory(playerList.getPlayer(i).getAccount().allOfAKindFields());
+					gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
+				} else if (option == 2) {
+					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
 				}
 				
 

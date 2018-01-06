@@ -152,9 +152,8 @@ public class GuiController {
 	 * @param fields
 	 * The owned fields that the player has all of the kind in.
 	 */
-	public void showOwnedTerritory(Field[] fields) {
 
-
+	public void buyHouses(Field[] fields) {
 		boolean sameHeight = true;
 		int highestHouse = 0;
 		String[] territories;
@@ -176,10 +175,14 @@ public class GuiController {
 			//ellers:
 			//If the houses are at same heigth, then all of the fields should be visible for action.
 			if (sameHeight == true && highestHouse != 5) {
-				territories = new String[fields.length];
+				territories = new String[fields.length + 1];
 
-				for (int i = 0; i < territories.length; i++) 
+				for (int i = 0; i < territories.length-1; i++) 
 					territories[i] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];	
+				
+				
+				//tilføj en fortryd-knap
+				territories[fields.length] = descriptions[55];
 
 			} else {
 				//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
@@ -199,36 +202,103 @@ public class GuiController {
 						counter++;
 					}
 				}
-
-
-
+				
+				//tilføj en fortryd knap
+				territories[counter] = descriptions[55];
 			}
+
+			
 
 			//Now we have fields to be represented ready and ask the user wich one he would like to build on.
 
 			String selected = gui.getUserSelection(descriptions[6], territories);
-
 			String real = selected.split(",")[0];
-			for (int i = 0; i < fields.length; i++) {
 
-				if (fields[i].getName().equals(real)) {
-					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
+			if (!(real.equals(descriptions[55]))) {
+				for (int i = 0; i < fields.length; i++) {
 
-					fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
-					fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
-					updateBalance(fields[i].getOwner());
+					if (fields[i].getName().equals(real)) {
+						fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
 
-					fields[i].setHouses(fields[i].getHouses() + 1);
-					gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+						fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
+						fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
+						updateBalance(fields[i].getOwner());
+
+						fields[i].setHouses(fields[i].getHouses() + 1);
+						gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+
+					}
+
 
 				}
-
-
 			}
 		}
 
 
 	}
+
+/**
+ * This method deals with the scenario where the user wants to sell houses.
+ * @param fields
+ * All the player's fields
+ */
+	public void sellHouses(Field[] fields) {
+		int count = 0;
+
+		//Find out how many fields that has houses
+		for (int i = 0; i < fields.length; i++) 
+			if (fields[i].getHouses() > 0)
+				count++;
+
+		if (count == 0) {
+			gui.showMessage(descriptions[54]);
+		} else {
+			// Add the fields that has houses to a new array
+			String[] hasHouses = new String[count + 1];
+			int counter = 0;
+
+			for (int i = 0; i < fields.length; i++) 
+				if (fields[i].getHouses()>0) {
+					hasHouses[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
+					counter++;
+				}
+
+			hasHouses[counter] = descriptions[55];
+
+			//Find out which territory the player wants to sell a house on
+			String selected = gui.getUserSelection(descriptions[56], hasHouses);
+			String real = selected.split(",")[0];
+
+			if (!(real.equals(descriptions[55]))) {
+				for (int i = 0; i < fields.length; i++) {
+
+					//sell a house on the selected territory
+					if (fields[i].getName().equals(real)) {
+						fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() - 1);
+
+						fields[i].getOwner().getAccount().addActives(-fields[i].getHousePrice());
+						fields[i].getOwner().getAccount().addBalance(fields[i].getHousePrice());
+						updateBalance(fields[i].getOwner());
+
+						fields[i].setHouses(fields[i].getHouses() - 1);
+
+						gui.showMessage(descriptions[57] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+
+
+
+					}
+
+				}
+			}
+
+		}
+
+
+
+
+	}
+
+
 
 
 
@@ -241,11 +311,11 @@ public class GuiController {
 	}
 
 
-	public int territoryOptions() {
+	public int territoryOptions(Player p) {
 
-		String[] options = new String[] {"Køb huse", "Sælg Huse", "Fortryd og kast terningerne."};
+		String[] options = new String[] {descriptions[59], descriptions[60], descriptions[55]};
 
-		String choice = gui.getUserSelection("Hvad vil du gøre?", options);
+		String choice = gui.getUserSelection(p.getName() + descriptions[58], options);
 
 		int output = 1000;
 
