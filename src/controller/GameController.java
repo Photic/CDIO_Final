@@ -79,17 +79,19 @@ public class GameController {
 
 	private void gameLoop() {
 
-		boolean decision;
-
+		boolean decision;	
+		
 		for (int i = 0; i < playerList.getLength(); i++) {
-
-
+			//The game can be played normally if the player is not bankrupt or in jail.
 			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
-				if (playerList.getPlayer(i).getAccount().getTerritories() == 0) {
+				
+				// If the player does not have all of a kind, he should just roll the dice
+				if (playerList.getPlayer(i).getAccount().hasAllOfAKind() == false) {
 					gui.rollDiceMessage(playerList.getPlayer(i));
 					takeTurn(playerList.getPlayer(i));
 					
 				} else {
+					// If the player does have all of a kind, he should be offered the oppertunity to manage houses.
 					decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
 					
 					if (decision == true) {
@@ -97,6 +99,11 @@ public class GameController {
 						takeTurn(playerList.getPlayer(i));
 						
 					} else {
+						
+						
+						gui.showOwnedTerritory(playerList.getPlayer(i).getAccount().allOfAKindFields());
+						gui.rollDiceMessage(playerList.getPlayer(i));
+						takeTurn(playerList.getPlayer(i));
 						
 					}
 					

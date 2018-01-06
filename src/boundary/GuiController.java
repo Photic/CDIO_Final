@@ -135,7 +135,87 @@ public class GuiController {
 
 	}
 
+/**
+ * This method lets the user select owned fields to build houses on.
+ * 
+ * It regulates, so that people has to build "jævnt".
+ * @param fields
+ * The owned fields that the player has all of the kind in.
+ */
+	public void showOwnedTerritory(Field[] fields) {
+		
+		
+		boolean sameHeight = true;
+		int highestHouse = 0;
+		String[] territories;
+		for (int i = 0; i < fields.length; i++) {
+			if (fields[i].getHouses()>highestHouse)
+				highestHouse = fields[i].getHouses();
+			
+			if (!(fields[i].getHouses() == fields[0].getHouses())) {
+				sameHeight = false;	
+			}
+		}
+		
+		
+		if (sameHeight == true) {
+			territories = new String[fields.length];
+			
+			for (int i = 0; i < territories.length; i++) 
+				territories[i] = fields[i].getName() + ", har i forvejen " + fields[i].getHouses() + " huse.";	
+			
+		} else {
+			int count = 0;
+			for (int i = 0; i < fields.length; i++) {
+				if (fields[i].getHouses() < highestHouse) {
+					count++;
+				}
+			}
+			
+			territories = new String[count];
+			
+			int counter = 0;
+			for (int i = 0; i < fields.length; i++) {
+				if (fields[i].getHouses() < highestHouse) {
+					territories[counter] = fields[i].getName() + ", har i forvejen " + fields[i].getHouses() + " huse.";
+					counter++;
+				}
+			}
+			
+			
+			
+		}
 
+		
+		
+		
+		
+		
+		String selected = gui.getUserSelection("Hvilken grund vil du bygge et hus på?", territories);
+		
+		String real = selected.split(",")[0];
+		for (int i = 0; i < fields.length; i++) {
+			
+			if (fields[i].getName().equals(real)) {
+				fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
+				
+				fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
+				fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
+				updateBalance(fields[i].getOwner());
+				
+				fields[i].setHouses(fields[i].getHouses() + 1);
+				gui.showMessage("Du købte et hus til " + fields[i].getName() + " til " + fields[i].getHousePrice() + " kroner. " + fields[i].getName() + " har nu " + fields[i].getHouses() + " hus(e).");
+				
+			}
+			
+			
+		}
+		
+		
+	}
+	
+	
+	
 	public void showWinner(Player p) {
 
 		String output = p.getName() + " har vundet, Tillykke!!";
