@@ -21,8 +21,8 @@ public class GuiController {
 	private GUI_Player[] gui_players;
 	private int playerCount;
 	private String[] descriptions;
-	
-	
+
+
 	public GuiController(TextReader tr) {
 		try {
 			this.descriptions = tr.textFromFile("guiText");
@@ -145,93 +145,119 @@ public class GuiController {
 
 	}
 
-/**
- * This method lets the user select owned fields to build houses on.
- * 
- * It regulates, so that people has to build "jævnt".
- * @param fields
- * The owned fields that the player has all of the kind in.
- */
+	/**
+	 * This method lets the user select owned fields to build houses on.
+	 * 
+	 * It regulates, so that people has to build "jævnt".
+	 * @param fields
+	 * The owned fields that the player has all of the kind in.
+	 */
 	public void showOwnedTerritory(Field[] fields) {
-		
-		
+
+
 		boolean sameHeight = true;
 		int highestHouse = 0;
 		String[] territories;
+
+		//First find out what height the highest house is, and if they are all at the same height.
 		for (int i = 0; i < fields.length; i++) {
 			if (fields[i].getHouses()>highestHouse)
 				highestHouse = fields[i].getHouses();
-			
+
 			if (!(fields[i].getHouses() == fields[0].getHouses())) {
 				sameHeight = false;	
 			}
 		}
-		
-		
-		if (sameHeight == true) {
-			territories = new String[fields.length];
-			
-			for (int i = 0; i < territories.length; i++) 
-				territories[i] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];	
-			
+
+		//Hvis alle huse er samme højde, og hvis det højeste punkt er 5, så kan spillere ikke bygge højere.
+		if (sameHeight == true && highestHouse == 5) {
+			gui.showMessage(descriptions[53]);
 		} else {
-			int count = 0;
-			for (int i = 0; i < fields.length; i++) {
-				if (fields[i].getHouses() < highestHouse) {
-					count++;
+			//ellers:
+			//If the houses are at same heigth, then all of the fields should be visible for action.
+			if (sameHeight == true && highestHouse != 5) {
+				territories = new String[fields.length];
+
+				for (int i = 0; i < territories.length; i++) 
+					territories[i] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];	
+
+			} else {
+				//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
+				int count = 0;
+				for (int i = 0; i < fields.length; i++) {
+					if (fields[i].getHouses() < highestHouse) {
+						count++;
+					}
 				}
-			}
-			
-			territories = new String[count];
-			
-			int counter = 0;
-			for (int i = 0; i < fields.length; i++) {
-				if (fields[i].getHouses() < highestHouse) {
-					territories[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
-					counter++;
+
+				territories = new String[count];
+
+				int counter = 0;
+				for (int i = 0; i < fields.length; i++) {
+					if (fields[i].getHouses() < highestHouse) {
+						territories[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
+						counter++;
+					}
 				}
+
+
+
 			}
-			
-			
-			
+
+			//Now we have fields to be represented ready and ask the user wich one he would like to build on.
+
+			String selected = gui.getUserSelection(descriptions[6], territories);
+
+			String real = selected.split(",")[0];
+			for (int i = 0; i < fields.length; i++) {
+
+				if (fields[i].getName().equals(real)) {
+					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
+
+					fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
+					fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
+					updateBalance(fields[i].getOwner());
+
+					fields[i].setHouses(fields[i].getHouses() + 1);
+					gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+
+				}
+
+
+			}
 		}
 
-		
-		
-		
-		
-		
-		String selected = gui.getUserSelection(descriptions[6], territories);
-		
-		String real = selected.split(",")[0];
-		for (int i = 0; i < fields.length; i++) {
-			
-			if (fields[i].getName().equals(real)) {
-				fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
-				
-				fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
-				fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
-				updateBalance(fields[i].getOwner());
-				
-				fields[i].setHouses(fields[i].getHouses() + 1);
-				gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
-				
-			}
-			
-			
-		}
-		
-		
+
 	}
-	
-	
-	
+
+
+
 	public void showWinner(Player p) {
 
 		String output = p.getName() + descriptions[12];
 
 		gui.showMessage(output);
 
+	}
+
+
+	public int territoryOptions() {
+
+		String[] options = new String[] {"Køb huse", "Sælg Huse", "Fortryd og kast terningerne."};
+
+		String choice = gui.getUserSelection("Hvad vil du gøre?", options);
+
+		int output = 1000;
+
+		if (choice == options[0]) {
+			output = 1;
+		} else if (choice == options[1]){
+			output = 2;
+		} else if (choice == options[2]) {
+			output = 3;
+		}
+
+		return output;
 	}
 
 
@@ -368,25 +394,25 @@ public class GuiController {
 		return decision;
 
 	}
-	
+
 	public void jailFreePay(Player p) {
 
 		gui.showMessage(p.getName() + descriptions[44]);
 
 	}
-	
+
 	public void jailEqualsTrue(Player p) {
 
 		gui.showMessage(p.getName() + descriptions[45]);
 
 	}
-	
+
 	public void jailEqualsFalse(Player p) {
 
 		gui.showMessage(p.getName() + descriptions[46]);
 
 	}
-	
+
 	public void antiJailUsed(Player p) {
 
 		gui.showMessage(p.getName() + descriptions[47]);
@@ -573,21 +599,21 @@ public class GuiController {
 
 	}
 
-	
-	
+
+
 	public void rollDiceMessage(Player p) {
 		//gui.showMessage(p.getName() + " please roll the dice");
 		gui.getUserButtonPressed(p.getName() + descriptions[49], descriptions[50]);
 
 	}
 
-	
+
 	public boolean rollDiceMessageUpdated(Player p) {
-		
-		
+
+
 		return gui.getUserLeftButtonPressed(descriptions[51], descriptions[50], descriptions[52]);
 	}
-	
+
 	public void showDice(DiceCup dc) {
 		gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
 	}

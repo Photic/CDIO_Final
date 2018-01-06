@@ -13,7 +13,7 @@ public class Account {
 
 	private int balance, actives, housesowned, hotelsowned, companies, shipping, territoriesOwned;
 
-	private int amountOfCards = 1;
+	private int amountOfCards = 0;
 
 
 
@@ -174,7 +174,6 @@ public class Account {
 				length += purpleFields.length;
 
 			Field[] output = new Field[length];
-			
 			
 			int count = 0;
 			if (allblue) {
@@ -415,13 +414,6 @@ public class Account {
 		addActives(price);
 	}
 
-	//	public void payRent(int rent, Player owner) {
-	//		
-	//		owner.getAccount().setBalance(rent + owner.getAccount().getBalance());
-	//		
-	//		setBalance(getBalance() - rent);
-	//		
-	//	}
 
 	//--------------------------------------------------------
 	//
