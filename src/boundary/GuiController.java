@@ -1,6 +1,7 @@
 package boundary;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.Random;
 
 import entity.DiceCup;
@@ -19,8 +20,17 @@ public class GuiController {
 	private GUI gui;
 	private GUI_Player[] gui_players;
 	private int playerCount;
+	private String[] descriptions;
 
 
+	public GuiController(TextReader tr) {
+		try {
+			this.descriptions = tr.textFromFile("guiText");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void defineGUI(GameBoard gameboard) {
 		GUI_Field[] gui_fields = new GUI_Field[gameboard.getLength()];
@@ -44,7 +54,7 @@ public class GuiController {
 	public PlayerList registerPlayerCount() {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};
-		String nop = gui.getUserSelection("Hvor mange spillere er vi?", nopArray);
+		String nop = gui.getUserSelection(descriptions[0], nopArray);
 		GUI_Car gui_car;
 		String name;
 
@@ -57,7 +67,7 @@ public class GuiController {
 		for (int i = 0; i <= playerCount - 1; i++) {
 			index = i + 1;
 
-			name = gui.getUserString("Spiller " + index + "' navn?");
+			name = gui.getUserString(descriptions[1] + index + descriptions[2]);
 
 
 			gui_car = new GUI_Car();
@@ -91,7 +101,7 @@ public class GuiController {
 		}
 		PlayerList playerList = new PlayerList(playerCount, names);
 
-		String output = "De registrede spillere er: ";
+		String output = descriptions[3];
 		for (int i = 0; i < playerList.getLength(); i++) {
 			output = output + playerList.getPlayer(i).getName() + ", ";
 
@@ -135,49 +145,225 @@ public class GuiController {
 
 	}
 
+	/**
+	 * This method lets the user select owned fields to build houses on.
+	 * 
+	 * It regulates, so that people has to build "jævnt".
+	 * @param fields
+	 * The owned fields that the player has all of the kind in.
+	 */
+
+	public void buyHouses(Field[] fields) {
+		boolean sameHeight = true;
+		int highestHouse = 0;
+		String[] territories;
+
+		//First find out what height the highest house is, and if they are all at the same height.
+		for (int i = 0; i < fields.length; i++) {
+			if (fields[i].getHouses()>highestHouse)
+				highestHouse = fields[i].getHouses();
+
+			if (!(fields[i].getHouses() == fields[0].getHouses())) {
+				sameHeight = false;	
+			}
+		}
+
+		//Hvis alle huse er samme højde, og hvis det højeste punkt er 5, så kan spillere ikke bygge højere.
+		if (sameHeight == true && highestHouse == 5) {
+			gui.showMessage(descriptions[53]);
+		} else {
+			//ellers:
+			//If the houses are at same heigth, then all of the fields should be visible for action.
+			if (sameHeight == true && highestHouse != 5) {
+				territories = new String[fields.length + 1];
+
+				for (int i = 0; i < territories.length-1; i++) 
+					territories[i] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];	
+				
+				
+				//tilføj en fortryd-knap
+				territories[fields.length] = descriptions[55];
+
+			} else {
+				//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
+				int count = 0;
+				for (int i = 0; i < fields.length; i++) {
+					if (fields[i].getHouses() < highestHouse) {
+						count++;
+					}
+				}
+
+				territories = new String[count];
+
+				int counter = 0;
+				for (int i = 0; i < fields.length; i++) {
+					if (fields[i].getHouses() < highestHouse) {
+						territories[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
+						counter++;
+					}
+				}
+				
+				//tilføj en fortryd knap
+				territories[counter] = descriptions[55];
+			}
+
+			
+
+			//Now we have fields to be represented ready and ask the user wich one he would like to build on.
+
+			String selected = gui.getUserSelection(descriptions[6], territories);
+			String real = selected.split(",")[0];
+
+			if (!(real.equals(descriptions[55]))) {
+				for (int i = 0; i < fields.length; i++) {
+
+					if (fields[i].getName().equals(real)) {
+						fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
+
+						fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
+						fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
+						updateBalance(fields[i].getOwner());
+
+						fields[i].setHouses(fields[i].getHouses() + 1);
+						gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+
+					}
+
+
+				}
+			}
+		}
+
+
+	}
+
+/**
+ * This method deals with the scenario where the user wants to sell houses.
+ * @param fields
+ * All the player's fields
+ */
+	public void sellHouses(Field[] fields) {
+		int count = 0;
+
+		//Find out how many fields that has houses
+		for (int i = 0; i < fields.length; i++) 
+			if (fields[i].getHouses() > 0)
+				count++;
+
+		if (count == 0) {
+			gui.showMessage(descriptions[54]);
+		} else {
+			// Add the fields that has houses to a new array
+			String[] hasHouses = new String[count + 1];
+			int counter = 0;
+
+			for (int i = 0; i < fields.length; i++) 
+				if (fields[i].getHouses()>0) {
+					hasHouses[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
+					counter++;
+				}
+
+			hasHouses[counter] = descriptions[55];
+
+			//Find out which territory the player wants to sell a house on
+			String selected = gui.getUserSelection(descriptions[56], hasHouses);
+			String real = selected.split(",")[0];
+
+			if (!(real.equals(descriptions[55]))) {
+				for (int i = 0; i < fields.length; i++) {
+
+					//sell a house on the selected territory
+					if (fields[i].getName().equals(real)) {
+						fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() - 1);
+
+						fields[i].getOwner().getAccount().addActives(-fields[i].getHousePrice());
+						fields[i].getOwner().getAccount().addBalance(fields[i].getHousePrice());
+						updateBalance(fields[i].getOwner());
+
+						fields[i].setHouses(fields[i].getHouses() - 1);
+
+						gui.showMessage(descriptions[57] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+
+
+
+					}
+
+				}
+			}
+
+		}
+
+
+
+
+	}
+
+
+
+
 
 	public void showWinner(Player p) {
 
-		String output = p.getName() + " har vundet, Tillykke!!";
+		String output = p.getName() + descriptions[12];
 
 		gui.showMessage(output);
 
 	}
 
 
+	public int territoryOptions(Player p) {
+
+		String[] options = new String[] {descriptions[59], descriptions[60], descriptions[55]};
+
+		String choice = gui.getUserSelection(p.getName() + descriptions[58], options);
+
+		int output = 1000;
+
+		if (choice == options[0]) {
+			output = 1;
+		} else if (choice == options[1]){
+			output = 2;
+		} else if (choice == options[2]) {
+			output = 3;
+		}
+
+		return output;
+	}
+
+
 
 	public boolean territoryDecision(Field field, Player p) {
-		gui.showMessage(p.getName() + ", du er landet på en grund der kan købes.");
+		gui.showMessage(p.getName() + descriptions[13]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe grunden eller lade vær.", "Køb", "Gør intet");
+		return gui.getUserLeftButtonPressed(p.getName() + descriptions[14], descriptions[15], descriptions[16]);
 
 	}
 
 	public boolean companyDecision(Field field, Player p) {
 
-		gui.showMessage(p.getName() + ", du er landet på en virksomhed der kan købes.");
+		gui.showMessage(p.getName() + descriptions[17]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe virksomheden eller lade vær.", "Køb", "Gør intet");
+		return gui.getUserLeftButtonPressed(p.getName() + descriptions[18], descriptions[15], descriptions[16]);
 	}
 
 	public boolean shippingDecision(Field field, Player p) {
 
-		gui.showMessage(p.getName() + ", du er landet på et rederi der kan købes.");
+		gui.showMessage(p.getName() + descriptions[19]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten købe rederiet eller lade vær.", "Køb", "Gør intet");
+		return gui.getUserLeftButtonPressed(p.getName() + descriptions[20], descriptions[15], descriptions[16]);
 
 	}
 
 	public boolean taxDecision(Field field, Player p) {
-		gui.showMessage("Du skal betale indkomstskat.");
+		gui.showMessage(descriptions[21]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + ", du kan enten betale 4000 kroner eller betale 10% af dine værdier.", "Betal 4000 kroner", "Betal 10% af dine værdier");
+		return gui.getUserLeftButtonPressed(p.getName() + descriptions[22], descriptions[23], descriptions[24]);
 
 	}
 
 	public void taxMessage(Player p) {
 
-		gui.showMessage(p.getName() +", du skal betale 2000 kroner i ekstraordinært skattebidrag.");
+		gui.showMessage(p.getName() + descriptions[25]);
 
 	}
 
@@ -185,41 +371,41 @@ public class GuiController {
 
 		if (b == true) {
 
-			gui.showMessage(p.getName() + ", du har købt " + field.getName() + " for " + field.getPrice() + " kroner.");
+			gui.showMessage(p.getName() + descriptions[26] + field.getName() + descriptions[27] + field.getPrice() + descriptions[28]);
 
 		} else {
 
-			gui.showMessage(p.getName() + ", du valgt at lade vær med at købe " + field.getName());
+			gui.showMessage(p.getName() + descriptions[29] + field.getName());
 
 		}
 
 	}
 
 	public void payRentMessege(Field field, Player p) {
-		gui.showMessage(p.getName() + ", du er landet på " + field.getOwner().getName() + "'s grund. Der er bygget " + field.getHouses() + " huse på grunden. Du betaler altså " + field.getCurrentRent() + " kroner i leje.");
+		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() + descriptions[32] + field.getCurrentRent() + descriptions[33]);
 
 	}
 
 	public void payRentShippingMessege(Field field, Player p) {
 
-		gui.showMessage(p.getName() + ", du er landet på " + field.getOwner().getName() + "'s rederi. " + field.getOwner().getName() + " ejer " + field.getOwner().getAccount().getShipping() + " rederier. Derfor betaler du " + field.getRent()[field.getOwner().getAccount().getShipping() - 1] + " kroner i leje.");
+		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[34] + field.getOwner().getName() + descriptions[35] + field.getOwner().getAccount().getShipping() + descriptions[36 ]+ field.getRent()[field.getOwner().getAccount().getShipping() - 1] + descriptions[33]);
 
 	}
 
 	public void visitJailMessege(Field field, Player p) {
-		gui.showMessage(p.getName() + ", du er på besøg i fængslet. Hyg dig!");
+		gui.showMessage(p.getName() + descriptions[37]);
 	}
 
 
 	public void goToJailMessege(Field field, Player p) {
 
-		gui.showMessage(p.getName() + ", du er blevet anholdt og ryger en tur i fængsel.");
+		gui.showMessage(p.getName() + descriptions[38]);
 
 	}
 
 	public void parkingMessege(Field field, Player p) {
 
-		gui.showMessage(p.getName() + ", du er parkeret og er klar til at spise frokost. Nyd maden!");
+		gui.showMessage(p.getName() + descriptions[39]);
 
 	}
 
@@ -242,19 +428,19 @@ public class GuiController {
 
 		if(p.getAccount().getAmountOfCards()>0) {
 
-			String[] jailDecision = {"1. Betal 1000 kroner", "2. Slå 2 ens", "3.Brug dit 'Kom ud af fængsel'- kort"};
+			String[] jailDecision = {descriptions[40], descriptions[41], descriptions[42]};
 
-			String decisionMade = gui.getUserSelection("Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel", jailDecision);
+			String decisionMade = gui.getUserSelection(descriptions[43], jailDecision);
 
-			if (decisionMade == "1. Betal 1000 kroner") {
+			if (decisionMade == descriptions[40]) {
 
 				decision = 1;
 
-			} else if (decisionMade == "2. Slå 2 ens") {
+			} else if (decisionMade == descriptions[41]) {
 
 				decision = 2;
 
-			} else if (decisionMade == "3.Brug dit 'Kom ud af fængsel'- kort") {
+			} else if (decisionMade == descriptions[42]) {
 
 				decision = 3;
 
@@ -262,15 +448,15 @@ public class GuiController {
 
 		}
 		else {
-			String[] jailDecision = {"1. Betal 1000 kroner", "2. Slå 2 ens"};
+			String[] jailDecision = {descriptions[40], descriptions[41]};
 
-			String decisionMade = gui.getUserSelection(p.getName() + ", du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel", jailDecision);
+			String decisionMade = gui.getUserSelection(p.getName() + descriptions[43], jailDecision);
 
-			if (decisionMade == "1. Betal 1000 kroner") {
+			if (decisionMade == descriptions[40]) {
 
 				decision = 1;
 
-			} else if (decisionMade == "2. Slå 2 ens") {
+			} else if (decisionMade == descriptions[41]) {
 
 				decision = 2;
 			}
@@ -278,28 +464,28 @@ public class GuiController {
 		return decision;
 
 	}
-	
+
 	public void jailFreePay(Player p) {
 
-		gui.showMessage(p.getName() + ", du har betalt 1000 kroner for at komme ud af fængsel. Du er hermed løsladt.");
+		gui.showMessage(p.getName() + descriptions[44]);
 
 	}
-	
+
 	public void jailEqualsTrue(Player p) {
 
-		gui.showMessage(p.getName() + ", du har slået to ens, og er hermed løsladt.");
+		gui.showMessage(p.getName() + descriptions[45]);
 
 	}
-	
+
 	public void jailEqualsFalse(Player p) {
 
-		gui.showMessage(p.getName() + ", du har ikke slået to ens, og er hermed stadig i fængsel.");
+		gui.showMessage(p.getName() + descriptions[46]);
 
 	}
-	
+
 	public void antiJailUsed(Player p) {
 
-		gui.showMessage(p.getName() + ", du har et chancekort til at komme ud af fængsel. Du er hermed løsladt.");
+		gui.showMessage(p.getName() + descriptions[47]);
 
 	}
 
@@ -328,7 +514,9 @@ public class GuiController {
 	}
 
 
-
+	/**
+	 * Places all the players on start.
+	 */
 	public void placePlayer() {
 
 		for (int j = 0; j < gui_players.length; j++) {
@@ -381,7 +569,7 @@ public class GuiController {
 
 			p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 			updateBalance(p);
-			gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
+			gui.showMessage(p.getName() + descriptions[48]);
 
 
 		}
@@ -471,7 +659,7 @@ public class GuiController {
 
 				p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 				updateBalance(p);
-				gui.showMessage(p.getName() + ", du er passeret start. Dermed modtager du 4000 kroner af banken.");
+				gui.showMessage(p.getName() + descriptions[48]);
 
 
 			}
@@ -481,21 +669,21 @@ public class GuiController {
 
 	}
 
-	
-	
+
+
 	public void rollDiceMessage(Player p) {
 		//gui.showMessage(p.getName() + " please roll the dice");
-		gui.getUserButtonPressed(p.getName() + ", kast terningerne", "KAST!");
+		gui.getUserButtonPressed(p.getName() + descriptions[49], descriptions[50]);
 
 	}
 
-	
+
 	public boolean rollDiceMessageUpdated(Player p) {
-		
-		
-		return gui.getUserLeftButtonPressed("Vil du kaste terningerne eller ordne dine grunde?", "KAST!", "Grunde");
+
+
+		return gui.getUserLeftButtonPressed(descriptions[51], descriptions[50], descriptions[52]);
 	}
-	
+
 	public void showDice(DiceCup dc) {
 		gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
 	}

@@ -3,9 +3,12 @@ package entity.gameboard;
 import java.awt.Color;
 
 public class Jail extends Field {
-	
-	public Jail(String navn, String description, Color color) {
-		super(navn, description, color);
+
+	public Jail(String name, String description, Color color, int index) {
+		super(name, description, color, index);
+		// TODO Auto-generated constructor stub
 	}
+	
+
 
 }

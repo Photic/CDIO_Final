@@ -11,8 +11,8 @@ import entity.player.Player;
 public class Territory extends Field {
 
 	
-	public Territory(String name, String description, Color color, int price, int housePrice, int[] rent) {
-		super(name, description, color);
+	public Territory(String name, String description, Color color, int price, int housePrice, int[] rent, int index) {
+		super(name, description, color, index);
 		this.isOwned = false;
 		this.price = price;
 		this.housePrice = housePrice; 

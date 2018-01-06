@@ -26,6 +26,7 @@ public class GameController {
 	private GameBoard gameboard;
 	private DiceCup dicecup;
 	private DeckController dc;
+	private HouseController hc;
 	private boolean playing;
 	private TextReader textReader;
 
@@ -38,12 +39,13 @@ public class GameController {
 	public GameController() throws IOException 
 	{
 		textReader = new TextReader();
-		gui = new GuiController();
+		gui = new GuiController(textReader);
 		gameboard = new GameBoard(textReader);
-		playing = true;
-		dicecup = new DiceCup();
 		fc = new FieldController(textReader);
 		dc = new DeckController(textReader);
+		hc = new HouseController();
+		playing = true;
+		dicecup = new DiceCup();
 
 	}
 
@@ -57,66 +59,45 @@ public class GameController {
 
 
 		while(playing) {
-			if (alivePlayers == 1) {
-
-				for (int i = 0; i < playerList.getLength(); i++) {
-					if (playerList.getPlayer(i).isBankrupt() == false) {
-						gui.showWinner(playerList.getPlayer(i));
-					}
-
-				}
-
-			} else {
-				gameLoop();
-			}
-
+			gameLoop();
 		}
-
 	}
 
 
 
-
+	/**
+	 * This is the gameloop.
+	 */
 	private void gameLoop() {
 
-		boolean decision;
+		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
+//		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+//		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		
 
-		for (int i = 0; i < playerList.getLength(); i++) {
+		if (alivePlayers == 1) {
+			for (int i = 0; i < playerList.getLength(); i++) 
+				if (playerList.getPlayer(i).isBankrupt() == false) 
+					gui.showWinner(playerList.getPlayer(i));
+		} else {
+			for (int i = 0; i < playerList.getLength(); i++) {
+				//The game can be played normally if the player is not bankrupt or in jail.
+				if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
 
+					hc.houseControl(playerList, i, this, gui);
 
-			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
-				if (playerList.getPlayer(i).getAccount().getTerritories() == 0) {
-					gui.rollDiceMessage(playerList.getPlayer(i));
-					takeTurn(playerList.getPlayer(i));
-					
-				} else {
-					decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
-					
-					if (decision == true) {
-						
-						takeTurn(playerList.getPlayer(i));
-						
-					} else {
-						
-					}
-					
-					
+				} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
+					jailDecision(gui, playerList.getPlayer(i));
 				}
-				
 
-			} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
-				jailDecision(gui, playerList.getPlayer(i));
+				checkForLostPlayers(playerList);
 			}
-
-			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
-				playerList.getPlayer(i).setBankrupt(true);
-				gui.removeBankrupted(playerList.getPlayer(i), gameboard);
-				alivePlayers--;
-
-			}
-
 		}
+
+
 	}
+
+
 
 
 	private void initGui() {
@@ -124,15 +105,31 @@ public class GameController {
 		playerList = gui.registerPlayerCount();
 		gui.placePlayer();
 	}
-	
-	private void takeTurn(Player p) {
+
+	/**
+	 * Checks if the player
+	 * @param i
+	 */
+	private void checkForLostPlayers(PlayerList playerList) {
+
+		for (int j = 0; j < playerList.getLength(); j++)
+			if (playerList.getPlayer(j).getAccount().getBalance() < 0) {
+				playerList.getPlayer(j).setBankrupt(true);
+				gui.removeBankrupted(playerList.getPlayer(j), gameboard);
+				this.alivePlayers--;
+				System.out.println(alivePlayers);
+			}
+
+
+	}
+	public void takeTurn(Player p) {
 		Field currentField;
 		dicecup.shake();
 		gui.showDice(dicecup);
 		gui.movePlayer(p, dicecup.sum());
-		
+
 		currentField = gameboard.getField(p.getPosition());
-		
+
 		fc.evaluateField(currentField, gui, p, dicecup.sum(), dc, gameboard, playerList);
 	}
 
@@ -153,23 +150,23 @@ public class GameController {
 				dicecup.shake();
 				gui.showDice(dicecup);
 
-					if (dicecup.equalsDice() == true) {
-						
-						p.setInJail(false);
-						gui.jailEqualsTrue(p);
-					
-					} else {
-						
-						gui.jailEqualsFalse(p);
-						
-					}
+				if (dicecup.equalsDice() == true) {
+
+					p.setInJail(false);
+					gui.jailEqualsTrue(p);
+
+				} else {
+
+					gui.jailEqualsFalse(p);
+
+				}
 
 			} else if (decision == 3) {
-				
+
 				p.getAccount().removeAntiJaulCard();
 				p.setInJail(false);
 				gui.antiJailUsed(p);
-				
+
 			}
 
 		}
