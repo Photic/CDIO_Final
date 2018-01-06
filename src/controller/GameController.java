@@ -38,7 +38,7 @@ public class GameController {
 	public GameController() throws IOException 
 	{
 		textReader = new TextReader();
-		gui = new GuiController();
+		gui = new GuiController(textReader);
 		gameboard = new GameBoard(textReader);
 		playing = true;
 		dicecup = new DiceCup();
