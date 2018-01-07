@@ -323,7 +323,10 @@ public class GUIController {
 		return output;
 	}
 
-
+//Stephan Arbejder på noget her
+//	public boolean tdecision2(Player p, GameBoard gboard){
+//		gui.showMessage(gboard.getField(p.getPosition()).getPrice());
+//	}
 
 	public boolean territoryDecision(Player p) {
 
