@@ -53,7 +53,7 @@ public class DeckController {
 		    firstGameCycle = true;
 		} else if (cardPicked == firstCardPicked) {
 			this.deck.shuffleCards();
-			cardPicked = this.deck.pickACard();
+			chanceField(p, plist, gameboard, gui);
 			firstGameCycle = false;
 		}
 		
