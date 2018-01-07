@@ -197,7 +197,7 @@ public class DeckController {
 	 * @param gameboard
 	 * @param gui
 	 */
-	public void moverPlayerToNearestShippingCard(Player p, GameBoard gameboard, GuiController gui) {
+	private void moverPlayerToNearestShippingCard(Player p, GameBoard gameboard, GuiController gui) {
 		int iMod = 0;
 		int calculateNewPosition = 0;
 		int i;
