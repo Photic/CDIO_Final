@@ -35,8 +35,6 @@ public class FieldController {
 	 */
 	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, GameBoard gameboard, PlayerList plist) {
 
-
-
 		if (field instanceof Territory) {
 
 			territoryLogic(field, gui, p, gameboard);
@@ -67,10 +65,9 @@ public class FieldController {
 
 		} else if (field instanceof Chance) {
 
-			chanceLogic(field, gui, p, dc, plist, gameboard);
+			chanceLogic(gui, p, dc, plist, gameboard);
 
 		}
-
 
 	}
 
@@ -95,7 +92,7 @@ public class FieldController {
 
 
 			} else {
-
+				// Something here or not ?
 			}
 
 			gui.transaction(decision, field, p);
@@ -162,7 +159,7 @@ public class FieldController {
 
 
 			} else {
-
+				// Something here or not ? 
 			}
 
 			gui.transaction(decision, field, p);
@@ -209,9 +206,8 @@ public class FieldController {
 				field.setOwned(true);
 				gui.setOwnerText(p);
 
-
 			} else {
-
+				// Something here or not ? 
 			}
 
 			gui.transaction(decision, field, p);
@@ -276,7 +272,7 @@ public class FieldController {
 		
 	}
 
-	private void chanceLogic(Field field, GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
+	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
 		
 		dc.chanceField(p, plist, gameboard, gui);
 		

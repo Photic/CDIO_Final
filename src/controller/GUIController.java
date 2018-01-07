@@ -51,7 +51,6 @@ public class GUIController {
 
 	}
 
-
 	public PlayerList registerPlayerCount() {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};
@@ -114,7 +113,6 @@ public class GUIController {
 
 	}
 
-
 	public void removeBankrupted(Player p, GameBoard gb) {
 
 		for (int i = 0; i < gui_players.length; i++) {
@@ -139,10 +137,9 @@ public class GUIController {
 
 				}
 
-
 			}
+			
 		}
-
 
 	}
 
@@ -180,8 +177,8 @@ public class GUIController {
 
 				for (int i = 0; i < territories.length-1; i++) 
 					territories[i] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];	
-				
-				
+
+
 				//tilføj en fortryd-knap
 				territories[fields.length] = descriptions[55];
 
@@ -203,12 +200,12 @@ public class GUIController {
 						counter++;
 					}
 				}
-				
+
 				//tilføj en fortryd knap
 				territories[counter] = descriptions[55];
 			}
 
-			
+
 
 			//Now we have fields to be represented ready and ask the user wich one he would like to build on.
 
@@ -230,19 +227,19 @@ public class GUIController {
 
 					}
 
-
 				}
-			}
-		}
 
+			}
+
+		}
 
 	}
 
-/**
- * This method deals with the scenario where the user wants to sell houses.
- * @param fields
- * All the player's fields
- */
+	/**
+	 * This method deals with the scenario where the user wants to sell houses.
+	 * @param fields
+	 * All the player's fields
+	 */
 	public void sellHouses(Field[] fields) {
 		int count = 0;
 
@@ -290,17 +287,12 @@ public class GUIController {
 					}
 
 				}
+
 			}
 
 		}
 
-
-
-
 	}
-
-
-
 
 
 	public void showWinner(Player p) {
@@ -334,7 +326,7 @@ public class GUIController {
 
 
 	public boolean territoryDecision(Player p) {
-		
+
 		gui.showMessage(p.getName() + descriptions[13]);
 
 		return gui.getUserLeftButtonPressed(p.getName() + descriptions[14], descriptions[15], descriptions[16]);
@@ -699,33 +691,24 @@ public class GUIController {
 			if (gui_players[i].getName() == p.getName()) {
 				gui_players[i].setBalance(p.getAccount().getBalance());
 			}
+			
 		}
+		
 	}
-
 
 	public void setDice(DiceCup dc) {
 
-
-
 	}
 
-
-
 	public void setOwner(Player p) {
-
-
 
 	}
 
 	public void removeBankruptOwner(int index) {
 
-
-
 	}
 
 	public void removeBankruptPlayer(Player p) {
-
-
 
 	}
 
