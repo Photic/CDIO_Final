@@ -33,7 +33,7 @@ public class TestCards extends ConstructorForJUnit {
 	@Test
 	public void testCardShipping() {
 		this.plist.getPlayer(0).setPosition(39);
-		this.dc.moverPlayerCardSuperAdvanced(plist.getPlayer(0), gameboard, gui);
+		this.dc.moverPlayerToNearestShippingCard(plist.getPlayer(0), gameboard, gui);
 	}
 
 }

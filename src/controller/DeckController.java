@@ -43,31 +43,31 @@ public class DeckController {
 			recieveMoneyCard(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof BirthdayCard) {
-			recieveMoneyCardAdvanced(p, plist, cardPicked.getAmount());
+			birthdayCard(p, plist, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof PayMoneyCard) {
 			payMoneyCard(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
-			payMoneyCardAdvanced(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
+			payMoneyPrHouseHotelCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
 		}
 		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
-			payMoneyCardSuperAdvanced(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
+			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
 		}
 		else if (cardPicked instanceof AntiJailCard) {
 			antiJailCard(p, cardPicked);
 		}
 		else if (cardPicked instanceof GoToJailCard) {
-			goToJail(p, cardPicked.getAmount(), gui);
+			goToJailCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
 			moverPlayerCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerBackCard) {
-			moverPlayerCardAdvanced(p, cardPicked.getAmount(), gui);
+			moverPlayerBackCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
-			moverPlayerCardSuperAdvanced(p, gameboard, gui);
+			moverPlayerToNearestShippingCard(p, gameboard, gui);
 		}
 
 		return cardPicked.getDescription();
@@ -89,7 +89,7 @@ public class DeckController {
 	 * @param plist
 	 * @param amount
 	 */
-	private void recieveMoneyCardAdvanced(Player p, PlayerList plist, int amount) {
+	private void birthdayCard(Player p, PlayerList plist, int amount) {
 		for (int i = 0; i < plist.getLength(); i++) {
 			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.getAccount().addBalance(amount);
@@ -114,7 +114,7 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	private void payMoneyCardAdvanced(Player p, PlayerList plist, int amount, int advancedAmount) {
+	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, int amount, int advancedAmount) {
 		p.getAccount().addBalance(-(p.getAccount().getHousesowned()*amount));
 		p.getAccount().addBalance(-(p.getAccount().getHotelsowned()*advancedAmount));
 	}
@@ -126,7 +126,7 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	private void payMoneyCardSuperAdvanced(Player p, PlayerList plist, int amount, int advancedAmount) {
+	private void GetMoneyIfWorthIsLowCard(Player p, PlayerList plist, int amount, int advancedAmount) {
 		if (p.getAccount().getPlayerWorth(p) <= amount)
 			p.getAccount().addBalance(advancedAmount);
 	}
@@ -145,7 +145,7 @@ public class DeckController {
 	 * Sents the player to prison.
 	 * @param p
 	 */
-	private void goToJail(Player p, int newPosition, GuiController gui) {
+	private void goToJailCard(Player p, int newPosition, GuiController gui) {
 		gui.movePlayerInstantly(p, newPosition, false);
 		p.setInJail(true);
 	}
@@ -166,7 +166,7 @@ public class DeckController {
 	 * @param newPosition
 	 * @param gui
 	 */
-	private void moverPlayerCardAdvanced(Player p, int newPosition, GuiController gui) {
+	private void moverPlayerBackCard(Player p, int newPosition, GuiController gui) {
 		gui.movePlayerBackwards(p, newPosition);
 	}
 	
@@ -177,7 +177,7 @@ public class DeckController {
 	 * @param gameboard
 	 * @param gui
 	 */
-	public void moverPlayerCardSuperAdvanced(Player p, GameBoard gameboard, GuiController gui) {
+	public void moverPlayerToNearestShippingCard(Player p, GameBoard gameboard, GuiController gui) {
 		int iMod = 0;
 		int calculateNewPosition = 0;
 		int i;
