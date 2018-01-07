@@ -38,7 +38,7 @@ public class DeckController {
 	 * @param gui Needs the gui to move the player.
 	 * @return
 	 */
-	public String chanceField(Player p, PlayerList plist, GameBoard gameboard, GuiController gui) {
+	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GuiController gui) {
 
 		Card cardPicked = this.deck.pickACard();
 		
@@ -57,7 +57,7 @@ public class DeckController {
 			firstGameCycle = false;
 		}
 		
-		getDescription(cardPicked.getDescription());
+		gui.chanceMessege(cardPicked.getDescription());
 		
 		// Logic that look at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
@@ -91,8 +91,6 @@ public class DeckController {
 			moverPlayerToNearestShippingCard(p, gameboard, gui);
 		}
 		
-		return cardPicked.getDescription();
-
 	}
 
 	/**
@@ -218,15 +216,6 @@ public class DeckController {
 			gameboard.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
 		}
 		
-	}
-
-	/**
-	 * Deliver the cards description in a String.
-	 * @param description
-	 * @return
-	 */
-	public String getDescription(String description) {
-		return description;
 	}
 	
 	/**
