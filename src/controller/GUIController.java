@@ -333,21 +333,22 @@ public class GUIController {
 
 
 
-	public boolean territoryDecision(Field field, Player p) {
+	public boolean territoryDecision(Player p) {
+		
 		gui.showMessage(p.getName() + descriptions[13]);
 
 		return gui.getUserLeftButtonPressed(p.getName() + descriptions[14], descriptions[15], descriptions[16]);
 
 	}
 
-	public boolean companyDecision(Field field, Player p) {
+	public boolean companyDecision(Player p) {
 
 		gui.showMessage(p.getName() + descriptions[17]);
 
 		return gui.getUserLeftButtonPressed(p.getName() + descriptions[18], descriptions[15], descriptions[16]);
 	}
 
-	public boolean shippingDecision(Field field, Player p) {
+	public boolean shippingDecision(Player p) {
 
 		gui.showMessage(p.getName() + descriptions[19]);
 

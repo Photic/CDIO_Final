@@ -7,7 +7,6 @@ import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
-import entity.gameboard.Territory;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -121,6 +120,7 @@ public class GameController {
 
 
 	}
+	
 	public void takeTurn(Player p) {
 		Field currentField;
 		dicecup.shake();

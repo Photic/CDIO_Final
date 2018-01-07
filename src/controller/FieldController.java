@@ -77,7 +77,7 @@ public class FieldController {
 	private void territoryLogic(Field field, GUIController gui, Player p, GameBoard gb) {
 
 		if(field.isOwned() == false) {
-			boolean decision = gui.territoryDecision(field, p);
+			boolean decision = gui.territoryDecision(p);
 
 			if (decision == true) {
 				p.getAccount().buyField(field.getPrice());
@@ -148,7 +148,7 @@ public class FieldController {
 	private void companyLogic(Field field, GUIController gui, Player p, int diceSum) {
 
 		if(field.isOwned() == false) {
-			boolean decision = gui.companyDecision(field, p);
+			boolean decision = gui.companyDecision(p);
 
 			if (decision == true) {
 
@@ -197,7 +197,7 @@ public class FieldController {
 	private void shippingLogic(Field field, GUIController gui, Player p) {
 
 		if(field.isOwned() == false) {
-			boolean decision = gui.shippingDecision(field, p);
+			boolean decision = gui.shippingDecision(p);
 
 			if (decision == true) {
 
