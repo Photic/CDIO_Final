@@ -49,7 +49,7 @@ public class DeckController {
 		
 		// Saves the first card picked, If the first card picked is picked again, shuffle the deck and pick another card.
 		if(!firstGameCycle) {
-		    firstCardPicked = this.deck.getCard(this.deck.getLength()-1);
+		    firstCardPicked = this.deck.getLastCard();
 		    firstGameCycle = true;
 		} else if (cardPicked == firstCardPicked) {
 			this.deck.shuffleCards();
@@ -157,7 +157,7 @@ public class DeckController {
 	 * @param cardPicked
 	 */
 	private void antiJailCard(Player p, Card cardPicked) {
-		this.deck.getCard(this.deck.getLength()-1).addRemoveCardOwner(p.getName(), true);
+		this.deck.getLastCard().addRemoveCardOwner(p.getName(), true);
 		p.getAccount().recieveAntiJaulCard(cardPicked);
 	}
 
@@ -225,7 +225,7 @@ public class DeckController {
 	 */
 	public void removeAntiJailCard(Player p) {
 		for (int i = 0; i <= deck.getLength(); i++) {
-			if (deck.getCard(i) instanceof AntiJailCard && p.getName() == deck.getCard(i).getCardOwner()) {
+			if (this.deck.getCard(i) instanceof AntiJailCard && p.getName() == this.deck.getCard(i).getCardOwner()) {
 				this.deck.getCard(i).addRemoveCardOwner(null, false);
 				p.getAccount().removeAntiJaulCard();
 				break;

@@ -101,6 +101,9 @@ public class Deck {
 		return this.deck.length;
 	}
 
+	public Card getLastCard() {
+		return this.deck[getLength()-1];
+	}
 
 }
 
