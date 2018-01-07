@@ -12,7 +12,7 @@ public class DiceCup {
 		this.d1 = new Die();
 		this.d2 = new Die();
 		
-	}; 
+	}
 	
 	public void shake() {
 		
