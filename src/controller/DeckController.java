@@ -157,7 +157,7 @@ public class DeckController {
 	 * @param cardPicked
 	 */
 	private void antiJailCard(Player p, Card cardPicked) {
-		this.deck.getCard(this.deck.getLength()).addRemoveCardOwner(p.getName(), true);
+		this.deck.getCard(this.deck.getLength()-1).addRemoveCardOwner(p.getName(), true);
 		p.getAccount().recieveAntiJaulCard(cardPicked);
 	}
 
