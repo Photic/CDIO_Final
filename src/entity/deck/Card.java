@@ -27,7 +27,7 @@ public abstract class Card {
 		return this.advancedAmount;
 	}
 	
-	public boolean isCardIsOwned() {
+	public boolean isCardOwned() {
 		return cardIsOwned;
 	}
 	

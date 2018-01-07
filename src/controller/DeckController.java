@@ -22,6 +22,8 @@ import entity.player.PlayerList;
 public class DeckController {
 
 	private Deck deck;
+	private boolean firstGameCycle;
+	private Card firstCardPicked;
 
 	public DeckController(TextReader text) {
 		this.deck = new Deck(text);
@@ -29,16 +31,33 @@ public class DeckController {
 	}
 
 	/**
-	 * Use when landing on a chanceField.
-	 * @param p
-	 * @param plist
-	 * @param gameboard
+	 * Code needed by Chancefields.
+	 * @param p Needs a specific player
+	 * @param plist Needs the player list.
+	 * @param gameboard Needs a gameboard.
+	 * @param gui Needs the gui to move the player.
 	 * @return
 	 */
 	public String chanceField(Player p, PlayerList plist, GameBoard gameboard, GuiController gui) {
 
 		Card cardPicked = this.deck.pickACard();
-
+		
+		// Pick another card if the card picked is already owned by someone.
+		if (cardPicked instanceof AntiJailCard && cardPicked.isCardOwned() == true) {
+			chanceField(p, plist, gameboard, gui);
+		}
+		
+		// Saves the first card picked, If the first card picked is picked again, shuffle the deck and pick another card.
+		if(!firstGameCycle) {
+		    firstCardPicked = this.deck.getCard(this.deck.getLength()-1);
+		    firstGameCycle = true;
+		} else if (cardPicked == firstCardPicked) {
+			this.deck.shuffleCards();
+			cardPicked = this.deck.pickACard();
+			firstGameCycle = false;
+		}
+		
+		// Logic that look at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
 		}
@@ -70,6 +89,7 @@ public class DeckController {
 			moverPlayerToNearestShippingCard(p, gameboard, gui);
 		}
 
+		// returns the Description of a card to be displayed in the GUI
 		return cardPicked.getDescription();
 
 	}
@@ -203,7 +223,7 @@ public class DeckController {
 	 * Remove anti Jail card from Player
 	 * @param p
 	 */
-	public void removeantiJailCard(Player p) {
+	public void removeAntiJailCard(Player p) {
 		for (int i = 0; i <= deck.getLength(); i++) {
 			if (deck.getCard(i) instanceof AntiJailCard && p.getName() == deck.getCard(i).getCardOwner()) {
 				this.deck.getCard(i).addRemoveCardOwner(null, false);
