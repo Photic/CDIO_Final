@@ -1,8 +1,6 @@
 package entity.player;
 
 
-import java.awt.Color;
-
 import entity.deck.Card;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
@@ -15,11 +13,7 @@ public class Account {
 
 	private int amountOfCards = 0;
 
-
-
 	private Card antiJailCard;
-
-
 	private Field[] blueFields;
 	private Field[] pinkFields;
 	private Field[] greenFields;
@@ -148,7 +142,6 @@ public class Account {
 			}
 
 		}
-
 
 	}
 
