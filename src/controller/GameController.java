@@ -3,7 +3,6 @@ package controller;
 
 import java.io.IOException;
 
-import boundary.GuiController;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -20,7 +19,7 @@ import entity.player.PlayerList;
 public class GameController {
 
 
-	private GuiController gui;
+	private GUIController gui;
 	private PlayerList playerList;
 	private FieldController fc;
 	private GameBoard gameboard;
@@ -39,7 +38,7 @@ public class GameController {
 	public GameController() throws IOException 
 	{
 		textReader = new TextReader();
-		gui = new GuiController(textReader);
+		gui = new GUIController(textReader);
 		gameboard = new GameBoard(textReader);
 		fc = new FieldController(textReader);
 		dc = new DeckController(textReader);
@@ -133,7 +132,7 @@ public class GameController {
 		fc.evaluateField(currentField, gui, p, dicecup.sum(), dc, gameboard, playerList);
 	}
 
-	private void jailDecision(GuiController gui, Player p) {
+	private void jailDecision(GUIController gui, Player p) {
 
 		if (p.isInJail() == true) {
 			int decision = gui.inJailDecision(p);

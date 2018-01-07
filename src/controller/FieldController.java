@@ -1,6 +1,5 @@
 package controller;
 
-import boundary.GuiController;
 import boundary.TextReader;
 import entity.gameboard.Chance;
 import entity.gameboard.Company;
@@ -34,7 +33,7 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GuiController gui, Player p, int diceSum, DeckController dc, GameBoard gameboard, PlayerList plist) {
+	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, GameBoard gameboard, PlayerList plist) {
 
 
 
@@ -75,7 +74,7 @@ public class FieldController {
 
 	}
 
-	private void territoryLogic(Field field, GuiController gui, Player p, GameBoard gb) {
+	private void territoryLogic(Field field, GUIController gui, Player p, GameBoard gb) {
 
 		if(field.isOwned() == false) {
 			boolean decision = gui.territoryDecision(field, p);
@@ -118,7 +117,7 @@ public class FieldController {
 		}
 	}
 
-	private void taxLogic(Field field, GuiController gui, Player p) {
+	private void taxLogic(Field field, GUIController gui, Player p) {
 
 		if (field.getPrice() == 4000) {
 
@@ -146,7 +145,7 @@ public class FieldController {
 
 	}
 
-	private void companyLogic(Field field, GuiController gui, Player p, int diceSum) {
+	private void companyLogic(Field field, GUIController gui, Player p, int diceSum) {
 
 		if(field.isOwned() == false) {
 			boolean decision = gui.companyDecision(field, p);
@@ -195,7 +194,7 @@ public class FieldController {
 	}
 
 
-	private void shippingLogic(Field field, GuiController gui, Player p) {
+	private void shippingLogic(Field field, GUIController gui, Player p) {
 
 		if(field.isOwned() == false) {
 			boolean decision = gui.shippingDecision(field, p);
@@ -257,13 +256,13 @@ public class FieldController {
 	}
 
 
-	private void jailLogic(Field field, GuiController gui, Player p) {
+	private void jailLogic(Field field, GUIController gui, Player p) {
 
 		gui.visitJailMessege(field, p);
 
 	}
 
-	private void goToJailLogic(Field field, GuiController gui, Player p) {
+	private void goToJailLogic(Field field, GUIController gui, Player p) {
 
 		gui.goToJailMessege(field, p);
 		p.setInJail(true);
@@ -271,13 +270,13 @@ public class FieldController {
 
 	}
 
-	private void parkingLogic(Field field, GuiController gui, Player p) {
+	private void parkingLogic(Field field, GUIController gui, Player p) {
 		
 		gui.parkingMessege(field, p);
 		
 	}
 
-	private void chanceLogic(Field field, GuiController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
+	private void chanceLogic(Field field, GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
 		
 		dc.chanceField(p, plist, gameboard, gui);
 		

@@ -1,9 +1,10 @@
-package boundary;
+package controller;
 
 import java.awt.Color;
 import java.io.IOException;
 import java.util.Random;
 
+import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
@@ -15,7 +16,7 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
-public class GuiController {
+public class GUIController {
 
 	private GUI gui;
 	private GUI_Player[] gui_players;
@@ -23,11 +24,11 @@ public class GuiController {
 	private String[] descriptions;
 
 
-	public GuiController(TextReader tr) {
+	public GUIController(TextReader tr) {
 		try {
 			this.descriptions = tr.textFromFile("guiText");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Something went wrong in the GUIController constructor");
 			e.printStackTrace();
 		}
 	}

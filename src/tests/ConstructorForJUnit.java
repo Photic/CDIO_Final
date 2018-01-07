@@ -1,8 +1,8 @@
 package tests;
 
-import boundary.GuiController;
 import boundary.TextReader;
 import controller.DeckController;
+import controller.GUIController;
 import entity.deck.Deck;
 import entity.gameboard.GameBoard;
 import entity.player.PlayerList;
@@ -15,7 +15,7 @@ public abstract class ConstructorForJUnit {
 	protected TextReader textReader;
 	protected Deck deck;
 	protected DeckController dc;
-	protected GuiController gui;
+	protected GUIController gui;
 	protected GameBoard gameboard;
 
 	public ConstructorForJUnit() {

@@ -1,13 +1,12 @@
 package controller;
 
-import boundary.GuiController;
 import entity.player.PlayerList;
 
 public class HouseController {
 	
 	
 	
-	public void houseControl(PlayerList playerList, int i, GameController gc, GuiController gui) {
+	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui) {
 		
 		boolean decision;
 		int option;

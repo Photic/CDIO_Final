@@ -1,6 +1,5 @@
 package controller;
 
-import boundary.GuiController;
 import boundary.TextReader;
 import entity.deck.AntiJailCard;
 import entity.deck.Card;
@@ -38,7 +37,7 @@ public class DeckController {
 	 * @param gui Needs the gui to move the player.
 	 * @return
 	 */
-	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GuiController gui) {
+	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GUIController gui) {
 
 		Card cardPicked = this.deck.pickACard();
 		
@@ -164,7 +163,7 @@ public class DeckController {
 	 * Sents the player to prison.
 	 * @param p
 	 */
-	private void goToJailCard(Player p, int newPosition, GuiController gui) {
+	private void goToJailCard(Player p, int newPosition, GUIController gui) {
 		gui.movePlayerInstantly(p, newPosition, false);
 		p.setInJail(true);
 	}
@@ -175,7 +174,7 @@ public class DeckController {
 	 * @param newPosition
 	 * @param gui
 	 */
-	private void moverPlayerCard(Player p, int newPosition, GuiController gui) {
+	private void moverPlayerCard(Player p, int newPosition, GUIController gui) {
 		gui.movePlayerInstantly(p, newPosition, true);
 	}
 
@@ -185,7 +184,7 @@ public class DeckController {
 	 * @param newPosition
 	 * @param gui
 	 */
-	private void moverPlayerBackCard(Player p, int newPosition, GuiController gui) {
+	private void moverPlayerBackCard(Player p, int newPosition, GUIController gui) {
 		gui.movePlayerBackwards(p, newPosition);
 	}
 	
@@ -196,7 +195,7 @@ public class DeckController {
 	 * @param gameboard
 	 * @param gui
 	 */
-	private void moverPlayerToNearestShippingCard(Player p, GameBoard gameboard, GuiController gui) {
+	private void moverPlayerToNearestShippingCard(Player p, GameBoard gameboard, GUIController gui) {
 		int iMod = 0;
 		int calculateNewPosition = 0;
 		int i;
