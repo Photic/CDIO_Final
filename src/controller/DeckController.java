@@ -57,6 +57,8 @@ public class DeckController {
 			firstGameCycle = false;
 		}
 		
+		getDescription(cardPicked.getDescription());
+		
 		// Logic that look at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
@@ -88,8 +90,7 @@ public class DeckController {
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
 			moverPlayerToNearestShippingCard(p, gameboard, gui);
 		}
-
-		// returns the Description of a card to be displayed in the GUI
+		
 		return cardPicked.getDescription();
 
 	}
@@ -219,6 +220,15 @@ public class DeckController {
 		
 	}
 
+	/**
+	 * Deliver the cards description in a String.
+	 * @param description
+	 * @return
+	 */
+	public String getDescription(String description) {
+		return description;
+	}
+	
 	/**
 	 * Remove anti Jail card from Player
 	 * @param p
