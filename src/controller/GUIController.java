@@ -38,7 +38,6 @@ public class GUIController {
 
 		for (int i = 0; i < gameboard.getLength(); i++) {
 
-
 			gui_fields[i] = new GUI_Street();
 			gui_fields[i].setTitle(gameboard.getField(i).getName());
 			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
