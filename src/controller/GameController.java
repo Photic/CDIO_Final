@@ -125,6 +125,7 @@ public class GameController {
 				checker = checkForDoubleDice(j);
 				
 				if (checker == false) {
+					playerList.getPlayer(j).setNumberOfEqualDice(0);
 					j++;
 				}
 				

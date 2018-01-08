@@ -746,5 +746,9 @@ public class GUIController {
 
 		return rgb;
 	}
+	
+	public void showMessage() {
+		gui.showMessage(this.descriptions[69]);
+	}
 
 }
