@@ -57,7 +57,8 @@ public class DeckController {
 		}
 
 		gui.chanceMessege(cardPicked.getDescription());
-
+		gui.showMessage();
+		
 		// Logic that look at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
