@@ -9,7 +9,7 @@ public class Account {
 
 
 
-	private int balance, actives, housesowned, hotelsowned, companies, shipping, territoriesOwned;
+	private int balance, actives, housesowned, companies, shipping, territoriesOwned;
 
 	private int amountOfCards = 0;
 
@@ -40,7 +40,6 @@ public class Account {
 		this.shipping = 0;
 		this.territoriesOwned = 0;
 		this.housesowned = 0;
-		this.hotelsowned = 0;
 
 		blueFields = new Field[] {null, null};
 		pinkFields = new Field[] {null, null, null};
@@ -561,25 +560,9 @@ public class Account {
 		return housesowned;
 	}
 
-
-	public void setHousesowned(int housesowned) {
-		this.housesowned = this.hotelsowned + housesowned;
-	}
-
-
-	public int getHotelsowned() {
-		return hotelsowned;
-	}
-
-
-	public void setHotelsowned(int hotelsowned) {
-		this.hotelsowned = this.hotelsowned + hotelsowned;
-	}
-
 	public int getCompanies() {
 		return companies;
 	}
-
 
 	public void setCompanies(int companies) {
 		this.companies = companies;
