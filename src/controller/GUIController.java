@@ -698,7 +698,7 @@ public class GUIController {
 	public boolean rollDiceMessageUpdated(Player p) {
 
 
-		return gui.getUserLeftButtonPressed(descriptions[51], descriptions[50], descriptions[52]);
+		return gui.getUserLeftButtonPressed(p.getName() + descriptions[51], descriptions[50], descriptions[52]);
 	}
 
 	public void showDice(DiceCup dc) {
