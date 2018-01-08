@@ -1,5 +1,6 @@
 package controller;
 
+import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
@@ -48,10 +49,9 @@ public class HouseController {
 	}
 	
 	//Green, Grey, White, Yellow, Purple
-	public void sellPropToPlayer(Player p1, Player p2, GameBoard gameboard, GUIController gui, int price){
-
-		//p1.getAccount();
-		//p2.getAccount().buyField(price);
+	public void sellPropToPlayer(Player p1, Player p2, GameBoard gameboard, Field field, GUIController gui, int price){
+		p1.getAccount().removeField(gameboard, gameboard.getField(field.getIndex()));
+		p2.getAccount().buyField(price);
 	}
 	
 	

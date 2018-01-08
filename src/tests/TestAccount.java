@@ -69,9 +69,8 @@ public class TestAccount extends ConstructorForJUnit {
 		boolean actual = false;
 		plist.getPlayer(1).getAccount().addField(gameboard.getField(1), gameboard);
 		System.out.println("SE HER!! \n \n");
-		if(!((plist.getPlayer(1).getAccount().getBlueFields()[0])==null)){
-			actual = false;
-			System.out.println(actual);
+		if((plist.getPlayer(1).getAccount().getBlueFields()[0])!=null){
+			System.out.println("LOOK MAAAAA!!! IT WORKS!! ");
 			System.out.println(plist.getPlayer(1).getAccount().getBlueFields()[0].getName());
 		}
 		plist.getPlayer(1).getAccount().removeField(gameboard, gameboard.getField(1));
@@ -80,6 +79,9 @@ public class TestAccount extends ConstructorForJUnit {
 			actual = true;
 		}
 	System.out.println(actual);
+	
+	
+	
 	}
 
 }
