@@ -9,7 +9,7 @@ public class HouseController {
 	
 	
 	
-	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui) {
+	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, GameBoard gameboard) {
 		
 		boolean decision;
 		int option;
@@ -36,6 +36,26 @@ public class HouseController {
 					gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
 				} else if (option == 2) {
 					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
+				} else if (option == 3) {
+					Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));
+					
+					String buyer = gui.sellTerritory(playerList);
+					
+					int sellPrice = gui.priceToSell();
+					
+					for (int j = 0; j < playerList.getLength(); j++) {
+						
+						if (buyer.equals(playerList.getPlayer(j).getName())) {
+							
+							
+							sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), gameboard, terriToSell, gui, sellPrice);
+							
+							
+						}
+						
+					}
+					
+					
 				}
 				
 
@@ -48,11 +68,14 @@ public class HouseController {
 		}
 	}
 	
-	//Green, Grey, White, Yellow, Purple
+
 	public void sellPropToPlayer(Player p1, Player p2, GameBoard gameboard, Field field, GUIController gui, int price){
 		p1.getAccount().removeField(gameboard, gameboard.getField(field.getIndex()));
 		p2.getAccount().buyField(price);
 		p1.getAccount().addBalance(price);
+		
+		gui.updateBalance(p1);
+		gui.updateBalance(p2);
 	}
 	
 	

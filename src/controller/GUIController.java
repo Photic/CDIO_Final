@@ -353,7 +353,7 @@ public class GUIController {
 
 	public int territoryOptions(Player p) {
 
-		String[] options = new String[] {this.description[59], this.description[60], this.description[55]};
+		String[] options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
 
 		String choice = this.gui.getUserSelection(p.getName() + this.description[58], options);
 
@@ -365,16 +365,68 @@ public class GUIController {
 			output = 2;
 		} else if (choice == options[2]) {
 			output = 3;
+		} else if (choice == options[3]) {
+			output = 4;
 		}
 
 		return output;
 	}
 
-	//Stephan Arbejder på noget her
-	//	public boolean tdecision2(Player p, GameBoard gboard){
-	//		gui.showMessage(gboard.getField(p.getPosition()).getPrice());
-	//	}
 
+	
+	public String sellTerritory(PlayerList plist) {
+		String[] playerNames = new String[plist.getLength()];
+		
+		
+		System.out.println(plist.getLength());
+		for (int i = 0; i < playerNames.length; i++) 
+			playerNames[i] = plist.getPlayer(i).getName();
+			
+		for (int i = 0; i < playerNames.length; i++) 
+			System.out.println(playerNames[i]);
+		
+		
+		String[] fortryd = new String[] {"fortryd"};
+		playerNames = combineStringArrays(playerNames, fortryd);
+		
+		String output = gui.getUserSelection("Hvem vil du sælge til?", playerNames);
+		
+
+		
+		return output;
+		
+	}
+	
+	public Field sellTerritoryProp(Player p) {
+		
+		String[] fieldNames = new String[p.getAccount().getFields().length];
+
+		for (int i = 0; i < p.getAccount().getFields().length; i++) 
+			fieldNames[i] = p.getAccount().getFields()[i].getName();
+		
+		String output = gui.getUserSelection("Hvilket territory vil du sælge?", fieldNames);
+		Field outField = null;
+		
+		for (int i = 0; i < p.getAccount().getFields().length; i++) {
+			if (p.getAccount().getFields()[i].getName() == output) {
+				outField = p.getAccount().getFields()[i];
+			}
+			
+		}
+		
+		return outField;
+	}
+	
+	public int priceToSell() {
+		
+		return gui.getUserInteger("Hvad er den aftalte pris?");
+	}
+	
+	
+	
+	
+	
+	
 	public boolean territoryDecision(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[13]);

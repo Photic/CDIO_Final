@@ -68,9 +68,6 @@ public class GameController {
 		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 		
-		fc.evaluateField(gameboard.getField(6), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-		fc.evaluateField(gameboard.getField(8), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-		fc.evaluateField(gameboard.getField(9), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 
 		
 		if (this.alivePlayers == 1) {
@@ -86,7 +83,7 @@ public class GameController {
 				//The game can be played normally if the player is not bankrupt or in jail.
 				if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == false) {
 
-					this.hc.houseControl(this.playerList, j, this, this.gui);
+					this.hc.houseControl(this.playerList, j, this, this.gui, gameboard);
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
 					jailDecision(this.playerList.getPlayer(j));
