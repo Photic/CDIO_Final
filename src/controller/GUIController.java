@@ -46,7 +46,7 @@ public class GUIController {
 
 		}
 
-		gui = new GUI(gui_fields);
+		this.gui = new GUI(gui_fields);
 
 	}
 
