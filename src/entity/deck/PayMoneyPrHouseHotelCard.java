@@ -2,9 +2,8 @@ package entity.deck;
 
 public class PayMoneyPrHouseHotelCard extends Card {
 
-	public PayMoneyPrHouseHotelCard(String description, int amount, int[] needstopay) {
+	public PayMoneyPrHouseHotelCard(String description, int[] needstopay) {
 		super(description);
-		this.actionOrAmount = amount;
 		this.housesHotels = needstopay;
 	}
 

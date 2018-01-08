@@ -49,7 +49,7 @@ Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel
 , du er passeret start. Dermed modtager du 4000 kr af banken.
 , kast terningerne
 KAST!
-Vil du kaste terningerne eller ordne dine grunde?
+, vil du kaste terningerne eller ordne dine grunde?
 Håndtér grunde
 Du kan ikke bygge højere på dine grunde.
 Du ejer ingen huse
@@ -67,3 +67,4 @@ Sælg Huse
  huse. 
  ejer alle grunde af denne type. 
  betaler altså 
+ Du har trukket et chanceKort
