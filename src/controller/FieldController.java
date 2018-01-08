@@ -97,9 +97,7 @@ public class FieldController {
 
 				boolean checker = checkAllOfAKind(field, p, gb);
 				
-				System.out.println(checker);
 				if (checker == true && field.getHouses() == 0) {
-					System.out.println("Vi kom ind i den her");
 					payRent(p, field, gui, 2);
 				} else {
 					payRent(p, field, gui);
@@ -139,7 +137,6 @@ public class FieldController {
 		
 		if (field.getColor() == gb.getBlue())
 			checker = field.getOwner().getAccount().isAllblue();
-		
 		
 		if (field.getColor() == gb.getPink())
 			checker = field.getOwner().getAccount().isAllpink();
