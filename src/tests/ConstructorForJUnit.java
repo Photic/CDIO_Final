@@ -4,6 +4,7 @@ import boundary.TextReader;
 import controller.DeckController;
 import controller.FieldController;
 import controller.GUIController;
+import entity.DiceCup;
 import entity.deck.Deck;
 import entity.gameboard.GameBoard;
 import entity.player.PlayerList;
@@ -19,6 +20,7 @@ public abstract class ConstructorForJUnit {
 	protected GUIController gui;
 	protected GameBoard gameboard;
 	protected FieldController fieldController;
+	protected DiceCup diceCup;
 
 	public ConstructorForJUnit() {
 		this.names = new String[] {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
@@ -28,6 +30,7 @@ public abstract class ConstructorForJUnit {
 		this.dc = new DeckController(this.textReader);
 		this.gameboard = new GameBoard(this.textReader);
 		this.fieldController = new FieldController(this.textReader);
+		this.diceCup = new DiceCup();
 	}
 	
 }

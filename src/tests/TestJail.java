@@ -16,10 +16,11 @@ public class TestJail extends ConstructorForJUnit {
 		boolean expected = true;
 		
 		boolean notLockedUpToBeginWith = plist.getPlayer(0).isInJail();
+		System.out.println(gameboard.getField(30).getDescription());
 		assertNotEquals(notLockedUpToBeginWith, expected);
-		
-		//fieldController.evaluateField(field, gui, p, diceSum, dc, gameboard, plist);
-		
+		fieldController.evaluateField(gameboard.getField(30), gui, plist.getPlayer(0), diceCup.sum(), dc, gameboard, plist);
+		boolean lockedUpNow = plist.getPlayer(0).isInJail();
+		assertEquals(expected, lockedUpNow);
 
 		
 	}
