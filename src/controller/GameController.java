@@ -85,10 +85,10 @@ public class GameController {
 					this.hc.houseControl(this.playerList, j, this, this.gui);
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
-					jailDecision(this.gui, this.playerList.getPlayer(j));
+					jailDecision(this.playerList.getPlayer(j));
 				}
 
-				checkForLostPlayers(this.playerList);
+				checkForLostPlayers();
 				
 				checker = checkForDoubleDice(j);
 				
@@ -113,13 +113,13 @@ public class GameController {
 	 * Checks if the player
 	 * @param i
 	 */
-	private void checkForLostPlayers(PlayerList playerList) {
+	private void checkForLostPlayers() {
 
 		int stillAliveLost = 0;
 		
-		for (int j = 0; j < playerList.getLength(); j++)
-			if (playerList.getPlayer(j).getAccount().getBalance() < 0) {
-				playerList.getPlayer(j).setBankrupt(true);
+		for (int j = 0; j < this.playerList.getLength(); j++)
+			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {
+				this.playerList.getPlayer(j).setBankrupt(true);
 				this.gui.removeBankrupted(playerList.getPlayer(j), this.gameboard);
 			} else {
 				stillAliveLost++;
@@ -166,31 +166,31 @@ public class GameController {
 		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.gameboard, this.playerList);
 	}
 
-	private void jailDecision(GUIController gui, Player p) {
+	private void jailDecision(Player p) {
 
 		if (p.isInJail() == true) {
-			int decision = gui.inJailDecision(p);
+			int decision = this.gui.inJailDecision(p);
 
 			if (decision == 1) {
 
 				p.getAccount().addBalance(-1000);
 				p.setInJail(false);
-				gui.updateBalance(p);
-				gui.jailFreePay(p);
+				this.gui.updateBalance(p);
+				this.gui.jailFreePay(p);
 
 			} else if (decision == 2) {
 
 				this.dicecup.shake();
-				gui.showDice(this.dicecup);
+				this.gui.showDice(this.dicecup);
 
 				if (this.dicecup.equalsDice() == true) {
 
 					p.setInJail(false);
-					gui.jailEqualsTrue(p);
+					this.gui.jailEqualsTrue(p);
 
 				} else {
 
-					gui.jailEqualsFalse(p);
+					this.gui.jailEqualsFalse(p);
 
 				}
 
@@ -198,7 +198,7 @@ public class GameController {
 
 				p.getAccount().removeAntiJaulCard();
 				p.setInJail(false);
-				gui.antiJailUsed(p);
+				this.gui.antiJailUsed(p);
 
 			}
 
