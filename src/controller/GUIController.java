@@ -587,7 +587,7 @@ public class GUIController {
 		
 	}
 	
-	public void doubleDiceJail(Player p) {
+	public void doubleDiceJailMessege(Player p) {
 		gui.showMessage(p.getName() + descriptions[64] + p.getName() + descriptions[65]);
 	}
 	
