@@ -117,7 +117,7 @@ public class FieldController {
 
 		if (field.getPrice() == 4000) {
 
-			boolean dicision = gui.taxDecision(field, p);
+			boolean dicision = gui.taxDecision(p);
 
 			if (dicision == true) {
 
