@@ -5,6 +5,7 @@ public abstract class Card {
 	protected String description, specificCardOwner;
 	protected int actionOrAmount, advancedAmount;
 	protected boolean cardIsOwned;
+	protected int[] housesHotels;
 
 	/**
 	 * Abstract class to create a card types.
@@ -25,6 +26,10 @@ public abstract class Card {
 	
 	public int getAdvancedAmount() {
 		return this.advancedAmount;
+	}
+	
+	public int[] getHousePrices() {
+		return housesHotels;
 	}
 	
 	public boolean isCardOwned() {
