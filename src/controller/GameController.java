@@ -61,40 +61,9 @@ public class GameController {
 		}
 	}
 
-
-
-//	/**
-//	 * This is the gameloop.
-//	 */
-//	private void gameLoop() {
-//
-//		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
-////		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-////		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-//		
-//		if (alivePlayers == 1) {
-//			for (int i = 0; i < playerList.getLength(); i++) 
-//				if (playerList.getPlayer(i).isBankrupt() == false) 
-//					gui.showWinner(playerList.getPlayer(i));
-//		} else {
-//			
-//			for (int i = 0; i < playerList.getLength(); i++) {
-//				//The game can be played normally if the player is not bankrupt or in jail.
-//				if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
-//
-//					hc.houseControl(playerList, i, this, gui);
-//
-//				} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
-//					jailDecision(gui, playerList.getPlayer(i));
-//				}
-//
-//				checkForLostPlayers(playerList);
-//			}
-//		}
-//
-//
-//	}
-	
+	/**
+	 * Controls the flow of the game.
+	 */
 	private void gameLoop() {
 		boolean checker;
 		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
@@ -109,6 +78,7 @@ public class GameController {
 		} else {
 			
 			int j = 0;
+			
 			while (j < playerList.getLength()) {
 				
 				//The game can be played normally if the player is not bankrupt or in jail.
@@ -134,9 +104,6 @@ public class GameController {
 
 
 	}
-
-
-
 
 	private void initGui() {
 		gui.defineGUI(gameboard);
