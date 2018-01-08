@@ -191,9 +191,10 @@ public class GUIController {
 					}
 				}
 
-				territories = new String[count];
+				territories = new String[count + 1];
 
 				int counter = 0;
+				
 				for (int i = 0; i < fields.length; i++) {
 					if (fields[i].getHouses() < highestHouse) {
 						territories[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
@@ -201,8 +202,8 @@ public class GUIController {
 					}
 				}
 
-				//tilføj en fortryd knap
 				territories[counter] = descriptions[55];
+
 			}
 
 
