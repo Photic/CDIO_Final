@@ -65,8 +65,12 @@ public class GameController {
 	private void gameLoop() {
 		boolean checker;
 		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
-//		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-//		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		
+		fc.evaluateField(gameboard.getField(6), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(8), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(9), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 
 		
 		if (this.alivePlayers == 1) {
@@ -169,6 +173,7 @@ public void checkForDoubleDiceJail(int j) {
 				this.playerList.getPlayer(j).setInJail(false);
 				this.playerList.getPlayer(j).getAccount().addBalance(-1000);
 				this.playerList.getPlayer(j).setJailCounterDice(0);
+				this.gui.updateBalance(this.playerList.getPlayer(j));
 				
 				
 			} else {
