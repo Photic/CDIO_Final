@@ -86,6 +86,7 @@ public class GameController {
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
 					jailDecision(this.playerList.getPlayer(j));
+					checkForDoubleDiceJail(j);
 				}
 
 				checkForLostPlayers();
@@ -153,6 +154,36 @@ public class GameController {
 			this.playerList.getPlayer(j).setNumberOfEqualDice(0);
 			return false;
 		}
+	}
+	
+public void checkForDoubleDiceJail(int j) {
+		
+		if(!this.dicecup.equalsDice()) {
+			
+			this.playerList.getPlayer(j).setJailCounterDice(this.playerList.getPlayer(j).getJailCounterDice() + 1);
+			
+			if(this.playerList.getPlayer(j).getJailCounterDice() == 3) {
+				
+				//besked til gui
+				
+				this.playerList.getPlayer(j).setInJail(false);
+				this.playerList.getPlayer(j).getAccount().addBalance(-1000);
+				this.playerList.getPlayer(j).setJailCounterDice(0);
+				
+				
+			} else {
+				//gui besked
+					
+			}
+			
+		} else {
+			
+			//gui besked
+			this.playerList.getPlayer(j).setInJail(false);
+			
+		}
+		
+	
 	}
 	
 	public void takeTurn(Player p) {
