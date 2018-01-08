@@ -14,7 +14,7 @@ public class Player {
 	private boolean turn, bankrupt, inJail;
 	private Account account;
 	private int numberOfEqualDice;
-
+	private int jailCounterDice; 
 
 
 	public Player(String n) {
@@ -85,5 +85,12 @@ public class Player {
 		this.numberOfEqualDice = numberOfEqualDice;
 	}
 	
+	public int getJailCounterDice() {
+		return jailCounterDice;
+	}
+
+	public void setJailCounterDice(int jailCounterDice) {
+		this.jailCounterDice = jailCounterDice;
+	}
 }
 
