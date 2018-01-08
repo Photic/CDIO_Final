@@ -727,6 +727,10 @@ public class Account {
 	public void setAllpurple(boolean allpurple) {
 		this.allpurple = allpurple;
 	}
+	
+	public void setHousesowned(int housesowned) {
+		this.housesowned = housesowned;
+	}
 
 
 }
