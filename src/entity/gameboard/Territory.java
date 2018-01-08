@@ -2,8 +2,6 @@ package entity.gameboard;
 
 import java.awt.Color;
 
-import entity.player.Player;
-
 /**
  * The territory describes the squares players can own and pay rent to.
  *

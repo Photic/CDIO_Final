@@ -63,32 +63,71 @@ public class GameController {
 
 
 
-	/**
-	 * This is the gameloop.
-	 */
+//	/**
+//	 * This is the gameloop.
+//	 */
+//	private void gameLoop() {
+//
+//		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
+////		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+////		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+//		
+//		if (alivePlayers == 1) {
+//			for (int i = 0; i < playerList.getLength(); i++) 
+//				if (playerList.getPlayer(i).isBankrupt() == false) 
+//					gui.showWinner(playerList.getPlayer(i));
+//		} else {
+//			
+//			for (int i = 0; i < playerList.getLength(); i++) {
+//				//The game can be played normally if the player is not bankrupt or in jail.
+//				if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
+//
+//					hc.houseControl(playerList, i, this, gui);
+//
+//				} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
+//					jailDecision(gui, playerList.getPlayer(i));
+//				}
+//
+//				checkForLostPlayers(playerList);
+//			}
+//		}
+//
+//
+//	}
+	
 	private void gameLoop() {
-
+		boolean checker;
 		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
 //		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 //		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-		
 
+		
 		if (alivePlayers == 1) {
 			for (int i = 0; i < playerList.getLength(); i++) 
 				if (playerList.getPlayer(i).isBankrupt() == false) 
 					gui.showWinner(playerList.getPlayer(i));
 		} else {
-			for (int i = 0; i < playerList.getLength(); i++) {
+			
+			int j = 0;
+			while (j < playerList.getLength()) {
+				
 				//The game can be played normally if the player is not bankrupt or in jail.
-				if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
+				if (playerList.getPlayer(j).isBankrupt() == false && playerList.getPlayer(j).isInJail() == false) {
 
-					hc.houseControl(playerList, i, this, gui);
+					hc.houseControl(playerList, j, this, gui);
 
-				} else if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == true) {
-					jailDecision(gui, playerList.getPlayer(i));
+				} else if (playerList.getPlayer(j).isBankrupt() == false && playerList.getPlayer(j).isInJail() == true) {
+					jailDecision(gui, playerList.getPlayer(j));
 				}
 
 				checkForLostPlayers(playerList);
+				
+				checker = checkForDoubleDice(j);
+				
+				if (checker == false) {
+					j++;
+				}
+				
 			}
 		}
 
@@ -119,6 +158,32 @@ public class GameController {
 			}
 
 
+	}
+	
+	private boolean checkForDoubleDice(int j) {
+		if (dicecup.equalsDice()) {
+			playerList.getPlayer(j).setNumberOfEqualDice(playerList.getPlayer(j).getNumberOfEqualDice() + 1);
+			
+			if (playerList.getPlayer(j).getNumberOfEqualDice() == 3) {
+				
+				gui.doubleDiceJail(playerList.getPlayer(j)); 
+				
+				gui.movePlayerInstantly(playerList.getPlayer(j), 10, false);
+				
+				playerList.getPlayer(j).setInJail(true);
+				playerList.getPlayer(j).setNumberOfEqualDice(0);
+				return false;
+				
+				
+			} else {
+				gui.doubleDiceMessage(playerList.getPlayer(j));
+				return true;
+			}
+			
+		} else {
+			playerList.getPlayer(j).setNumberOfEqualDice(0);
+			return false;
+		}
 	}
 	
 	public void takeTurn(Player p) {

@@ -40,24 +40,24 @@ public class DeckController {
 	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GUIController gui) {
 
 		Card cardPicked = this.deck.pickACard();
-		
+
 		// Pick another card if the card picked is already owned by someone.
 		if (cardPicked instanceof AntiJailCard && cardPicked.isCardOwned() == true) {
 			chanceField(p, plist, gameboard, gui);
 		}
-		
+
 		// Saves the first card picked, If the first card picked is picked again, shuffle the deck and pick another card.
 		if(!firstGameCycle) {
-		    firstCardPicked = this.deck.getLastCard();
-		    firstGameCycle = true;
+			firstCardPicked = this.deck.getLastCard();
+			firstGameCycle = true;
 		} else if (cardPicked == firstCardPicked) {
 			this.deck.shuffleCards();
 			chanceField(p, plist, gameboard, gui);
 			firstGameCycle = false;
 		}
-		
+
 		gui.chanceMessege(cardPicked.getDescription());
-		
+
 		// Logic that look at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
@@ -69,7 +69,7 @@ public class DeckController {
 			payMoneyCard(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
-			payMoneyPrHouseHotelCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
+			payMoneyPrHouseHotelCard(p, plist, gameboard, cardPicked.getAmount(), cardPicked.getHousePrices());
 		}
 		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
 			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
@@ -89,7 +89,7 @@ public class DeckController {
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
 			moverPlayerToNearestShippingCard(p, gameboard, gui);
 		}
-		
+
 	}
 
 	/**
@@ -132,9 +132,21 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, int amount, int advancedAmount) {
-		p.getAccount().addBalance(-(p.getAccount().getHousesowned()*amount));
-		p.getAccount().addBalance(-(p.getAccount().getHotelsowned()*advancedAmount));
+	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, GameBoard gameboard, int amount, int[] housesTotal) {
+
+		for (int i = 0; i < gameboard.getLength(); i++) {
+			if (p.getName() == gameboard.getField(i).getOwner().getName())  {
+				if (p.getAccount().getHousesowned() == amount) {
+					p.getAccount().addBalance(-(housesTotal[amount]));
+				}
+				else {
+					p.getAccount().addBalance(-(housesTotal[p.getAccount().getHousesowned()]));
+				}
+
+			}
+
+		}
+
 	}
 
 	/**
@@ -187,8 +199,8 @@ public class DeckController {
 	private void moverPlayerBackCard(Player p, int newPosition, GUIController gui) {
 		gui.movePlayerBackwards(p, newPosition);
 	}
-	
-	
+
+
 	/**
 	 * Move player to the nearest Shipping field.
 	 * @param p
@@ -206,17 +218,17 @@ public class DeckController {
 			}
 			calculateNewPosition++;
 		}
-		System.out.println(calculateNewPosition);
+
 		gui.movePlayer(p, calculateNewPosition);
-		
+
 		if (gameboard.getField(iMod).isOwned() == true) {
 			int payRecieve = (gameboard.getField(iMod).getRent()[gameboard.getField(iMod).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
 			gameboard.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Remove anti Jail card from Player
 	 * @param p

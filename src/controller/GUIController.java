@@ -38,7 +38,6 @@ public class GUIController {
 
 		for (int i = 0; i < gameboard.getLength(); i++) {
 
-
 			gui_fields[i] = new GUI_Street();
 			gui_fields[i].setTitle(gameboard.getField(i).getName());
 			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
@@ -191,9 +190,10 @@ public class GUIController {
 					}
 				}
 
-				territories = new String[count];
+				territories = new String[count + 1];
 
 				int counter = 0;
+				
 				for (int i = 0; i < fields.length; i++) {
 					if (fields[i].getHouses() < highestHouse) {
 						territories[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
@@ -201,8 +201,8 @@ public class GUIController {
 					}
 				}
 
-				//tilføj en fortryd knap
 				territories[counter] = descriptions[55];
+
 			}
 
 
@@ -351,7 +351,7 @@ public class GUIController {
 
 	}
 
-	public boolean taxDecision(Field field, Player p) {
+	public boolean taxDecision(Player p) {
 		gui.showMessage(descriptions[21]);
 
 		return gui.getUserLeftButtonPressed(p.getName() + descriptions[22], descriptions[23], descriptions[24]);
@@ -380,6 +380,12 @@ public class GUIController {
 
 	public void payRentMessege(Field field, Player p) {
 		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() + descriptions[32] + field.getCurrentRent() + descriptions[33]);
+	}
+	
+	public void payRentMessege(Field field, Player p, int multiplier) {
+		int rent = multiplier*field.getCurrentRent();
+		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() +
+				descriptions[66] + field.getOwner().getName() + descriptions[67] + p.getName() + descriptions[68] + rent + descriptions[33]);
 
 	}
 
@@ -408,6 +414,7 @@ public class GUIController {
 
 	public void chanceMessege(String chanceMessege) {
 		gui.displayChanceCard(chanceMessege);
+		gui.displayChanceCard();
 	}
 
 	public void setOwnerText(Player p) {
@@ -572,6 +579,19 @@ public class GUIController {
 		}
 
 	}
+	
+	
+	public void doubleDiceMessage(Player p) {
+		
+		gui.showMessage(p.getName() + descriptions[61] + p.getName() + descriptions[62] +p.getNumberOfEqualDice() + descriptions[63]);
+		
+	}
+	
+	public void doubleDiceJail(Player p) {
+		gui.showMessage(p.getName() + descriptions[64] + p.getName() + descriptions[65]);
+	}
+	
+	
 
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.

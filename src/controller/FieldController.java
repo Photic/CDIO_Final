@@ -18,11 +18,10 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 
+
 	public FieldController(TextReader name) {
 		this.gameBoard = new GameBoard(name);
 	}
-
-
 
 	/**
 	 * 
@@ -82,17 +81,12 @@ public class FieldController {
 
 				p.getAccount().addField(field, gb);
 
-
-
 				gui.updateBalance(p);
 
 				field.setOwner(p);
 				field.setOwned(true);
 				gui.setOwnerText(p);
 
-
-			} else {
-				// Something here or not ?
 			}
 
 			gui.transaction(decision, field, p);
@@ -101,24 +95,78 @@ public class FieldController {
 
 			if (field.getOwner().getName() != p.getName()) {
 
-				//Vi skal huske at tjekke for om ejeren ejer alle i farve gruppen --> 2x getRent.
-
-				p.getAccount().setBalance(p.getAccount().getBalance() - field.getCurrentRent());
-				field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getCurrentRent());
-
-
-				gui.payRentMessege(field, p);
-				gui.updateBalance(p);
-				gui.updateBalance(field.getOwner());
+				boolean checker = checkAllOfAKind(field, p, gb);
+				
+				if (checker == true && field.getHouses() == 0) {
+					payRent(p, field, gui, 2);
+				} else {
+					payRent(p, field, gui);
+				}	
 			}
 		}
 	}
 
+	
+	
+	private void payRent(Player p, Field field, GUIController gui) {
+		p.getAccount().setBalance(p.getAccount().getBalance() - field.getCurrentRent());
+		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getCurrentRent());
+
+
+		gui.payRentMessege(field, p);
+		gui.updateBalance(p);
+		gui.updateBalance(field.getOwner());
+	}
+	
+	
+	private void payRent(Player p, Field field, GUIController gui, int multiplier) {
+		p.getAccount().setBalance(p.getAccount().getBalance() - (field.getCurrentRent() * multiplier));
+		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + (field.getCurrentRent()*multiplier));
+
+
+		gui.payRentMessege(field, p, multiplier);
+		gui.updateBalance(p);
+		gui.updateBalance(field.getOwner());
+	}
+	
+	
+	private boolean checkAllOfAKind(Field field, Player p, GameBoard gb) {
+		boolean checker = false;
+		if (field.getColor() == gb.getRed())
+			checker = field.getOwner().getAccount().isAllred();
+		
+		if (field.getColor() == gb.getBlue())
+			checker = field.getOwner().getAccount().isAllblue();
+		
+		if (field.getColor() == gb.getPink())
+			checker = field.getOwner().getAccount().isAllpink();
+		
+		if (field.getColor() == gb.getGreen())
+			checker = field.getOwner().getAccount().isAllgreen();
+		
+		if (field.getColor() == gb.getGrey())
+			checker = field.getOwner().getAccount().isAllgrey();
+		
+		if (field.getColor() == gb.getWhite())
+			checker = field.getOwner().getAccount().isAllwhite();
+		
+		if (field.getColor() == gb.getYellow())
+			checker = field.getOwner().getAccount().isAllyellow();
+		
+		if (field.getColor() == gb.getPurple())
+			checker = field.getOwner().getAccount().isAllpurple();
+		
+		
+		return checker;
+	}
+	
+	
+	
 	private void taxLogic(Field field, GUIController gui, Player p) {
 
 		if (field.getPrice() == 4000) {
 
-			boolean dicision = gui.taxDecision(field, p);
+			boolean dicision = gui.taxDecision(p);
 
 			if (dicision == true) {
 
@@ -267,15 +315,15 @@ public class FieldController {
 	}
 
 	private void parkingLogic(Field field, GUIController gui, Player p) {
-		
+
 		gui.parkingMessege(field, p);
-		
+
 	}
 
 	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
-		
+
 		dc.chanceField(p, plist, gameboard, gui);
-		
+
 		for (int i = 0; i < plist.getLength(); i++) {
 
 			gui.updateBalance(plist.getPlayer(i));
