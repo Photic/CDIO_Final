@@ -572,6 +572,19 @@ public class GUIController {
 		}
 
 	}
+	
+	
+	public void doubleDiceMessage(Player p) {
+		
+		gui.showMessage(p.getName() + descriptions[61] + p.getName() + descriptions[62] +p.getNumberOfEqualDice() + descriptions[63]);
+		
+	}
+	
+	public void doubleDiceJail(Player p) {
+		gui.showMessage(p.getName() + descriptions[64] + p.getName() + descriptions[65]);
+	}
+	
+	
 
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
