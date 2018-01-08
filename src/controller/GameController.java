@@ -154,7 +154,6 @@ public class GameController {
 				playerList.getPlayer(j).setBankrupt(true);
 				gui.removeBankrupted(playerList.getPlayer(j), gameboard);
 				this.alivePlayers--;
-				System.out.println(alivePlayers);
 			}
 
 
