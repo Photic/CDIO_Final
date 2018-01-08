@@ -408,6 +408,7 @@ public class GUIController {
 
 	public void chanceMessege(String chanceMessege) {
 		gui.displayChanceCard(chanceMessege);
+		gui.displayChanceCard();
 	}
 
 	public void setOwnerText(Player p) {
