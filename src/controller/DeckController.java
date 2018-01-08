@@ -69,7 +69,7 @@ public class DeckController {
 			payMoneyCard(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
-			payMoneyPrHouseHotelCard(p, plist, gameboard, cardPicked.getAmount(), cardPicked.getHousePrices());
+			payMoneyPrHouseHotelCard(p, plist, gameboard, cardPicked.getHousePrices());
 		}
 		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
 			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
@@ -132,17 +132,11 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, GameBoard gameboard, int amount, int[] housesTotal) {
+	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, GameBoard gameboard, int[] housesTotal) {
 
 		for (int i = 0; i < gameboard.getLength(); i++) {
 			if (p.getName() == gameboard.getField(i).getOwner().getName())  {
-				if (p.getAccount().getHousesowned() == amount) {
-					p.getAccount().addBalance(-(housesTotal[amount]));
-				}
-				else {
-					p.getAccount().addBalance(-(housesTotal[p.getAccount().getHousesowned()]));
-				}
-
+				p.getAccount().addBalance(-(housesTotal[p.getAccount().getHousesowned()]));
 			}
 
 		}
