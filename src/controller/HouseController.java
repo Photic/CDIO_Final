@@ -50,8 +50,8 @@ public class HouseController {
 	//Green, Grey, White, Yellow, Purple
 	public void sellPropToPlayer(Player p1, Player p2, GameBoard gameboard, GUIController gui, int price){
 
-		p1.getAccount().
-		p2.getAccount().buyField(price);
+		//p1.getAccount();
+		//p2.getAccount().buyField(price);
 	}
 	
 	
