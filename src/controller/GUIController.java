@@ -38,7 +38,6 @@ public class GUIController {
 
 		for (int i = 0; i < gameboard.getLength(); i++) {
 
-
 			gui_fields[i] = new GUI_Street();
 			gui_fields[i].setTitle(gameboard.getField(i).getName());
 			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
@@ -352,7 +351,7 @@ public class GUIController {
 
 	}
 
-	public boolean taxDecision(Field field, Player p) {
+	public boolean taxDecision(Player p) {
 		gui.showMessage(descriptions[21]);
 
 		return gui.getUserLeftButtonPressed(p.getName() + descriptions[22], descriptions[23], descriptions[24]);

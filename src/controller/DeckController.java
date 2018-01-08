@@ -206,7 +206,7 @@ public class DeckController {
 			}
 			calculateNewPosition++;
 		}
-		System.out.println(calculateNewPosition);
+
 		gui.movePlayer(p, calculateNewPosition);
 		
 		if (gameboard.getField(iMod).isOwned() == true) {
