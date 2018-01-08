@@ -52,6 +52,7 @@ public class HouseController {
 	public void sellPropToPlayer(Player p1, Player p2, GameBoard gameboard, Field field, GUIController gui, int price){
 		p1.getAccount().removeField(gameboard, gameboard.getField(field.getIndex()));
 		p2.getAccount().buyField(price);
+		p1.getAccount().addBalance(price);
 	}
 	
 	
