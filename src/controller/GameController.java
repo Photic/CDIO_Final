@@ -169,7 +169,7 @@ public void checkForDoubleDiceJail(int j) {
 				this.playerList.getPlayer(j).setInJail(false);
 				this.playerList.getPlayer(j).getAccount().addBalance(-1000);
 				this.playerList.getPlayer(j).setJailCounterDice(0);
-				gui.updateBalance(this.playerList.getPlayer(j));
+				this.gui.updateBalance(this.playerList.getPlayer(j));
 				
 				
 			} else {
