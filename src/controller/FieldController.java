@@ -18,11 +18,10 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 
+	
 	public FieldController(TextReader name) {
 		this.gameBoard = new GameBoard(name);
 	}
-
-
 
 	/**
 	 * 
