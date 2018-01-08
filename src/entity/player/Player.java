@@ -13,6 +13,9 @@ public class Player {
 	private int position;
 	private boolean turn, bankrupt, inJail;
 	private Account account;
+	private int numberOfEqualDice;
+
+
 
 	public Player(String n) {
 		this.name = n;
@@ -73,6 +76,13 @@ public class Player {
 
 	public Account getAccount() {
 		return account;
+	}
+	public int getNumberOfEqualDice() {
+		return numberOfEqualDice;
+	}
+
+	public void setNumberOfEqualDice(int numberOfEqualDice) {
+		this.numberOfEqualDice = numberOfEqualDice;
 	}
 	
 }
