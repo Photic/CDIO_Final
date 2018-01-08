@@ -350,7 +350,7 @@ public class GUIController {
 
 	}
 
-	public boolean taxDecision(Field field, Player p) {
+	public boolean taxDecision(Player p) {
 		gui.showMessage(descriptions[21]);
 
 		return gui.getUserLeftButtonPressed(p.getName() + descriptions[22], descriptions[23], descriptions[24]);
