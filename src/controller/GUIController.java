@@ -21,12 +21,12 @@ public class GUIController {
 	private GUI gui;
 	private GUI_Player[] gui_players;
 	private int playerCount;
-	private String[] descriptions;
+	private String[] description;
 
 
 	public GUIController(TextReader tr) {
 		try {
-			this.descriptions = tr.textFromFile("guiText");
+			this.description = tr.textFromFile("guiText");
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the GUIController constructor");
 			e.printStackTrace();
@@ -46,27 +46,27 @@ public class GUIController {
 
 		}
 
-		gui = new GUI(gui_fields);
+		this.gui = new GUI(gui_fields);
 
 	}
 
 	public PlayerList registerPlayerCount() {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};
-		String nop = gui.getUserSelection(descriptions[0], nopArray);
+		String nop = this.gui.getUserSelection(this.description[0], nopArray);
 		GUI_Car gui_car;
 		String name;
 
 		int index;
 
 		this.playerCount = Integer.parseInt(nop);
-		String[] names = new String[playerCount];
-		this.gui_players = new GUI_Player[playerCount];
+		String[] names = new String[this.playerCount];
+		this.gui_players = new GUI_Player[this.playerCount];
 
-		for (int i = 0; i <= playerCount - 1; i++) {
+		for (int i = 0; i <= this.playerCount - 1; i++) {
 			index = i + 1;
 
-			name = gui.getUserString(descriptions[1] + index + descriptions[2]);
+			name = this.gui.getUserString(this.description[1] + index + this.description[2]);
 
 
 			gui_car = new GUI_Car();
@@ -95,18 +95,18 @@ public class GUIController {
 			}
 
 
-			gui_players[i] = new GUI_Player(names[i], 30000, gui_car);
+			this.gui_players[i] = new GUI_Player(names[i], 30000, gui_car);
 
 		}
-		PlayerList playerList = new PlayerList(playerCount, names);
+		PlayerList playerList = new PlayerList(this.playerCount, names);
 
-		String output = descriptions[3];
+		String output = this.description[3];
 		for (int i = 0; i < playerList.getLength(); i++) {
 			output = output + playerList.getPlayer(i).getName() + ", ";
 
 		}
 
-		gui.showMessage(output);
+		this.gui.showMessage(output);
 
 		return playerList;
 
@@ -114,10 +114,10 @@ public class GUIController {
 
 	public void removeBankrupted(Player p, GameBoard gb) {
 
-		for (int i = 0; i < gui_players.length; i++) {
-			if (gui_players[i].getName() == p.getName()) {
-				gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
-				gui_players[i].setBalance(0);
+		for (int i = 0; i < this.gui_players.length; i++) {
+			if (this.gui_players[i].getName() == p.getName()) {
+				this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
+				this.gui_players[i].setBalance(0);
 
 
 				for (int j = 0; j < gb.getLength(); j++) {
@@ -127,8 +127,8 @@ public class GUIController {
 
 							gb.getField(j).setOwned(false);
 							gb.getField(j).setOwner(null);
-							gui.getFields()[j].setSubText(gui.getFields()[j].getDescription());
-							gui.getFields()[j].setDescription(gui.getFields()[j].getTitle());
+							this.gui.getFields()[j].setSubText(this.gui.getFields()[j].getDescription());
+							this.gui.getFields()[j].setDescription(this.gui.getFields()[j].getTitle());
 
 						}
 					}
@@ -212,7 +212,7 @@ public class GUIController {
 					territories = new String[currentFields.length];
 
 					for (int i = 0; i < territories.length; i++) 
-						territories[i] = currentFields[i].getName() + descriptions[4] + currentFields[i].getHouses() + descriptions[5];	
+						territories[i] = currentFields[i].getName() + description[4] + currentFields[i].getHouses() + description[5];	
 
 				} else {
 					//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
@@ -229,7 +229,7 @@ public class GUIController {
 
 					for (int i = 0; i < currentFields.length; i++) {
 						if (currentFields[i].getHouses() < highestHouse) {
-							territories[countere] = currentFields[i].getName() + descriptions[4] + currentFields[i].getHouses() + descriptions[5];
+							territories[countere] = currentFields[i].getName() + description[4] + currentFields[i].getHouses() + description[5];
 							countere++;
 						}
 					}
@@ -255,10 +255,10 @@ public class GUIController {
 		String[] fortryd = new String[] {"Fortryd"};
 		output = combineStringArrays(output, fortryd);
 		
-		String selected = gui.getUserSelection(descriptions[6], output);
+		String selected = gui.getUserSelection(description[6], output);
 		String real = selected.split(",")[0];
 
-		if (!(real.equals(descriptions[55]))) {
+		if (!(real.equals(description[55]))) {
 			for (int i = 0; i < fields.length; i++) {
 
 				if (fields[i].getName().equals(real)) {
@@ -269,7 +269,7 @@ public class GUIController {
 					updateBalance(fields[i].getOwner());
 
 					fields[i].setHouses(fields[i].getHouses() + 1);
-					gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+					gui.showMessage(description[7] + fields[i].getName() + description[8] + fields[i].getHousePrice() + description[9] + fields[i].getName() + description[10] + fields[i].getHouses() + description[11]);
 
 				}
 
@@ -292,7 +292,7 @@ public class GUIController {
 				count++;
 
 		if (count == 0) {
-			gui.showMessage(descriptions[54]);
+			gui.showMessage(this.description[54]);
 		} else {
 			// Add the fields that has houses to a new array
 			String[] hasHouses = new String[count + 1];
@@ -300,17 +300,17 @@ public class GUIController {
 
 			for (int i = 0; i < fields.length; i++) 
 				if (fields[i].getHouses()>0) {
-					hasHouses[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
+					hasHouses[counter] = fields[i].getName() + this.description[4] + fields[i].getHouses() + this.description[5];
 					counter++;
 				}
 
-			hasHouses[counter] = descriptions[55];
+			hasHouses[counter] = this.description[55];
 
 			//Find out which territory the player wants to sell a house on
-			String selected = gui.getUserSelection(descriptions[56], hasHouses);
+			String selected = this.gui.getUserSelection(this.description[56], hasHouses);
 			String real = selected.split(",")[0];
 
-			if (!(real.equals(descriptions[55]))) {
+			if (!(real.equals(this.description[55]))) {
 				for (int i = 0; i < fields.length; i++) {
 
 					//sell a house on the selected territory
@@ -323,10 +323,14 @@ public class GUIController {
 
 						fields[i].setHouses(fields[i].getHouses() - 1);
 
-						gui.showMessage(descriptions[57] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
-
-
-
+						this.gui.showMessage(
+								this.description[57] + fields[i].getName() + 
+								this.description[8] + fields[i].getHousePrice() + 
+								this.description[9] + fields[i].getName() + 
+								this.description[10] + fields[i].getHouses() + 
+								this.description[11]
+								);
+						
 					}
 
 				}
@@ -340,18 +344,18 @@ public class GUIController {
 
 	public void showWinner(Player p) {
 
-		String output = p.getName() + descriptions[12];
+		String output = p.getName() + this.description[12];
 
-		gui.showMessage(output);
+		this.gui.showMessage(output);
 
 	}
 
 
 	public int territoryOptions(Player p) {
 
-		String[] options = new String[] {descriptions[59], descriptions[60], descriptions[55]};
+		String[] options = new String[] {this.description[59], this.description[60], this.description[55]};
 
-		String choice = gui.getUserSelection(p.getName() + descriptions[58], options);
+		String choice = this.gui.getUserSelection(p.getName() + this.description[58], options);
 
 		int output = 1000;
 
@@ -373,37 +377,38 @@ public class GUIController {
 
 	public boolean territoryDecision(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[13]);
+		this.gui.showMessage(p.getName() + this.description[13]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + descriptions[14], descriptions[15], descriptions[16]);
+		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[14], this.description[15], this.description[16]);
 
 	}
 
 	public boolean companyDecision(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[17]);
+		this.gui.showMessage(p.getName() + this.description[17]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + descriptions[18], descriptions[15], descriptions[16]);
+		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[18], this.description[15], this.description[16]);
 	}
 
 	public boolean shippingDecision(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[19]);
+		this.gui.showMessage(p.getName() + this.description[19]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + descriptions[20], descriptions[15], descriptions[16]);
+		return gui.getUserLeftButtonPressed(p.getName() + this.description[20], this.description[15], this.description[16]);
 
 	}
 
 	public boolean taxDecision(Player p) {
-		gui.showMessage(descriptions[21]);
+		gui.showMessage(description[21]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + descriptions[22], descriptions[23], descriptions[24]);
+		return gui.getUserLeftButtonPressed(
+				p.getName() + this.description[22], this.description[23], this.description[24]);
 
 	}
 
 	public void taxMessage(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[25]);
+		gui.showMessage(p.getName() + this.description[25]);
 
 	}
 
@@ -411,60 +416,79 @@ public class GUIController {
 
 		if (b == true) {
 
-			gui.showMessage(p.getName() + descriptions[26] + field.getName() + descriptions[27] + field.getPrice() + descriptions[28]);
+			this.gui.showMessage(
+					p.getName() + this.description[26] + 
+					field.getName() + this.description[27] + 
+					field.getPrice() + this.description[28]
+					);
 
 		} else {
 
-			gui.showMessage(p.getName() + descriptions[29] + field.getName());
+			this.gui.showMessage(p.getName() + this.description[29] + field.getName());
 
 		}
 
 	}
 
 	public void payRentMessege(Field field, Player p) {
-		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() + descriptions[32] + field.getCurrentRent() + descriptions[33]);
+		this.gui.showMessage(
+				p.getName() + this.description[30] + 
+				field.getOwner().getName() + this.description[31] + 
+				field.getHouses() + this.description[32] + 
+				field.getCurrentRent() + this.description[33]
+				);
 	}
 
 	public void payRentMessege(Field field, Player p, int multiplier) {
 		int rent = multiplier*field.getCurrentRent();
-		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() +
-				descriptions[66] + field.getOwner().getName() + descriptions[67] + p.getName() + descriptions[68] + rent + descriptions[33]);
-
+		this.gui.showMessage (
+				p.getName() + this.description[30] + 
+				field.getOwner().getName() + this.description[31] + 
+				field.getHouses() + this.description[66] + 
+				field.getOwner().getName() + this.description[67] + 
+				p.getName() + this.description[68] + 
+				rent + this.description[33]
+				);
 	}
 
 	public void payRentShippingMessege(Field field, Player p) {
 
-		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[34] + field.getOwner().getName() + descriptions[35] + field.getOwner().getAccount().getShipping() + descriptions[36 ]+ field.getRent()[field.getOwner().getAccount().getShipping() - 1] + descriptions[33]);
-
+		this.gui.showMessage (
+				p.getName() + this.description[30] + 
+				field.getOwner().getName() + this.description[34] + 
+				field.getOwner().getName() + this.description[35] + 
+				field.getOwner().getAccount().getShipping() + this.description[36] + 
+				field.getRent()[field.getOwner().getAccount().getShipping() - 1] + this.description[33]
+				);
 	}
 
-	public void visitJailMessege(Field field, Player p) {
-		gui.showMessage(p.getName() + descriptions[37]);
+	public void visitJailMessege(Player p) {
+		this.gui.showMessage(p.getName() + this.description[37]);
 	}
 
 
-	public void goToJailMessege(Field field, Player p) {
+	public void goToJailMessege(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[38]);
+		this.gui.showMessage(p.getName() + this.description[38]);
 
 	}
 
 	public void parkingMessege(Field field, Player p) {
 
-		gui.showMessage(p.getName() + descriptions[39]);
+		this.gui.showMessage(p.getName() + this.description[39]);
 
 	}
 
 	public void chanceMessege(String chanceMessege) {
-		gui.displayChanceCard(chanceMessege);
-		gui.displayChanceCard();
+		this.gui.displayChanceCard(chanceMessege);
+		this.gui.displayChanceCard();
 	}
 
 	public void setOwnerText(Player p) {
 
-		gui.getFields()[p.getPosition()].setDescription(gui.getFields()[p.getPosition()].getSubText());
+		this.gui.getFields()[p.getPosition()].setDescription(this.gui.getFields()[p.getPosition()].getSubText());
 
-		gui.getFields()[p.getPosition()].setSubText(p.getName());
+		this.gui.getFields()[p.getPosition()].setSubText(p.getName());
 
 
 	}
@@ -475,19 +499,19 @@ public class GUIController {
 
 		if(p.getAccount().getAmountOfCards()>0) {
 
-			String[] jailDecision = {descriptions[40], descriptions[41], descriptions[42]};
+			String[] jailDecision = {this.description[40], this.description[41], this.description[42]};
 
-			String decisionMade = gui.getUserSelection(descriptions[43], jailDecision);
+			String decisionMade = this.gui.getUserSelection(this.description[43], jailDecision);
 
-			if (decisionMade == descriptions[40]) {
+			if (decisionMade == this.description[40]) {
 
 				decision = 1;
 
-			} else if (decisionMade == descriptions[41]) {
+			} else if (decisionMade == this.description[41]) {
 
 				decision = 2;
 
-			} else if (decisionMade == descriptions[42]) {
+			} else if (decisionMade == this.description[42]) {
 
 				decision = 3;
 
@@ -495,15 +519,15 @@ public class GUIController {
 
 		}
 		else {
-			String[] jailDecision = {descriptions[40], descriptions[41]};
+			String[] jailDecision = {this.description[40], this.description[41]};
 
-			String decisionMade = gui.getUserSelection(p.getName() + descriptions[43], jailDecision);
+			String decisionMade = this.gui.getUserSelection(p.getName() + this.description[43], jailDecision);
 
-			if (decisionMade == descriptions[40]) {
+			if (decisionMade == this.description[40]) {
 
 				decision = 1;
 
-			} else if (decisionMade == descriptions[41]) {
+			} else if (decisionMade == this.description[41]) {
 
 				decision = 2;
 			}
@@ -514,25 +538,25 @@ public class GUIController {
 
 	public void jailFreePay(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[44]);
+		this.gui.showMessage(p.getName() + this.description[44]);
 
 	}
 
 	public void jailEqualsTrue(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[45]);
+		this.gui.showMessage(p.getName() + this.description[45]);
 
 	}
 
 	public void jailEqualsFalse(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[46]);
+		this.gui.showMessage(p.getName() + this.description[46]);
 
 	}
 
 	public void antiJailUsed(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[47]);
+		this.gui.showMessage(p.getName() + this.description[47]);
 
 	}
 
@@ -589,9 +613,9 @@ public class GUIController {
 	 */
 	public void placePlayer() {
 
-		for (int j = 0; j < gui_players.length; j++) {
-			gui.getFields()[0].setCar(gui_players[j], true);
-			gui.addPlayer(gui_players[j]);
+		for (int j = 0; j < this.gui_players.length; j++) {
+			this.gui.getFields()[0].setCar(this.gui_players[j], true);
+			this.gui.addPlayer(this.gui_players[j]);
 		}
 	}
 
@@ -612,14 +636,14 @@ public class GUIController {
 		int newPosition = (p.getPosition() + diceSum) % 40;
 		int initPosition = (p.getPosition());
 
-		for (int i = 0; i < gui_players.length; i++) {
+		for (int i = 0; i < this.gui_players.length; i++) {
 
-			if (gui_players[i].getName() == p.getName()) {
+			if (this.gui_players[i].getName() == p.getName()) {
 
 				while(p.getPosition() != newPosition) {
-					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
-					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 
 					try {
 						Thread.sleep(300);
@@ -636,11 +660,9 @@ public class GUIController {
 
 		if (initPosition > newPosition) {
 
-
 			p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 			updateBalance(p);
-			gui.showMessage(p.getName() + descriptions[48]);
-
+			this.gui.showMessage(p.getName() + this.description[48]);
 
 		}
 
@@ -649,12 +671,12 @@ public class GUIController {
 
 	public void doubleDiceMessage(Player p) {
 
-		gui.showMessage(p.getName() + descriptions[61] + p.getName() + descriptions[62] +p.getNumberOfEqualDice() + descriptions[63]);
+		this.gui.showMessage(p.getName() + this.description[61] + p.getName() + this.description[62] +p.getNumberOfEqualDice() + this.description[63]);
 
 	}
 
 	public void doubleDiceJail(Player p) {
-		gui.showMessage(p.getName() + descriptions[64] + p.getName() + descriptions[65]);
+		this.gui.showMessage(p.getName() + this.description[64] + p.getName() + this.description[65]);
 	}
 
 
@@ -673,18 +695,18 @@ public class GUIController {
 		int newPosition = (p.getPosition() + diceSum) % 40;
 		int initPosition = (p.getPosition());
 
-		for (int i = 0; i < gui_players.length; i++) {
+		for (int i = 0; i < this.gui_players.length; i++) {
 
-			if (gui_players[i].getName() == p.getName()) {
+			if (this.gui_players[i].getName() == p.getName()) {
 
 				while(p.getPosition() != newPosition) {
-					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					if (p.getPosition() != 0) {
 						p.setPosition(p.getPosition()-1);
 					} else {
 						p.setPosition(39);
 					}
-					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 
 					try {
 						Thread.sleep(300);
@@ -715,14 +737,14 @@ public class GUIController {
 	public void movePlayerInstantly(Player p, int newPosition, boolean recieveStartMoney) {
 
 		int initPosition = p.getPosition();
-		for (int i = 0; i < gui_players.length; i++) {
+		for (int i = 0; i < this.gui_players.length; i++) {
 
-			if (gui_players[i].getName() == p.getName()) {
+			if (this.gui_players[i].getName() == p.getName()) {
 
 				while(p.getPosition() != newPosition) {
-					gui.getFields()[p.getPosition()].setCar(gui_players[i], false);
+					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
-					gui.getFields()[p.getPosition()].setCar(gui_players[i], true);
+					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 
 					try {
 						Thread.sleep(100);
@@ -742,7 +764,7 @@ public class GUIController {
 
 				p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 				updateBalance(p);
-				gui.showMessage(p.getName() + descriptions[48]);
+				this.gui.showMessage(p.getName() + this.description[48]);
 
 
 			}
@@ -756,7 +778,7 @@ public class GUIController {
 
 	public void rollDiceMessage(Player p) {
 		//gui.showMessage(p.getName() + " please roll the dice");
-		gui.getUserButtonPressed(p.getName() + descriptions[49], descriptions[50]);
+		this.gui.getUserButtonPressed(p.getName() + this.description[49], this.description[50]);
 
 	}
 
@@ -764,11 +786,11 @@ public class GUIController {
 	public boolean rollDiceMessageUpdated(Player p) {
 
 
-		return gui.getUserLeftButtonPressed(p.getName() + descriptions[51], descriptions[50], descriptions[52]);
+		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[51], this.description[50], this.description[52]);
 	}
 
 	public void showDice(DiceCup dc) {
-		gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
+		this.gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
 	}
 
 
@@ -776,9 +798,9 @@ public class GUIController {
 
 	public void updateBalance(Player p) {
 
-		for (int i = 0; i < gui_players.length; i++) {
-			if (gui_players[i].getName() == p.getName()) {
-				gui_players[i].setBalance(p.getAccount().getBalance());
+		for (int i = 0; i < this.gui_players.length; i++) {
+			if (this.gui_players[i].getName() == p.getName()) {
+				this.gui_players[i].setBalance(p.getAccount().getBalance());
 			}
 
 		}
@@ -814,7 +836,7 @@ public class GUIController {
 	}
 
 	public void showMessage() {
-		gui.showMessage(this.descriptions[69]);
+		gui.showMessage(this.description[69]);
 	}
 
 }

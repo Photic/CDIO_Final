@@ -9,7 +9,7 @@ public class Account {
 
 
 
-	private int balance, actives, housesowned, hotelsowned, companies, shipping, territoriesOwned;
+	private int balance, actives, housesowned, companies, shipping, territoriesOwned;
 
 	private int amountOfCards = 0;
 
@@ -40,7 +40,6 @@ public class Account {
 		this.shipping = 0;
 		this.territoriesOwned = 0;
 		this.housesowned = 0;
-		this.hotelsowned = 0;
 
 		blueFields = new Field[] {null, null};
 		pinkFields = new Field[] {null, null, null};
@@ -145,135 +144,134 @@ public class Account {
 
 	}
 
-	
-	
-	public void removeField(Player player, GameBoard gameBoard, Field field){
+
+
+	public void removeField(GameBoard gameBoard, Field field){
 		field = gameBoard.getField(field.getIndex());
-		
-			if(field.getColor() == gameBoard.getRed()){
-				int count = this.redFields.length;
-					while(true){
-						if(this.redFields[count]==null){
-							count--;	
-						}
-						else{
-							this.redFields[count]=null;
-							break;
-						}
-					}
-				
+		if(field.getColor() == gameBoard.getRed()){
+			int count = this.redFields.length-1;
+			while(true){
+				if(this.redFields[count]==null){
+					count--;	
+				}
+				else{
+					this.redFields[count]=null;
+					break;
+				}
 			}
-			
-			else if(field.getColor() == gameBoard.getBlue()){
-				int count = this.blueFields.length;
-				while(true){
-					if(this.blueFields[count]==null){
-						count--;	
-					}
-					else{
-						this.blueFields[count]=null;
-						break;
-					}
-				}
-			
-		}
-			
-			else if(field.getColor() == gameBoard.getPink()){
-				int count = this.pinkFields.length;
-				while(true){
-					if(this.pinkFields[count]==null){
-						count--;	
-					}
-					else{
-						this.pinkFields[count]=null;
-						break;
-					}
-				}
-			
+			System.out.println("Fjernet rød");
 		}
 
-		
-			else if(field.getColor() == gameBoard.getGreen()){
-				int count = this.greenFields.length;
-				while(true){
-					if(this.greenFields[count]==null){
-						count--;	
-					}
-					else{
-						this.greenFields[count]=null;
-						break;
-					}
+		else if(field.getColor() == gameBoard.getBlue()){
+			int count = this.blueFields.length-1;
+			while(true){
+				if(this.blueFields[count]==null){
+					count--;	
 				}
-			
-		}
-		
-			
-			else if(field.getColor() == gameBoard.getGrey()){
-				int count = this.greyFields.length;
-				while(true){
-					if(this.greyFields[count]==null){
-						count--;	
-					}
-					else{
-						this.greyFields[count]=null;
-						break;
-					}
+				else{
+					this.blueFields[count]=null;
+					break;
 				}
-			
+			}
+			System.out.println("Fjernet blue");
 		}
-		
-			else if(field.getColor() == gameBoard.getWhite()){
-				int count = this.whiteFields.length;
-				while(true){
-					if(this.whiteFields[count]==null){
-						count--;	
-					}
-					else{
-						this.whiteFields[count]=null;
-						break;
-					}
+
+		else if(field.getColor() == gameBoard.getPink()){
+			int count = this.pinkFields.length-1;
+			while(true){
+				if(this.pinkFields[count]==null){
+					count--;	
 				}
-			
-		}
-			
-			
-			else if(field.getColor() == gameBoard.getYellow()){
-				int count = this.yellowFields.length;
-				while(true){
-					if(this.yellowFields[count]==null){
-						count--;	
-					}
-					else{
-						this.yellowFields[count]=null;
-						break;
-					}
+				else{
+					this.pinkFields[count]=null;
+					break;
 				}
-			
+			}
+			System.out.println("Fjernet pink");
 		}
-			
-			else if(field.getColor() == gameBoard.getPurple()){
-				int count = this.whiteFields.length;
-				while(true){
-					if(this.whiteFields[count]==null){
-						count--;	
-					}
-					else{
-						this.whiteFields[count]=null;
-						break;
-					}
+
+
+		else if(field.getColor() == gameBoard.getGreen()){
+			int count = this.greenFields.length-1;
+			while(true){
+				if(this.greenFields[count]==null){
+					count--;	
 				}
-			
+				else{
+					this.greenFields[count]=null;
+					break;
+				}
+			}
+			System.out.println("Fjernet grøn");
 		}
-			
-			
-			
-		field.setOwner(null);
-		field.setOwned(false);
-		
-	
+
+
+		else if(field.getColor() == gameBoard.getGrey()){
+			int count = this.greyFields.length-1;
+			while(true){
+				if(this.greyFields[count]==null){
+					count--;	
+				}
+				else{
+					this.greyFields[count]=null;
+					break;
+				}
+			}
+			System.out.println("Fjernet grå");
+		}
+
+		else if(field.getColor() == gameBoard.getWhite()){
+			int count = this.whiteFields.length-1;
+			while(true){
+				if(this.whiteFields[count]==null){
+					count--;	
+				}
+				else{
+					this.whiteFields[count]=null;
+					break;
+				}
+			}
+			System.out.println("Fjernet hvid");
+		}
+
+
+		else if(field.getColor() == gameBoard.getYellow()){
+			int count = this.yellowFields.length-1;
+			while(true){
+				if(this.yellowFields[count]==null){
+					count--;	
+				}
+				else{
+					this.yellowFields[count]=null;
+					break;
+				}
+			}
+			System.out.println("Fjernet gul");
+		}
+
+		else if(field.getColor() == gameBoard.getPurple()){
+			int count = this.purpleFields.length-1;
+			while(true){
+				if(this.purpleFields[count]==null){
+					count--;	
+				}
+				else{
+					this.purpleFields[count]=null;
+					break;
+				}
+			}
+			System.out.println("Fjernet purple");
+		}
+
+
+
+		//		field.setOwner(null);
+		//		field.setOwned(false);
+		//		
+
 	}// end of function
 
-	
+
 	public Field[] allOfAKindFields() {
 
 		int length = 0;
@@ -296,7 +294,7 @@ public class Account {
 				length += purpleFields.length;
 
 			Field[] output = new Field[length];
-			
+
 			int count = 0;
 			if (allblue) {
 				output[count] = blueFields[0];
@@ -313,7 +311,7 @@ public class Account {
 				output[count] = pinkFields[2];
 				count++;
 			}
-			
+
 			if (allgreen) {
 				output[count] = greenFields[0];
 				count++;
@@ -322,8 +320,8 @@ public class Account {
 				output[count] = greenFields[2];
 				count++;
 			}
-			
-			
+
+
 			if (allgrey) {
 				output[count] = greyFields[0];
 				count++;
@@ -332,8 +330,8 @@ public class Account {
 				output[count] = greyFields[2];
 				count++;
 			}
-			
-			
+
+
 			if (allred) {
 				output[count] = redFields[0];
 				count++;
@@ -342,7 +340,7 @@ public class Account {
 				output[count] = redFields[2];
 				count++;
 			}
-			
+
 			if (allwhite) {
 				output[count] = whiteFields[0];
 				count++;
@@ -351,9 +349,9 @@ public class Account {
 				output[count] = whiteFields[2];
 				count++;
 			}
-			
-			
-			
+
+
+
 			if (allyellow) {
 				output[count] = yellowFields[0];
 				count++;
@@ -362,7 +360,7 @@ public class Account {
 				output[count] = yellowFields[2];
 				count++;
 			}
-			
+
 			if (allpurple) {
 				output[count] = purpleFields[0];
 				count++;
@@ -373,7 +371,7 @@ public class Account {
 		} else {
 			return null;
 		}
-	
+
 	}
 
 
@@ -562,25 +560,9 @@ public class Account {
 		return housesowned;
 	}
 
-
-	public void setHousesowned(int housesowned) {
-		this.housesowned = this.hotelsowned + housesowned;
-	}
-
-
-	public int getHotelsowned() {
-		return hotelsowned;
-	}
-
-
-	public void setHotelsowned(int hotelsowned) {
-		this.hotelsowned = this.hotelsowned + hotelsowned;
-	}
-
 	public int getCompanies() {
 		return companies;
 	}
-
 
 	public void setCompanies(int companies) {
 		this.companies = companies;
@@ -744,6 +726,10 @@ public class Account {
 
 	public void setAllpurple(boolean allpurple) {
 		this.allpurple = allpurple;
+	}
+	
+	public void setHousesowned(int housesowned) {
+		this.housesowned = housesowned;
 	}
 
 

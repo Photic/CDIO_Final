@@ -52,11 +52,11 @@ public class FieldController {
 
 		} else if (field instanceof Jail) {
 
-			jailLogic(field, gui, p);
+			jailLogic(gui, p);
 
 		} else if (field instanceof GoToJail) {
 
-			goToJailLogic(field, gui, p);
+			goToJailLogic(gui, p);
 
 		} else if (field instanceof Parking) {
 
@@ -300,15 +300,15 @@ public class FieldController {
 	}
 
 
-	private void jailLogic(Field field, GUIController gui, Player p) {
+	private void jailLogic(GUIController gui, Player p) {
 
-		gui.visitJailMessege(field, p);
+		gui.visitJailMessege(p);
 
 	}
 
-	private void goToJailLogic(Field field, GUIController gui, Player p) {
+	private void goToJailLogic(GUIController gui, Player p) {
 
-		gui.goToJailMessege(field, p);
+		gui.goToJailMessege(p);
 		p.setInJail(true);
 		gui.movePlayerInstantly(p, 10, false);
 
