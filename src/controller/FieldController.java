@@ -322,14 +322,13 @@ public class FieldController {
 
 	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
 
-		dc.chanceField(p, plist, gameboard, gui);
+		dc.chanceField(p, plist, gameboard, gui, this);
 
 		for (int i = 0; i < plist.getLength(); i++) {
 
 			gui.updateBalance(plist.getPlayer(i));
 
 		}
-
 
 	}
 

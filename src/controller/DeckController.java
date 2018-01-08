@@ -2,17 +2,17 @@ package controller;
 
 import boundary.TextReader;
 import entity.deck.AntiJailCard;
+import entity.deck.BirthdayCard;
 import entity.deck.Card;
 import entity.deck.Deck;
+import entity.deck.GetMoneyIfWorthIsLowCard;
 import entity.deck.GoToJailCard;
-import entity.deck.MovePlayerCard;
 import entity.deck.MovePlayerBackCard;
+import entity.deck.MovePlayerCard;
 import entity.deck.MovePlayerToNearestShippingCard;
 import entity.deck.PayMoneyCard;
 import entity.deck.PayMoneyPrHouseHotelCard;
-import entity.deck.GetMoneyIfWorthIsLowCard;
 import entity.deck.RecieveMoneyCard;
-import entity.deck.BirthdayCard;
 import entity.gameboard.GameBoard;
 import entity.gameboard.Shipping;
 import entity.player.Player;
@@ -37,13 +37,13 @@ public class DeckController {
 	 * @param gui Needs the gui to move the player.
 	 * @return
 	 */
-	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GUIController gui) {
+	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GUIController gui, FieldController fc) {
 
 		Card cardPicked = this.deck.pickACard();
 
 		// Pick another card if the card picked is already owned by someone.
 		if (cardPicked instanceof AntiJailCard && cardPicked.isCardOwned() == true) {
-			chanceField(p, plist, gameboard, gui);
+			chanceField(p, plist, gameboard, gui, fc);
 		}
 
 		// Saves the first card picked, If the first card picked is picked again, shuffle the deck and pick another card.
@@ -52,7 +52,7 @@ public class DeckController {
 			firstGameCycle = true;
 		} else if (cardPicked == firstCardPicked) {
 			this.deck.shuffleCards();
-			chanceField(p, plist, gameboard, gui);
+			chanceField(p, plist, gameboard, gui, fc);
 			firstGameCycle = false;
 		}
 
@@ -81,13 +81,13 @@ public class DeckController {
 			goToJailCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
-			moverPlayerCard(p, cardPicked.getAmount(), gui);
+			movePlayerCard(p, plist, gameboard, cardPicked.getAmount(), gui, fc);
 		}
 		else if (cardPicked instanceof MovePlayerBackCard) {
 			moverPlayerBackCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
-			moverPlayerToNearestShippingCard(p, gameboard, gui);
+			moverPlayerToNearestShippingCard(p, plist, gameboard, gui, fc);
 		}
 
 	}
@@ -186,8 +186,9 @@ public class DeckController {
 	 * @param newPosition
 	 * @param gui
 	 */
-	private void moverPlayerCard(Player p, int newPosition, GUIController gui) {
+	private void movePlayerCard(Player p, PlayerList plist, GameBoard gameboard, int newPosition, GUIController gui, FieldController fc) {
 		gui.movePlayerInstantly(p, newPosition, true);
+		fc.evaluateField(gameboard.getField(newPosition), gui, p, 0, this, gameboard, plist);
 	}
 
 	/**
@@ -207,7 +208,7 @@ public class DeckController {
 	 * @param gameboard
 	 * @param gui
 	 */
-	private void moverPlayerToNearestShippingCard(Player p, GameBoard gameboard, GUIController gui) {
+	private void moverPlayerToNearestShippingCard(Player p, PlayerList plist, GameBoard gameboard, GUIController gui, FieldController fc) {
 		int iMod = 0;
 		int calculateNewPosition = 0;
 		int i;
@@ -225,6 +226,8 @@ public class DeckController {
 			int payRecieve = (gameboard.getField(iMod).getRent()[gameboard.getField(iMod).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
 			gameboard.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
+		} else {
+			fc.evaluateField(gameboard.getField(p.getPosition()), gui, p, 0, this, gameboard, plist);
 		}
 
 	}
