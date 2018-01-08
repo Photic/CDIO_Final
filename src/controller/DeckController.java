@@ -135,7 +135,7 @@ public class DeckController {
 	 */
 	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, GameBoard gameboard, int[] housesTotal) {
 
-		for (int i = 0; i < gameboard.getLength(); i++) {
+		for (int i = 0; i < gameboard.getLength()-1; i++) {
 			if (p.getName() == gameboard.getField(i).getOwner().getName())  {
 				p.getAccount().addBalance(-(housesTotal[p.getAccount().getHousesowned()]));
 			}
