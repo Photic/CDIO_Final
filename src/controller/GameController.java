@@ -67,8 +67,12 @@ public class GameController {
 	private void gameLoop() {
 		boolean checker;
 		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
-//		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-//		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		
+		fc.evaluateField(gameboard.getField(6), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(8), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(gameboard.getField(9), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 
 		
 		if (alivePlayers == 1) {

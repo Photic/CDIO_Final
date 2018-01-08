@@ -137,7 +137,7 @@ public class GUIController {
 				}
 
 			}
-			
+
 		}
 
 	}
@@ -153,87 +153,130 @@ public class GUIController {
 	public void buyHouses(Field[] fields) {
 		boolean sameHeight = true;
 		int highestHouse = 0;
-		String[] territories;
+		String[] output = new String[] {};
+		String[] territories = new String[] {};
+		String[] c = new String[fields.length];
 
-		//First find out what height the highest house is, and if they are all at the same height.
-		for (int i = 0; i < fields.length; i++) {
-			if (fields[i].getHouses()>highestHouse)
-				highestHouse = fields[i].getHouses();
-
-			if (!(fields[i].getHouses() == fields[0].getHouses())) {
-				sameHeight = false;	
+		int counter = 0;
+		for (int i = 0; i < fields.length; i++) 
+			if (!(contains(c, fields[i].getColor().toString()))) {
+				c[counter] = fields[i].getColor().toString();
+				counter++;
 			}
-		}
-
-		//Hvis alle huse er samme højde, og hvis det højeste punkt er 5, så kan spillere ikke bygge højere.
-		if (sameHeight == true && highestHouse == 5) {
-			gui.showMessage(descriptions[53]);
-		} else {
-			//ellers:
-			//If the houses are at same heigth, then all of the fields should be visible for action.
-			if (sameHeight == true && highestHouse != 5) {
-				territories = new String[fields.length + 1];
-
-				for (int i = 0; i < territories.length-1; i++) 
-					territories[i] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];	
 
 
-				//tilføj en fortryd-knap
-				territories[fields.length] = descriptions[55];
+		String[] colorCheck = new String[counter];
 
-			} else {
-				//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
-				int count = 0;
-				for (int i = 0; i < fields.length; i++) {
-					if (fields[i].getHouses() < highestHouse) {
-						count++;
-					}
+		for (int i = 0; i < colorCheck.length; i++) 
+			colorCheck[i] = c[i];
+
+
+
+
+
+
+		// HERE IT STARTS!!!
+		for (int k = 0; k < colorCheck.length; k++) {
+
+			int lengthOfArray = 0;
+			for (int l = 0; l < fields.length; l++) 
+				if (fields[l].getColor().toString().equals(colorCheck[k])) {
+					lengthOfArray++;
 				}
 
-				territories = new String[count + 1];
+			Field[] currentFields = new Field[lengthOfArray];
+			int count = 0;
 
-				int counter = 0;
+			for (int l = 0; l < fields.length; l++) 
+				if (fields[l].getColor().toString().equals(colorCheck[k])) {
+					currentFields[count] = fields[l];
+					count++;
+				}
+
+			//First find out what height the highest house is, and if they are all at the same height.
+			for (int i = 0; i < currentFields.length; i++) {
+				if (currentFields[i].getHouses()>highestHouse)
+					highestHouse = currentFields[i].getHouses();
+
+				if (!(currentFields[i].getHouses() == currentFields[0].getHouses())) {
+					sameHeight = false;	
+				}
+			}
+
+
+
+			if (highestHouse != 5) {
 				
-				for (int i = 0; i < fields.length; i++) {
-					if (fields[i].getHouses() < highestHouse) {
-						territories[counter] = fields[i].getName() + descriptions[4] + fields[i].getHouses() + descriptions[5];
-						counter++;
+				if (sameHeight == true && highestHouse != 5) {
+					System.out.println(currentFields.length);
+					territories = new String[currentFields.length];
+
+					for (int i = 0; i < territories.length; i++) 
+						territories[i] = currentFields[i].getName() + descriptions[4] + currentFields[i].getHouses() + descriptions[5];	
+
+				} else {
+					//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
+					int counting = 0;
+					for (int i = 0; i < currentFields.length; i++) {
+						if (currentFields[i].getHouses() < highestHouse) {
+							counting++;
+						}
 					}
+
+					territories = new String[counting];
+
+					int countere = 0;
+
+					for (int i = 0; i < currentFields.length; i++) {
+						if (currentFields[i].getHouses() < highestHouse) {
+							territories[countere] = currentFields[i].getName() + descriptions[4] + currentFields[i].getHouses() + descriptions[5];
+							countere++;
+						}
+					}
+
+
 				}
 
-				territories[counter] = descriptions[55];
+
 
 			}
 
 
+			output = combineStringArrays(output, territories);
 
-			//Now we have fields to be represented ready and ask the user wich one he would like to build on.
 
-			String selected = gui.getUserSelection(descriptions[6], territories);
-			String real = selected.split(",")[0];
+		}
 
-			if (!(real.equals(descriptions[55]))) {
-				for (int i = 0; i < fields.length; i++) {
+		
+		
+		
+		//Now we have fields to be represented ready and ask the user wich one he would like to build on.
 
-					if (fields[i].getName().equals(real)) {
-						fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
+		String[] fortryd = new String[] {"Fortryd"};
+		output = combineStringArrays(output, fortryd);
+		
+		String selected = gui.getUserSelection(descriptions[6], output);
+		String real = selected.split(",")[0];
 
-						fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
-						fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
-						updateBalance(fields[i].getOwner());
+		if (!(real.equals(descriptions[55]))) {
+			for (int i = 0; i < fields.length; i++) {
 
-						fields[i].setHouses(fields[i].getHouses() + 1);
-						gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
+				if (fields[i].getName().equals(real)) {
+					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
 
-					}
+					fields[i].getOwner().getAccount().addActives(fields[i].getHousePrice());
+					fields[i].getOwner().getAccount().addBalance(-fields[i].getHousePrice());
+					updateBalance(fields[i].getOwner());
+
+					fields[i].setHouses(fields[i].getHouses() + 1);
+					gui.showMessage(descriptions[7] + fields[i].getName() + descriptions[8] + fields[i].getHousePrice() + descriptions[9] + fields[i].getName() + descriptions[10] + fields[i].getHouses() + descriptions[11]);
 
 				}
 
 			}
 
 		}
-
-	}
+	} 
 
 	/**
 	 * This method deals with the scenario where the user wants to sell houses.
@@ -323,10 +366,10 @@ public class GUIController {
 		return output;
 	}
 
-//Stephan Arbejder på noget her
-//	public boolean tdecision2(Player p, GameBoard gboard){
-//		gui.showMessage(gboard.getField(p.getPosition()).getPrice());
-//	}
+	//Stephan Arbejder på noget her
+	//	public boolean tdecision2(Player p, GameBoard gboard){
+	//		gui.showMessage(gboard.getField(p.getPosition()).getPrice());
+	//	}
 
 	public boolean territoryDecision(Player p) {
 
@@ -381,7 +424,7 @@ public class GUIController {
 	public void payRentMessege(Field field, Player p) {
 		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() + descriptions[32] + field.getCurrentRent() + descriptions[33]);
 	}
-	
+
 	public void payRentMessege(Field field, Player p, int multiplier) {
 		int rent = multiplier*field.getCurrentRent();
 		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() +
@@ -518,6 +561,29 @@ public class GUIController {
 	}
 
 
+
+	public String[] combineStringArrays(String[] first, String[] second) {
+
+
+		String[] output = new String[first.length + second.length];
+
+		int counter = 0;
+
+		for (int i = 0; i < first.length; i++) {
+			output[counter] = first[i];
+			counter++;
+		}
+
+		for (int i = 0; i < second.length; i++) {
+			output[counter] = second[i];
+			counter++;
+		}
+
+
+		return output;
+	}
+
+
 	/**
 	 * Places all the players on start.
 	 */
@@ -579,19 +645,19 @@ public class GUIController {
 		}
 
 	}
-	
-	
+
+
 	public void doubleDiceMessage(Player p) {
-		
+
 		gui.showMessage(p.getName() + descriptions[61] + p.getName() + descriptions[62] +p.getNumberOfEqualDice() + descriptions[63]);
-		
+
 	}
-	
+
 	public void doubleDiceJail(Player p) {
 		gui.showMessage(p.getName() + descriptions[64] + p.getName() + descriptions[65]);
 	}
-	
-	
+
+
 
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
@@ -714,9 +780,9 @@ public class GUIController {
 			if (gui_players[i].getName() == p.getName()) {
 				gui_players[i].setBalance(p.getAccount().getBalance());
 			}
-			
+
 		}
-		
+
 	}
 
 	public void setDice(DiceCup dc) {
@@ -746,7 +812,7 @@ public class GUIController {
 
 		return rgb;
 	}
-	
+
 	public void showMessage() {
 		gui.showMessage(this.descriptions[69]);
 	}
