@@ -229,12 +229,43 @@ public class Account {
 						count--;	
 					}
 					else{
-						this.greyFields[count]=null;
+						this.whiteFields[count]=null;
 						break;
 					}
 				}
 			
 		}
+			
+			
+			else if(field.getColor() == gameBoard.getYellow()){
+				int count = this.yellowFields.length;
+				while(true){
+					if(this.yellowFields[count]==null){
+						count--;	
+					}
+					else{
+						this.yellowFields[count]=null;
+						break;
+					}
+				}
+			
+		}
+			
+			else if(field.getColor() == gameBoard.getPurple()){
+				int count = this.whiteFields.length;
+				while(true){
+					if(this.whiteFields[count]==null){
+						count--;	
+					}
+					else{
+						this.whiteFields[count]=null;
+						break;
+					}
+				}
+			
+		}
+			
+			
 			
 		field.setOwner(null);
 		field.setOwned(false);
