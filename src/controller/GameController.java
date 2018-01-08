@@ -100,6 +100,7 @@ public class GameController {
 		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
 //		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
 //		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+
 		
 		if (alivePlayers == 1) {
 			for (int i = 0; i < playerList.getLength(); i++) 
@@ -123,7 +124,7 @@ public class GameController {
 				
 				checker = checkForDoubleDice(j);
 				
-				if (checker == true) {
+				if (checker == false) {
 					j++;
 				}
 				
@@ -170,17 +171,18 @@ public class GameController {
 				gui.movePlayerInstantly(playerList.getPlayer(j), 10, false);
 				
 				playerList.getPlayer(j).setInJail(true);
-				
-				return true;
+				playerList.getPlayer(j).setNumberOfEqualDice(0);
+				return false;
 				
 				
 			} else {
 				gui.doubleDiceMessage(playerList.getPlayer(j));
-				return false;
+				return true;
 			}
 			
 		} else {
-			return true;
+			playerList.getPlayer(j).setNumberOfEqualDice(0);
+			return false;
 		}
 	}
 	

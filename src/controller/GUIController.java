@@ -380,6 +380,12 @@ public class GUIController {
 
 	public void payRentMessege(Field field, Player p) {
 		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() + descriptions[32] + field.getCurrentRent() + descriptions[33]);
+	}
+	
+	public void payRentMessege(Field field, Player p, int multiplier) {
+		int rent = multiplier*field.getCurrentRent();
+		gui.showMessage(p.getName() + descriptions[30] + field.getOwner().getName() + descriptions[31] + field.getHouses() +
+				descriptions[66] + field.getOwner().getName() + descriptions[67] + p.getName() + descriptions[68] + rent + descriptions[33]);
 
 	}
 
