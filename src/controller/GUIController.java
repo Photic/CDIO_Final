@@ -352,11 +352,27 @@ public class GUIController {
 	
 	public String territoryOptions(Player p, boolean hasAll) {
 		String[] options;
-		if (hasAll == true) {
-			options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
+		
+		
+		
+		if(p.getAccount().noHouses().length != 0){
+			if (hasAll == true) {
+				options = new String[] {this.description[59], this.description[60], this.description[70],this.description[71],this.description[55]};
+			} else {
+				options = new String[] {this.description[70],this.description[71],this.description[55]};
+			}
 		} else {
-			options = new String[] {this.description[70],this.description[55]};
+			if (hasAll == true) {
+				options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
+			} else {
+				options = new String[] {this.description[70],this.description[55]};
+			}
 		}
+		
+		
+		
+		
+		
 
 		String choice = this.gui.getUserSelection(p.getName() + this.description[58], options);
 

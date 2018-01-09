@@ -2,6 +2,7 @@ package controller;
 
 import entity.gameboard.Field;
 import entity.gameboard.GameBoard;
+import entity.gameboard.Territory;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -40,6 +41,8 @@ public class HouseController {
 					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
 				} else if (option.equals("Sælg grund")) {
 					sellProp(gui, playerList, gameboard, i);
+				} else if (option.equals("Pantsæt grund")){
+					//TBC
 				}
 
 
@@ -119,6 +122,18 @@ public class HouseController {
 		//		gui.updateBalance(p2);
 	}
 
+	public void pawnPropToBank(Territory territory){
+		
+		if(territory.getHouses()>0){
+			
+		}
+		
+		else{
+			
+		}
+			
+		
+	}
 
 
 }
