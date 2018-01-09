@@ -16,6 +16,11 @@ import entity.gameboard.Territory;
 import entity.player.Player;
 import entity.player.PlayerList;
 
+/**
+ * The FieldController controls the gameboard and the main responsibility of the controller, is to evaluate actions to be executed when a player lands on a given field.
+ *
+ */
+
 public class FieldController {
 
 	private GameBoard gameBoard;
@@ -104,7 +109,7 @@ public class FieldController {
 
 			if (field.getOwner().getName() != p.getName()) {
 
-				boolean checker = checkAllOfAKind(field, gb);
+				boolean checker = checkAllOfAKind(field);
 				
 				if (checker == true && field.getHouses() == 0) {
 					payRent(p, field, gui, 2);
@@ -138,31 +143,36 @@ public class FieldController {
 		gui.updateBalance(field.getOwner());
 	}
 	
-	
-	private boolean checkAllOfAKind(Field field, GameBoard gb) {
+	/**
+	 * Checks if the owner of a fields, owns the other of that color.
+	 * @param field
+	 * The field to be investigated
+	 * @return
+	 */
+	private boolean checkAllOfAKind(Field field) {
 		boolean checker = false;
-		if (field.getColor() == gb.getRed())
+		if (field.getColor() == this.gameBoard.getRed())
 			checker = field.getOwner().getAccount().isAllred();
 		
-		if (field.getColor() == gb.getBlue())
+		if (field.getColor() == this.gameBoard.getBlue())
 			checker = field.getOwner().getAccount().isAllblue();
 		
-		if (field.getColor() == gb.getPink())
+		if (field.getColor() == this.gameBoard.getPink())
 			checker = field.getOwner().getAccount().isAllpink();
 		
-		if (field.getColor() == gb.getGreen())
+		if (field.getColor() == this.gameBoard.getGreen())
 			checker = field.getOwner().getAccount().isAllgreen();
 		
-		if (field.getColor() == gb.getGrey())
+		if (field.getColor() == this.gameBoard.getGrey())
 			checker = field.getOwner().getAccount().isAllgrey();
 		
-		if (field.getColor() == gb.getWhite())
+		if (field.getColor() == this.gameBoard.getWhite())
 			checker = field.getOwner().getAccount().isAllwhite();
 		
-		if (field.getColor() == gb.getYellow())
+		if (field.getColor() == this.gameBoard.getYellow())
 			checker = field.getOwner().getAccount().isAllyellow();
 		
-		if (field.getColor() == gb.getPurple())
+		if (field.getColor() == this.gameBoard.getPurple())
 			checker = field.getOwner().getAccount().isAllpurple();
 		
 		
@@ -217,8 +227,6 @@ public class FieldController {
 				gui.setOwnerText(p);
 
 
-			} else {
-				// Something here or not ? 
 			}
 
 			gui.transaction(decision, field, p);
@@ -249,7 +257,15 @@ public class FieldController {
 
 	}
 
-
+	/**
+	 * Service method to deal with the logic connected to a shipping field.
+	 * @param field
+	 * The current field
+	 * @param gui
+	 * The GUIController
+	 * @param p
+	 * The player who landed on the field.
+	 */
 	private void shippingLogic(Field field, GUIController gui, Player p) {
 
 		if(field.isOwned() == false) {
@@ -265,41 +281,20 @@ public class FieldController {
 				field.setOwned(true);
 				gui.setOwnerText(p);
 
-			} else {
-				// Something here or not ? 
 			}
-
 			gui.transaction(decision, field, p);
 
 		} else {
 
 			if (field.getOwner().getName() != p.getName()) {
 
-				if (field.getOwner().getAccount().getShipping() == 1) {
-
-					gui.payRentShippingMessege(field, p);
-					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[0]);
-					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[0]);
-
-				} else if (field.getOwner().getAccount().getShipping() == 2) {
-
-					gui.payRentShippingMessege(field, p);
-					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[1]);
-					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[1]);
-
-				} else if (field.getOwner().getAccount().getShipping() == 3) {
-
-					gui.payRentShippingMessege(field, p);
-					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[2]);
-					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[2]);
-
-				} else if (field.getOwner().getAccount().getShipping() == 4) {
-
-					gui.payRentShippingMessege(field, p);
-					p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[3]);
-					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[3]);
-				}
-
+				
+				for (int i = 1; i < 5; i++) 
+					if (field.getOwner().getAccount().getShipping() == i) {
+						gui.payRentShippingMessege(field, p);
+						p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[i-1]);
+						field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[i-1]);
+					}
 
 				gui.updateBalance(p);
 				gui.updateBalance(field.getOwner());
@@ -310,19 +305,15 @@ public class FieldController {
 
 	}
 
-
+	
 	private void jailLogic(GUIController gui, Player p) {
-
 		gui.visitJailMessege(p);
-
 	}
 
 	private void goToJailLogic(GUIController gui, Player p) {
-
 		gui.goToJailMessege(p);
 		p.setInJail(true);
 		gui.movePlayerInstantly(p, 10, false);
-
 	}
 
 	private void parkingLogic(GUIController gui, Player p) {
@@ -346,6 +337,7 @@ public class FieldController {
 	/**
 	 * Get a specific field.
 	 * @param i
+	 * index
 	 * @return
 	 */
 	public Field getField(int i) {

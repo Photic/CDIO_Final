@@ -22,7 +22,6 @@ public class GameController {
 	private FieldController fc;
 	private DiceCup dicecup;
 	private DeckController dc;
-	private HouseController hc;
 	private boolean playing;
 	private TextReader textReader;
 	private int alivePlayers;
