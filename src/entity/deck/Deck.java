@@ -50,6 +50,7 @@ public class Deck {
 				new MovePlayerCard(description[29], 39),
 				new MovePlayerCard(description[30], 24),
 				new MovePlayerCard(description[31], 11)
+				
 		};
 	}
 
@@ -103,6 +104,10 @@ public class Deck {
 
 	public Card getLastCard() {
 		return this.deck[getLength()-1];
+	}
+	
+	public Card[] getDeck() {
+		return this.deck;
 	}
 
 }
