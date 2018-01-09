@@ -38,7 +38,7 @@ public class DeckController {
 	 */
 	public void chanceField(Player p, PlayerList plist, GUIController gui, FieldController fc) {
 
-		Card cardPicked = this.deck.pickACard();
+ 		Card cardPicked = this.deck.pickACard();
 
 		// Pick another card if the card picked is already owned by someone.
 		if (cardPicked instanceof AntiJailCard && cardPicked.isCardOwned() == true) {
