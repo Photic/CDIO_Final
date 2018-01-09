@@ -28,6 +28,10 @@ public class GameBoard {
 	private String[] fieldName;
 	private String[] fieldDescription;
 
+
+	/**
+	 * Creates the entire gameboard.
+	 */
 	public GameBoard(TextReader name) {
 		try {
 			this.fieldName = name.textFromFile("src/main/rsc/FieldNames.txt");
@@ -82,10 +86,6 @@ public class GameBoard {
 				};
 		
 	}
-
-	/**
-	 * Creates the entire gameboard.
-	 */
 
 	public Field getField(int a) {
 		return fields[a];

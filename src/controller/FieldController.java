@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Color;
+
 import boundary.TextReader;
 import entity.gameboard.Chance;
 import entity.gameboard.Company;
@@ -331,8 +333,71 @@ public class FieldController {
 
 	}
 	
-	public GameBoard getGameBoard() {
-		return this.gameBoard;
+	/**
+	 * Get a specific field.
+	 * @param i
+	 * @return
+	 */
+	public Field getField(int i) {
+		return this.gameBoard.getField(i);
+	}
+	
+	/**
+	 * Get the length of the gameboard.
+	 * @return
+	 */
+	public int getBoardLength() {
+		return this.gameBoard.getLength();
+	}
+	
+	/**
+	 * Get all Colors.
+	 */
+	public Color getBlue() {
+		return this.gameBoard.getBlue();
+	}
+	
+	public Color getBrown() {
+		return this.gameBoard.getBrown();
 	}
 
+	public Color getGreen() {
+		return this.gameBoard.getGreen();
+	}
+	
+	public Color getGrey() {
+		return this.gameBoard.getGrey();
+	}
+	
+	public Color getMagenta() {
+		return this.gameBoard.getMagenta();
+	}
+	
+	public Color getOrange() {
+		return this.gameBoard.getOrange();
+	}
+	
+	public Color getPink() {
+		return this.gameBoard.getPink();
+	}
+	
+	public Color getPurple() {
+		return this.gameBoard.getPurple();
+	}
+	
+	public Color getRed() {
+		return this.gameBoard.getRed();
+	}
+	
+	public Color getTurkies() {
+		return this.gameBoard.getTurkies();
+	}
+	
+	public Color getWhite() {
+		return this.gameBoard.getWhite();
+	}
+	
+	public Color getYellow() {
+		return this.gameBoard.getYellow();
+	}
 }

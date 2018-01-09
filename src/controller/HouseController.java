@@ -9,7 +9,7 @@ public class HouseController {
 
 
 
-	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, GameBoard gameboard) {
+	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, FieldController fc) {
 
 		boolean decision;
 		int option;
@@ -47,7 +47,7 @@ public class HouseController {
 						int sellPrice = gui.priceToSell();
 						for (int j = 0; j < playerList.getLength(); j++) 
 							if (buyer.equals(playerList.getPlayer(j).getName())) 
-								sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), gameboard, terriToSell, gui, sellPrice);
+								sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 					}
 					if (buyer.equals("Banken")) {
 						sellPropToBank(playerList.getPlayer(i), terriToSell, gui);
@@ -79,7 +79,7 @@ public class HouseController {
 
 
 
-	private void sellPropToPlayer(Player seller, Player buyer, GameBoard gameboard, Field fieldToSell, GUIController gui, int price){
+	private void sellPropToPlayer(Player seller, Player buyer, FieldController fc, Field fieldToSell, GUIController gui, int price){
 
 
 		seller.getAccount().sellField(price);

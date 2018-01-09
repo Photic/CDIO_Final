@@ -33,16 +33,16 @@ public class GUIController {
 		}
 	}
 
-	public void defineGUI(GameBoard gameboard) {
-		GUI_Field[] gui_fields = new GUI_Field[gameboard.getLength()];
+	public void defineGUI(FieldController fc) {
+		GUI_Field[] gui_fields = new GUI_Field[fc.getBoardLength()];
 
-		for (int i = 0; i < gameboard.getLength(); i++) {
+		for (int i = 0; i < fc.getBoardLength(); i++) {
 
 			gui_fields[i] = new GUI_Street();
-			gui_fields[i].setTitle(gameboard.getField(i).getName());
-			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
-			gui_fields[i].setDescription(gameboard.getField(i).getName());
-			gui_fields[i].setBackGroundColor(gameboard.getField(i).getColor());
+			gui_fields[i].setTitle(fc.getField(i).getName());
+			gui_fields[i].setSubText(fc.getField(i).getDescription());
+			gui_fields[i].setDescription(fc.getField(i).getName());
+			gui_fields[i].setBackGroundColor(fc.getField(i).getColor());
 
 		}
 
@@ -112,7 +112,7 @@ public class GUIController {
 
 	}
 
-	public void removeBankrupted(Player p, GameBoard gb) {
+	public void removeBankrupted(Player p, FieldController fc) {
 
 		for (int i = 0; i < this.gui_players.length; i++) {
 			if (this.gui_players[i].getName() == p.getName()) {
@@ -120,13 +120,13 @@ public class GUIController {
 				this.gui_players[i].setBalance(0);
 
 
-				for (int j = 0; j < gb.getLength(); j++) {
+				for (int j = 0; j < fc.getBoardLength(); j++) {
 
-					if (gb.getField(j).getOwner() != null) {
-						if (gb.getField(j).getOwner().getName() == p.getName()) {
+					if (fc.getField(j).getOwner() != null) {
+						if (fc.getField(j).getOwner().getName() == p.getName()) {
 
-							gb.getField(j).setOwned(false);
-							gb.getField(j).setOwner(null);
+							fc.getField(j).setOwned(false);
+							fc.getField(j).setOwner(null);
 							this.gui.getFields()[j].setSubText(this.gui.getFields()[j].getDescription());
 							this.gui.getFields()[j].setDescription(this.gui.getFields()[j].getTitle());
 
