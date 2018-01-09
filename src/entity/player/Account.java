@@ -508,6 +508,14 @@ public class Account {
 
 		return output;
 	}
+	
+	
+	public int numberOfTerri() {
+		
+		
+		
+		return getFields().length;
+	}
 
 
 

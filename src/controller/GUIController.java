@@ -26,7 +26,7 @@ public class GUIController {
 
 	public GUIController(TextReader tr) {
 		try {
-			this.description = tr.textFromFile("guiText");
+			this.description = tr.textFromFile("src/main/rsc/guiText.txt");
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the GUIController constructor");
 			e.printStackTrace();
@@ -349,27 +349,18 @@ public class GUIController {
 		this.gui.showMessage(output);
 
 	}
-
-
-	public int territoryOptions(Player p) {
-
-		String[] options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
+	
+	public String territoryOptions(Player p, boolean hasAll) {
+		String[] options;
+		if (hasAll == true) {
+			options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
+		} else {
+			options = new String[] {this.description[70],this.description[55]};
+		}
 
 		String choice = this.gui.getUserSelection(p.getName() + this.description[58], options);
 
-		int output = 1000;
-
-		if (choice == options[0]) {
-			output = 1;
-		} else if (choice == options[1]){
-			output = 2;
-		} else if (choice == options[2]) {
-			output = 3;
-		} else if (choice == options[3]) {
-			output = 4;
-		}
-
-		return output;
+		return choice;
 	}
 
 
@@ -407,20 +398,24 @@ public class GUIController {
 	
 	public Field sellTerritoryProp(Player p) {
 		
-		String[] fieldNames = new String[p.getAccount().getFields().length];
+		String[] fieldNames = new String[p.getAccount().getFields().length + 1];
 
 		for (int i = 0; i < p.getAccount().getFields().length; i++) 
 			fieldNames[i] = p.getAccount().getFields()[i].getName();
 		
+		fieldNames[p.getAccount().getFields().length] = "Fortryd";
 		String output = gui.getUserSelection("Hvilket territory vil du sælge?", fieldNames);
 		Field outField = null;
 		
-		for (int i = 0; i < p.getAccount().getFields().length; i++) {
-			if (p.getAccount().getFields()[i].getName() == output) {
-				outField = p.getAccount().getFields()[i];
+		if (!(output.equals("Fortryd"))) {
+			for (int i = 0; i < p.getAccount().getFields().length; i++) {
+				if (p.getAccount().getFields()[i].getName() == output) {
+					outField = p.getAccount().getFields()[i];
+				}
 			}
-			
 		}
+		
+
 		
 		return outField;
 	}
@@ -437,7 +432,6 @@ public class GUIController {
 
 		for (int i = 0; i < gui.getFields().length; i++) 
 			if (gui.getFields()[i].getTitle().equals(field.getName())) {
-				gui.getFields()[i].setDescription(gui.getFields()[i].getSubText());
 				gui.getFields()[i].setSubText(newOwner.getName());
 			}
 		
