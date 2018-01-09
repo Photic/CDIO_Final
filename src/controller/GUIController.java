@@ -33,16 +33,16 @@ public class GUIController {
 		}
 	}
 
-	public void defineGUI(GameBoard gameboard) {
-		GUI_Field[] gui_fields = new GUI_Field[gameboard.getLength()];
+	public void defineGUI(FieldController fc) {
+		GUI_Field[] gui_fields = new GUI_Field[fc.getBoardLength()];
 
-		for (int i = 0; i < gameboard.getLength(); i++) {
+		for (int i = 0; i < fc.getBoardLength(); i++) {
 
 			gui_fields[i] = new GUI_Street();
-			gui_fields[i].setTitle(gameboard.getField(i).getName());
-			gui_fields[i].setSubText(gameboard.getField(i).getDescription());
-			gui_fields[i].setDescription(gameboard.getField(i).getName());
-			gui_fields[i].setBackGroundColor(gameboard.getField(i).getColor());
+			gui_fields[i].setTitle(fc.getField(i).getName());
+			gui_fields[i].setSubText(fc.getField(i).getDescription());
+			gui_fields[i].setDescription(fc.getField(i).getName());
+			gui_fields[i].setBackGroundColor(fc.getField(i).getColor());
 
 		}
 
@@ -65,11 +65,9 @@ public class GUIController {
 
 		for (int i = 0; i <= this.playerCount - 1; i++) {
 			index = i + 1;
-			
+
 			name = this.gui.getUserString(this.description[1] + index + this.description[2]);
-			if (name.length() <= 0) {
-				name = "JaneDoe";
-			}
+
 
 			gui_car = new GUI_Car();
 
@@ -114,7 +112,7 @@ public class GUIController {
 
 	}
 
-	public void removeBankrupted(Player p, GameBoard gb) {
+	public void removeBankrupted(Player p, FieldController fc) {
 
 		for (int i = 0; i < this.gui_players.length; i++) {
 			if (this.gui_players[i].getName() == p.getName()) {
@@ -122,13 +120,13 @@ public class GUIController {
 				this.gui_players[i].setBalance(0);
 
 
-				for (int j = 0; j < gb.getLength(); j++) {
+				for (int j = 0; j < fc.getBoardLength(); j++) {
 
-					if (gb.getField(j).getOwner() != null) {
-						if (gb.getField(j).getOwner().getName() == p.getName()) {
+					if (fc.getField(j).getOwner() != null) {
+						if (fc.getField(j).getOwner().getName() == p.getName()) {
 
-							gb.getField(j).setOwned(false);
-							gb.getField(j).setOwner(null);
+							fc.getField(j).setOwned(false);
+							fc.getField(j).setOwner(null);
 							this.gui.getFields()[j].setSubText(this.gui.getFields()[j].getDescription());
 							this.gui.getFields()[j].setDescription(this.gui.getFields()[j].getTitle());
 
@@ -354,27 +352,11 @@ public class GUIController {
 	
 	public String territoryOptions(Player p, boolean hasAll) {
 		String[] options;
-		
-		
-		
-		if(p.getAccount().noHouses().length != 0){
-			if (hasAll == true) {
-				options = new String[] {this.description[59], this.description[60], this.description[70],this.description[71],this.description[55]};
-			} else {
-				options = new String[] {this.description[70],this.description[71],this.description[55]};
-			}
+		if (hasAll == true) {
+			options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
 		} else {
-			if (hasAll == true) {
-				options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
-			} else {
-				options = new String[] {this.description[70],this.description[55]};
-			}
+			options = new String[] {this.description[70],this.description[55]};
 		}
-		
-		
-		
-		
-		
 
 		String choice = this.gui.getUserSelection(p.getName() + this.description[58], options);
 
