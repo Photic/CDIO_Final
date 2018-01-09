@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import entity.deck.AntiJailCard;
+import entity.deck.Card;
 import entity.player.PlayerList;
 
 public class TestAccount extends ConstructorForJUnit {
@@ -92,10 +94,47 @@ public class TestAccount extends ConstructorForJUnit {
 		int actual = plist.getPlayer(1).getAccount().numberOfTerri();
 		int expected = 2;
 		
-		assertEquals(expected, actual);
-		
-		
-	
+		assertEquals(expected, actual);	
 	}
+	
+	@Test
+	public void recieveAntiJailCardTest() {
+		boolean test;
+		Card card = new AntiJailCard(" ");
+		
+		p.getAccount().recieveAntiJaulCard(card);
+	
+		
+		if (p.getAccount().getAmountOfCards() == 1)
+			test = true;
+		else
+			test = false; 
+		
+		assertTrue(test);
+	}
+	
+	@Test
+	public void removeAntiJailCardTest() {
+		boolean test; 
+		Card card = new AntiJailCard(" ");
+		
+		p.getAccount().recieveAntiJaulCard(card);
+		
+		p.getAccount().removeAntiJaulCard();
+		
+		if (p.getAccount().getAmountOfCards() == 0)
+			test = true;
+		else
+			test = false; 
+		
+		assertTrue(test);
+		
+		
+		
+		
+	}
+	
+	
+	
 
 }
