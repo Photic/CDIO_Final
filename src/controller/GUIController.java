@@ -26,7 +26,7 @@ public class GUIController {
 
 	public GUIController(TextReader tr) {
 		try {
-			this.description = tr.textFromFile("src/main/rsc/guiText");
+			this.description = tr.textFromFile("guiText");
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the GUIController constructor");
 			e.printStackTrace();

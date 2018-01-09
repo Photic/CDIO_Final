@@ -30,8 +30,8 @@ public class GameBoard {
 
 	public GameBoard(TextReader name) {
 		try {
-			this.fieldName = name.textFromFile("src/main/rsc/FieldNames.txt");
-			this.fieldDescription = name.textFromFile("src/main/rsc/FieldDescriptions.txt");
+			this.fieldName = name.textFromFile("FieldNames.txt");
+			this.fieldDescription = name.textFromFile("FieldDescriptions.txt");
 		} catch (IOException e) {
 			System.err.println("Something went wrong when trieng to import Text from TextReader in Deck");
 			e.printStackTrace();
