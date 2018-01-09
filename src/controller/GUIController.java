@@ -7,7 +7,6 @@ import java.util.Random;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
-import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
 import gui_fields.GUI_Car;
@@ -67,7 +66,9 @@ public class GUIController {
 			index = i + 1;
 
 			name = this.gui.getUserString(this.description[1] + index + this.description[2]);
-
+			if (name.length() <= 0) {
+				name = "JaneDoe";
+			}
 
 			gui_car = new GUI_Car();
 
@@ -546,7 +547,7 @@ public class GUIController {
 
 	}
 
-	public void parkingMessege(Field field, Player p) {
+	public void parkingMessege(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[39]);
 
@@ -766,7 +767,6 @@ public class GUIController {
 	public void movePlayerBackwards(Player p, int diceSum) {
 
 		int newPosition = (p.getPosition() + diceSum) % 40;
-		int initPosition = (p.getPosition());
 
 		for (int i = 0; i < this.gui_players.length; i++) {
 
