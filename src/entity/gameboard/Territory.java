@@ -54,4 +54,5 @@ public class Territory extends Field {
 		return housePrice;
 	}
 	
+	
 }
