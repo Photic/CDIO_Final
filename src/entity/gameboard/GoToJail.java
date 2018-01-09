@@ -1,14 +1,15 @@
 package entity.gameboard;
 
 import java.awt.Color;
-import entity.player.Player;
-import entity.player.PlayerList;
 
 public class GoToJail extends Field {
-	
-	public GoToJail(String navn, String description, Color color) {
-		super(navn, description, color);
+
+	public GoToJail(String name, String description, Color color, int index) {
+		super(name, description, color, index);
+		// TODO Auto-generated constructor stub
 	}
+	
+
 	
 
 }

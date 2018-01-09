@@ -12,7 +12,7 @@ public class DiceCup {
 		this.d1 = new Die();
 		this.d2 = new Die();
 		
-	}; 
+	}
 	
 	public void shake() {
 		
@@ -28,6 +28,25 @@ public class DiceCup {
  */
 	public int sum() {
 		return this.d1.getValue() + this.d2.getValue();
+	}
+	
+	public boolean equalsDice() {
+		
+		boolean equals;
+		
+		if (this.d1.getValue() == this.d2.getValue()) {
+			
+			equals = true;
+			
+		} else {
+			
+			equals = false;
+			
+		}
+		
+		return equals;
+		
+		
 	}
 	
 	//--------------------------------------------------------

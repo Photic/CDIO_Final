@@ -3,12 +3,10 @@ package controller;
 
 import java.io.IOException;
 
-import boundary.GuiController;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
-import entity.gameboard.GameBoard;
-import entity.gameboard.Territory;
+import entity.player.Player;
 import entity.player.PlayerList;
 
 
@@ -19,15 +17,14 @@ import entity.player.PlayerList;
 public class GameController {
 
 
-	private GuiController gui;
+	private GUIController gui;
 	private PlayerList playerList;
 	private FieldController fc;
-	private GameBoard gameboard;
 	private DiceCup dicecup;
 	private DeckController dc;
+	private HouseController hc;
 	private boolean playing;
 	private TextReader textReader;
-	
 	private int alivePlayers;
 
 	/**
@@ -36,13 +33,13 @@ public class GameController {
 	 */
 	public GameController() throws IOException 
 	{
-		gui = new GuiController();
-		gameboard = new GameBoard();
-		playing = true;
-		dicecup = new DiceCup();
-		fc = new FieldController();
-		textReader = new TextReader();
-		dc = new DeckController(textReader);
+		this.textReader = new TextReader();
+		this.gui = new GUIController(this.textReader);
+		this.fc = new FieldController(this.textReader);
+		this.dc = new DeckController(this.textReader);
+		this.hc = new HouseController();
+		this.playing = true;
+		this.dicecup = new DiceCup();
 
 	}
 
@@ -52,239 +49,194 @@ public class GameController {
 	public void gameControl() 
 	{
 		initGui();
-		alivePlayers = playerList.getLength();
+		this.alivePlayers = this.playerList.getLength();
+
+		while(this.playing) {
+			gameLoop();
+		}
+	}
+
+	/**
+	 * Controls the flow of the game.
+	 */
+	private void gameLoop() {
+		boolean checker;
+//		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
+//		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+//		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+//		
+//		gameboard.getField(1).setHouses(1);
+
 		
-		
-		while(playing) {
-			if (alivePlayers == 1) {
+		if (this.alivePlayers == 1) {
+			for (int i = 0; i < this.playerList.getLength(); i++) 
+				if (this.playerList.getPlayer(i).isBankrupt() == false) 
+					this.gui.showWinner(this.playerList.getPlayer(i));
+		} else {
+			
+			int j = 0;
+			
+			while (j < this.playerList.getLength()) {
 				
-				for (int i = 0; i < playerList.getLength(); i++) {
-					if (playerList.getPlayer(i).isBankrupt() == false) {
-						gui.showWinner(playerList.getPlayer(i));
-					}
-					
+				//The game can be played normally if the player is not bankrupt or in jail.
+				if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == false) {
+
+					this.hc.houseControl(this.playerList, j, this, this.gui, this.fc.getGameBoard());
+
+				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
+					jailDecision(this.playerList.getPlayer(j));
+					checkForDoubleDiceJail(j);
+				}
+
+				checkForLostPlayers();
+				
+				checker = checkForDoubleDice(j);
+				
+				if (checker == false) {
+					this.playerList.getPlayer(j).setNumberOfEqualDice(0);
+					j++;
 				}
 				
-			} else {
-				gameLoop();
 			}
-
 		}
-		
+
+
 	}
-						
-				
-
-
-	private void gameLoop() {
-		Field currentField;
-		
-		for (int i = 0; i < playerList.getLength(); i++) {
-			
-			
-			if (playerList.getPlayer(i).isBankrupt() == false && playerList.getPlayer(i).isInJail() == false) {
-				gui.rollDiceMessage();
-				dicecup.shake();
-				gui.showDice(dicecup);
-				gui.movePlayer(playerList.getPlayer(i), dicecup.sum());
-				
-				currentField = gameboard.getField(playerList.getPlayer(i).getPosition());
-				
-				fc.evaluateField(currentField, gui, playerList.getPlayer(i), dicecup.sum(), dc, gameboard, playerList);
-			}
-
-			if (playerList.getPlayer(i).getAccount().getBalance() <= 0) {
-				playerList.getPlayer(i).setBankrupt(true);
-				gui.removeBankrupted(playerList.getPlayer(i), gameboard);
-				alivePlayers--;
-				
-			}
-
-		}
-	}
-
 
 	private void initGui() {
-		gui.defineGUI(gameboard);
-		playerList = gui.registerPlayerCount();
-		gui.placePlayer();
+		this.gui.defineGUI(this.fc.getGameBoard());
+		this.playerList = this.gui.registerPlayerCount();
+		this.gui.placePlayer();
 	}
 
+	/**
+	 * Checks if the player
+	 * @param i
+	 */
+	private void checkForLostPlayers() {
 
-	//	/**
-	//	 * Check if the player passed start
-	//	 * @param i
-	//	 * current player index
-	//	 */
-	//	private void checkStartPassed(int i) {
-	//		//check if the player passed start
-	//		if (rulebook.checkIfPassedStart(playerList.getSpecificPlayer(i), gameboard) == true) {
-	//
-	//			//the player recieves $2 and a message is presented.
-	//			playerList.getSpecificPlayer(i).setBalance(playerList.getSpecificPlayer(i).getBalance() + 2);
-	//			out.passedStart(playerList.getSpecificPlayer(i));
-	//
-	//			//Update the players balance on the gui.
-	//			gui.updateBalance(playerList.getSpecificPlayer(i));
-	//		}
-	//		playerList.getSpecificPlayer(i).setPosition(newPosition);
-	//	}
-	//
-	//	/**
-	//	 * check if the square is a territory
-	//	 * @param i
-	//	 */
-	//	private void checkIfTerritory(int i) {
-	//
-	//		if (gameboard.getField(playerList.getSpecificPlayer(i).getPosition()).getClass() == gameboard.getField(1).getClass()) 
-	//		{
-	//			if (((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).isOwned() == false) 
-	//			{
-	//				territorySituation(i);	
-	//			}
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * Check if the player is in jail
-	//	 * @param i
-	//	 */
-	//	private void inJail(int i) {
-	//		out.jailPrint(playerList.getSpecificPlayer(i));
-	//		playerList.getSpecificPlayer(i).setInJail(false);
-	//		playerList.getSpecificPlayer(i).setBalance(playerList.getSpecificPlayer(i).getBalance() - 1);
-	//	}
-	//
-	//	/**
-	//	 * Update the players balances
-	//	 */
-	//	private void updateBalance() {
-	//		//Update the balance of the players on the gui.
-	//		for (int j = 0; j<playerList.getLength(); j++) 
-	//		{
-	//			gui.updateBalance(playerList.getSpecificPlayer(j));
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * Update if a player has died.
-	//	 * @param i
-	//	 */
-	//	private void updateDead(int i) {
-	//		if (playerList.getSpecificPlayer(i).isBankrupt()) 
-	//		{
-	//			amountDead++;
-	//			removeDead(playerList.getSpecificPlayer(i), i);
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * roll dice and calculate new position
-	//	 * @param i
-	//	 */
-	//	private void rollDiceAndMove(int i) {
-	//
-	//		//Wait for the player to press 5 to roll the dice.
-	//		out.wantToRoll(playerList.getSpecificPlayer(i));
-	//		keyboard.waitForInt(5);
-	//
-	//
-	//		diceSum = playerList.getSpecificPlayer(i).rollDice(d1, d2); 
-	//		gui.setDice(this.d1, this.d2);
-	//		out.evaluateDice(playerList.getSpecificPlayer(i).getName(), diceSum);
-	//
-	//		//Calculates the new position for the player.
-	//		newPosition = gamelogic.newPosition(playerList.getSpecificPlayer(i).getPosition(), diceSum, gameboard.getSize());
-	//		out.evaluateNewPos(newPosition, gameboard);
-	//	}
-	//
-	//
-	//	/**
-	//	 * This method checks if the player wants to buy a free territory.
-	//	 * @param i
-	//	 * the current iterations variable, to determine player.
-	//	 */
-	//	public void territorySituation(int i) 
-	//	{
-	//		int answer = keyboard.getIntRange(0, 1);
-	//
-	//		if (answer == 1) {
-	//			gui.setOwner(playerList.getSpecificPlayer(i));
-	//			((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).setOwner(playerList.getSpecificPlayer(i));
-	//			((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).setOwned(true);
-	//			out.playerNowOwns(playerList.getSpecificPlayer(i), gameboard);
-	//			playerList.getSpecificPlayer(i).setBalance(playerList.getSpecificPlayer(i).getBalance() - ((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).getPrice());
-	//		} else {
-	//			out.notBuying();
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * This method removes dead players from the gameboard
-	//	 * @param player
-	//	 * @param i
-	//	 */
-	//	private void removeDead(Player player, int i) 
-	//	{
-	//		out.youAreDead(player);
-	//		gui.removeDeadPlayer(player);
-	//		for (int p = 0; p<gameboard.getSize();p++) 
-	//		{
-	//			if (playerList.getSpecificPlayer(i).isBankrupt())
-	//			{
-	//				if (gameboard.getField(p) instanceof Territory)
-	//				{
-	//					if (((Territory) gameboard.getField(p)).isOwned())
-	//					{
-	//						if (((Territory) gameboard.getField(p)).getOwner().getName() == player.getName()) 
-	//							gui.removeDeadOwner(p);
-	//					}
-	//					((Territory) gameboard.getField(p)).removeDeadOwner(playerList.getSpecificPlayer(i));
-	//				}
-	//			}
-	//		}
-	//	}
-	//
-	//
-	//	/**
-	//	 * Check if there is a winner
-	//	 */
-	//	private void checkWinner() {
-	//		// If there is only 1 player left, the winner is announced.
-	//		if (amountDead == playerList.getLength()-1)
-	//		{
-	//			for (int o = 0; o<playerList.getLength(); o++) {
-	//				if (!(playerList.getSpecificPlayer(o).isBankrupt())) {
-	//					out.announceWinner(playerList.getSpecificPlayer(o));
-	//				}
-	//			}
-	//			playing = false;
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * This method is used to test the method used in the game. It therefor takes in a anwer, and does not ask the keyboard.
-	//	 * @param i
-	//	 * the current iterations variable, to determine player.
-	//	 */
-	//	public void territorySituation(int i, boolean test, int answerTest) 
-	//	{
-	//		int answer = 0;
-	//		if (test == false) {
-	//			answer = keyboard.getIntRange(0, 1);
-	//		} else {
-	//			answer = answerTest;
-	//		}
-	//		if (answer == 1) {
-	//			gui.setOwner(playerList.getSpecificPlayer(i));
-	//			((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).setOwner(playerList.getSpecificPlayer(i));
-	//			((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).setOwned(true);
-	//			out.playerNowOwns(playerList.getSpecificPlayer(i), gameboard);
-	//			playerList.getSpecificPlayer(i).setBalance(playerList.getSpecificPlayer(i).getBalance() - ((Territory)gameboard.getField(playerList.getSpecificPlayer(i).getPosition())).getPrice());
-	//		} else {
-	//			out.notBuying();
-	//		}
-	//	}
+		int stillAliveLost = 0;
+		
+		for (int j = 0; j < this.playerList.getLength(); j++)
+			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {
+				this.playerList.getPlayer(j).setBankrupt(true);
+				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc.getGameBoard());
+			} else {
+				stillAliveLost++;
+			}
+
+		this.alivePlayers = stillAliveLost;
+
+	}
+	
+	private boolean checkForDoubleDice(int j) {
+		if (this.dicecup.equalsDice()) {
+			this.playerList.getPlayer(j).setNumberOfEqualDice(this.playerList.getPlayer(j).getNumberOfEqualDice() + 1);
+			
+			if (this.playerList.getPlayer(j).getNumberOfEqualDice() == 3) {
+				
+				this.gui.doubleDiceJail(this.playerList.getPlayer(j)); 
+				
+				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false);
+				
+				this.playerList.getPlayer(j).setInJail(true);
+				this.playerList.getPlayer(j).setNumberOfEqualDice(0);
+				return false;
+				
+				
+			} else {
+				gui.doubleDiceMessage(this.playerList.getPlayer(j));
+				return true;
+			}
+			
+		} else {
+			this.playerList.getPlayer(j).setNumberOfEqualDice(0);
+			return false;
+		}
+	}
+	
+public void checkForDoubleDiceJail(int j) {
+		
+		if(!this.dicecup.equalsDice()) {
+			
+			this.playerList.getPlayer(j).setJailCounterDice(this.playerList.getPlayer(j).getJailCounterDice() + 1);
+			
+			if(this.playerList.getPlayer(j).getJailCounterDice() == 3) {
+				
+				//besked til gui
+				
+				this.playerList.getPlayer(j).setInJail(false);
+				this.playerList.getPlayer(j).getAccount().addBalance(-1000);
+				this.playerList.getPlayer(j).setJailCounterDice(0);
+				this.gui.updateBalance(this.playerList.getPlayer(j));
+				
+				
+			} else {
+				//gui besked
+					
+			}
+			
+		} else {
+			
+			//gui besked
+			this.playerList.getPlayer(j).setInJail(false);
+			
+		}
+		
+	
+	}
+	
+	public void takeTurn(Player p) {
+		Field currentField;
+		this.dicecup.shake();
+		this.gui.showDice(this.dicecup);
+		this.gui.movePlayer(p, this.dicecup.sum());
+
+		currentField = this.fc.getGameBoard().getField(p.getPosition());
+
+		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
+	}
+
+	private void jailDecision(Player p) {
+
+		if (p.isInJail() == true) {
+			int decision = this.gui.inJailDecision(p);
+
+			if (decision == 1) {
+
+				p.getAccount().addBalance(-1000);
+				p.setInJail(false);
+				this.gui.updateBalance(p);
+				this.gui.jailFreePay(p);
+
+			} else if (decision == 2) {
+
+				this.dicecup.shake();
+				this.gui.showDice(this.dicecup);
+
+				if (this.dicecup.equalsDice() == true) {
+
+					p.setInJail(false);
+					this.gui.jailEqualsTrue(p);
+
+				} else {
+
+					this.gui.jailEqualsFalse(p);
+
+				}
+
+			} else if (decision == 3) {
+
+				p.getAccount().removeAntiJaulCard();
+				p.setInJail(false);
+				this.gui.antiJailUsed(p);
+
+			}
+
+		}
+
+	}
+
 
 }
 

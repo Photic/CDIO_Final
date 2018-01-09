@@ -15,13 +15,17 @@ public abstract class Field {
 	private Color color;
 	protected Player owner;
 	protected boolean isOwned;
-	protected int price, housePrice, houses, hotels;
+	protected int price, housePrice, houses, hotels, index, pawnValue;
+
+
+
 	protected int[] rent;
 	
-	public Field(String name, String description, Color color) {
+	public Field(String name, String description, Color color, int index) {
 		this.name = name;
 		this.description = description;
 		this.color = color;
+		this.index = index;
 	}
 	
 	public String getName() {
@@ -70,7 +74,13 @@ public abstract class Field {
 	public void removeOwner() {
 		this.isOwned = false;
 	}
-	
+	public void setHouses(int houses) {
+		this.houses = houses;
+	}
+
+	public int getIndex() {
+		return index;
+	}
 	
 	/*
 	 * Get Prices on able price fields.

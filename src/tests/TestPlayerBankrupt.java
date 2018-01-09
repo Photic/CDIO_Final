@@ -10,12 +10,8 @@ import org.junit.Test;
 
 import entity.player.PlayerList;
 
-public class TestPlayerBankrupt {
+public class TestPlayerBankrupt extends ConstructorForJUnit {
 
-	String[] names = {"Stephan","Mathias","Steen","Tobias","Marcus","Tamour"};
-	PlayerList plist;
-	int count;
-	
 	@Before
 	public void setup() {
 		this.plist = new PlayerList(6, names);
@@ -29,13 +25,13 @@ public class TestPlayerBankrupt {
 	
 	@Test
 	public void testForPlayerZero() {
-		System.out.println(Arrays.toString(this.plist.getList()));
+		//System.out.println(Arrays.toString(this.plist.getList()));
 		
 		for (int i = 0; i <= this.plist.getLength(); i++) {
 			this.plist.getPlayer(0).setBankrupt(true);
-			System.out.println("Removing player " + this.plist.getPlayer(0).getName());
+			//System.out.println("Removing player " + this.plist.getPlayer(0).getName());
 			this.plist.removePlayer(this.plist);
-			System.out.println(Arrays.toString(this.plist.getList()));
+			//System.out.println(Arrays.toString(this.plist.getList()));
 			this.count--;
 			assertEquals(this.count, this.plist.getLength());
 		}

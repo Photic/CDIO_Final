@@ -1,23 +1,18 @@
 package boundary;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
 public class TextReader {		
 		
-		
 		public String[] textFromFile(String fileName) throws IOException {
 			String[] outputArray;
-		    
 		    
 		    FileReader fr = new FileReader(fileName);
 		    BufferedReader bf = new BufferedReader(fr);
 		    FileReader fileA = new FileReader(fileName);
 		    
-			
-			
 		    outputArray = new String[countArray(fileA)];
 		    
 		    try {
@@ -38,10 +33,10 @@ public class TextReader {
 			return outputArray;
 		}
 		
-		
-		
-		
-		
+		/**
+		 * Prints the array.
+		 * @param a
+		 */
 		public void printArray(String[] a) {
 		    for (int i = 0; i<a.length; i++) {
 		    System.out.println(a[i]);

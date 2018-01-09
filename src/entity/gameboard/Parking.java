@@ -3,9 +3,14 @@ package entity.gameboard;
 import java.awt.Color;
 
 public class Parking extends Field {
-	
-	public Parking(String navn, String description, Color color) {
-		super(navn, description, color);
+
+	public Parking(String name, String description, Color color, int index) {
+		super(name, description, color, index);
+		// TODO Auto-generated constructor stub
 	}
+
+
+	
+
 
 }
