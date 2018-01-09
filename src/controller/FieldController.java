@@ -63,7 +63,7 @@ public class FieldController {
 
 		} else if (field instanceof Chance) {
 
-			chanceLogic(gui, p, dc, plist, this.gameBoard);
+			chanceLogic(gui, p, dc, plist);
 
 		}
 
@@ -319,9 +319,9 @@ public class FieldController {
 
 	}
 
-	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
+	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist) {
 
-		dc.chanceField(p, plist, gameboard, gui, this);
+		dc.chanceField(p, plist, gui, this);
 
 		for (int i = 0; i < plist.getLength(); i++) {
 
