@@ -36,23 +36,7 @@ public class HouseController {
 				} else if (option.equals("Sælg huse")) {
 					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
 				} else if (option.equals("Sælg grundS")) {
-					Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));
-
-					String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
-
-
-
-					if (!(buyer.equals("Banken"))) {
-						int sellPrice = gui.priceToSell();
-						for (int j = 0; j < playerList.getLength(); j++) 
-							if (buyer.equals(playerList.getPlayer(j).getName())) 
-								sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
-					}
-					if (buyer.equals("Banken")) {
-						sellPropToBank(playerList.getPlayer(i), terriToSell, gui);
-					}
-
-
+					sellProp(gui, playerList, fc, i);
 				}
 
 
@@ -67,7 +51,12 @@ public class HouseController {
 
 	private void sellPropToBank(Player seller, Field field, GUIController gui) {
 
-		seller.getAccount().sellField((int)(field.getPrice() * 0.5));
+		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());
+
+		seller.getAccount().sellField((int)(price * 0.5));
+		field.setOwned(false);
+		field.setOwner(null);
+		field.setHouses(0);
 
 
 		gui.updateSubtextReversed(field);
@@ -78,15 +67,36 @@ public class HouseController {
 
 
 
- /**
-  * Sels a territory to a player
-  * @param seller
-  * @param buyer
-  * @param gameboard
-  * @param fieldToSell
-  * @param gui
-  * @param price
-  */
+	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i) {
+		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));
+
+		if (terriToSell != null) {
+			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
+
+			if (!(buyer.equals("Banken"))) {
+				int sellPrice = gui.priceToSell();
+				for (int j = 0; j < playerList.getLength(); j++) 
+					if (buyer.equals(playerList.getPlayer(j).getName())) 
+						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
+			}
+			if (buyer.equals("Banken")) {
+				sellPropToBank(playerList.getPlayer(i), terriToSell, gui);
+			}
+		}
+
+	}
+
+
+
+	/**
+	 * Sels a territory to a player
+	 * @param seller
+	 * @param buyer
+	 * @param gameboard
+	 * @param fieldToSell
+	 * @param gui
+	 * @param price
+	 */
 
 	private void sellPropToPlayer(Player seller, Player buyer, FieldController fc, Field fieldToSell, GUIController gui, int price){
 		seller.getAccount().sellField(price);
