@@ -76,60 +76,60 @@ public class Account {
 	 * @param gb
 	 * The gameboard, that is instantiated in the gamecontroller.
 	 */
-	public void addField(Field field, GameBoard gb) {
+	public void addField(Field field, FieldController fc) {
 
 		int count = 0;
 		while(true) {
-			if (field.getColor() == gb.getRed())
+			if (field.getColor() == fc.getRed())
 				if (redFields[count] == null) {
 					this.redFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getBlue())
+			if (field.getColor() == fc.getBlue())
 				if (blueFields[count] == null) {
 					this.blueFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getPink())
+			if (field.getColor() == fc.getPink())
 				if (pinkFields[count] == null) {
 					this.pinkFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getGreen())
+			if (field.getColor() == fc.getGreen())
 				if (greenFields[count] == null) {
 					this.greenFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getGrey())
+			if (field.getColor() == fc.getGrey())
 				if (greyFields[count] == null) {
 					this.greyFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getWhite())
+			if (field.getColor() == fc.getWhite())
 				if (whiteFields[count] == null) {
 					this.whiteFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getYellow())
+			if (field.getColor() == fc.getYellow())
 				if (yellowFields[count] == null) {
 					this.yellowFields[count] = field;
 					break;
 				} else {
 					count++;
 				}
-			if (field.getColor() == gb.getPurple())
+			if (field.getColor() == fc.getPurple())
 				if (purpleFields[count] == null) {
 					this.purpleFields[count] = field;
 					break;
