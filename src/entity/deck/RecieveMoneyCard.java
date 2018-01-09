@@ -7,6 +7,4 @@ public class RecieveMoneyCard extends Card {
 		this.actionOrAmount = getMoney;
 	}
 
-	
-
 }

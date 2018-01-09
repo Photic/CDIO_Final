@@ -7,5 +7,4 @@ public class MovePlayerBackCard extends Card {
 		this.actionOrAmount = moveBack;
 	}
 
-
 }
