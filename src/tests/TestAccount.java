@@ -80,7 +80,21 @@ public class TestAccount extends ConstructorForJUnit {
 		}
 	System.out.println(actual);
 	
+	}
 	
+	
+	@Test
+	public void numberOfTerriTest(){
+		
+		plist.getPlayer(1).getAccount().addField(gameboard.getField(1), gameboard);
+		plist.getPlayer(1).getAccount().addField(gameboard.getField(3), gameboard);
+		
+		int actual = plist.getPlayer(1).getAccount().numberOfTerri();
+		int expected = 2;
+		
+		assertEquals(expected, actual);
+		
+		
 	
 	}
 
