@@ -3,7 +3,6 @@ package tests;
 import boundary.TextReader;
 import controller.DeckController;
 import controller.FieldController;
-import controller.GUIController;
 import entity.DiceCup;
 import entity.deck.Deck;
 import entity.gameboard.GameBoard;
@@ -17,7 +16,7 @@ public abstract class ConstructorForJUnit {
 	protected TextReader textReader;
 	protected Deck deck;
 	protected DeckController dc;
-	protected GUIController gui;
+//	protected GUIController gui;
 	protected GameBoard gameboard;
 	protected FieldController fieldController;
 	protected DiceCup diceCup;
