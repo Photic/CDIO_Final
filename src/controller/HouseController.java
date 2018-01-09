@@ -13,13 +13,15 @@ public class HouseController {
 		boolean decision;
 		String option;
 
-
+		
 		// If the player does own all of the same kind of territories he should just roll the dice normally.
-		if (playerList.getPlayer(i).getAccount().hasAllOfAKind() == false) {
+		if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {
 			gui.rollDiceMessage(playerList.getPlayer(i));
 			gc.takeTurn(playerList.getPlayer(i));
 
-		} else {
+		} 
+		
+		else if (playerList.getPlayer(i).getAccount().numberOfTerri() > 0) {
 			// If the player does have all of a kind, he should be offered the oppertunity to manage houses.
 			decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
 
@@ -29,13 +31,15 @@ public class HouseController {
 			} else {
 				// or if he decides to manage properties, find out exactly what he wants.
 
+				option = "fortryd";
+				
 				option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAccount().hasAllOfAKind());
 
 				if (option.equals("Køb huse")) {
 					gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
 				} else if (option.equals("Sælg huse")) {
 					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
-				} else if (option.equals("Sælg grundS")) {
+				} else if (option.equals("Sælg grund")) {
 					sellProp(gui, playerList, fc, i);
 				}
 
