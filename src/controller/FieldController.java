@@ -82,7 +82,7 @@ public class FieldController {
 				p.getAccount().buyField(field.getPrice());
 				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1));
 
-				p.getAccount().addField(field, gb);
+				p.getAccount().addField(field, this);
 
 				gui.updateBalance(p);
 
