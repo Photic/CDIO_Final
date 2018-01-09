@@ -185,7 +185,7 @@ public class DeckController {
 	 */
 	private void movePlayerCard(Player p, PlayerList plist, GameBoard gameboard, int newPosition, GUIController gui, FieldController fc) {
 		gui.movePlayerInstantly(p, newPosition, true);
-		fc.evaluateField(gameboard.getField(newPosition), gui, p, 0, this, gameboard, plist);
+		fc.evaluateField(gameboard.getField(newPosition), gui, p, 0, this, plist);
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class DeckController {
 			p.getAccount().addBalance(-payRecieve);
 			gameboard.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
 		} else {
-			fc.evaluateField(gameboard.getField(p.getPosition()), gui, p, 0, this, gameboard, plist);
+			fc.evaluateField(gameboard.getField(p.getPosition()), gui, p, 0, this, plist);
 		}
 
 	}

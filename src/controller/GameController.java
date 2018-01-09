@@ -6,7 +6,6 @@ import java.io.IOException;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
-import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
 
@@ -21,7 +20,6 @@ public class GameController {
 	private GUIController gui;
 	private PlayerList playerList;
 	private FieldController fc;
-	private GameBoard gameboard;
 	private DiceCup dicecup;
 	private DeckController dc;
 	private HouseController hc;
@@ -37,7 +35,6 @@ public class GameController {
 	{
 		this.textReader = new TextReader();
 		this.gui = new GUIController(this.textReader);
-		this.gameboard = new GameBoard(this.textReader);
 		this.fc = new FieldController(this.textReader);
 		this.dc = new DeckController(this.textReader);
 		this.hc = new HouseController();
@@ -84,7 +81,7 @@ public class GameController {
 				//The game can be played normally if the player is not bankrupt or in jail.
 				if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == false) {
 
-					this.hc.houseControl(this.playerList, j, this, this.gui, gameboard);
+					this.hc.houseControl(this.playerList, j, this, this.gui, this.fc.getGameBoard());
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
 					jailDecision(this.playerList.getPlayer(j));
@@ -107,7 +104,7 @@ public class GameController {
 	}
 
 	private void initGui() {
-		this.gui.defineGUI(this.gameboard);
+		this.gui.defineGUI(this.fc.getGameBoard());
 		this.playerList = this.gui.registerPlayerCount();
 		this.gui.placePlayer();
 	}
@@ -123,7 +120,7 @@ public class GameController {
 		for (int j = 0; j < this.playerList.getLength(); j++)
 			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {
 				this.playerList.getPlayer(j).setBankrupt(true);
-				this.gui.removeBankrupted(playerList.getPlayer(j), this.gameboard);
+				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc.getGameBoard());
 			} else {
 				stillAliveLost++;
 			}
@@ -195,9 +192,9 @@ public void checkForDoubleDiceJail(int j) {
 		this.gui.showDice(this.dicecup);
 		this.gui.movePlayer(p, this.dicecup.sum());
 
-		currentField = this.gameboard.getField(p.getPosition());
+		currentField = this.fc.getGameBoard().getField(p.getPosition());
 
-		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.gameboard, this.playerList);
+		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
 	}
 
 	private void jailDecision(Player p) {
