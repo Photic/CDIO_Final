@@ -533,6 +533,11 @@ public class Account {
 		addBalance(-price);
 		addActives(price);
 	}
+	
+	public void sellField(int price) {
+		addBalance(price);
+		addActives(-price);
+	}
 
 
 	//--------------------------------------------------------

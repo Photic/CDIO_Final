@@ -48,6 +48,9 @@ public class HouseController {
 						if (buyer.equals(playerList.getPlayer(j).getName())) {
 							
 							
+							
+							
+							
 							sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), gameboard, terriToSell, gui, sellPrice);
 							
 							
@@ -69,13 +72,35 @@ public class HouseController {
 	}
 	
 
-	public void sellPropToPlayer(Player p1, Player p2, GameBoard gameboard, Field field, GUIController gui, int price){
-		p1.getAccount().removeField(gameboard, gameboard.getField(field.getIndex()));
-		p2.getAccount().buyField(price);
-		p1.getAccount().addBalance(price);
+	public void sellPropToPlayer(Player seller, Player buyer, GameBoard gameboard, Field fieldToSell, GUIController gui, int price){
 		
-		gui.updateBalance(p1);
-		gui.updateBalance(p2);
+		
+		seller.getAccount().sellField(price);
+		buyer.getAccount().buyField(price);
+		
+		seller.getAccount().removeField(gameboard, fieldToSell);
+		
+		buyer.getAccount().addField(fieldToSell, gameboard);
+		
+		
+		gui.updateSubtext(buyer, fieldToSell);
+		gui.updateBalance(seller);
+		gui.updateBalance(buyer);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		p1.getAccount().removeField(gameboard, gameboard.getField(field.getIndex()));
+//		p2.getAccount().buyField(price);
+//		p1.getAccount().buyField(-price);
+//		
+//		gui.updateBalance(p1);
+//		gui.updateBalance(p2);
 	}
 	
 	
