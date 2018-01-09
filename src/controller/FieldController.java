@@ -111,7 +111,7 @@ public class FieldController {
 					for (int i = 0; i < plist.getLength(); i++) 
 						if (plist.getPlayer(i).getName().equals(buyer)) {
 							plist.getPlayer(i).getAccount().addField(field, this);
-							plist.getPlayer(i).getAccount().buyField(price);
+							plist.getPlayer(i).getAccount().buyField(field.getPrice() + price);
 							
 							field.setOwned(true);
 							field.setOwner(plist.getPlayer(i));

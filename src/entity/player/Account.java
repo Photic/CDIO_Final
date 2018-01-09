@@ -160,7 +160,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet rød");
 		}
 
 		else if(field.getColor() == fc.getBlue()){
@@ -174,7 +173,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet blue");
 		}
 
 		else if(field.getColor() == fc.getPink()){
@@ -188,7 +186,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet pink");
 		}
 
 
@@ -203,7 +200,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet grøn");
 		}
 
 
@@ -218,7 +214,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet grå");
 		}
 
 		else if(field.getColor() == fc.getWhite()){
@@ -232,7 +227,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet hvid");
 		}
 
 
@@ -247,7 +241,6 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet gul");
 		}
 
 		else if(field.getColor() == fc.getPurple()){
@@ -261,16 +254,10 @@ public class Account {
 					break;
 				}
 			}
-			System.out.println("Fjernet purple");
 		}
+			
 
-
-
-		//		field.setOwner(null);
-		//		field.setOwned(false);
-		//		
-
-	}// end of function
+	}
 
 
 	public Field[] allOfAKindFields() {

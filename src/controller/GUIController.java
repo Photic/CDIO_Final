@@ -452,7 +452,7 @@ public class GUIController {
 	
 	public int priceToSell() {
 		
-		return gui.getUserInteger("Hvad er den aftalte pris?");
+		return gui.getUserInteger("Hvor meget oven i grundens pris vil du give?");
 	}
 	
 	public void updateDescription(Field field) {

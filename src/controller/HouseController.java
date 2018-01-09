@@ -12,51 +12,54 @@ public class HouseController {
 
 		boolean decision;
 		String option;
+		boolean finished = false;
 
+//		// If the player does own all of the same kind of territories he should just roll the dice normally.
+//		if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {
+//			gui.rollDiceMessage(playerList.getPlayer(i));
+//			gc.takeTurn(playerList.getPlayer(i));
+//		} else {
+//			finished = false;
+//		}
 		
-		// If the player does own all of the same kind of territories he should just roll the dice normally.
-		if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {
-			gui.rollDiceMessage(playerList.getPlayer(i));
-			gc.takeTurn(playerList.getPlayer(i));
-
-		} 
 		
-		else if (playerList.getPlayer(i).getAccount().numberOfTerri() > 0) {
-			// If the player does have all of a kind, he should be offered the oppertunity to manage houses.
-			decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
-
-			// If he decides to roll dice, do so.
-			if (decision == true) {
-				gc.takeTurn(playerList.getPlayer(i));
-			} else {
-				// or if he decides to manage properties, find out exactly what he wants.
-
-				option = "fortryd";
-				
-				option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAccount().hasAllOfAKind());
-
-				if (option.equals("Køb huse")) {
-					gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
-				} else if (option.equals("Sælg huse")) {
-					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
-				} else if (option.equals("Sælg grund")) {
-					sellProp(gui, playerList, fc, i);
-				}
-
-
+		while(finished != true) {
+			
+			if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {
 				gui.rollDiceMessage(playerList.getPlayer(i));
 				gc.takeTurn(playerList.getPlayer(i));
+				finished = true;
+			} else if (playerList.getPlayer(i).getAccount().numberOfTerri() > 0) {
+				// If the player does have all of a kind, he should be offered the oppertunity to manage houses.
+				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
 
+				// If he decides to roll dice, do so.
+				if (decision == true) {
+					gc.takeTurn(playerList.getPlayer(i));
+					finished = true;
+				} else {
+					// or if he decides to manage properties, find out exactly what he wants.
+
+					option = "fortryd";
+					
+					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAccount().hasAllOfAKind());
+
+					if (option.equals("Køb huse")) {
+						gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
+					} else if (option.equals("Sælg huse")) {
+						gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
+					} else if (option.equals("Sælg grund")) {
+						sellProp(gui, playerList, fc, i);
+					}
+				}
 			}
-
-
 		}
 	}
 
-	private void sellPropToBank(Player seller, Field field, GUIController gui) {
+	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());
-
+		seller.getAccount().removeField(fc, field);
 		seller.getAccount().sellField((int)(price * 0.5));
 		field.setOwned(false);
 		field.setOwner(null);
@@ -84,7 +87,7 @@ public class HouseController {
 						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
 			if (buyer.equals("Banken")) {
-				sellPropToBank(playerList.getPlayer(i), terriToSell, gui);
+				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
 			}
 		}
 
