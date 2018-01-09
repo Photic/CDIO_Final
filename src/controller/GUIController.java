@@ -423,8 +423,22 @@ public class GUIController {
 	}
 	
 	
+
 	
-	
+	public void updateSubtext(Player newOwner, Field field) {
+		
+		
+		
+		
+		for (int i = 0; i < gui.getFields().length; i++) 
+			if (gui.getFields()[i].getTitle().equals(field.getName())) {
+				gui.getFields()[i].setDescription(gui.getFields()[i].getSubText());
+				gui.getFields()[i].setSubText(newOwner.getName());
+			}
+				
+		
+		
+	}
 	
 	
 	public boolean territoryDecision(Player p) {
