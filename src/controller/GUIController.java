@@ -374,16 +374,24 @@ public class GUIController {
 
 
 	
-	public String sellTerritory(PlayerList plist) {
+	public String sellTerritory(Player seller, PlayerList plist) {
 		String[] playerNames = new String[plist.getLength()];
 		
+	
+		int counter = 0;
 		
-		System.out.println(plist.getLength());
-		for (int i = 0; i < playerNames.length; i++) 
-			playerNames[i] = plist.getPlayer(i).getName();
+		playerNames[counter] = "Banken";
+		counter++;
+		
+		for (int i = 0; i < plist.getLength(); i++) 
+			if (!(plist.getPlayer(i).getName().equals(seller.getName()))) {
+				playerNames[counter] = plist.getPlayer(i).getName();
+				counter++;
+			}
+				
+		
+
 			
-		for (int i = 0; i < playerNames.length; i++) 
-			System.out.println(playerNames[i]);
 		
 		
 		String[] fortryd = new String[] {"fortryd"};
@@ -426,17 +434,22 @@ public class GUIController {
 
 	
 	public void updateSubtext(Player newOwner, Field field) {
-		
-		
-		
-		
+
 		for (int i = 0; i < gui.getFields().length; i++) 
 			if (gui.getFields()[i].getTitle().equals(field.getName())) {
 				gui.getFields()[i].setDescription(gui.getFields()[i].getSubText());
 				gui.getFields()[i].setSubText(newOwner.getName());
 			}
-				
 		
+	}
+	
+	public void updateSubtextReversed(Field field) {
+
+		for (int i = 0; i < gui.getFields().length; i++) 
+			if (gui.getFields()[i].getTitle().equals(field.getName())) {
+				gui.getFields()[i].setSubText(gui.getFields()[i].getDescription());
+				gui.getFields()[i].setDescription(gui.getFields()[i].getTitle());
+			}
 		
 	}
 	
