@@ -13,7 +13,7 @@ public class Deck {
 		try {
 			this.description = text.textFromFile("src/main/rsc/DescriptionsChanceCards.txt");
 		} catch (IOException e) {
-			System.err.println("Something went wrong when trieng to import Text from TextReader in Deck");
+			System.err.println("Something went wrong when trying to import Text from TextReader in Deck");
 			e.printStackTrace();
 		}
 
