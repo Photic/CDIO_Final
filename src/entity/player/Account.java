@@ -744,22 +744,6 @@ public class Account {
 	public void setHousesowned(int housesowned) {
 		this.housesowned = housesowned;
 	}
-	public Field[] noHouses(){
-		int count = 0; 
-		int count2 = 0;
-		for (int i = 0; i < getFields().length; i++) 
-			if(getFields()[i].getHouses() == 0)
-				count++;
-			
-		Field[] fields = new Field[count];
-		
-		for (int i = 0; i < getFields().length; i++)
-			if(getFields()[i].getHouses() == 0){
-				fields[count2] = getFields()[i];
-				count2++;
-			}
 
-		return fields;
-	}
 
 }

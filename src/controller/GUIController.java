@@ -65,11 +65,9 @@ public class GUIController {
 
 		for (int i = 0; i <= this.playerCount - 1; i++) {
 			index = i + 1;
-			
+
 			name = this.gui.getUserString(this.description[1] + index + this.description[2]);
-			if (name.length() <= 0) {
-				name = "JaneDoe";
-			}
+
 
 			gui_car = new GUI_Car();
 
@@ -354,27 +352,11 @@ public class GUIController {
 	
 	public String territoryOptions(Player p, boolean hasAll) {
 		String[] options;
-		
-		
-		
-		if(p.getAccount().noHouses().length != 0){
-			if (hasAll == true) {
-				options = new String[] {this.description[59], this.description[60], this.description[70],this.description[71],this.description[55]};
-			} else {
-				options = new String[] {this.description[70],this.description[71],this.description[55]};
-			}
+		if (hasAll == true) {
+			options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
 		} else {
-			if (hasAll == true) {
-				options = new String[] {this.description[59], this.description[60], this.description[70],this.description[55]};
-			} else {
-				options = new String[] {this.description[70],this.description[55]};
-			}
+			options = new String[] {this.description[70],this.description[55]};
 		}
-		
-		
-		
-		
-		
 
 		String choice = this.gui.getUserSelection(p.getName() + this.description[58], options);
 
