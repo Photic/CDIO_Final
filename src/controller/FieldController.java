@@ -69,7 +69,7 @@ public class FieldController {
 
 		} else if (field instanceof Parking) {
 
-			parkingLogic(field, gui, p);
+			parkingLogic(gui, p);
 
 		} else if (field instanceof Chance) {
 
@@ -325,9 +325,9 @@ public class FieldController {
 
 	}
 
-	private void parkingLogic(Field field, GUIController gui, Player p) {
+	private void parkingLogic(GUIController gui, Player p) {
 
-		gui.parkingMessege(field, p);
+		gui.parkingMessege(p);
 
 	}
 
