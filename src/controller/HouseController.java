@@ -12,7 +12,7 @@ public class HouseController {
 	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, FieldController fc) {
 
 		boolean decision;
-		int option;
+		String option;
 
 
 		// If the player does own all of the same kind of territories he should just roll the dice normally.
@@ -30,13 +30,13 @@ public class HouseController {
 			} else {
 				// or if he decides to manage properties, find out exactly what he wants.
 
-				option = gui.territoryOptions(playerList.getPlayer(i));
+				option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAccount().hasAllOfAKind());
 
-				if (option == 1) {
+				if (option.equals("Køb huse")) {
 					gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
-				} else if (option == 2) {
+				} else if (option.equals("Sælg huse")) {
 					gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
-				} else if (option == 3) {
+				} else if (option.equals("Sælg grundS")) {
 					Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));
 
 					String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
@@ -95,7 +95,7 @@ public class HouseController {
 
 		seller.getAccount().removeField(fc, fieldToSell);
 
-		buyer.getAccount().addField(fieldToSell, fc.getGameBoard());
+		buyer.getAccount().addField(fieldToSell, fc);
 
 
 		gui.updateSubtext(buyer, fieldToSell);
