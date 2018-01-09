@@ -7,5 +7,4 @@ public class PayMoneyCard extends Card {
 		this.actionOrAmount = haveToPay;
 	}
 	
-
 }
