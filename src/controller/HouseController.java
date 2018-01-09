@@ -53,10 +53,13 @@ public class HouseController {
 	}
 
 	private void sellPropToBank(Player seller, Field field, GUIController gui) {
-
-		seller.getAccount().sellField((int)(field.getPrice() * 0.5));
+		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());
+		
+		seller.getAccount().sellField((int)(price * 0.5));
 		field.setOwned(false);
 		field.setOwner(null);
+		field.setHouses(0);
+		
 
 		gui.updateSubtextReversed(field);
 		gui.updateBalance(seller);
