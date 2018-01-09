@@ -397,6 +397,35 @@ public class GUIController {
 		
 	}
 	
+	public String sellTerritory(Player seller, PlayerList plist, Field field) {
+		String[] playerNames = new String[plist.getLength() - 1];
+		
+		int counter = 0;
+		
+		for (int i = 0; i < plist.getLength(); i++) 
+			if (!(plist.getPlayer(i).getName().equals(seller.getName()))) {
+				playerNames[counter] = plist.getPlayer(i).getName();
+				counter++;
+			}
+				
+		
+
+			
+		
+		
+		String[] fortryd = new String[] {"Ingen Køber"};
+		playerNames = combineStringArrays(playerNames, fortryd);
+		
+		String output = gui.getUserSelection(field.getName() + " er nu på auktion. Er der andre der vil købe grunden?", playerNames);
+		
+
+		
+		return output;
+		
+	}
+	
+	
+	
 	public Field sellTerritoryProp(Player p) {
 		
 		String[] fieldNames = new String[p.getAccount().getFields().length + 1];
@@ -426,7 +455,14 @@ public class GUIController {
 		return gui.getUserInteger("Hvad er den aftalte pris?");
 	}
 	
-	
+	public void updateDescription(Field field) {
+		
+		for (int i = 0; i < gui.getFields().length; i++) 
+			if (gui.getFields()[i].getTitle().equals(field.getName())) {
+				gui.getFields()[i].setDescription(gui.getFields()[i].getSubText());
+			}
+
+	}
 
 	
 	public void updateSubtext(Player newOwner, Field field) {

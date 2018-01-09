@@ -50,7 +50,7 @@ public class FieldController {
 
 		if (field instanceof Territory) {
 
-			territoryLogic(field, gui, p, this.gameBoard);
+			territoryLogic(field, gui, plist, p, this.gameBoard);
 
 		} else if (field instanceof Tax) {
 
@@ -84,7 +84,7 @@ public class FieldController {
 
 	}
 
-	private void territoryLogic(Field field, GUIController gui, Player p, GameBoard gb) {
+	private void territoryLogic(Field field, GUIController gui, PlayerList plist, Player p, GameBoard gb) {
 
 		if(field.isOwned() == false) {
 			boolean decision = gui.territoryDecision(p);
@@ -101,6 +101,35 @@ public class FieldController {
 				field.setOwned(true);
 				gui.setOwnerText(p);
 
+			} else {
+				
+				String buyer = gui.sellTerritory(p, plist, field);
+				int price = gui.priceToSell();
+				
+				
+				if (!(buyer.equals("Ingen køber"))) 
+					for (int i = 0; i < plist.getLength(); i++) 
+						if (plist.getPlayer(i).getName().equals(buyer)) {
+							plist.getPlayer(i).getAccount().addField(field, this);
+							plist.getPlayer(i).getAccount().buyField(price);
+							
+							field.setOwned(true);
+							field.setOwner(plist.getPlayer(i));
+							
+							gui.updateBalance(plist.getPlayer(i));
+							gui.updateBalance(p);
+							gui.updateDescription(field);
+							gui.updateSubtext(plist.getPlayer(i), field);
+							
+						}
+					
+					
+					
+				
+				
+				
+				
+				
 			}
 
 			gui.transaction(decision, field, p);
