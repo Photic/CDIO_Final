@@ -105,4 +105,8 @@ public abstract class Field {
 		return housePrice;
 	}
 	
+	public int getPawnValue(){
+		return this.pawnValue;
+	}
+	
 }

@@ -22,7 +22,6 @@ public class GameController {
 	private FieldController fc;
 	private DiceCup dicecup;
 	private DeckController dc;
-	private HouseController hc;
 	private boolean playing;
 	private TextReader textReader;
 	private int alivePlayers;
@@ -37,7 +36,6 @@ public class GameController {
 		this.gui = new GUIController(this.textReader);
 		this.fc = new FieldController(this.textReader);
 		this.dc = new DeckController(this.textReader);
-		this.hc = new HouseController();
 		this.playing = true;
 		this.dicecup = new DiceCup();
 
@@ -81,7 +79,7 @@ public class GameController {
 				//The game can be played normally if the player is not bankrupt or in jail.
 				if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == false) {
 
-					this.hc.houseControl(this.playerList, j, this, this.gui, this.fc.getGameBoard());
+					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
 					jailDecision(this.playerList.getPlayer(j));
@@ -104,7 +102,7 @@ public class GameController {
 	}
 
 	private void initGui() {
-		this.gui.defineGUI(this.fc.getGameBoard());
+		this.gui.defineGUI(this.fc);
 		this.playerList = this.gui.registerPlayerCount();
 		this.gui.placePlayer();
 	}
@@ -120,7 +118,7 @@ public class GameController {
 		for (int j = 0; j < this.playerList.getLength(); j++)
 			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {
 				this.playerList.getPlayer(j).setBankrupt(true);
-				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc.getGameBoard());
+				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc);
 			} else {
 				stillAliveLost++;
 			}
@@ -192,7 +190,7 @@ public void checkForDoubleDiceJail(int j) {
 		this.gui.showDice(this.dicecup);
 		this.gui.movePlayer(p, this.dicecup.sum());
 
-		currentField = this.fc.getGameBoard().getField(p.getPosition());
+		currentField = this.fc.getField(p.getPosition());
 
 		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
 	}

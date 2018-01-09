@@ -20,7 +20,6 @@ public abstract class ConstructorForJUnit {
 	protected Deck deck;
 	protected DeckController dc;
 	protected GUIController gui;
-	protected GameBoard gameboard;
 	protected FieldController fc;
 	protected DiceCup diceCup;
 
@@ -30,7 +29,6 @@ public abstract class ConstructorForJUnit {
 		this.textReader = new TextReader();
 		this.deck = new Deck(this.textReader);
 		this.dc = new DeckController(this.textReader);
-		this.gameboard = new GameBoard(this.textReader);
 		this.fc = new FieldController(this.textReader);
 		this.diceCup = new DiceCup();
 		this.p = this.plist.getPlayer(0);
