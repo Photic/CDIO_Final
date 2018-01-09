@@ -15,7 +15,7 @@ public abstract class Field {
 	private Color color;
 	protected Player owner;
 	protected boolean isOwned;
-	protected int price, housePrice, houses, hotels, index;
+	protected int price, housePrice, houses, hotels, index, pawnValue;
 
 
 
