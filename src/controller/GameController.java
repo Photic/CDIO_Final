@@ -37,7 +37,6 @@ public class GameController {
 		this.gui = new GUIController(this.textReader);
 		this.fc = new FieldController(this.textReader);
 		this.dc = new DeckController(this.textReader);
-		this.hc = new HouseController();
 		this.playing = true;
 		this.dicecup = new DiceCup();
 
@@ -81,7 +80,7 @@ public class GameController {
 				//The game can be played normally if the player is not bankrupt or in jail.
 				if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == false) {
 
-					this.hc.houseControl(this.playerList, j, this, this.gui, this.fc);
+					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false && this.playerList.getPlayer(j).isInJail() == true) {
 					jailDecision(this.playerList.getPlayer(j));

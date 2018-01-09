@@ -19,11 +19,17 @@ import entity.player.PlayerList;
 public class FieldController {
 
 	private GameBoard gameBoard;
+	private HouseController hc;
 
 
+
+	public HouseController getHc() {
+		return hc;
+	}
 
 	public FieldController(TextReader name) {
 		this.gameBoard = new GameBoard(name);
+		this.hc = new HouseController();
 	}
 
 	/**

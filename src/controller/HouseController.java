@@ -1,7 +1,6 @@
 package controller;
 
 import entity.gameboard.Field;
-import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
 
