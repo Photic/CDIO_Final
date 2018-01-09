@@ -37,13 +37,13 @@ public class DeckController {
 	 * @param gui Needs the gui to move the player.
 	 * @return
 	 */
-	public void chanceField(Player p, PlayerList plist, GameBoard gameboard, GUIController gui, FieldController fc) {
+	public void chanceField(Player p, PlayerList plist, GUIController gui, FieldController fc) {
 
 		Card cardPicked = this.deck.pickACard();
 
 		// Pick another card if the card picked is already owned by someone.
 		if (cardPicked instanceof AntiJailCard && cardPicked.isCardOwned() == true) {
-			chanceField(p, plist, gameboard, gui, fc);
+			chanceField(p, plist, gui, fc);
 		}
 
 		// Saves the first card picked, If the first card picked is picked again, shuffle the deck and pick another card.
@@ -52,7 +52,7 @@ public class DeckController {
 			firstGameCycle = true;
 		} else if (cardPicked == firstCardPicked) {
 			this.deck.shuffleCards();
-			chanceField(p, plist, gameboard, gui, fc);
+			chanceField(p, plist, gui, fc);
 			firstGameCycle = false;
 		}
 
@@ -70,7 +70,7 @@ public class DeckController {
 			payMoneyCard(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
-			payMoneyPrHouseHotelCard(p, plist, gameboard, cardPicked.getHousePrices());
+			payMoneyPrHouseHotelCard(p, plist, fc.getGameBoard(), cardPicked.getHousePrices());
 		}
 		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
 			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
@@ -82,13 +82,13 @@ public class DeckController {
 			goToJailCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
-			movePlayerCard(p, plist, gameboard, cardPicked.getAmount(), gui, fc);
+			movePlayerCard(p, plist, cardPicked.getAmount(), gui, fc);
 		}
 		else if (cardPicked instanceof MovePlayerBackCard) {
 			moverPlayerBackCard(p, cardPicked.getAmount(), gui);
 		}
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
-			moverPlayerToNearestShippingCard(p, plist, gameboard, gui, fc);
+			moverPlayerToNearestShippingCard(p, plist, gui, fc);
 		}
 
 	}
@@ -183,9 +183,9 @@ public class DeckController {
 	 * @param newPosition
 	 * @param gui
 	 */
-	private void movePlayerCard(Player p, PlayerList plist, GameBoard gameboard, int newPosition, GUIController gui, FieldController fc) {
+	private void movePlayerCard(Player p, PlayerList plist, int newPosition, GUIController gui, FieldController fc) {
 		gui.movePlayerInstantly(p, newPosition, true);
-		fc.evaluateField(gameboard.getField(newPosition), gui, p, 0, this, gameboard, plist);
+		fc.evaluateField(fc.getGameBoard().getField(newPosition), gui, p, 0, this, plist);
 	}
 
 	/**
@@ -205,13 +205,13 @@ public class DeckController {
 	 * @param gameboard
 	 * @param gui
 	 */
-	private void moverPlayerToNearestShippingCard(Player p, PlayerList plist, GameBoard gameboard, GUIController gui, FieldController fc) {
+	private void moverPlayerToNearestShippingCard(Player p, PlayerList plist, GUIController gui, FieldController fc) {
 		int iMod = 0;
 		int calculateNewPosition = 0;
 		int i;
-		for (i = p.getPosition(); i < gameboard.getLength()*2; i++) {
-			iMod = i%gameboard.getLength();
-			if ((gameboard.getField(iMod) instanceof Shipping)) {
+		for (i = p.getPosition(); i < fc.getGameBoard().getLength()*2; i++) {
+			iMod = i%fc.getGameBoard().getLength();
+			if ((fc.getGameBoard().getField(iMod) instanceof Shipping)) {
 				break;
 			}
 			calculateNewPosition++;
@@ -219,12 +219,12 @@ public class DeckController {
 
 		gui.movePlayer(p, calculateNewPosition);
 
-		if (gameboard.getField(iMod).isOwned() == true) {
-			int payRecieve = (gameboard.getField(iMod).getRent()[gameboard.getField(iMod).getOwner().getAccount().getShipping()]*2);
+		if (fc.getGameBoard().getField(iMod).isOwned() == true) {
+			int payRecieve = (fc.getGameBoard().getField(iMod).getRent()[fc.getGameBoard().getField(iMod).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
-			gameboard.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
+			fc.getGameBoard().getField(iMod).getOwner().getAccount().addBalance(payRecieve);
 		} else {
-			fc.evaluateField(gameboard.getField(p.getPosition()), gui, p, 0, this, gameboard, plist);
+			fc.evaluateField(fc.getGameBoard().getField(p.getPosition()), gui, p, 0, this, plist);
 		}
 
 	}

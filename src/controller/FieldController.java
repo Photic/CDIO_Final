@@ -18,7 +18,6 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 
-
 	public FieldController(TextReader name) {
 		this.gameBoard = new GameBoard(name);
 	}
@@ -32,11 +31,11 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, GameBoard gameboard, PlayerList plist) {
+	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, PlayerList plist) {
 
 		if (field instanceof Territory) {
 
-			territoryLogic(field, gui, p, gameboard);
+			territoryLogic(field, gui, p, this.gameBoard);
 
 		} else if (field instanceof Tax) {
 
@@ -64,7 +63,7 @@ public class FieldController {
 
 		} else if (field instanceof Chance) {
 
-			chanceLogic(gui, p, dc, plist, gameboard);
+			chanceLogic(gui, p, dc, plist);
 
 		}
 
@@ -95,7 +94,7 @@ public class FieldController {
 
 			if (field.getOwner().getName() != p.getName()) {
 
-				boolean checker = checkAllOfAKind(field, p, gb);
+				boolean checker = checkAllOfAKind(field, gb);
 				
 				if (checker == true && field.getHouses() == 0) {
 					payRent(p, field, gui, 2);
@@ -130,7 +129,7 @@ public class FieldController {
 	}
 	
 	
-	private boolean checkAllOfAKind(Field field, Player p, GameBoard gb) {
+	private boolean checkAllOfAKind(Field field, GameBoard gb) {
 		boolean checker = false;
 		if (field.getColor() == gb.getRed())
 			checker = field.getOwner().getAccount().isAllred();
@@ -320,9 +319,9 @@ public class FieldController {
 
 	}
 
-	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, GameBoard gameboard) {
+	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist) {
 
-		dc.chanceField(p, plist, gameboard, gui, this);
+		dc.chanceField(p, plist, gui, this);
 
 		for (int i = 0; i < plist.getLength(); i++) {
 
@@ -330,6 +329,10 @@ public class FieldController {
 
 		}
 
+	}
+	
+	public GameBoard getGameBoard() {
+		return this.gameBoard;
 	}
 
 }

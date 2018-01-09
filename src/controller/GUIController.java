@@ -65,9 +65,11 @@ public class GUIController {
 
 		for (int i = 0; i <= this.playerCount - 1; i++) {
 			index = i + 1;
-
+			
 			name = this.gui.getUserString(this.description[1] + index + this.description[2]);
-
+			if (name.length() <= 0) {
+				name = "JaneDoe";
+			}
 
 			gui_car = new GUI_Car();
 
