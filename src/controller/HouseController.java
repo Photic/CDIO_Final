@@ -90,10 +90,16 @@ public class HouseController {
 
 	}
 
-
+ /**
+  * Sels a territory to a player
+  * @param seller
+  * @param buyer
+  * @param gameboard
+  * @param fieldToSell
+  * @param gui
+  * @param price
+  */
 	private void sellPropToPlayer(Player seller, Player buyer, GameBoard gameboard, Field fieldToSell, GUIController gui, int price){
-
-
 		seller.getAccount().sellField(price);
 		buyer.getAccount().buyField(price);
 
@@ -105,21 +111,6 @@ public class HouseController {
 		gui.updateSubtext(buyer, fieldToSell);
 		gui.updateBalance(seller);
 		gui.updateBalance(buyer);
-
-
-
-
-
-
-
-
-
-		//		p1.getAccount().removeField(gameboard, gameboard.getField(field.getIndex()));
-		//		p2.getAccount().buyField(price);
-		//		p1.getAccount().buyField(-price);
-		//		
-		//		gui.updateBalance(p1);
-		//		gui.updateBalance(p2);
 	}
 
 	public void pawnPropToBank(Territory territory){
