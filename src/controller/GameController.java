@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -16,7 +17,7 @@ import entity.player.PlayerList;
  */
 public class GameController {
 
-
+	private AudioPlayer dac;
 	private GUIController gui;
 	private PlayerList playerList;
 	private FieldController fc;
@@ -192,7 +193,7 @@ public void checkForDoubleDiceJail(int j) {
 
 		currentField = this.fc.getField(p.getPosition());
 
-		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
+		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList , this.dac);
 	}
 
 	private void jailDecision(Player p) {

@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Color;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.gameboard.Chance;
 import entity.gameboard.Company;
@@ -46,7 +47,7 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, PlayerList plist) {
+	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, PlayerList plist, AudioPlayer dac) {
 
 		if (field instanceof Territory) {
 
@@ -70,7 +71,7 @@ public class FieldController {
 
 		} else if (field instanceof GoToJail) {
 
-			goToJailLogic(gui, p);
+			goToJailLogic(gui, p, dac);
 
 		} else if (field instanceof Parking) {
 
@@ -78,7 +79,7 @@ public class FieldController {
 
 		} else if (field instanceof Chance) {
 
-			chanceLogic(gui, p, dc, plist);
+			chanceLogic(gui, p, dc, plist, dac);
 
 		}
 
@@ -341,10 +342,11 @@ public class FieldController {
 		gui.visitJailMessege(p);
 	}
 
-	private void goToJailLogic(GUIController gui, Player p) {
+	private void goToJailLogic(GUIController gui, Player p, AudioPlayer dac) {
 		gui.goToJailMessege(p);
 		p.setInJail(true);
 		gui.movePlayerInstantly(p, 10, false);
+		dac.playJailSound();
 	}
 
 	private void parkingLogic(GUIController gui, Player p) {
@@ -353,9 +355,9 @@ public class FieldController {
 
 	}
 
-	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist) {
+	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, AudioPlayer dac) {
 
-		dc.chanceField(p, plist, gui, this);
+		dc.chanceField(p, plist, gui, this, dac);
 
 		for (int i = 0; i < plist.getLength(); i++) {
 
