@@ -77,9 +77,10 @@ public class HouseController {
 					if (buyer.equals(playerList.getPlayer(j).getName())) 
 						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
-			if (buyer.equals("Banken")) {
+			
+			if (buyer.equals("Banken")) 
 				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
-			}
+			
 		}
 
 	}
