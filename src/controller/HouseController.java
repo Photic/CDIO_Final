@@ -68,18 +68,19 @@ public class HouseController {
 	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i) {
 		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));
 
-		if (terriToSell != null) {
+		if (terriToSell != null && !(terriToSell.equals("Fortryd"))) {
 			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
 
-			if (!(buyer.equals("Banken"))) {
+			if (!(buyer.equals("Banken")) && !(buyer.equals("Fortryd"))) {
 				int sellPrice = gui.priceToSellToOther();
 				for (int j = 0; j < playerList.getLength(); j++) 
 					if (buyer.equals(playerList.getPlayer(j).getName())) 
 						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
-			if (buyer.equals("Banken")) {
+			
+			if (buyer.equals("Banken")) 
 				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
-			}
+			
 		}
 
 	}
