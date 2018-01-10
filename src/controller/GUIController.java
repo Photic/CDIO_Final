@@ -386,7 +386,7 @@ public class GUIController {
 			
 		
 		
-		String[] fortryd = new String[] {"fortryd"};
+		String[] fortryd = new String[] {"Fortryd"};
 		playerNames = combineStringArrays(playerNames, fortryd);
 		
 		String output = gui.getUserSelection("Hvem vil du sælge til?", playerNames);
