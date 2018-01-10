@@ -14,7 +14,7 @@ Du købte et hus til
 , du er landet på en grund der kan købes.
 , du kan enten købe grunden eller lade vær.
 Køb
-Gør intet
+Lad gå på auktion
 , du er landet på en virksomhed der kan købes.
 , du kan enten købe virksomheden eller lade vær.
 , du er landet på et rederi der kan købes.
