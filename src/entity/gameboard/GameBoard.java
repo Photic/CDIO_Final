@@ -8,7 +8,7 @@ import boundary.TextReader;
 public class GameBoard {
 
 	/**
-	 * Colors
+	 * Local Colors
 	 */
 	private Color standard = new Color(208, 251, 230);
 	private Color purple = new Color(179, 102, 255);
@@ -24,6 +24,9 @@ public class GameBoard {
 	private Color white = new Color(255, 255, 255);
 	private Color brown = new Color(153, 102, 0);
 
+	/*
+	 * Local attributes.
+	 */
 	private Field[] fields;
 	private String[] fieldName;
 	private String[] fieldDescription;
@@ -41,6 +44,7 @@ public class GameBoard {
 			e.printStackTrace();
 		}
 
+		// Evert field in game.
 		this.fields = new Field[] 
 				{
 						new Start(fieldName[0], fieldDescription[0], standard,0),																			// 0
@@ -99,142 +103,48 @@ public class GameBoard {
 		return purple;
 	}
 
-
-
-	public void setPurple(Color purple) {
-		this.purple = purple;
-	}
-
-
-
 	public Color getGrey() {
 		return grey;
 	}
-
-
-
-	public void setGrey(Color grey) {
-		this.grey = grey;
-	}
-
-
 
 	public Color getPink() {
 		return pink;
 	}
 
-
-
-	public void setPink(Color pink) {
-		this.pink = pink;
-	}
-
-
-
 	public Color getOrange() {
 		return orange;
 	}
-
-
-
-	public void setOrange(Color orange) {
-		this.orange = orange;
-	}
-
-
-
+	
 	public Color getRed() {
 		return red;
 	}
-
-
-
-	public void setRed(Color red) {
-		this.red = red;
-	}
-
-
 
 	public Color getYellow() {
 		return yellow;
 	}
 
-
-
-	public void setYellow(Color yellow) {
-		this.yellow = yellow;
-	}
-
-
-
 	public Color getGreen() {
 		return green;
 	}
-
-
-
-	public void setGreen(Color green) {
-		this.green = green;
-	}
-
-
-
+	
 	public Color getBlue() {
 		return blue;
 	}
-
-
-
-	public void setBlue(Color blue) {
-		this.blue = blue;
-	}
-
-
 
 	public Color getTurkies() {
 		return turkies;
 	}
 
-
-
-	public void setTurkies(Color turkies) {
-		this.turkies = turkies;
-	}
-
-
-
 	public Color getMagenta() {
 		return magenta;
 	}
-
-
-
-	public void setMagenta(Color magenta) {
-		this.magenta = magenta;
-	}
-
-
 
 	public Color getWhite() {
 		return white;
 	}
 
-
-
-	public void setWhite(Color white) {
-		this.white = white;
-	}
-
-
-
 	public Color getBrown() {
 		return brown;
-	}
-
-
-
-	public void setBrown(Color brown) {
-		this.brown = brown;
 	}
 
 }
