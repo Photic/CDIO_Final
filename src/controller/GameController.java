@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -25,6 +26,7 @@ public class GameController {
 	private boolean playing;
 	private TextReader textReader;
 	private int alivePlayers;
+	private AudioPlayer dac;
 
 	/**
 	 * Constructor setting up the gamecontroller.
@@ -39,7 +41,7 @@ public class GameController {
 		this.dc = new DeckController(this.textReader);
 		this.playing = true;
 		this.dicecup = new DiceCup();
-
+		this.dac = new AudioPlayer();
 	}
 
 	/**
@@ -59,8 +61,11 @@ public class GameController {
 	 * Controls the flow of the game.
 	 */
 	private void gameLoop() {
+		
+		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
+		
 		boolean checker;
-
+		
 		if (this.alivePlayers == 1) {														// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
 				if (this.playerList.getPlayer(i).isBankrupt() == false) 					// Check if the current player is bankrupt
@@ -200,7 +205,7 @@ public class GameController {
 
 		currentField = this.fc.getField(p.getPosition());
 
-		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
+		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList, this.dac);
 	}
 
 	/**
