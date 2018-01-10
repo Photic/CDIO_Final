@@ -58,21 +58,6 @@ public class Player {
 		this.inJail = inJail;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public boolean isTurn() {
-		return turn;
-	}
-
-	public void setTurn(boolean turn) {
-		this.turn = turn;
-	}
 
 	public Account getAccount() {
 		return account;
