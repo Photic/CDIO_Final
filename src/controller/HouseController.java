@@ -89,14 +89,14 @@ public class HouseController {
 			Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));									//field to sell
 			if (terriToSell != null) {
 				String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
-				if (!(buyer.equals("Banken"))) {																//if the seller wants to sell to somebody else than the bank
+				if (!(buyer.equals(description[4]))) {																//if the seller wants to sell to somebody else than the bank
 					int sellPrice = gui.priceToSell();
 					
 					for (int j = 0; j < playerList.getLength(); j++) 											//loops through the playerlist to find the matching buyer
 						if (buyer.equals(playerList.getPlayer(j).getName())) 									
 							sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 				}
-				if (buyer.equals("Banken")) {																	//if the seller wants to sell to the bank
+				if (buyer.equals(description[4])) {																	//if the seller wants to sell to the bank
 					sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
 				}
 			}
