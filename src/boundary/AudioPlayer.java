@@ -15,7 +15,6 @@ public class AudioPlayer {
 	
 	public static void playSound(File fileName) {
 		try {
-			System.out.println("It worked");
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(fileName));
 			clip.start();
@@ -26,12 +25,11 @@ public class AudioPlayer {
 			System.out.println(e + " MY ASS");
 			// TODO: handle exception
 		}
+		
 	}
 	
 	public void playJailSound() {
 		playSound(alibrary.getJailSound());
 	}
-	//			File jail = new File("Jail.wav");
-	//			playSound(jail);
 	
 }
