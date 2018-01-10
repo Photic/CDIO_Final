@@ -161,7 +161,7 @@ public void checkForDoubleDiceJail(int j) {
 			
 			if(this.playerList.getPlayer(j).getJailCounterDice() == 3) {
 				
-				//besked til gui
+				this.gui.DoubleDiceJail();
 				
 				this.playerList.getPlayer(j).setInJail(false);
 				this.playerList.getPlayer(j).getAccount().addBalance(-1000);

@@ -669,6 +669,10 @@ public class GUIController {
 		this.gui.showMessage(p.getName() + this.description[47]);
 
 	}
+	
+	public void DoubleDiceJail(){
+		this.gui.showMessage(this.description[73]);
+	}
 
 
 	/**
