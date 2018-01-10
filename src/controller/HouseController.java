@@ -12,16 +12,7 @@ public class HouseController {
 
 		boolean decision;
 		String option;
-		boolean finished = false;
-
-//		// If the player does own all of the same kind of territories he should just roll the dice normally.
-//		if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {
-//			gui.rollDiceMessage(playerList.getPlayer(i));
-//			gc.takeTurn(playerList.getPlayer(i));
-//		} else {
-//			finished = false;
-//		}
-		
+		boolean finished = false;		
 		
 		while(finished != true) {
 			
@@ -81,7 +72,7 @@ public class HouseController {
 			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
 
 			if (!(buyer.equals("Banken"))) {
-				int sellPrice = gui.priceToSell();
+				int sellPrice = gui.priceToSellToOther();
 				for (int j = 0; j < playerList.getLength(); j++) 
 					if (buyer.equals(playerList.getPlayer(j).getName())) 
 						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);

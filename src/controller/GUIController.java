@@ -455,6 +455,11 @@ public class GUIController {
 		return gui.getUserInteger("Hvor meget oven i grundens pris vil du give?");
 	}
 	
+	public int priceToSellToOther() {
+		
+		return gui.getUserInteger("Hvad er den aftalte pris?");
+	}
+	
 	public void updateDescription(Field field) {
 		
 		for (int i = 0; i < gui.getFields().length; i++) 
