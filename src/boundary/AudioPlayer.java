@@ -15,10 +15,10 @@ public class AudioPlayer {
 	
 	public static void playSound(File fileName) {
 		try {
+			System.out.println("It worked");
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(fileName));
 			clip.start();
-			
 			// Makes the game sleep for lenght of clip. Sinece clip.get length is in microseconds, devide then by 1000.
 			Thread.sleep(clip.getMicrosecondLength()/1000);
 
@@ -29,7 +29,10 @@ public class AudioPlayer {
 	}
 	
 	public void playJailSound() {
-		playSound(alibrary.getJailSound());
+		File file =new File ("src/main/rsc/Jail.wav"); 
+		
+		System.out.println("It worked");
+		playSound(file);
 	}
 	//			File jail = new File("Jail.wav");
 	//			playSound(jail);

@@ -62,7 +62,7 @@ public class GameController {
 		boolean checker;
 //		//det her er bare til mathias. jeg bruger det til at teste det med at købe huse.
 //		fc.evaluateField(gameboard.getField(1), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
-//		fc.evaluateField(gameboard.getField(3), gui, playerList.getPlayer(0), 0, dc, gameboard, playerList);
+		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
 //		
 //		gameboard.getField(1).setHouses(1);
 
