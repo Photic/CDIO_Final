@@ -1,5 +1,6 @@
 package entity.player;
 
+import controller.AccountController;
 
 /**
  * Player class describing the player in the game.
@@ -15,7 +16,12 @@ public class Player {
 	private Account account;
 	private int numberOfEqualDice;
 	private int jailCounterDice; 
+	private AccountController ac;
 
+
+	public AccountController getAc() {
+		return ac;
+	}
 
 	public Player(String n) {
 		this.name = n;
@@ -23,6 +29,7 @@ public class Player {
 		this.bankrupt = false;
 		this.inJail = false;
 		this.position = 0;
+		ac = new AccountController(this);
 	}
 
 	//--------------------------------------------------------

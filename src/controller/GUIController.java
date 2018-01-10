@@ -418,19 +418,19 @@ public class GUIController {
 	 */
 	public Field sellTerritoryProp(Player p) {
 
-		String[] fieldNames = new String[p.getAccount().getFields().length + 1];
+		String[] fieldNames = new String[p.getAc().getFields().length + 1];
 
-		for (int i = 0; i < p.getAccount().getFields().length; i++) 
-			fieldNames[i] = p.getAccount().getFields()[i].getName();
+		for (int i = 0; i < p.getAc().getFields().length; i++) 
+			fieldNames[i] = p.getAc().getFields()[i].getName();
 
-		fieldNames[p.getAccount().getFields().length] = description[55];
+		fieldNames[p.getAc().getFields().length] = description[55];
 		String output = gui.getUserSelection(description[75], fieldNames);
 		Field outField = null;
 
 		if (!(output.equals(description[55]))) 
-			for (int i = 0; i < p.getAccount().getFields().length; i++) 
-				if (p.getAccount().getFields()[i].getName() == output) 
-					outField = p.getAccount().getFields()[i];
+			for (int i = 0; i < p.getAc().getFields().length; i++) 
+				if (p.getAc().getFields()[i].getName() == output) 
+					outField = p.getAc().getFields()[i];
 
 		return outField;
 	}

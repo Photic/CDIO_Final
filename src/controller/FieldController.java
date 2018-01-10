@@ -117,7 +117,7 @@ public class FieldController {
 		
 				p.getAccount().buyField(field.getPrice()); 														
 				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1)); 							
-				p.getAccount().addField(field, this); 															
+				p.getAc().addField(field, this); 															
 				gui.updateBalance(p); 																			
 				field.setOwner(p); 																				
 				field.setOwned(true); 																			
@@ -136,7 +136,7 @@ public class FieldController {
 					//loop through the playerlist, and when the player(i) matches the buyer, then begin all the buy field things.
 					for (int i = 0; i < plist.getLength(); i++) 
 						if (plist.getPlayer(i).getName().equals(buyer)) {
-							plist.getPlayer(i).getAccount().addField(field, this);
+							plist.getPlayer(i).getAc().addField(field, this);
 							plist.getPlayer(i).getAccount().buyField(field.getPrice() + price);
 
 							field.setOwned(true);

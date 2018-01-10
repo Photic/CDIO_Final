@@ -16,11 +16,11 @@ public class HouseController {
 		
 		while(finished != true) {
 			
-			if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {
+			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {
 				gui.rollDiceMessage(playerList.getPlayer(i));
 				gc.takeTurn(playerList.getPlayer(i));
 				finished = true;
-			} else if (playerList.getPlayer(i).getAccount().numberOfTerri() > 0) {
+			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {
 				// If the player does have all of a kind, he should be offered the oppertunity to manage houses.
 				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));
 
@@ -33,12 +33,12 @@ public class HouseController {
 
 					option = "fortryd";
 					
-					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAccount().hasAllOfAKind());
+					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAc().hasAllOfAKind());
 
 					if (option.equals("Køb huse")) {
-						gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
+						gui.buyHouses(playerList.getPlayer(i).getAc().allOfAKindFields());
 					} else if (option.equals("Sælg huse")) {
-						gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
+						gui.sellHouses(playerList.getPlayer(i).getAc().getFields());
 					} else if (option.equals("Sælg grund")) {
 						sellProp(gui, playerList, fc, i);
 					}
@@ -50,7 +50,7 @@ public class HouseController {
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());
-		seller.getAccount().removeField(fc, field);
+		seller.getAc().removeField(fc, field);
 		seller.getAccount().sellField((int)(price * 0.5));
 		field.setOwned(false);
 		field.setOwner(null);
@@ -101,9 +101,9 @@ public class HouseController {
 		seller.getAccount().sellField(price);
 		buyer.getAccount().buyField(price);
 
-		seller.getAccount().removeField(fc, fieldToSell);
+		seller.getAc().removeField(fc, fieldToSell);
 
-		buyer.getAccount().addField(fieldToSell, fc);
+		buyer.getAc().addField(fieldToSell, fc);
 
 
 		gui.updateSubtext(buyer, fieldToSell);
