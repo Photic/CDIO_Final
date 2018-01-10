@@ -55,7 +55,7 @@ public class DeckController {
 			firstGameCycle = false;
 		}
 
-		gui.chanceMessege(cardPicked.getDescription());
+		gui.chanceMessage(cardPicked.getDescription());
 		gui.showMessage();
 		
 		// Logic that look at which card is picked, and afterwords runs the appopriate function.

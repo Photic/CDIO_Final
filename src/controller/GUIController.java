@@ -22,7 +22,11 @@ public class GUIController {
 	private int playerCount;
 	private String[] description;
 
-
+	/**
+	 * The contructor to the guiController.
+	 * @param tr
+	 * The textreader. It is used to create a String array with all text used in the GUIController.
+	 */
 	public GUIController(TextReader tr) {
 		try {
 			this.description = tr.textFromFile("src/main/rsc/guiText.txt");
@@ -32,6 +36,11 @@ public class GUIController {
 		}
 	}
 
+	/**
+	 * Defines the gui. It shows the gameboard on the gui.
+	 * @param fc
+	 * The FieldController
+	 */
 	public void defineGUI(FieldController fc) {
 		GUI_Field[] gui_fields = new GUI_Field[fc.getBoardLength()];
 
@@ -49,36 +58,37 @@ public class GUIController {
 
 	}
 
+	/**
+	 * This method registers players.
+	 * @return
+	 * A PlayerList with the registered players.
+	 */
 	public PlayerList registerPlayerCount() {
 
-		String[] nopArray = {"2", "3", "4", "5", "6"};
-		String nop = this.gui.getUserSelection(this.description[0], nopArray);
-		GUI_Car gui_car;
-		String name;
+		String[] nopArray = {"2", "3", "4", "5", "6"};																// The array with the options of how many players to register
+		String nop = this.gui.getUserSelection(this.description[0], nopArray);										// The choice the players make
+		GUI_Car gui_car;																							// Get ready to make a car for every player
+		String name;																								// Get ready to save a given playername
+		Color[] colors = new Color[] {Color.red, Color.black, Color.blue, Color.yellow, Color.white, Color.green};
 
-		int index;
 
-		this.playerCount = Integer.parseInt(nop);
-		String[] names = new String[this.playerCount];
-		this.gui_players = new GUI_Player[this.playerCount];
+		int index;																									// A counter.
 
-		for (int i = 0; i <= this.playerCount - 1; i++) {
-			index = i + 1;
+		this.playerCount = Integer.parseInt(nop);																	// Define the playerCount. Use the choice from the players
+		String[] names = new String[this.playerCount];																// Create a String array with the length of playerCount
+		this.gui_players = new GUI_Player[this.playerCount];														// Create a GUI_Player array with the length of playerCount
 
-			name = this.gui.getUserString(this.description[1] + index + this.description[2]);
-			if (name.length() <= 0) {
+		for (int i = 0; i <= this.playerCount - 1; i++) {															// Loop through the players
+			index = i + 1;																							// define the index
+			name = this.gui.getUserString(this.description[1] + index + this.description[2]);						// Ask for a name
+
+			if (name.length() <= 0) 																				// if the player doesn't write anything, then let the player be called JaneDoe
 				name = "JaneDoe";
-			}
 
-			gui_car = new GUI_Car();
+			gui_car = new GUI_Car();																				// Create a car for the player
+			gui_car.setPrimaryColor(colors[i]);																		// Give the car a color
 
-
-			int[] color = randomColorGenerator();
-
-			gui_car.setPrimaryColor(new Color (color[0], color[1], color[2]));
-
-
-			if (!(contains(names, name))) {
+			if (!(contains(names, name))) {																			// Make sure the same name is not created twice
 				names[i] = name;
 			} else {
 				int count = 2;
@@ -96,12 +106,13 @@ public class GUIController {
 			}
 
 
-			this.gui_players[i] = new GUI_Player(names[i], 30000, gui_car);
+			this.gui_players[i] = new GUI_Player(names[i], 30000, gui_car);											// Create the gui_player with the name, 30000 starting money and the car.
 
 		}
-		PlayerList playerList = new PlayerList(this.playerCount, names);
 
-		String output = this.description[3];
+		PlayerList playerList = new PlayerList(this.playerCount, names);											// Create the player list with the registered players
+
+		String output = this.description[3];																		// Prepare for a message that tells who was registered.
 		for (int i = 0; i < playerList.getLength(); i++) {
 			output = output + playerList.getPlayer(i).getName() + ", ";
 
@@ -113,34 +124,29 @@ public class GUIController {
 
 	}
 
+	/**
+	 * This method removes a bankrupted player on the gui.
+	 * @param p
+	 * The player to be removed
+	 * @param fc
+	 * The fieldController
+	 */
 	public void removeBankrupted(Player p, FieldController fc) {
 
-		for (int i = 0; i < this.gui_players.length; i++) {
+		for (int i = 0; i < this.gui_players.length; i++) 
 			if (this.gui_players[i].getName() == p.getName()) {
 				this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 				this.gui_players[i].setBalance(0);
 
-
-				for (int j = 0; j < fc.getBoardLength(); j++) {
-
-					if (fc.getField(j).getOwner() != null) {
+				for (int j = 0; j < fc.getBoardLength(); j++) 
+					if (fc.getField(j).getOwner() != null) 
 						if (fc.getField(j).getOwner().getName() == p.getName()) {
-
 							fc.getField(j).setOwned(false);
 							fc.getField(j).setOwner(null);
 							this.gui.getFields()[j].setSubText(this.gui.getFields()[j].getDescription());
 							this.gui.getFields()[j].setDescription(this.gui.getFields()[j].getTitle());
-
 						}
-					}
-
-
-				}
-
 			}
-
-		}
-
 	}
 
 	/**
@@ -150,7 +156,6 @@ public class GUIController {
 	 * @param fields
 	 * The owned fields that the player has all of the kind in.
 	 */
-
 	public void buyHouses(Field[] fields) {
 		boolean sameHeight = true;
 		int highestHouse = 0;
@@ -158,6 +163,7 @@ public class GUIController {
 		String[] territories = new String[] {};
 		String[] c = new String[fields.length];
 
+		//First create an array of unique colors
 		int counter = 0;
 		for (int i = 0; i < fields.length; i++) 
 			if (!(contains(c, fields[i].getColor().toString()))) {
@@ -165,27 +171,20 @@ public class GUIController {
 				counter++;
 			}
 
-
 		String[] colorCheck = new String[counter];
 
 		for (int i = 0; i < colorCheck.length; i++) 
 			colorCheck[i] = c[i];
 
-
-
-
-
-
-		// HERE IT STARTS!!!
-		for (int k = 0; k < colorCheck.length; k++) {
+		for (int k = 0; k < colorCheck.length; k++) {																						// Loop through the unique colors
 
 			int lengthOfArray = 0;
-			for (int l = 0; l < fields.length; l++) 
-				if (fields[l].getColor().toString().equals(colorCheck[k])) {
+			for (int l = 0; l < fields.length; l++) 																						// Loop through the fields
+				if (fields[l].getColor().toString().equals(colorCheck[k])) 																	// I the current field's color is the current color in the unique color list
 					lengthOfArray++;
-				}
 
-			Field[] currentFields = new Field[lengthOfArray];
+
+			Field[] currentFields = new Field[lengthOfArray];																				// Now it creates an array with fields of the current color
 			int count = 0;
 
 			for (int l = 0; l < fields.length; l++) 
@@ -194,74 +193,57 @@ public class GUIController {
 					count++;
 				}
 
-			//First find out what height the highest house is, and if they are all at the same height.
-			for (int i = 0; i < currentFields.length; i++) {
-				if (currentFields[i].getHouses()>highestHouse)
-					highestHouse = currentFields[i].getHouses();
 
-				if (!(currentFields[i].getHouses() == currentFields[0].getHouses())) {
-					sameHeight = false;	
-				}
+			for (int i = 0; i < currentFields.length; i++) {																				// Loop through the current fields
+				if (currentFields[i].getHouses()>highestHouse)																				// Find the highest house
+					highestHouse = currentFields[i].getHouses();																			
+
+				if (!(currentFields[i].getHouses() == currentFields[0].getHouses())) 														// If the current house is different from the first in the array
+					sameHeight = false;																										// Then they are not the same height.
 			}
 
+			// Now we need to figure out which options the player should have. The player should not be able to build uneven, and thus same heigth defines the options
 
+			if (highestHouse != 5) {																										// If the highest House is not 5 (else nothing happens)
 
-			if (highestHouse != 5) {
-				
-				if (sameHeight == true && highestHouse != 5) {
-					System.out.println(currentFields.length);
-					territories = new String[currentFields.length];
+				if (sameHeight == true) {																									// If they are the same heigth
+					territories = new String[currentFields.length];																			// All the current fields should be presented as a option to the player
 
 					for (int i = 0; i < territories.length; i++) 
 						territories[i] = currentFields[i].getName() + description[4] + currentFields[i].getHouses() + description[5];	
 
-				} else {
-					//If the houses does not have the same heigth, we have to find out how many houses are lower than the highest, and represent only them.
-					int counting = 0;
-					for (int i = 0; i < currentFields.length; i++) {
-						if (currentFields[i].getHouses() < highestHouse) {
-							counting++;
-						}
-					}
+				} else {																													// If they are not the same heigth, only the lower ones should be an option
 
-					territories = new String[counting];
+					int counting = 0;
+					for (int i = 0; i < currentFields.length; i++) 																			// Figure out how many of the current fields have lower houses
+						if (currentFields[i].getHouses() < highestHouse) 
+							counting++;
+
+					territories = new String[counting];																						// Create a new array with that amount.
 
 					int countere = 0;
-
-					for (int i = 0; i < currentFields.length; i++) {
+					for (int i = 0; i < currentFields.length; i++) 																			// Put the fields with low houses in that array
 						if (currentFields[i].getHouses() < highestHouse) {
 							territories[countere] = currentFields[i].getName() + description[4] + currentFields[i].getHouses() + description[5];
 							countere++;
 						}
-					}
-
-
 				}
-
-
-
 			}
 
-
-			output = combineStringArrays(output, territories);
-
+			output = combineStringArrays(output, territories);																				// Combine the current territories into the output array. (So that different colors are handled seperately)
 
 		}
 
-		
-		
-		
-		//Now we have fields to be represented ready and ask the user wich one he would like to build on.
+		//Now we have fields to be represented ready and ask the user which one he would like to build on.
 
-		String[] fortryd = new String[] {"Fortryd"};
+		String[] fortryd = new String[] {description[55]};																					// Create a return button.
 		output = combineStringArrays(output, fortryd);
-		
-		String selected = gui.getUserSelection(description[6], output);
-		String real = selected.split(",")[0];
 
-		if (!(real.equals(description[55]))) {
-			for (int i = 0; i < fields.length; i++) {
+		String selected = gui.getUserSelection(description[6], output);																		// Ask for user selection
+		String real = selected.split(",")[0];																								// Split the string (so that we only have the name of the territory in a string.
 
+		if (!(real.equals(description[55]))) 																								// If the return button is not pressed
+			for (int i = 0; i < fields.length; i++) 																						// find the field chosen, and but a house on it and make the owner pay for it.
 				if (fields[i].getName().equals(real)) {
 					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
 
@@ -273,21 +255,16 @@ public class GUIController {
 					gui.showMessage(description[7] + fields[i].getName() + description[8] + fields[i].getHousePrice() + description[9] + fields[i].getName() + description[10] + fields[i].getHouses() + description[11]);
 
 				}
-
-			}
-
-		}
 	} 
 
 	/**
-	 * This method deals with the scenario where the user wants to sell houses.
+	 * This method deals with the scenario where the user wants to sell houses. It works in much the same way as buy houses, but it handles the selling instead.
 	 * @param fields
 	 * All the player's fields
 	 */
 	public void sellHouses(Field[] fields) {
 		int count = 0;
 
-		//Find out how many fields that has houses
 		for (int i = 0; i < fields.length; i++) 
 			if (fields[i].getHouses() > 0)
 				count++;
@@ -311,9 +288,8 @@ public class GUIController {
 			String selected = this.gui.getUserSelection(this.description[56], hasHouses);
 			String real = selected.split(",")[0];
 
-			if (!(real.equals(this.description[55]))) {
-				for (int i = 0; i < fields.length; i++) {
-
+			if (!(real.equals(this.description[55]))) 
+				for (int i = 0; i < fields.length; i++) 
 					//sell a house on the selected territory
 					if (fields[i].getName().equals(real)) {
 						fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() - 1);
@@ -331,18 +307,16 @@ public class GUIController {
 								this.description[10] + fields[i].getHouses() + 
 								this.description[11]
 								);
-						
+
 					}
-
-				}
-
-			}
-
 		}
 
 	}
 
-
+	/**
+	 * Use the gui to show a winner message
+	 * @param p
+	 */
 	public void showWinner(Player p) {
 
 		String output = p.getName() + this.description[12];
@@ -350,7 +324,16 @@ public class GUIController {
 		this.gui.showMessage(output);
 
 	}
-	
+
+	/**
+	 * Show the different options that the player can chose from when handling his territory
+	 * @param p
+	 * The current player
+	 * @param hasAll
+	 * The current players' has all boolean
+	 * @return
+	 * The choice the player made. A string
+	 */
 	public String territoryOptions(Player p, boolean hasAll) {
 		String[] options;
 		if (hasAll == true) {
@@ -364,121 +347,141 @@ public class GUIController {
 		return choice;
 	}
 
-
-	
+	/**
+	 * Shows the options to the player, when he wants to sell a territory
+	 * @param seller
+	 * The seller
+	 * @param plist
+	 * The player lits
+	 * @return
+	 * The choice he made. A String
+	 */
 	public String sellTerritory(Player seller, PlayerList plist) {
 		String[] playerNames = new String[plist.getLength()];
-		
-	
+
 		int counter = 0;
-		
-		playerNames[counter] = "Banken";
+
+		playerNames[counter] = description[71];
 		counter++;
-		
+
 		for (int i = 0; i < plist.getLength(); i++) 
 			if (!(plist.getPlayer(i).getName().equals(seller.getName()))) {
 				playerNames[counter] = plist.getPlayer(i).getName();
 				counter++;
 			}
-				
-		
 
-			
-		
-		
-		String[] fortryd = new String[] {"Fortryd"};
+		String[] fortryd = new String[] {description[55]};
 		playerNames = combineStringArrays(playerNames, fortryd);
-		
-		String output = gui.getUserSelection("Hvem vil du sælge til?", playerNames);
-		
+		String output = gui.getUserSelection(description[72], playerNames);
 
-		
 		return output;
-		
+
 	}
-	
-	public String sellTerritory(Player seller, PlayerList plist, Field field) {
+
+	/**
+	 * Deals with the scenario where the territory goes on auction.
+	 * @param p
+	 * The player who landed on the field
+	 * @param plist
+	 * The playerList
+	 * @param field
+	 * The field to be set on auction
+	 * @return
+	 * The choice made
+	 */
+	public String auctionTerritory(Player p, PlayerList plist, Field field) {
 		String[] playerNames = new String[plist.getLength() - 1];
-		
+
 		int counter = 0;
-		
+
 		for (int i = 0; i < plist.getLength(); i++) 
-			if (!(plist.getPlayer(i).getName().equals(seller.getName()))) {
+			if (!(plist.getPlayer(i).getName().equals(p.getName()))) {
 				playerNames[counter] = plist.getPlayer(i).getName();
 				counter++;
 			}
-				
-		
 
-			
-		
-		
-		String[] fortryd = new String[] {"Ingen Køber"};
+		String[] fortryd = new String[] {description[73]};
 		playerNames = combineStringArrays(playerNames, fortryd);
-		
-		String output = gui.getUserSelection(field.getName() + " er nu på auktion. Er der andre der vil købe grunden?", playerNames);
-		
 
-		
+		String output = gui.getUserSelection(field.getName() + description[74], playerNames);
+
 		return output;
-		
 	}
-	
-	
-	
+
+
+	/**
+	 * Deals with the scenario where the player chooses to sell a territory
+	 * @param p
+	 * The player who wants to sell
+	 * @return
+	 * The field that the player wants to sell
+	 */
 	public Field sellTerritoryProp(Player p) {
-		
+
 		String[] fieldNames = new String[p.getAccount().getFields().length + 1];
 
 		for (int i = 0; i < p.getAccount().getFields().length; i++) 
 			fieldNames[i] = p.getAccount().getFields()[i].getName();
-		
-		fieldNames[p.getAccount().getFields().length] = "Fortryd";
-		String output = gui.getUserSelection("Hvilket territory vil du sælge?", fieldNames);
-		Field outField = null;
-		
-		if (!(output.equals("Fortryd"))) {
-			for (int i = 0; i < p.getAccount().getFields().length; i++) {
-				if (p.getAccount().getFields()[i].getName() == output) {
-					outField = p.getAccount().getFields()[i];
-				}
-			}
-		}
-		
 
-		
+		fieldNames[p.getAccount().getFields().length] = description[55];
+		String output = gui.getUserSelection(description[75], fieldNames);
+		Field outField = null;
+
+		if (!(output.equals(description[55]))) 
+			for (int i = 0; i < p.getAccount().getFields().length; i++) 
+				if (p.getAccount().getFields()[i].getName() == output) 
+					outField = p.getAccount().getFields()[i];
+
 		return outField;
 	}
-	
+
+	/**
+	 * A message to ask for how much a player will pay + the fields price
+	 * @return
+	 */
 	public int priceToSell() {
-		
-		return gui.getUserInteger("Hvor meget oven i grundens pris vil du give?");
+
+		return gui.getUserInteger(description[76]);
 	}
-	
+
+	/**
+	 * A message when you want to sell to another player
+	 * @return
+	 */
 	public int priceToSellToOther() {
-		
-		return gui.getUserInteger("Hvad er den aftalte pris?");
+
+		return gui.getUserInteger(description[77]);
 	}
-	
+
+	/**
+	 * Updates the gui descirption on a field.
+	 * @param field
+	 */
 	public void updateDescription(Field field) {
-		
+
 		for (int i = 0; i < gui.getFields().length; i++) 
-			if (gui.getFields()[i].getTitle().equals(field.getName())) {
+			if (gui.getFields()[i].getTitle().equals(field.getName())) 
 				gui.getFields()[i].setDescription(gui.getFields()[i].getSubText());
-			}
 
 	}
 
-	
+	/**
+	 * Updates the subtext on the field to the newOwners name
+	 * @param newOwner
+	 * @param field
+	 */
 	public void updateSubtext(Player newOwner, Field field) {
 
 		for (int i = 0; i < gui.getFields().length; i++) 
-			if (gui.getFields()[i].getTitle().equals(field.getName())) {
+			if (gui.getFields()[i].getTitle().equals(field.getName())) 
 				gui.getFields()[i].setSubText(newOwner.getName());
-			}
-		
+
 	}
-	
+
+	/**
+	 * Updates the subtext back the fields price (if it is on the market again
+	 * @param field
+	 */
 	public void updateSubtextReversed(Field field) {
 
 		for (int i = 0; i < gui.getFields().length; i++) 
@@ -486,10 +489,15 @@ public class GUIController {
 				gui.getFields()[i].setSubText(gui.getFields()[i].getDescription());
 				gui.getFields()[i].setDescription(gui.getFields()[i].getTitle());
 			}
-		
+
 	}
-	
-	
+
+	/**
+	 * Asks the player if he wants to buy a field
+	 * @param p
+	 * @return
+	 * If he wants to buy or not.
+	 */
 	public boolean territoryDecision(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[13]);
@@ -498,35 +506,59 @@ public class GUIController {
 
 	}
 
+	/**
+	 * Asks if the player wants to buy a territory
+	 * @param p
+	 * @return
+	 */
 	public boolean companyDecision(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[17]);
 
-		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[18], this.description[15], this.description[16]);
+		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[18], this.description[15], this.description[78]);
 	}
 
+	/**
+	 * Aks if the player wants to buy a shipping field
+	 * @param p
+	 * @return
+	 */
 	public boolean shippingDecision(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[19]);
 
-		return gui.getUserLeftButtonPressed(p.getName() + this.description[20], this.description[15], this.description[16]);
+		return gui.getUserLeftButtonPressed(p.getName() + this.description[20], this.description[15], this.description[78]);
 
 	}
 
+	/**
+	 * Asks if the player wishes to pay 10% og 4000 in tax
+	 * @param p
+	 * @return
+	 */
 	public boolean taxDecision(Player p) {
 		gui.showMessage(description[21]);
 
 		return gui.getUserLeftButtonPressed(
 				p.getName() + this.description[22], this.description[23], this.description[24]);
-
 	}
 
+	/**
+	 * Show a tax message
+	 * @param p
+	 */
 	public void taxMessage(Player p) {
 
 		gui.showMessage(p.getName() + this.description[25]);
 
 	}
 
+	/**
+	 * If the player buys a field, show a message, else show another message
+	 * @param b
+	 * @param field
+	 * @param p
+	 */
 	public void transaction(boolean b, Field field, Player p) {
 
 		if (b == true) {
@@ -538,13 +570,16 @@ public class GUIController {
 					);
 
 		} else {
-
 			this.gui.showMessage(p.getName() + this.description[29] + field.getName());
-
 		}
 
 	}
 
+	/**
+	 * Show a message when a player pays rent
+	 * @param field
+	 * @param p
+	 */
 	public void payRentMessege(Field field, Player p) {
 		this.gui.showMessage(
 				p.getName() + this.description[30] + 
@@ -554,6 +589,12 @@ public class GUIController {
 				);
 	}
 
+	/**
+	 * Show a payrent message, but with a multiplier of the rent
+	 * @param field
+	 * @param p
+	 * @param multiplier
+	 */
 	public void payRentMessege(Field field, Player p, int multiplier) {
 		int rent = multiplier*field.getCurrentRent();
 		this.gui.showMessage (
@@ -566,6 +607,11 @@ public class GUIController {
 				);
 	}
 
+	/**
+	 * Show a message when you pay shipping rent
+	 * @param field
+	 * @param p
+	 */
 	public void payRentShippingMessege(Field field, Player p) {
 
 		this.gui.showMessage (
@@ -577,86 +623,97 @@ public class GUIController {
 				);
 	}
 
+	/**
+	 * A message to play when you visit jail.
+	 * @param p
+	 */
 	public void visitJailMessege(Player p) {
 		this.gui.showMessage(p.getName() + this.description[37]);
 	}
 
-
+	/**
+	 * A message to play when you are put in jail.
+	 * @param p
+	 */
 	public void goToJailMessege(Player p) {
-
 		this.gui.showMessage(p.getName() + this.description[38]);
-
 	}
 
+	/**
+	 * A message to play when you are parking.
+	 * @param p
+	 */
 	public void parkingMessege(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[39]);
 
 	}
 
-	public void chanceMessege(String chanceMessege) {
+	/**
+	 * Players a message whe landing on a chance
+	 * @param chanceMessege
+	 */
+	public void chanceMessage(String chanceMessege) {
 		this.gui.displayChanceCard(chanceMessege);
 		this.gui.displayChanceCard();
 	}
 
+	/**
+	 * Set the owner text on a field. Requires the player to stand on the field.
+	 * @param p
+	 */
 	public void setOwnerText(Player p) {
-
 		this.gui.getFields()[p.getPosition()].setDescription(this.gui.getFields()[p.getPosition()].getSubText());
-
 		this.gui.getFields()[p.getPosition()].setSubText(p.getName());
-
-
 	}
 
+	/**
+	 * Asks for decisions when the player is in jail.
+	 * @param p
+	 * @return
+	 */
 	public int inJailDecision(Player p) {
 
 		int decision = 0;
 
 		if(p.getAccount().getAmountOfCards()>0) {
-
 			String[] jailDecision = {this.description[40], this.description[41], this.description[42]};
-
 			String decisionMade = this.gui.getUserSelection(this.description[43], jailDecision);
 
 			if (decisionMade == this.description[40]) {
-
 				decision = 1;
-
 			} else if (decisionMade == this.description[41]) {
-
 				decision = 2;
-
 			} else if (decisionMade == this.description[42]) {
-
 				decision = 3;
-
 			}
 
 		}
 		else {
 			String[] jailDecision = {this.description[40], this.description[41]};
-
 			String decisionMade = this.gui.getUserSelection(p.getName() + this.description[43], jailDecision);
 
 			if (decisionMade == this.description[40]) {
-
 				decision = 1;
-
 			} else if (decisionMade == this.description[41]) {
-
 				decision = 2;
 			}
 		}
 		return decision;
-
 	}
 
+	/**
+	 * A message when the player is sat free.
+	 * @param p
+	 */
 	public void jailFreePay(Player p) {
-
 		this.gui.showMessage(p.getName() + this.description[44]);
-
 	}
 
+	/**
+	 * A message when you are in jail.
+	 * @param p
+	 */
 	public void jailEqualsTrue(Player p) {
 
 		this.gui.showMessage(p.getName() + this.description[45]);
@@ -700,12 +757,15 @@ public class GUIController {
 	}
 
 
-
+	/**
+	 * Combines to string arrays
+	 * @param first
+	 * @param second
+	 * @return
+	 */
 	public String[] combineStringArrays(String[] first, String[] second) {
 
-
 		String[] output = new String[first.length + second.length];
-
 		int counter = 0;
 
 		for (int i = 0; i < first.length; i++) {
@@ -717,7 +777,6 @@ public class GUIController {
 			output[counter] = second[i];
 			counter++;
 		}
-
 
 		return output;
 	}
@@ -738,9 +797,7 @@ public class GUIController {
 	/**
 	 * This is the main move method. It moves the player to a new position given the dicesum.
 	 * 
-	 * The plyaer recieves 4000 if he passes start.
-	 * 
-	 * 
+	 * The player recives 400 if he passes start
 	 * @param p
 	 * The player to be moved.
 	 * @param diceSum
@@ -751,10 +808,8 @@ public class GUIController {
 		int newPosition = (p.getPosition() + diceSum) % 40;
 		int initPosition = (p.getPosition());
 
-		for (int i = 0; i < this.gui_players.length; i++) {
-
-			if (this.gui_players[i].getName() == p.getName()) {
-
+		for (int i = 0; i < this.gui_players.length; i++) 
+			if (this.gui_players[i].getName() == p.getName()) 
 				while(p.getPosition() != newPosition) {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
@@ -766,33 +821,18 @@ public class GUIController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
-			}
-
-
-		}
+			
 
 		if (initPosition > newPosition) {
-
 			p.getAccount().setBalance(p.getAccount().getBalance() + 4000);
 			updateBalance(p);
 			this.gui.showMessage(p.getName() + this.description[48]);
-
 		}
 
 	}
 
 
-	public void doubleDiceMessage(Player p) {
-
-		this.gui.showMessage(p.getName() + this.description[61] + p.getName() + this.description[62] +p.getNumberOfEqualDice() + this.description[63]);
-
-	}
-
-	public void doubleDiceJail(Player p) {
-		this.gui.showMessage(p.getName() + this.description[64] + p.getName() + this.description[65]);
-	}
 
 
 
@@ -887,19 +927,23 @@ public class GUIController {
 
 
 	}
-
-
-
-	public void rollDiceMessage(Player p) {
-		//gui.showMessage(p.getName() + " please roll the dice");
-		this.gui.getUserButtonPressed(p.getName() + this.description[49], this.description[50]);
-
+	/**
+	 * A message when the player rolls a double.
+	 * @param p
+	 */
+	public void doubleDiceMessage(Player p) {
+		this.gui.showMessage(p.getName() + this.description[61] + p.getName() + this.description[62] +p.getNumberOfEqualDice() + this.description[63]);
 	}
 
+	public void doubleDiceJail(Player p) {
+		this.gui.showMessage(p.getName() + this.description[64] + p.getName() + this.description[65]);
+	}
+
+	public void rollDiceMessage(Player p) {
+		this.gui.getUserButtonPressed(p.getName() + this.description[49], this.description[50]);
+	}
 
 	public boolean rollDiceMessageUpdated(Player p) {
-
-
 		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[51], this.description[50], this.description[52]);
 	}
 
@@ -907,46 +951,11 @@ public class GUIController {
 		this.gui.setDice(dc.getD1().getValue(), dc.getD2().getValue());
 	}
 
-
-
-
 	public void updateBalance(Player p) {
 
-		for (int i = 0; i < this.gui_players.length; i++) {
-			if (this.gui_players[i].getName() == p.getName()) {
+		for (int i = 0; i < this.gui_players.length; i++) 
+			if (this.gui_players[i].getName() == p.getName()) 
 				this.gui_players[i].setBalance(p.getAccount().getBalance());
-			}
-
-		}
-
-	}
-
-	public void setDice(DiceCup dc) {
-
-	}
-
-	public void setOwner(Player p) {
-
-	}
-
-	public void removeBankruptOwner(int index) {
-
-	}
-
-	public void removeBankruptPlayer(Player p) {
-
-	}
-
-	//Generer tilfældige farver til bilerne
-	private int[] randomColorGenerator() {
-		int[] rgb = new int[3];
-		Random rng = new Random();
-
-		for (int i = 0; i < rgb.length; i++) {
-			rgb[i] = rng.nextInt(255);
-		}
-
-		return rgb;
 	}
 
 	public void showMessage() {

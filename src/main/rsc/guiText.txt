@@ -69,6 +69,12 @@ Sælg Huse
  betaler altså 
  Du har trukket et chanceKort
 Sælg grund
- 
- 
+Banken
+Hvem vil du sælge til?
+Ingen Køber
+ er nu på auktion. Er der andre der vil købe grunden?
+Hvilket territory vil du sælge?
+Hvor meget oven i grundens pris vil du give?
+Hvad er den aftalte pris?
+Gør intet
  

@@ -103,7 +103,7 @@ public class FieldController {
 
 			} else {
 
-				String buyer = gui.sellTerritory(p, plist, field);
+				String buyer = gui.auctionTerritory(p, plist, field);
 
 				
 				
