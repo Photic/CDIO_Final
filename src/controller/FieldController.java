@@ -17,7 +17,7 @@ import entity.player.Player;
 import entity.player.PlayerList;
 
 /**
- * The FieldController controls the gameboard and the main responsibility of the controller, is to evaluate actions to be executed when a player lands on a given field.
+ * The FieldController controls the gameboard and the main responsibility of the controller, is to evaluate actions to be executed, when a player lands on a given field.
  *
  */
 
@@ -32,6 +32,12 @@ public class FieldController {
 		return hc;
 	}
 
+	
+	/**
+	 * FieldControllers contructor 
+	 * @param name
+	 * a text reader loaded from a TextReader class
+	 */
 	public FieldController(TextReader name) {
 		this.gameBoard = new GameBoard(name);
 		this.hc = new HouseController();
@@ -48,6 +54,8 @@ public class FieldController {
 	 */
 	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, PlayerList plist) {
 
+		
+		//Denne if/else if statement tager højde for hvilket felt der bliver landet på, og udfører den givne logik på feltet.
 		if (field instanceof Territory) {
 
 			territoryLogic(field, gui, plist, p, this.gameBoard);
@@ -83,32 +91,49 @@ public class FieldController {
 		}
 
 	}
-
+	
+	/**
+	 * makes the territory logic, when the player lands on a territory.
+	 * @param field
+	 * Current field
+	 * @param gui
+	 * Instance of GUIController
+	 * @param plist
+	 * Instance of PlayerList
+	 * @param p
+	 * The current playing player
+	 * @param gb
+	 * Instance of GameBoard
+	 */
 	private void territoryLogic(Field field, GUIController gui, PlayerList plist, Player p, GameBoard gb) {
-
+		
+		//is the field owned?
 		if(field.isOwned() == false) {
-			boolean decision = gui.territoryDecision(p);
+			//boolean take the decision from the user. True = buy, False = place on auction
+			boolean decision = gui.territoryDecision(p); 															
 
+			//make the logic if the user want to buy the current field.
 			if (decision == true) {
-				p.getAccount().buyField(field.getPrice());
-				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1));
-
-				p.getAccount().addField(field, this);
-
-				gui.updateBalance(p);
-
-				field.setOwner(p);
-				field.setOwned(true);
-				gui.setOwnerText(p);
+		
+				p.getAccount().buyField(field.getPrice()); 														
+				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1)); 							
+				p.getAccount().addField(field, this); 															
+				gui.updateBalance(p); 																			
+				field.setOwner(p); 																				
+				field.setOwned(true); 																			
+				gui.setOwnerText(p); 																			
 
 			} else {
 
 				String buyer = gui.auctionTerritory(p, plist, field);
 
 				
-				
+				//is there a owner?
 				if (!(buyer.equals("Ingen Køber"))) {
+					//the input price from the user
 					int price = gui.priceToSell();
+					
+					//loop through the playerlist, and when the player(i) matches the buyer, then begin all the buy field things.
 					for (int i = 0; i < plist.getLength(); i++) 
 						if (plist.getPlayer(i).getName().equals(buyer)) {
 							plist.getPlayer(i).getAccount().addField(field, this);
@@ -124,26 +149,22 @@ public class FieldController {
 
 						}
 				}
-
-
-
-
-
-
-
-
 			}
 
+			//gui messege about the transaction
 			gui.transaction(decision, field, p);
 
 		} else {
 
+			//is the player not the same as the field owner
 			if (field.getOwner().getName() != p.getName()) {
 
+				//checker = have all the fields in one color code
 				boolean checker = checkAllOfAKind(field);
 
+				//if you have all fields in a color code, and have no houses rent * 2. Else pay the normal rent.
 				if (checker == true && field.getHouses() == 0) {
-					payRent(p, field, gui, 2);
+					payRent(p, field, gui, 2); 
 				} else {
 					payRent(p, field, gui);
 				}	
@@ -152,7 +173,15 @@ public class FieldController {
 	}
 
 
-
+	/**
+	 * Pays the rent from the current playing player to the field owner.
+	 * @param p
+	 * The current playing player
+	 * @param field
+	 * Instans of Field
+	 * @param gui
+	 * instans of the GUI
+	 */
 	private void payRent(Player p, Field field, GUIController gui) {
 		p.getAccount().setBalance(p.getAccount().getBalance() - field.getCurrentRent());
 		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getCurrentRent());
@@ -164,6 +193,17 @@ public class FieldController {
 	}
 
 
+	/**
+	 * Pays double rent from the current playing player to the field owner
+	 * @param p
+	 * The current playing player
+	 * @param field
+	 * Instans of Field
+	 * @param gui
+	 * Instans of the GUI
+	 * @param multiplier
+	 * A int that multiply the rent
+	 */ 
 	private void payRent(Player p, Field field, GUIController gui, int multiplier) {
 		p.getAccount().setBalance(p.getAccount().getBalance() - (field.getCurrentRent() * multiplier));
 		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + (field.getCurrentRent()*multiplier));
@@ -175,13 +215,15 @@ public class FieldController {
 	}
 
 	/**
-	 * Checks if the owner of a fields, owns the other of that color.
+	 * Checks if the owner of a fields, owns all the other of that color.
 	 * @param field
 	 * The field to be investigated
 	 * @return
 	 */
 	private boolean checkAllOfAKind(Field field) {
+		
 		boolean checker = false;
+		
 		if (field.getColor() == this.gameBoard.getRed())
 			checker = field.getOwner().getAccount().isAllred();
 
@@ -210,30 +252,37 @@ public class FieldController {
 		return checker;
 	}
 
-	public GameBoard getGameBoard() {
-		return gameBoard;
-	}
 
+	/**
+	 * makes the tax logic, when the player lands on a tax field.
+	 * @param field
+	 * The current field
+	 * @param gui
+	 * Instance of GUIController
+	 * @param p
+	 * The current playing PLayer
+	 */
 	private void taxLogic(Field field, GUIController gui, Player p) {
 
+		//if you land on the field "indkomstskat" you have to decisions. True = pay 400, False = pay 10% of playerworth
 		if (field.getPrice() == 4000) {
 
 			boolean dicision = gui.taxDecision(p);
 
 			if (dicision == true) {
-
+				//pays 4000 tax
 				p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
 				gui.updateBalance(p);
 
 			} else {
-
-				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1));
+				//pays 10% of playerworth
+				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1)); 
 				gui.updateBalance(p);
 
 			}
 
 		} else {
-
+			//if you land on 2000 - tax field. Then you pay 2000.
 			gui.taxMessage(p);
 			p.getAccount().setBalance(p.getAccount().getBalance() - field.getPrice());
 			gui.updateBalance(p);
@@ -242,11 +291,24 @@ public class FieldController {
 
 	}
 
+	/**
+	 * makes the company logic, when the player lands on a company field.
+	 * @param field
+	 * The current field
+	 * @param gui
+	 * Instance of GUIController
+	 * @param p
+	 * The current playing player
+	 * @param diceSum
+	 * A int that takes in the dicesum.
+	 */
 	private void companyLogic(Field field, GUIController gui, Player p, int diceSum) {
 
+		//if the field isn´t owned, the current playing player can buy it.
 		if(field.isOwned() == false) {
 			boolean decision = gui.companyDecision(p);
 
+			//if the player wants to buy it, then the action below runs.
 			if (decision == true) {
 
 				p.getAccount().buyField(field.getPrice());
@@ -259,11 +321,12 @@ public class FieldController {
 
 
 			}
-
+			//GUI messege about the transaction
 			gui.transaction(decision, field, p);
 
 		} else {
 
+			//if the current player isn´t the owner, the player pays rent. There are 2 options of rent. 100*dicesum and 200*dicesum. 
 			if (field.getOwner().getName() != p.getName()) {
 
 				int payment;
@@ -299,9 +362,11 @@ public class FieldController {
 	 */
 	private void shippingLogic(Field field, GUIController gui, Player p) {
 
+		//if the field isn´t owned, the current playing player can buy it.
 		if(field.isOwned() == false) {
 			boolean decision = gui.shippingDecision(p);
 
+			//if the player wants to buy it, then the action below runs.
 			if (decision == true) {
 
 				p.getAccount().buyField(field.getPrice());
@@ -313,13 +378,15 @@ public class FieldController {
 				gui.setOwnerText(p);
 
 			}
+			//GUI message about the transaction
 			gui.transaction(decision, field, p);
 
 		} else {
 
+			//if the current player isn´t the owner, the player pays rent. There are 4 options of rent defined by how many the owner own.
 			if (field.getOwner().getName() != p.getName()) {
 
-
+				//the loop loops through 1-4 and applies the action acording to the number of owned shipping fields.
 				for (int i = 1; i < 5; i++) 
 					if (field.getOwner().getAccount().getShipping() == i) {
 						gui.payRentShippingMessege(field, p);
@@ -336,32 +403,62 @@ public class FieldController {
 
 	}
 
-
+	/**
+	 * Give a visit jail message
+	 * @param gui
+	 * Instance of GUIController
+	 * @param p
+	 * The current playing player
+	 */
 	private void jailLogic(GUIController gui, Player p) {
 		gui.visitJailMessege(p);
 	}
 
+	/**
+	 * Move the player to jail and place the setInJail to true
+	 * @param gui
+	 * Instance og GUIController
+	 * @param p
+	 * The current playing player
+	 */
 	private void goToJailLogic(GUIController gui, Player p) {
 		gui.goToJailMessege(p);
 		p.setInJail(true);
 		gui.movePlayerInstantly(p, 10, false);
 	}
 
+	/**
+	 * Give a parking message
+	 * @param gui
+	 * Instance of GUIController
+	 * @param p
+	 * The current playing player
+	 */
 	private void parkingLogic(GUIController gui, Player p) {
 
 		gui.parkingMessege(p);
 
 	}
 
+	/**
+	 * make the chance card logic, when you land on a chance field
+	 * @param gui
+	 * Instance of GUIController
+	 * @param p
+	 * The current playing player 
+	 * @param dc
+	 * Instance of DeckController
+	 * @param plist
+	 * Instance of PlayerList
+	 */
 	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist) {
 
+		//pick a card and do the logic from the card
 		dc.chanceField(p, plist, gui, this);
 
-		for (int i = 0; i < plist.getLength(); i++) {
-
+		//loops through the playerlist and update the balance.
+		for (int i = 0; i < plist.getLength(); i++) 
 			gui.updateBalance(plist.getPlayer(i));
-
-		}
 
 	}
 

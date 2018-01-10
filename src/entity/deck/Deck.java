@@ -6,9 +6,16 @@ import boundary.TextReader;
 
 public class Deck {
 
+	/**
+	 * Local attributes.
+	 */
 	private String[] description;
 	private Card[] deck;
 
+	/**
+	 * Method that creates the a Deck of cards.
+	 * @param text
+	 */
 	public Deck(TextReader text) {
 		try {
 			this.description = text.textFromFile("src/main/rsc/DescriptionsChanceCards.txt");
@@ -16,7 +23,8 @@ public class Deck {
 			System.err.println("Something went wrong when trying to import Text from TextReader in Deck");
 			e.printStackTrace();
 		}
-
+		
+		// Every card in game.
 		this.deck = new Card[] {
 				new BirthdayCard(description[0], 200),
 				new RecieveMoneyCard(description[1], 200),
@@ -49,13 +57,12 @@ public class Deck {
 				new MovePlayerCard(description[28], 25),
 				new MovePlayerCard(description[29], 39),
 				new MovePlayerCard(description[30], 24),
-				new MovePlayerCard(description[31], 11)
-				
+				new MovePlayerCard(description[31], 11)		
 		};
 	}
 
 	/**
-	 * Function to shuffle any object array.
+	 * Function to shuffle the cards in the Deck.
 	 * @param collectionOfCards
 	 */
 	public void shuffleCards() {
@@ -68,7 +75,7 @@ public class Deck {
 	}
 
 	/**
-	 * Pick a card from the top of the deck.
+	 * Pick a card from the top of the deck. Puts it into the bottom of the deck.
 	 * @param pickCardFromDeck
 	 */
 	public Card pickACard() {
@@ -102,13 +109,13 @@ public class Deck {
 		return this.deck.length;
 	}
 
+	/**
+	 * Gives the last card in the deck.
+	 * @return
+	 */
 	public Card getLastCard() {
 		return this.deck[getLength()-1];
 	}
 	
-	public Card[] getDeck() {
-		return this.deck;
-	}
-
 }
 

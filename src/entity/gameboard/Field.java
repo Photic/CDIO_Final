@@ -32,10 +32,6 @@ public abstract class Field {
 		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getDescription() {
 		return this.description;
 	}
@@ -46,10 +42,6 @@ public abstract class Field {
 
 	public Color getColor() {
 		return this.color;
-	}
-
-	public void setColor(Color color) {
-		this.color = color;
 	}
 	
 	/*

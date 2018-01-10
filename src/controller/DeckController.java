@@ -19,10 +19,17 @@ import entity.player.PlayerList;
 
 public class DeckController {
 
+	/**
+	 * Local attributes.
+	 */
 	private Deck deck;
 	private boolean firstGameCycle;
 	private Card firstCardPicked;
 
+	/**
+	 * Constructor for DeckController.
+	 * @param text
+	 */
 	public DeckController(TextReader text) {
 		this.deck = new Deck(text);
 		this.deck.shuffleCards();
@@ -38,6 +45,7 @@ public class DeckController {
 	 */
 	public void chanceField(Player p, PlayerList plist, GUIController gui, FieldController fc) {
 
+		// Picks the first card in a deck, using the helping method form deck "pickACard()".
  		Card cardPicked = this.deck.pickACard();
 
 		// Pick another card if the card picked is already owned by someone.
@@ -45,7 +53,7 @@ public class DeckController {
 			chanceField(p, plist, gui, fc);
 		}
 
-		// Saves the first card picked, If the first card picked is picked again, shuffle the deck and pick another card.
+		// Saves the first card picked, If the first card picked is then picked again later in game, then shuffle the deck and pick another card.
 		if(!firstGameCycle) {
 			firstCardPicked = this.deck.getLastCard();
 			firstGameCycle = true;
@@ -58,7 +66,7 @@ public class DeckController {
 		gui.chanceMessage(cardPicked.getDescription());
 		gui.showMessage();
 		
-		// Logic that look at which card is picked, and afterwords runs the appopriate function.
+		// Logic that looks at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
 			recieveMoneyCard(p, cardPicked.getAmount());
 		}
@@ -126,27 +134,24 @@ public class DeckController {
 	}
 
 	/**
-	 * Oil crises or Taxes
+	 * Oil crises or Taxes Card, pay for what you own of houses and hotels. 
 	 * @param p
 	 * @param plist
 	 * @param amount
 	 * @param advancedAmount
 	 */
 	private void payMoneyPrHouseHotelCard(Player p, PlayerList plist, FieldController fc, int[] housesTotal) {
-
 		for (int i = 0; i < fc.getBoardLength(); i++) {
 			if (fc.getField(i).isOwned()) {
 				if (p.getName().equals(fc.getField(i).getOwner().getName())) {
 					p.getAccount().addBalance(-(housesTotal[p.getAccount().getHousesowned()]));
 				}
 			}
-
 		}
-
 	}
 
 	/**
-	 * Checks players worth, then gives the player money if it is lower then the amount.
+	 * Checks players worth, then gives the player money if it is lower then the amount, default 15_000.
 	 * @param p
 	 * @param plist
 	 * @param amount
@@ -158,7 +163,7 @@ public class DeckController {
 	}
 
 	/**
-	 * Get an anti Jail card.
+	 * Get an anti Jail card. Store it in the players account.
 	 * @param p
 	 * @param cardPicked
 	 */
@@ -168,7 +173,7 @@ public class DeckController {
 	}
 
 	/**
-	 * Sents the player to prison.
+	 * Moves the player to prison.
 	 * @param p
 	 */
 	private void goToJailCard(Player p, int newPosition, GUIController gui) {
@@ -177,7 +182,7 @@ public class DeckController {
 	}
 
 	/**
-	 * Standard move player card.
+	 * Moves the player to a specific location on the gameBoard, described by the card.
 	 * @param p
 	 * @param newPosition
 	 * @param gui
@@ -199,17 +204,22 @@ public class DeckController {
 
 
 	/**
-	 * Moves the player to the cloeset shipping field.
+	 * Moves the player to the cloeset shipping field,
 	 * @param p
 	 * @param plist
 	 * @param gui
 	 * @param fc
 	 */
 	private void moverPlayerToNearestShippingCard(Player p, PlayerList plist, GUIController gui, FieldController fc) {
+		
+		// Value of the location the player needs to move to.
 		int iMod = 0;
+		
+		// The amount of speces between the player and the shipping field.
 		int calculateNewPosition = 0;
-		int i;
-		for (i = p.getPosition(); i < fc.getBoardLength()*2; i++) {
+		
+		// Loops the gameboard twice, but breaks if it finds a shipping field.
+		for (int i = p.getPosition(); i < fc.getBoardLength()*2; i++) {
 			iMod = i%fc.getBoardLength();
 			if ((fc.getField(iMod) instanceof Shipping)) {
 				break;
@@ -217,8 +227,10 @@ public class DeckController {
 			calculateNewPosition++;
 		}
 
+		// Uses the calculated new amount to move the player.
 		gui.movePlayer(p, calculateNewPosition);
 
+		// If the field is owned, pay the onwer twice the normal amount, if not, the player can buy the field.
 		if (fc.getField(iMod).isOwned() == true) {
 			int payRecieve = (fc.getField(iMod).getRent()[fc.getField(iMod).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
@@ -226,11 +238,10 @@ public class DeckController {
 		} else {
 			fc.evaluateField(fc.getField(p.getPosition()), gui, p, 0, this, plist);
 		}
-
 	}
 
 	/**
-	 * Remove anti Jail card from Player
+	 * Removes anti Jail card from Player.
 	 * @param p
 	 */
 	public void removeAntiJailCard(Player p) {
@@ -242,5 +253,5 @@ public class DeckController {
 			}
 		}
 	}
-
+	
 }
