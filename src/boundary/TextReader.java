@@ -8,38 +8,33 @@ public class TextReader {
 
 	
 	/**
-	 * Funktionen henter teksen fra en fil, og returnere det som et array, så det kan bruges andre steder i koden
-	 * 
+	 * This function collects text from a file, and returns it as an array, so it is usable in other places of the code
 	 * @param fileName
 	 * @return output Array
 	 * @throws IOException
 	 */
 	
 	public String[] textFromFile(String fileName) throws IOException {
+		
 		String[] outputArray;
-
-		//Filereader fylder sin buffer op med karaktere fra en given fil
-		FileReader fr = new FileReader(fileName);
+		FileReader fr = new FileReader(fileName);										//Filereader fills a buffer with chars from a file
+		BufferedReader bf = new BufferedReader(fr);										//BufferedReader reads from an inputstream
 		
-		//BufferedReader indlæser fra en inputstream, som i det her tilfælde er en FileReader
-		BufferedReader bf = new BufferedReader(fr);
-		
-		
-		//return array instantieres med størelsen af hvor mange linjer tekst der er at hente ind fra filen
+																						//return array is made with size of amount of chars in the inputstream from filereader
 		FileReader fileA = new FileReader(fileName);
 		outputArray = new String[countArray(fileA)];
 
-		//Try Catch bruges til enten at udføre funktionen eller give en besked uden at breake programmet
-		try {
+		
+		try {																			// try-catch to make sure that we know if the files cannot be read
 			int i=0;
 			String line; 
 
-			while((line = bf.readLine()) != null){
-				outputArray[i] = line;
+			while((line = bf.readLine()) != null){										//runs as long as the file does not end
+				outputArray[i] = line;													//puts line of text in the return array
 				i++;
 			}
-			//Her lukkes BufferedReader manuelt, så javas trashcollecter ikke behøver gøre det 
-			bf.close();
+	
+			bf.close();																	//closes bufferedreader 
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -60,11 +55,10 @@ public class TextReader {
 
 
 	 /**
-	  * Hjælpefunktion til main metoden. Metoden er til for at man ikke skal lave et array af en fast størrelse. 
-	  * Lige meget hvor stor en textfil man indlæser vil ovenstående metode returnere et array uden null på nogle af pladserne 
-	  * 
+	  * This method calculates how many lines of text that the textreader will load, to make sure that the array that it returns is the propper size, 
+	  * and doesnt have spaces with null
 	  * @param fileName
-	  * @return
+	  * @return int arrayCount
 	  * @throws IOException
 	  */
 	 private int countArray(Reader fileName) throws IOException{
