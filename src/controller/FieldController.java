@@ -34,7 +34,7 @@ public class FieldController {
 
 	public FieldController(TextReader name) {
 		this.gameBoard = new GameBoard(name);
-		this.hc = new HouseController();
+		this.hc = new HouseController(name);
 	}
 
 	/**

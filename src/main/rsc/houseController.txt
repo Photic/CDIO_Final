@@ -1,0 +1,4 @@
+fortryd
+Køb huse
+Sælg huse
+Sælg grund
