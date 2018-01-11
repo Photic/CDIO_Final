@@ -842,13 +842,7 @@ public class GUIController {
 	 */
 	public void movePlayerBackwards(Player p, int diceSum, FieldController fc) {
 
-		int newPosition = 0;
-		
-		if (diceSum < 0) {
-			newPosition = (p.getPosition() + diceSum + fc.getBoardLength()) % fc.getBoardLength();
-		} else {
-			newPosition = (p.getPosition() + diceSum) % fc.getBoardLength();
-		}
+		int newPosition = (p.getPosition() + diceSum + fc.getBoardLength()) % fc.getBoardLength();
 		
 		for (int i = 0; i < this.gui_players.length; i++) {
 
