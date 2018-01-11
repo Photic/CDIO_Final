@@ -87,7 +87,7 @@ public class DeckController {
 			antiJailCard(p, cardPicked);
 		}
 		else if (cardPicked instanceof GoToJailCard) {
-			goToJailCard(p, cardPicked.getAmount(), gui, dac);
+			goToJailCard(p, cardPicked.getAmount(), gui, dac, fc);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
 			movePlayerCard(p, plist, cardPicked.getAmount(), gui, fc, dac);
@@ -177,9 +177,9 @@ public class DeckController {
 	 * Moves the player to prison.
 	 * @param p
 	 */
-	private void goToJailCard(Player p, int newPosition, GUIController gui, AudioPlayer dac) {
+	private void goToJailCard(Player p, int newPosition, GUIController gui, AudioPlayer dac, FieldController fc) {
 		p.setInJail(true);
-		gui.movePlayerInstantly(p, newPosition, false);
+		gui.movePlayerInstantly(p, newPosition, false, fc);
 		dac.playJailSound();
 	}
 
@@ -190,7 +190,7 @@ public class DeckController {
 	 * @param gui
 	 */
 	private void movePlayerCard(Player p, PlayerList plist, int newPosition, GUIController gui, FieldController fc, AudioPlayer dac) {
-		gui.movePlayerInstantly(p, newPosition, true);
+		gui.movePlayerInstantly(p, newPosition, true, fc);
 		fc.evaluateField(fc.getField(newPosition), gui, p, 0, this, plist, dac);
 	}
 

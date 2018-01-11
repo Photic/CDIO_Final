@@ -79,7 +79,7 @@ public class FieldController {
 
 		} else if (field instanceof GoToJail) {
 
-			goToJailLogic(gui, p, dac);
+			goToJailLogic(gui, p, dac, this);
 
 		} else if (field instanceof Parking) {
 
@@ -422,10 +422,10 @@ public class FieldController {
 	 * @param p
 	 * The current playing player
 	 */
-	private void goToJailLogic(GUIController gui, Player p, AudioPlayer dac) {
+	private void goToJailLogic(GUIController gui, Player p, AudioPlayer dac, FieldController fc) {
 		gui.goToJailMessege(p);
 		p.setInJail(true);
-		gui.movePlayerInstantly(p, 10, false);
+		gui.movePlayerInstantly(p, 10, false, fc);
 		dac.playJailSound();
 	}
 

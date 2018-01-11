@@ -141,7 +141,7 @@ public class GameController {
 
 				this.gui.doubleDiceJail(this.playerList.getPlayer(j));
 				this.playerList.getPlayer(j).setInJail(true);
-				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false);
+				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false, this.fc);
 				this.dac.playJailSound();
 				this.playerList.getPlayer(j).setNumberOfEqualDice(0);
 				return false;
