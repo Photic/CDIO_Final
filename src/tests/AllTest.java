@@ -11,7 +11,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestDice.class,
 	TestGameLoop.class, 
 	TestJail.class, 
-	TestPlayerBankrupt.class,
 	TestDeckController.class
 	})
 
