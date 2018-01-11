@@ -16,7 +16,7 @@ public class TestAccount extends ConstructorForJUnit {
 	public void addFieldsTest() {
 
 		
-		plist.getPlayer(1).getAccount().addField(fc.getField(6), this.fc);	
+		plist.getPlayer(1).getAc().addField(fc.getField(6), this.fc);	
 		String actual = plist.getPlayer(1).getAccount().getPinkFields()[0].getName();
 		String expected = "Roskildevej";
 		
@@ -53,8 +53,6 @@ public class TestAccount extends ConstructorForJUnit {
 		plist.getPlayer(1).getAc().addField(this.fc.getField(1), this.fc);
 		plist.getPlayer(1).getAc().addField(this.fc.getField(3), this.fc);
 		//System.out.println(plist.getPlayer(1).getAccount().getBlueFields()[0].getName());
-		
-		
 		
 		String actual = plist.getPlayer(1).getAc().allOfAKindFields()[0].getName() + plist.getPlayer(1).getAc().allOfAKindFields()[1].getName();
 		String expected = "RødovrevejHvidovre";
