@@ -2,45 +2,28 @@ package boundary;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 
 public class TextReader {		
-
 	
-	/**
-	 * This function collects text from a file, and returns it as an array, so it is usable in other places of the code
-	 * @param fileName
-	 * @return output Array
-	 * @throws IOException
-	 */
 	
-	public String[] textFromFile(String fileName) throws IOException {
+	public String[] textFromFile(InputStream in) throws IOException {
 		
-		String[] outputArray;
-		FileReader fr = new FileReader(fileName);										//Filereader fills a buffer with chars from a file
-		BufferedReader bf = new BufferedReader(fr);										//BufferedReader reads from an inputstream
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));
+		StringBuilder out = new StringBuilder();
+		String line;
 		
-																						//return array is made with size of amount of chars in the inputstream from filereader
-		FileReader fileA = new FileReader(fileName);
-		outputArray = new String[countArray(fileA)];
-
+		while ((line = reader.readLine()) != null) 
+            out.append(line);
+        
 		
-		try {																			// try-catch to make sure that we know if the files cannot be read
-			int i=0;
-			String line; 
-
-			while((line = bf.readLine()) != null){										//runs as long as the file does not end
-				outputArray[i] = line;													//puts line of text in the return array
-				i++;
-			}
-	
-			bf.close();																	//closes bufferedreader 
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return outputArray;
+		String output = out.toString();
+		
+		
+		reader.close();
+		return output.split("_");
 	}
 
 	/**

@@ -1,74 +1,74 @@
-Hvor mange spillere er i?
-Spiller 
-' navn?
-De registrede spillere er: 
-, har i forvejen 
- hus(e).
-Hvilken grund vil du bygge et hus på?
-Du købte et hus til 
- til 
- kr. 
- har nu 
- hus(e).
- har vundet, Tillykke!!
-, du er landet på en grund der kan købes.
-, du kan enten købe grunden eller lade vær.
-Køb
-Gør intet
-, du er landet på en virksomhed der kan købes.
-, du kan enten købe virksomheden eller lade vær.
-, du er landet på et rederi der kan købes.
-, du kan enten købe rederiet eller lade vær.
-Du skal betale indkomstskat.
-, du kan enten betale 4000 kr eller betale 10% af dine værdier.
-Betal 4000 kr
-Betal 10% af dine værdier
-, du skal betale 2000 kr i ekstraordinært skattebidrag.
-, du har købt 
- for 
- kr.
-, du valgt at lade vær med at købe 
-, du er landet på 
-'s grund. Der er bygget 
- hus(e) på grunden. Du betaler derfor 
- kr i leje. 
-'s rederi. 
- ejer 
- rederier. Derfor betaler du 
-, du er på besøg i fængslet. Hyg dig!
-, du er blevet anholdt og ryger en tur i fængsel.
-, du er parkeret og er klar til at spise frokost. Nyd maden!
-1. Betal 1000 kr
-2. Slå 2 ens
-3. Brug dit 'Kom ud af fængsel'- kort
-Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel
-, du har betalt 1000 kr for at komme ud af fængsel. Du er hermed løsladt.
-, du har slået to ens, og er hermed løsladt.
-, du har ikke slået to ens, og er hermed stadig i fængsel.
-, du har et chancekort til at komme ud af fængsel. Du er hermed løsladt.
-, du er passeret start. Dermed modtager du 4000 kr af banken.
-, kast terningerne
-KAST!
-, vil du kaste terningerne eller ordne dine grunde?
-Håndtér grunde
-Du kan ikke bygge højere på dine grunde.
-Du ejer ingen huse
-Fortryd
-Hvilken grund vil du sælge et hus fra?
-Du solgte et hus fra 
-, hvad vil du gøre?
-Køb huse
-Sælg Huse
- slog to ens og får derfor en ekstra tur. 
- har nu slået to ens 
- gang(e) i træk.
- har slået to ens tre gange i træk, og har nu brudt fartgrænsen markant! 
- bliver nu sat i fængsel. 
- huse. 
- ejer alle grunde af denne type. 
- betaler altså 
- Du har trukket et chanceKort
-Sælg grund
-Du slog 2 ens, og bliver løsladt fra fængslet
+Hvor mange spillere er i?_
+Spiller _
+' navn?_
+De registrede spillere er: _
+, har i forvejen _
+ hus(e)._
+Hvilken grund vil du bygge et hus på?_
+Du købte et hus til _
+ til _
+ kr. _
+ har nu _
+ hus(e)._
+ har vundet, Tillykke!!_
+, du er landet på en grund der kan købes._
+, du kan enten købe grunden eller lade vær._
+Køb_
+Gør intet_
+, du er landet på en virksomhed der kan købes._
+, du kan enten købe virksomheden eller lade vær._
+, du er landet på et rederi der kan købes._
+, du kan enten købe rederiet eller lade vær._
+Du skal betale indkomstskat._
+, du kan enten betale 4000 kr eller betale 10% af dine værdier._
+Betal 4000 kr_
+Betal 10% af dine værdier_
+, du skal betale 2000 kr i ekstraordinært skattebidrag._
+, du har købt _
+ for _
+ kr._
+, du valgt at lade vær med at købe _
+, du er landet på _
+'s grund. Der er bygget _
+ hus(e) på grunden. Du betaler derfor _
+ kr i leje. _
+'s rederi. _
+ ejer _
+ rederier. Derfor betaler du _
+, du er på besøg i fængslet. Hyg dig!_
+, du er blevet anholdt og ryger en tur i fængsel._
+, du er parkeret og er klar til at spise frokost. Nyd maden!_
+1. Betal 1000 kr_
+2. Slå 2 ens_
+3. Brug dit 'Kom ud af fængsel'- kort_
+Du er i fængsel. Du kan vælge følgende, for at komme ud af fængsel_
+, du har betalt 1000 kr for at komme ud af fængsel. Du er hermed løsladt._
+, du har slået to ens, og er hermed løsladt._
+, du har ikke slået to ens, og er hermed stadig i fængsel._
+, du har et chancekort til at komme ud af fængsel. Du er hermed løsladt._
+, du er passeret start. Dermed modtager du 4000 kr af banken._
+, kast terningerne_
+KAST!_
+, vil du kaste terningerne eller ordne dine grunde?_
+Håndtér grunde_
+Du kan ikke bygge højere på dine grunde._
+Du ejer ingen huse_
+Fortryd_
+Hvilken grund vil du sælge et hus fra?_
+Du solgte et hus fra _
+, hvad vil du gøre?_
+Køb huse_
+Sælg Huse_
+ slog to ens og får derfor en ekstra tur. _
+ har nu slået to ens _
+ gang(e) i træk._
+ har slået to ens tre gange i træk, og har nu brudt fartgrænsen markant! _
+ bliver nu sat i fængsel. _
+ huse. _
+ ejer alle grunde af denne type. _
+ betaler altså _
+ Du har trukket et chanceKort_
+Sælg grund_
+Du slog 2 ens, og bliver løsladt fra fængslet_
  
  

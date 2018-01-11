@@ -1,5 +1,5 @@
-fortryd
-Køb huse
-Sælg huse
-Sælg grund
-Banken
+fortryd_
+Køb huse_
+Sælg huse_
+Sælg grund_
+Banken_

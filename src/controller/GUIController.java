@@ -14,6 +14,7 @@ import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
+import main.Main;
 
 public class GUIController {
 
@@ -25,7 +26,7 @@ public class GUIController {
 
 	public GUIController(TextReader tr) {
 		try {
-			this.description = tr.textFromFile("src/main/rsc/guiText.txt");
+			this.description = tr.textFromFile(Main.class.getResourceAsStream("rsc/guiText.txt"));
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the GUIController constructor");
 			e.printStackTrace();

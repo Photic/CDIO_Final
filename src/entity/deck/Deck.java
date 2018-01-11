@@ -3,6 +3,7 @@ package entity.deck;
 import java.io.IOException;
 
 import boundary.TextReader;
+import main.Main;
 
 public class Deck {
 
@@ -12,7 +13,7 @@ public class Deck {
 
 	public Deck(TextReader text) {
 		try {
-			this.description = text.textFromFile("src/main/rsc/DescriptionsChanceCards.txt");
+			this.description = text.textFromFile(Main.class.getResourceAsStream("rsc/DescriptionsChanceCards.txt"));
 		} catch (IOException e) {
 			System.err.println("Something went wrong when trying to import Text from TextReader in Deck");
 			e.printStackTrace();

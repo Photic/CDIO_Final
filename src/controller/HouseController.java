@@ -6,6 +6,7 @@ import boundary.TextReader;
 import entity.gameboard.Field;
 import entity.player.Player;
 import entity.player.PlayerList;
+import main.Main;
 
 public class HouseController {
 	String[] description;
@@ -13,7 +14,7 @@ public class HouseController {
 	
 	public HouseController(TextReader tr){
 		try {
-			this.description = tr.textFromFile("src/main/rsc/houseController.txt");
+			this.description = tr.textFromFile(Main.class.getResourceAsStream("rsc/houseController.txt"));
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the GUIController constructor");
 			e.printStackTrace();
