@@ -897,11 +897,8 @@ public class GUIController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
 			}
-
-
 		}
 		if (recieveStartMoney == true) {
 			if (initPosition > newPosition) {
@@ -911,13 +908,10 @@ public class GUIController {
 				updateBalance(p);
 				this.gui.showMessage(p.getName() + this.description[48]);
 
-
 			}
 		}
-
-
-
 	}
+	
 	/**
 	 * A message when the player rolls a double.
 	 * @param p
