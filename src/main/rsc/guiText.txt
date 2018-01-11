@@ -69,6 +69,12 @@ Sælg Huse_
  betaler altså _
  Du har trukket et chanceKort_
 Sælg grund_
-Du slog 2 ens, og bliver løsladt fra fængslet_
- 
+Banken_
+Hvem vil du sælge til?_
+Ingen Køber_
+ er nu på auktion. Er der andre der vil købe grunden?_
+Hvilket territory vil du sælge?_
+Hvor meget oven i grundens pris vil du give?_
+Hvad er den aftalte pris?_
+Gør intet_
  

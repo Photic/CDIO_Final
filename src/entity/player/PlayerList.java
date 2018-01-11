@@ -21,40 +21,6 @@ public class PlayerList {
 			this.players[i]= new Player(names[i]);
 	}	
 	
-	/**
-	 * Remove 1 player from the game.
-	 * @param p
-	 * @param plist
-	 */
-	public void removePlayer(PlayerList plist) {
-		Player[] removeOnePlayer = new Player[plist.getLength()-1];
-		this.count = 0;
-		
-		if (removeOnePlayer.length >= 2) {
-			for (int i = 0; i <= removeOnePlayer.length; i++) {
-				if (plist.getPlayer(i).isBankrupt() == false) {
-					removeOnePlayer[this.count] = plist.getPlayer(i);
-						this.count++;
-				}
-			}
-			this.players = removeOnePlayer;
-		}
-		else {
-			for (int i = 0; i < plist.getLength(); i++) {
-				if (plist.getPlayer(i).isBankrupt() == false)
-					winner(plist.getPlayer(i).getName());
-			}
-		}										
-	}
-	
-	/**
-	 * Announse the winner
-	 * @param s
-	 */
-	public void winner(String s) {
-		System.out.println("Winner is " + s); // Skal outputte til GUI når vi når dertil.
-	}
-	
 	public Player getPlayer(int n) {
 		return players[n];
 	}

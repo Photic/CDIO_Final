@@ -63,25 +63,5 @@ public class TestDeck extends ConstructorForJUnit {
 	
 	}
 	
-	// Test get a card in an unshuffled deck of cards.
-	@Test
-	public void testGetCard() {
-		for (int i = 0; i < this.deck.getLength(); i++) {
-			assertEquals(this.deck.getDeck()[i], this.deck.getCard(i));
-		}
-		
-	}
-	
-	// Test that getLength() is the same as .length of an array.
-	@Test
-	public void testGetLengthOfDeck() {
-		assertEquals(this.deck.getDeck().length, this.deck.getLength());
-	}
-
-	// Test getLastCard()
-	@Test
-	public void testGetLastCard() {
-		assertEquals(this.deck.getDeck()[this.deck.getLength()-1], this.deck.getLastCard());
-	}
 
 }

@@ -39,15 +39,14 @@ public class HouseController {
 		String option;
 		boolean finished = false;
 		
-		
 		while(finished != true) {
 			
-			if (playerList.getPlayer(i).getAccount().numberOfTerri() == 0) {									//if player does not own a propperty
+			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {									//if player does not own a propperty
 				gui.rollDiceMessage(playerList.getPlayer(i));
 				gc.takeTurn(playerList.getPlayer(i));
 				finished = true;
 				
-			} else if (playerList.getPlayer(i).getAccount().numberOfTerri() > 0) {								//if amount of propperties that player owns is > 0 
+			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {								//if amount of propperties that player owns is > 0 
 				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));									//offered the oppertunity to manage houses.
 				
 
@@ -59,12 +58,12 @@ public class HouseController {
 				
 				else {																							// or if he decides to manage properties, find out exactly what he wants.
 					option = description[0];
-					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAccount().hasAllOfAKind());
+					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAc().hasAllOfAKind());
 
 					if (option.equals(description[1])) {															//if "Buy houses" 
-						gui.buyHouses(playerList.getPlayer(i).getAccount().allOfAKindFields());
+						gui.buyHouses(playerList.getPlayer(i).getAc().allOfAKindFields());
 					} else if (option.equals(description[2])) {													//if "Sell houses to bank"
-						gui.sellHouses(playerList.getPlayer(i).getAccount().getFields());
+						gui.sellHouses(playerList.getPlayer(i).getAc().getFields());
 					} else if (option.equals(description[3])) {													//if sell propperty
 						sellProp(gui, playerList, fc, i);
 					}
@@ -116,7 +115,7 @@ public class HouseController {
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());								//calculates value of the propperty
-		seller.getAccount().removeField(fc, field);																//removes field from players index
+		seller.getAc().removeField(fc, field);																//removes field from players index
 		seller.getAccount().sellField((int)(price * 0.5));														//sells field to a reduced price of 50%
 		
 		//resets current field
@@ -148,8 +147,8 @@ public class HouseController {
 	private void sellPropToPlayer(Player seller, Player buyer, FieldController fc, Field fieldToSell, GUIController gui, int price){
 		seller.getAccount().sellField(price);																
 		buyer.getAccount().buyField(price);
-		seller.getAccount().removeField(fc, fieldToSell);
-		buyer.getAccount().addField(fieldToSell, fc);
+		seller.getAc().removeField(fc, fieldToSell);
+		buyer.getAc().addField(fieldToSell, fc);
 		gui.updateSubtext(buyer, fieldToSell);
 		gui.updateBalance(seller);
 		gui.updateBalance(buyer);
