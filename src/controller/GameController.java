@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -16,7 +17,6 @@ import entity.player.PlayerList;
  */
 public class GameController {
 
-
 	private GUIController gui;
 	private PlayerList playerList;
 	private FieldController fc;
@@ -25,6 +25,7 @@ public class GameController {
 	private boolean playing;
 	private TextReader textReader;
 	private int alivePlayers;
+	private AudioPlayer dac;
 
 	/**
 	 * Constructor setting up the gamecontroller.
@@ -200,7 +201,7 @@ public class GameController {
 
 		currentField = this.fc.getField(p.getPosition());
 
-		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
+		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList, this.dac);
 	}
 
 	/**
