@@ -201,7 +201,7 @@ public class DeckController {
 	 * @param gui
 	 */
 	private void movePlayerBackCard(Player p, PlayerList plist, int newPosition, GUIController gui, FieldController fc, AudioPlayer dac) {
-		gui.movePlayerBackwards(p, newPosition, fc);
+		gui.movePlayerBackwards(p, newPosition, fc, dac);
 		fc.evaluateField(fc.getField(p.getPosition()), gui, p, 0, this, plist, dac);
 	}
 

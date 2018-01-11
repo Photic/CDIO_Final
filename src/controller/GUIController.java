@@ -814,7 +814,7 @@ public class GUIController {
 	 * @param diceSum
 	 * The amount to be moved
 	 */
-	public void movePlayerBackwards(Player p, int diceSum, FieldController fc) {
+	public void movePlayerBackwards(Player p, int diceSum, FieldController fc, AudioPlayer dac) {
 
 		int newPosition = (p.getPosition() + diceSum + fc.getBoardLength()) % fc.getBoardLength();
 
@@ -830,13 +830,7 @@ public class GUIController {
 						p.setPosition(fc.getBoardLength()-1);
 					}
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
-
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e) {
-						System.out.println(e);
-						e.printStackTrace();
-					}
+					dac.playMoveSound();
 				}
 			}
 		}

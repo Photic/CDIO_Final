@@ -9,7 +9,7 @@ public class AudioLibrary {
 	 */
 	private File jail;
 	private File[] move;
-	private File transaction;
+	private File[] dieThrow;
 	private File birthday;
 
 	public AudioLibrary() {
@@ -31,6 +31,14 @@ public class AudioLibrary {
 	
 	public int getMoveLength() {
 		return this.move.length;
+	}
+	
+	public File getDieSound(int n) {
+		return this.dieThrow[n];
+	}
+	
+	public int getDieLength() {
+		return this.dieThrow.length;
 	}
 	
 

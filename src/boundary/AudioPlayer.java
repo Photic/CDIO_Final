@@ -24,6 +24,10 @@ public class AudioPlayer {
 		playSound(alibrary.getMoveSound((int)(Math.random()*alibrary.getMoveLength())));
 	}
 	
+	public void playDieSound() {
+		playSound(alibrary.getDieSound((int)(Math.random()*alibrary.getDieLength())));
+	}
+	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName
