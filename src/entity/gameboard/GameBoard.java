@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.IOException;
 
 import boundary.TextReader;
+import main.Main;
 
 public class GameBoard {
 
@@ -37,8 +38,8 @@ public class GameBoard {
 	 */
 	public GameBoard(TextReader name) {
 		try {
-			this.fieldName = name.textFromFile("src/main/rsc/FieldNames.txt");
-			this.fieldDescription = name.textFromFile("src/main/rsc/FieldDescriptions.txt");
+			this.fieldName = name.textFromFile(Main.class.getResourceAsStream("rsc/FieldNames.txt"));
+			this.fieldDescription = name.textFromFile(Main.class.getResourceAsStream("rsc/FieldDescriptions.txt"));
 		} catch (IOException e) {
 			System.err.println("Something went wrong when trieng to import Text from TextReader in Deck");
 			e.printStackTrace();

@@ -16,9 +16,7 @@ public class TestAccount extends ConstructorForJUnit {
 	public void addFieldsTest() {
 
 		
-		plist.getPlayer(1).getAc().addField(fc.getField(6), this.fc);
-		
-		
+		plist.getPlayer(1).getAccount().addField(fc.getField(6), this.fc);	
 		String actual = plist.getPlayer(1).getAccount().getPinkFields()[0].getName();
 		String expected = "Roskildevej";
 		
@@ -70,17 +68,12 @@ public class TestAccount extends ConstructorForJUnit {
 		boolean expected = true;
 		boolean actual = false;
 		plist.getPlayer(1).getAc().addField(fc.getField(1), fc);
-		System.out.println("SE HER!! \n \n");
-		if((plist.getPlayer(1).getAccount().getBlueFields()[0])!=null){
-			System.out.println("LOOK MAAAAA!!! IT WORKS!! ");
-			System.out.println(plist.getPlayer(1).getAccount().getBlueFields()[0].getName());
-		}
 		plist.getPlayer(1).getAc().removeField(fc, fc.getField(1));
 		
 		if((plist.getPlayer(1).getAccount().getBlueFields()[0])==null){
 			actual = true;
 		}
-	System.out.println(actual);
+		assertEquals(expected, actual);
 	
 	}
 	
