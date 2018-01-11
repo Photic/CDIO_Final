@@ -1,10 +1,8 @@
 package entity.player;
 
 
-import controller.FieldController;
 import entity.deck.Card;
 import entity.gameboard.Field;
-import entity.gameboard.GameBoard;
 
 public class Account {
 

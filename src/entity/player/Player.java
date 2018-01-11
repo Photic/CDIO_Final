@@ -10,9 +10,9 @@ import controller.AccountController;
 public class Player {
 		
 	private final int GAMEBOARDLENGTH = 40;
-	private String name, id;
+	private String name;
 	private int position;
-	private boolean turn, bankrupt, inJail;
+	private boolean bankrupt, inJail;
 	private Account account;
 	private int numberOfEqualDice;
 	private int jailCounterDice; 

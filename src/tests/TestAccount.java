@@ -1,12 +1,12 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import entity.deck.AntiJailCard;
 import entity.deck.Card;
-import entity.player.PlayerList;
 
 public class TestAccount extends ConstructorForJUnit {
 

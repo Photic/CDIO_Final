@@ -7,7 +7,6 @@ package entity.player;
 public class PlayerList {
 
 	private Player[] players;
-	private int count;
 	
 	/**
 	 * Create a list of players, used at the starf of a game.
