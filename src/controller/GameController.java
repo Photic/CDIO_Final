@@ -61,7 +61,7 @@ public class GameController {
 	 */
 	private void gameLoop() {
 		boolean checker;
-		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
+//		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
 		if (this.alivePlayers == 1) {														// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
 				if (this.playerList.getPlayer(i).isBankrupt() == false) 					// Check if the current player is bankrupt
@@ -141,7 +141,7 @@ public class GameController {
 
 				this.gui.doubleDiceJail(this.playerList.getPlayer(j));
 				this.playerList.getPlayer(j).setInJail(true);
-				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false);
+				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false, this.fc);
 				this.dac.playJailSound();
 				this.playerList.getPlayer(j).setNumberOfEqualDice(0);
 				return false;
