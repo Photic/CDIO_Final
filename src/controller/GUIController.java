@@ -848,9 +848,9 @@ public class GUIController {
 	 * @param diceSum
 	 * The amount to be moved
 	 */
-	public void movePlayerBackwards(Player p, int diceSum) {
+	public void movePlayerBackwards(Player p, int diceSum, FieldController fc) {
 
-		int newPosition = (p.getPosition() + diceSum) % 40;
+		int newPosition = (p.getPosition() + diceSum) % fc.getBoardLength();
 
 		for (int i = 0; i < this.gui_players.length; i++) {
 
@@ -868,7 +868,7 @@ public class GUIController {
 					try {
 						Thread.sleep(300);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						System.out.println(e);
 						e.printStackTrace();
 					}
 

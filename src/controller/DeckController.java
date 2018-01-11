@@ -93,7 +93,7 @@ public class DeckController {
 			movePlayerCard(p, plist, cardPicked.getAmount(), gui, fc, dac);
 		}
 		else if (cardPicked instanceof MovePlayerBackCard) {
-			moverPlayerBackCard(p, cardPicked.getAmount(), gui);
+			moverPlayerBackCard(p, cardPicked.getAmount(), gui, fc);
 		}
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
 			moverPlayerToNearestShippingCard(p, plist, gui, fc, dac);
@@ -200,8 +200,8 @@ public class DeckController {
 	 * @param newPosition
 	 * @param gui
 	 */
-	private void moverPlayerBackCard(Player p, int newPosition, GUIController gui) {
-		gui.movePlayerBackwards(p, newPosition);
+	private void moverPlayerBackCard(Player p, int newPosition, GUIController gui, FieldController fc) {
+		gui.movePlayerBackwards(p, newPosition, fc);
 	}
 
 
