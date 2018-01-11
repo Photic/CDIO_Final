@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.Random;
 
 import boundary.TextReader;
 import entity.DiceCup;
@@ -843,7 +842,6 @@ public class GUIController {
 
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
-	 * 
 	 * 
 	 * @param p
 	 * The player to be moved.
