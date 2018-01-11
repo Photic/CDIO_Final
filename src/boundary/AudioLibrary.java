@@ -19,6 +19,12 @@ public class AudioLibrary {
 				new File ("src/main/rsc/move2.wav"), 
 				new File ("src/main/rsc/move3.wav")
 				};
+		
+		this.dieThrow = new File[] {
+				new File ("src/main/rsc/die.wav"),
+				new File ("src/main/rsc/die2.wav"),
+				new File ("src/main/rsc/die3.wav")
+		};
 	}
 	
 	public File getJailSound() {

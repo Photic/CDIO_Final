@@ -196,7 +196,7 @@ public class GameController {
 	 */
 	public void takeTurn(Player p) {
 		Field currentField;
-		this.dicecup.shake();
+		this.dicecup.shake(this.dac);
 		this.gui.showDice(this.dicecup);
 		this.gui.movePlayer(p, this.dicecup.sum(), this.fc, this.dac);
 
@@ -226,7 +226,7 @@ public class GameController {
 
 			} else if (decision == 2) {
 
-				this.dicecup.shake();
+				this.dicecup.shake(this.dac);
 				this.gui.showDice(this.dicecup);
 
 				if (this.dicecup.equalsDice() == true) {

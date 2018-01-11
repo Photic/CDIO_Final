@@ -1,5 +1,7 @@
 package entity;
 
+import boundary.AudioPlayer;
+
 public class DiceCup {
 	
 	
@@ -8,14 +10,12 @@ public class DiceCup {
 	
 	
 	public DiceCup() {
-		
 		this.d1 = new Die();
 		this.d2 = new Die();
-		
 	}
 	
-	public void shake() {
-		
+	public void shake(AudioPlayer dac) {
+		dac.playDieSound();
 		this.d1.rollDie();
 		this.d2.rollDie();	
 	}
