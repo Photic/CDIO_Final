@@ -64,7 +64,7 @@ public class GameController {
 //		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
 		if (this.alivePlayers == 1) {														// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
-				if (this.playerList.getPlayer(i).isBankrupt() == false) 					// Check if the current player is bankrupt
+				if (this.playerList.getPlayer(i).isBankrupt() == false) 						// Check if the current player is bankrupt
 					this.gui.showWinner(this.playerList.getPlayer(i));						// If he is not, he is the winner.
 		} else {
 			// Now starts the "normal game"
@@ -75,20 +75,20 @@ public class GameController {
 				if (this.playerList.getPlayer(j).isBankrupt() == false 						// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == false) {				// and if the player is not in jail
 
-					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);	// Let the fieldController handle the turn.
+					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);		// Let the fieldController handle the turn.
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false 				// If the player is not bankrupt
-						&& this.playerList.getPlayer(j).isInJail() == true) {				// and the player IS in jail
+						&& this.playerList.getPlayer(j).isInJail() == true) {					// and the player IS in jail
 					jailDecision(this.playerList.getPlayer(j), j);							// apply the jail logic
 				}
 
 				checkForBankruptPlayers();													// After the player has taken his turn, check if there is any bankrupt players, and apply logic
 
-				checker = checkForDoubleDice(j);											// Check if the player rolled a double
+				checker = checkForDoubleDice(j);												// Check if the player rolled a double
 
 				if (checker == false) {														// If the player did not roll a double
-					this.playerList.getPlayer(j).setNumberOfEqualDice(0);					// Set the players doubleDice counter to 0
-					j++;																	// and increase the index (so that it is the next players turn)
+					this.playerList.getPlayer(j).setNumberOfEqualDice(0);						// Set the players doubleDice counter to 0
+					j++;																		// and increase the index (so that it is the next players turn)
 				}
 
 			}
@@ -113,11 +113,11 @@ public class GameController {
 
 		int alivePlayers = 0;																// Set a counter to 0
 
-		for (int j = 0; j < this.playerList.getLength(); j++)								// Loop through the playerlist
-			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {				// If the current players has a balance below 0:
+		for (int j = 0; j < this.playerList.getLength(); j++)									// Loop through the playerlist
+			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {					// If the current players has a balance below 0:
 				this.playerList.getPlayer(j).setBankrupt(true);								// Set his boolean Bankrupt to true
-				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc);				// And use the guiController to remove him from the gui
-			} else {																		// if the player is not bankrupt
+				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc);					// And use the guiController to remove him from the gui
+			} else {																			// if the player is not bankrupt
 				alivePlayers++;																// Proceed to the next player.
 			}
 
