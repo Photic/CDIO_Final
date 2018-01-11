@@ -40,7 +40,7 @@ public class GameController {
 		this.dc = new DeckController(this.textReader);
 		this.playing = true;
 		this.dicecup = new DiceCup();
-
+		this.dac = new AudioPlayer();
 	}
 
 	/**
