@@ -16,7 +16,7 @@ public class TestAccount extends ConstructorForJUnit {
 	public void addFieldsTest() {
 
 		
-		plist.getPlayer(1).getAccount().addField(fc.getField(6), this.fc);	
+		plist.getPlayer(1).getAc().addField(fc.getField(6), this.fc);	
 		String actual = plist.getPlayer(1).getAccount().getPinkFields()[0].getName();
 		String expected = "Roskildevej";
 		
