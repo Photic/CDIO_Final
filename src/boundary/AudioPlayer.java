@@ -20,6 +20,10 @@ public class AudioPlayer {
 		playSound(alibrary.getJailSound());
 	}
 	
+	public void playMoveSound() {
+		playSound(alibrary.getMoveSound((int)(Math.random()*alibrary.getMoveLength())));
+	}
+	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName

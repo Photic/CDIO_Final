@@ -3,6 +3,7 @@ package controller;
 import java.awt.Color;
 import java.io.IOException;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -782,7 +783,7 @@ public class GUIController {
 	 * @param diceSum
 	 * The sum of the dice
 	 */
-	public void movePlayer(Player p, int diceSum, FieldController fc) {
+	public void movePlayer(Player p, int diceSum, FieldController fc, AudioPlayer dac) {
 
 		int newPosition = (p.getPosition() + diceSum) % fc.getBoardLength();
 		int initPosition = (p.getPosition());
@@ -793,13 +794,7 @@ public class GUIController {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
-
-					try {
-						Thread.sleep(300);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					dac.playMoveSound();
 				}
 
 
