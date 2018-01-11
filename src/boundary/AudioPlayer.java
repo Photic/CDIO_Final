@@ -1,6 +1,7 @@
 package boundary;
 
-import javax.sound.sampled.AudioInputStream;
+import java.io.File;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
@@ -16,17 +17,17 @@ public class AudioPlayer {
 	 * Jail door closes shut sound.
 	 */
 	public void playJailSound() {
-		playSound(alibrary.getAis());
+		playSound(alibrary.getJailSound());
 	}
 	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName
 	 */
-	public static void playSound(AudioInputStream ais) {
+	public static void playSound(File file) {
 		try {
 			Clip clip = AudioSystem.getClip();
-			clip.open(ais);
+			clip.open(AudioSystem.getAudioInputStream(file));
 			clip.start();
 			// Makes the game sleep for lenght of clip. Sinece clip.get length is in microseconds, devide then by 1000.
 			Thread.sleep(clip.getMicrosecondLength()/1000);

@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.Random;
 
 import boundary.TextReader;
 import entity.DiceCup;
@@ -737,7 +736,6 @@ public class GUIController {
 		this.gui.showMessage(this.description[73]);
 	}
 
-
 	/**
 	 * Check if the name is in the array of names
 	 * @param names
@@ -760,7 +758,6 @@ public class GUIController {
 		}
 		return output;
 	}
-
 
 	/**
 	 * Combines to string arrays
@@ -786,7 +783,6 @@ public class GUIController {
 		return output;
 	}
 
-
 	/**
 	 * Places all the players on start.
 	 */
@@ -798,7 +794,6 @@ public class GUIController {
 		}
 	}
 
-
 	/**
 	 * This is the main move method. It moves the player to a new position given the dicesum.
 	 * 
@@ -808,9 +803,9 @@ public class GUIController {
 	 * @param diceSum
 	 * The sum of the dice
 	 */
-	public void movePlayer(Player p, int diceSum) {
+	public void movePlayer(Player p, int diceSum, FieldController fc) {
 
-		int newPosition = (p.getPosition() + diceSum) % 40;
+		int newPosition = (p.getPosition() + diceSum) % fc.getBoardLength();
 		int initPosition = (p.getPosition());
 
 		for (int i = 0; i < this.gui_players.length; i++) 
@@ -837,22 +832,17 @@ public class GUIController {
 
 	}
 
-
-
-
-
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
-	 * 
 	 * 
 	 * @param p
 	 * The player to be moved.
 	 * @param diceSum
 	 * The amount to be moved
 	 */
-	public void movePlayerBackwards(Player p, int diceSum) {
+	public void movePlayerBackwards(Player p, int diceSum, FieldController fc) {
 
-		int newPosition = (p.getPosition() + diceSum) % 40;
+		int newPosition = (p.getPosition() + diceSum) % fc.getBoardLength();
 
 		for (int i = 0; i < this.gui_players.length; i++) {
 
@@ -863,24 +853,20 @@ public class GUIController {
 					if (p.getPosition() != 0) {
 						p.setPosition(p.getPosition()-1);
 					} else {
-						p.setPosition(39);
+						p.setPosition(fc.getBoardLength()-1);
 					}
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 
 					try {
 						Thread.sleep(300);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						System.out.println(e);
 						e.printStackTrace();
 					}
-
 				}
 			}
-
-
 		}
 	}
-
 
 	/**
 	 * This is the second move method. The player moves to a given square
@@ -911,11 +897,8 @@ public class GUIController {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
 				}
 			}
-
-
 		}
 		if (recieveStartMoney == true) {
 			if (initPosition > newPosition) {
@@ -925,13 +908,10 @@ public class GUIController {
 				updateBalance(p);
 				this.gui.showMessage(p.getName() + this.description[48]);
 
-
 			}
 		}
-
-
-
 	}
+	
 	/**
 	 * A message when the player rolls a double.
 	 * @param p
