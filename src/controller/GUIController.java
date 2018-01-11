@@ -736,7 +736,6 @@ public class GUIController {
 		this.gui.showMessage(this.description[73]);
 	}
 
-
 	/**
 	 * Check if the name is in the array of names
 	 * @param names
@@ -759,7 +758,6 @@ public class GUIController {
 		}
 		return output;
 	}
-
 
 	/**
 	 * Combines to string arrays
@@ -785,7 +783,6 @@ public class GUIController {
 		return output;
 	}
 
-
 	/**
 	 * Places all the players on start.
 	 */
@@ -796,7 +793,6 @@ public class GUIController {
 			this.gui.addPlayer(this.gui_players[j]);
 		}
 	}
-
 
 	/**
 	 * This is the main move method. It moves the player to a new position given the dicesum.
@@ -836,10 +832,6 @@ public class GUIController {
 
 	}
 
-
-
-
-
 	/**
 	 * This move methods moves the player backwards. The player does not recieve money if he passes start.
 	 * 
@@ -871,14 +863,10 @@ public class GUIController {
 						System.out.println(e);
 						e.printStackTrace();
 					}
-
 				}
 			}
-
-
 		}
 	}
-
 
 	/**
 	 * This is the second move method. The player moves to a given square
