@@ -139,9 +139,10 @@ public class GameController {
 
 			if (this.playerList.getPlayer(j).getNumberOfEqualDice() == 3) {
 
-				this.gui.doubleDiceJail(this.playerList.getPlayer(j)); 
-				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false);
+				this.gui.doubleDiceJail(this.playerList.getPlayer(j));
 				this.playerList.getPlayer(j).setInJail(true);
+				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false);
+				this.dac.playJailSound();
 				this.playerList.getPlayer(j).setNumberOfEqualDice(0);
 				return false;
 
