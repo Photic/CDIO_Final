@@ -18,22 +18,10 @@ public class AudioLibrary {
 	 * Sounds to be used.
 	 */
 	private File jail;
-	private AudioInputStream ais;
-	private InputStream defaultSound;
-	
-	public AudioInputStream getAis() {
-		return ais;
-	}
 
 	public AudioLibrary() {
-		defaultSound = Main.class.getResourceAsStream(("rsc/Jail.wav"));
-		try {
-			ais = AudioSystem.getAudioInputStream(defaultSound);
-		} catch (UnsupportedAudioFileException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		
+		jail = new File("src/main/rsc/Jail.wav");
 
 	}
 	
