@@ -198,7 +198,7 @@ public class GameController {
 		Field currentField;
 		this.dicecup.shake();
 		this.gui.showDice(this.dicecup);
-		this.gui.movePlayer(p, this.dicecup.sum());
+		this.gui.movePlayer(p, this.dicecup.sum(), this.fc);
 
 		currentField = this.fc.getField(p.getPosition());
 

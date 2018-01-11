@@ -230,7 +230,7 @@ public class DeckController {
 		}
 
 		// Uses the calculated new amount to move the player.
-		gui.movePlayer(p, calculateNewPosition);
+		gui.movePlayer(p, calculateNewPosition, fc);
 
 		// If the field is owned, pay the onwer twice the normal amount, if not, the player can buy the field.
 		if (fc.getField(iMod).isOwned() == true) {

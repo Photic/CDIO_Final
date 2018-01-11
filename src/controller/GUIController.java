@@ -803,9 +803,9 @@ public class GUIController {
 	 * @param diceSum
 	 * The sum of the dice
 	 */
-	public void movePlayer(Player p, int diceSum) {
+	public void movePlayer(Player p, int diceSum, FieldController fc) {
 
-		int newPosition = (p.getPosition() + diceSum) % 40;
+		int newPosition = (p.getPosition() + diceSum) % fc.getBoardLength();
 		int initPosition = (p.getPosition());
 
 		for (int i = 0; i < this.gui_players.length; i++) 
@@ -853,7 +853,7 @@ public class GUIController {
 					if (p.getPosition() != 0) {
 						p.setPosition(p.getPosition()-1);
 					} else {
-						p.setPosition(39);
+						p.setPosition(fc.getBoardLength()-1);
 					}
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 
