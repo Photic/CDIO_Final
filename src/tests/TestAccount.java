@@ -54,8 +54,6 @@ public class TestAccount extends ConstructorForJUnit {
 		plist.getPlayer(1).getAc().addField(this.fc.getField(3), this.fc);
 		//System.out.println(plist.getPlayer(1).getAccount().getBlueFields()[0].getName());
 		
-		
-		
 		String actual = plist.getPlayer(1).getAc().allOfAKindFields()[0].getName() + plist.getPlayer(1).getAc().allOfAKindFields()[1].getName();
 		String expected = "RødovrevejHvidovre";
 		
