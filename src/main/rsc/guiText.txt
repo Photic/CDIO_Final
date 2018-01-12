@@ -69,7 +69,7 @@ Sælg Huse_
  betaler altså _
  Du har trukket et chanceKort_
 Sælg grund_
-Banken_
+Banken til 50% af værdien_
 Hvem vil du sælge til?_
 Ingen Køber_
  er nu på auktion. Er der andre der vil købe grunden?_
