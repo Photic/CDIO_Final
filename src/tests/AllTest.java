@@ -9,9 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestAccount.class, 
 	TestDeck.class, 
 	TestDice.class,
-	TestGameLoop.class, 
-	TestJail.class, 
-	TestDeckController.class
+	TestJail.class
 	})
 
 public class AllTest {
