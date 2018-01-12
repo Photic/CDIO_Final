@@ -36,6 +36,10 @@ public class AudioPlayer {
 		playSound(this.alibrary.getBirthday());
 	}
 	
+	public void playCarSound() {
+		playSound(this.alibrary.getCarSound());
+	}
+	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName
