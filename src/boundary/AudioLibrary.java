@@ -12,7 +12,7 @@ public class AudioLibrary {
 	private File[] dieThrow;
 
 	public AudioLibrary() {
-		this.jail = new File("src/main/rsc/Jail.wav");
+		this.jail = new File("src/main/rsc/jail.wav");
 		this.move = new File("src/main/rsc/move.wav");
 		
 		this.dieThrow = new File[] {
