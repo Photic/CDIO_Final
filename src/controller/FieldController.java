@@ -179,7 +179,7 @@ public class FieldController {
 		p.getAccount().setBalance(p.getAccount().getBalance() - field.getCurrentRent());
 		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getCurrentRent());
 
-		gui.payRentMessege(field, p);
+		gui.payRentMessage(field, p);
 		gui.updateBalance(p);
 		gui.updateBalance(field.getOwner());
 	}
@@ -200,7 +200,7 @@ public class FieldController {
 		p.getAccount().setBalance(p.getAccount().getBalance() - (field.getCurrentRent() * multiplier));
 		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + (field.getCurrentRent()*multiplier));
 
-		gui.payRentMessege(field, p, multiplier);
+		gui.payRentMessage(field, p, multiplier);
 		gui.updateBalance(p);
 		gui.updateBalance(field.getOwner());
 	}
@@ -380,7 +380,7 @@ public class FieldController {
 				//the loop loops through 1-4 and applies the action acording to the number of owned shipping fields.
 				for (int i = 1; i < 5; i++) 
 					if (field.getOwner().getAccount().getShipping() == i) {
-						gui.payRentShippingMessege(field, p);
+						gui.payRentShippingMessage(field, p);
 						p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[i-1]);
 						field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[i-1]);
 					}
@@ -402,7 +402,7 @@ public class FieldController {
 	 * The current playing player
 	 */
 	private void jailLogic(GUIController gui, Player p) {
-		gui.visitJailMessege(p);
+		gui.visitJailMessage(p);
 	}
 
 	/**
@@ -413,7 +413,7 @@ public class FieldController {
 	 * The current playing player
 	 */
 	private void goToJailLogic(GUIController gui, Player p, AudioPlayer dac) {
-		gui.goToJailMessege(p);
+		gui.goToJailMessage(p);
 		p.setInJail(true);
 		gui.movePlayerInstantly(p, 10, false, this);
 		dac.playJailSound();
@@ -427,7 +427,7 @@ public class FieldController {
 	 * The current playing player
 	 */
 	private void parkingLogic(GUIController gui, Player p) {
-		gui.parkingMessege(p);
+		gui.parkingMessage(p);
 	}
 
 	/**

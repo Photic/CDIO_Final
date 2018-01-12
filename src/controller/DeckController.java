@@ -205,7 +205,6 @@ public class DeckController {
 		fc.evaluateField(fc.getField(p.getPosition()), gui, p, 0, this, plist, dac);
 	}
 
-
 	/**
 	 * Moves the player to the cloeset shipping field,
 	 * @param p

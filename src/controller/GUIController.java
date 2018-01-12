@@ -72,7 +72,6 @@ public class GUIController {
 		String name;																									// Get ready to save a given playername
 		Color[] colors = new Color[] {Color.red, Color.black, Color.blue, Color.yellow, Color.white, Color.green};
 
-
 		int index;																									// A counter.
 
 		this.playerCount = Integer.parseInt(nop);																	// Define the playerCount. Use the choice from the players
@@ -210,7 +209,7 @@ public class GUIController {
 					territories = new String[currentFields.length];																			// All the current fields should be presented as a option to the player
 
 					for (int i = 0; i < territories.length; i++) 
-						territories[i] = currentFields[i].getName() + description[4] + currentFields[i].getHouses() + description[5];	
+						territories[i] = currentFields[i].getName() + this.description[4] + currentFields[i].getHouses() + this.description[5];	
 
 				} else {																													// If they are not the same heigth, only the lower ones should be an option
 
@@ -224,7 +223,7 @@ public class GUIController {
 					int countere = 0;
 					for (int i = 0; i < currentFields.length; i++) 																			// Put the fields with low houses in that array
 						if (currentFields[i].getHouses() < highestHouse) {
-							territories[countere] = currentFields[i].getName() + description[4] + currentFields[i].getHouses() + description[5];
+							territories[countere] = currentFields[i].getName() + this.description[4] + currentFields[i].getHouses() + this.description[5];
 							countere++;
 						}
 				}
@@ -236,13 +235,13 @@ public class GUIController {
 
 		//Now we have fields to be represented ready and ask the user which one he would like to build on.
 
-		String[] fortryd = new String[] {description[55]};																					// Create a return button.
+		String[] fortryd = new String[] {this.description[55]};																					// Create a return button.
 		output = combineStringArrays(output, fortryd);
 
-		String selected = gui.getUserSelection(description[6], output);																		// Ask for user selection
+		String selected = this.gui.getUserSelection(this.description[6], output);																		// Ask for user selection
 		String real = selected.split(",")[0];																								// Split the string (so that we only have the name of the territory in a string.
 
-		if (!(real.equals(description[55]))) 																								// If the return button is not pressed
+		if (!(real.equals(this.description[55]))) 																								// If the return button is not pressed
 			for (int i = 0; i < fields.length; i++) 																						// find the field chosen, and but a house on it and make the owner pay for it.
 				if (fields[i].getName().equals(real)) {
 					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
@@ -252,12 +251,12 @@ public class GUIController {
 					updateBalance(fields[i].getOwner());
 
 					fields[i].setHouses(fields[i].getHouses() + 1);
-					gui.showMessage(
-							description[7] + fields[i].getName() + 
-							description[8] + fields[i].getHousePrice() + 
-							description[9] + fields[i].getName() + 
-							description[10] + fields[i].getHouses() + 
-							description[11]);
+					this.gui.showMessage(
+							this.description[7] + fields[i].getName() + 
+							this.description[8] + fields[i].getHousePrice() + 
+							this.description[9] + fields[i].getName() + 
+							this.description[10] + fields[i].getHouses() + 
+							this.description[11]);
 				}
 	} 
 
@@ -274,7 +273,7 @@ public class GUIController {
 				count++;
 
 		if (count == 0) {
-			gui.showMessage(this.description[54]);
+			this.gui.showMessage(this.description[54]);
 		} else {
 			// Add the fields that has houses to a new array
 			String[] hasHouses = new String[count + 1];
@@ -320,11 +319,8 @@ public class GUIController {
 	 * @param p
 	 */
 	public void showWinner(Player p) {
-
 		String output = p.getName() + this.description[12];
-
 		this.gui.showMessage(output);
-
 	}
 
 	/**
@@ -363,7 +359,7 @@ public class GUIController {
 
 		int counter = 0;
 
-		playerNames[counter] = description[71];
+		playerNames[counter] = this.description[71];
 		counter++;
 
 		for (int i = 0; i < plist.getLength(); i++) 
@@ -372,12 +368,11 @@ public class GUIController {
 				counter++;
 			}
 
-		String[] fortryd = new String[] {description[55]};
+		String[] fortryd = new String[] {this.description[55]};
 		playerNames = combineStringArrays(playerNames, fortryd);
-		String output = gui.getUserSelection(description[72], playerNames);
+		String output = this.gui.getUserSelection(this.description[72], playerNames);
 
 		return output;
-
 	}
 
 	/**
@@ -402,10 +397,10 @@ public class GUIController {
 				counter++;
 			}
 
-		String[] fortryd = new String[] {description[73]};
+		String[] fortryd = new String[] {this.description[73]};
 		playerNames = combineStringArrays(playerNames, fortryd);
 
-		String output = gui.getUserSelection(field.getName() + description[74], playerNames);
+		String output = this.gui.getUserSelection(field.getName() + this.description[74], playerNames);
 
 		return output;
 	}
@@ -425,11 +420,11 @@ public class GUIController {
 		for (int i = 0; i < p.getAc().getFields().length; i++) 
 			fieldNames[i] = p.getAc().getFields()[i].getName();
 
-		fieldNames[p.getAc().getFields().length] = description[55];
-		String output = gui.getUserSelection(description[75], fieldNames);
+		fieldNames[p.getAc().getFields().length] = this.description[55];
+		String output = this.gui.getUserSelection(this.description[75], fieldNames);
 		Field outField = null;
 
-		if (!(output.equals(description[55]))) 
+		if (!(output.equals(this.description[55]))) 
 			for (int i = 0; i < p.getAc().getFields().length; i++) 
 				if (p.getAc().getFields()[i].getName() == output) 
 					outField = p.getAc().getFields()[i];
@@ -442,7 +437,7 @@ public class GUIController {
 	 * @return
 	 */
 	public int priceToSell() {
-		return gui.getUserInteger(description[76]);
+		return this.gui.getUserInteger(this.description[76]);
 	}
 
 	/**
@@ -450,7 +445,7 @@ public class GUIController {
 	 * @return
 	 */
 	public int priceToSellToOther() {
-		return gui.getUserInteger(description[77]);
+		return this.gui.getUserInteger(this.description[77]);
 	}
 
 	/**
@@ -458,9 +453,9 @@ public class GUIController {
 	 * @param field
 	 */
 	public void updateDescription(Field field) {
-		for (int i = 0; i < gui.getFields().length; i++) 
-			if (gui.getFields()[i].getTitle().equals(field.getName())) 
-				gui.getFields()[i].setDescription(gui.getFields()[i].getSubText());
+		for (int i = 0; i < this.gui.getFields().length; i++) 
+			if (this.gui.getFields()[i].getTitle().equals(field.getName())) 
+				this.gui.getFields()[i].setDescription(this.gui.getFields()[i].getSubText());
 	}
 
 	/**
@@ -469,9 +464,9 @@ public class GUIController {
 	 * @param field
 	 */
 	public void updateSubtext(Player newOwner, Field field) {
-		for (int i = 0; i < gui.getFields().length; i++) 
-			if (gui.getFields()[i].getTitle().equals(field.getName())) 
-				gui.getFields()[i].setSubText(newOwner.getName());
+		for (int i = 0; i < this.gui.getFields().length; i++) 
+			if (this.gui.getFields()[i].getTitle().equals(field.getName())) 
+				this.gui.getFields()[i].setSubText(newOwner.getName());
 	}
 
 	/**
@@ -479,13 +474,11 @@ public class GUIController {
 	 * @param field
 	 */
 	public void updateSubtextReversed(Field field) {
-
-		for (int i = 0; i < gui.getFields().length; i++) 
-			if (gui.getFields()[i].getTitle().equals(field.getName())) {
-				gui.getFields()[i].setSubText(gui.getFields()[i].getDescription());
-				gui.getFields()[i].setDescription(gui.getFields()[i].getTitle());
+		for (int i = 0; i < this.gui.getFields().length; i++) 
+			if (this.gui.getFields()[i].getTitle().equals(field.getName())) {
+				this.gui.getFields()[i].setSubText(this.gui.getFields()[i].getDescription());
+				this.gui.getFields()[i].setDescription(this.gui.getFields()[i].getTitle());
 			}
-
 	}
 
 	/**
@@ -496,7 +489,6 @@ public class GUIController {
 	 */
 	public boolean territoryDecision(Player p) {
 		this.gui.showMessage(p.getName() + this.description[13]);
-		
 		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[14], this.description[15], this.description[16]);
 	}
 
@@ -507,7 +499,6 @@ public class GUIController {
 	 */
 	public boolean companyDecision(Player p) {
 		this.gui.showMessage(p.getName() + this.description[17]);
-
 		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[18], this.description[15], this.description[78]);
 	}
 
@@ -518,7 +509,6 @@ public class GUIController {
 	 */
 	public boolean shippingDecision(Player p) {
 		this.gui.showMessage(p.getName() + this.description[19]);
-
 		return gui.getUserLeftButtonPressed(p.getName() + this.description[20], this.description[15], this.description[78]);
 	}
 
@@ -528,10 +518,8 @@ public class GUIController {
 	 * @return
 	 */
 	public boolean taxDecision(Player p) {
-		gui.showMessage(description[21]);
-
-		return gui.getUserLeftButtonPressed(
-				p.getName() + this.description[22], this.description[23], this.description[24]);
+		this.gui.showMessage(this.description[21]);
+		return this.gui.getUserLeftButtonPressed(p.getName() + this.description[22], this.description[23], this.description[24]);
 	}
 
 	/**
@@ -539,7 +527,7 @@ public class GUIController {
 	 * @param p
 	 */
 	public void taxMessage(Player p) {
-		gui.showMessage(p.getName() + this.description[25]);
+		this.gui.showMessage(p.getName() + this.description[25]);
 	}
 
 	/**
@@ -549,19 +537,15 @@ public class GUIController {
 	 * @param p
 	 */
 	public void transaction(boolean b, Field field, Player p) {
-
 		if (b == true) {
-
 			this.gui.showMessage(
 					p.getName() + this.description[26] + 
 					field.getName() + this.description[27] + 
 					field.getPrice() + this.description[28]
 					);
-
 		} else {
 			this.gui.showMessage(p.getName() + this.description[29] + field.getName());
 		}
-
 	}
 
 	/**
@@ -569,7 +553,7 @@ public class GUIController {
 	 * @param field
 	 * @param p
 	 */
-	public void payRentMessege(Field field, Player p) {
+	public void payRentMessage(Field field, Player p) {
 		this.gui.showMessage(
 				p.getName() + this.description[30] + 
 				field.getOwner().getName() + this.description[31] + 
@@ -584,7 +568,7 @@ public class GUIController {
 	 * @param p
 	 * @param multiplier
 	 */
-	public void payRentMessege(Field field, Player p, int multiplier) {
+	public void payRentMessage(Field field, Player p, int multiplier) {
 		int rent = multiplier*field.getCurrentRent();
 		this.gui.showMessage (
 				p.getName() + this.description[30] + 
@@ -601,7 +585,7 @@ public class GUIController {
 	 * @param field
 	 * @param p
 	 */
-	public void payRentShippingMessege(Field field, Player p) {
+	public void payRentShippingMessage(Field field, Player p) {
 		this.gui.showMessage (
 				p.getName() + this.description[30] + 
 				field.getOwner().getName() + this.description[34] + 
@@ -615,7 +599,7 @@ public class GUIController {
 	 * A message to play when you visit jail.
 	 * @param p
 	 */
-	public void visitJailMessege(Player p) {
+	public void visitJailMessage(Player p) {
 		this.gui.showMessage(p.getName() + this.description[37]);
 	}
 
@@ -623,7 +607,7 @@ public class GUIController {
 	 * A message to play when you are put in jail.
 	 * @param p
 	 */
-	public void goToJailMessege(Player p) {
+	public void goToJailMessage(Player p) {
 		this.gui.showMessage(p.getName() + this.description[38]);
 	}
 
@@ -631,7 +615,7 @@ public class GUIController {
 	 * A message to play when you are parking.
 	 * @param p
 	 */
-	public void parkingMessege(Player p) {
+	public void parkingMessage(Player p) {
 		this.gui.showMessage(p.getName() + this.description[39]);
 	}
 
@@ -767,7 +751,6 @@ public class GUIController {
 	 * Places all the players on start.
 	 */
 	public void placePlayer() {
-
 		for (int j = 0; j < this.gui_players.length; j++) {
 			this.gui.getFields()[0].setCar(this.gui_players[j], true);
 			this.gui.addPlayer(this.gui_players[j]);
@@ -796,7 +779,6 @@ public class GUIController {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 					dac.playMoveSound();
 				}
-
 
 		if (initPosition > newPosition) {
 			p.getAccount().setBalance(p.getAccount().getBalance() + fc.getField(0).getPrice());
