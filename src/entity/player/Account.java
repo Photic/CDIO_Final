@@ -8,9 +8,9 @@ public class Account {
 
 	private int balance, actives, housesowned, companies, shipping, territoriesOwned, amountOfCards;
 
-	private Card antiJailCard;
+	private Card jailCard;
 	
-	private Field[] blueFields, pinkFields, greenFields, greyFields, redFields, whiteFields, yellowFields,purpleFields;
+	private Field[] blueFields, pinkFields, greenFields, greyFields, redFields, whiteFields, yellowFields, purpleFields;
 
 	private boolean allblue, allpink, allgreen, allgrey, allred, allwhite, allyellow, allpurple;
 
@@ -35,18 +35,18 @@ public class Account {
 
 	}
 
-	public void recieveAntiJaulCard(Card cardrecieved) {
+	public void recieveAntiJailCard(Card cardrecieved) {
 		this.setAntiJailCard(cardrecieved);
 		this.amountOfCards++;
 	}
 
-	public void removeAntiJaulCard() {
+	public void removeAntiJailCard() {
 		if (this.amountOfCards > 1) {
 			this.amountOfCards--;
 		}
 		else {
 			this.amountOfCards--;
-			this.antiJailCard = null;
+			this.jailCard = null;
 		}
 	}	
 
@@ -57,7 +57,7 @@ public class Account {
 	 * @param gameboard
 	 * @return
 	 */
-	public int getPlayerWorth(Player p) {
+	public int getPlayerWorth() {
 		return this.balance + this.actives;
 	}
 
@@ -110,11 +110,11 @@ public class Account {
 	}
 
 	public Card getAntiJailCard() {
-		return antiJailCard;
+		return jailCard;
 	}
 
 	public void setAntiJailCard(Card antiJailCard) {
-		this.antiJailCard = antiJailCard;
+		this.jailCard = antiJailCard;
 	}
 
 	public int getShipping() {

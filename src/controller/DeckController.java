@@ -159,7 +159,7 @@ public class DeckController {
 	 * @param advancedAmount
 	 */
 	private void GetMoneyIfWorthIsLowCard(Player p, PlayerList plist, int amount, int advancedAmount) {
-		if (p.getAccount().getPlayerWorth(p) <= amount)
+		if (p.getAccount().getPlayerWorth() <= amount)
 			p.getAccount().addBalance(advancedAmount);
 	}
 
@@ -170,7 +170,7 @@ public class DeckController {
 	 */
 	private void antiJailCard(Player p, Card cardPicked) {
 		this.deck.getLastCard().addRemoveCardOwner(p.getName(), true);
-		p.getAccount().recieveAntiJaulCard(cardPicked);
+		p.getAccount().recieveAntiJailCard(cardPicked);
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class DeckController {
 		for (int i = 0; i <= deck.getLength(); i++) {
 			if (this.deck.getCard(i) instanceof AntiJailCard && p.getName() == this.deck.getCard(i).getCardOwner()) {
 				this.deck.getCard(i).addRemoveCardOwner(null, false);
-				p.getAccount().removeAntiJaulCard();
+				p.getAccount().removeAntiJailCard();
 				break;
 			}
 		}

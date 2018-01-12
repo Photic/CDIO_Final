@@ -267,7 +267,7 @@ public class FieldController {
 
 			} else {
 				//pays 10% of playerworth
-				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1)); 
+				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth() * 0.1)); 
 				gui.updateBalance(p);
 
 			}

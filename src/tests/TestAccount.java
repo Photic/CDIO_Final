@@ -93,7 +93,7 @@ public class TestAccount extends ConstructorForJUnit {
 		boolean test = false;
 		Card card = new AntiJailCard(" ");
 		
-		p.getAccount().recieveAntiJaulCard(card);
+		p.getAccount().recieveAntiJailCard(card);
 	
 		
 		if (p.getAccount().getAmountOfCards() == 1)
@@ -107,9 +107,9 @@ public class TestAccount extends ConstructorForJUnit {
 		boolean test = false; 
 		Card card = new AntiJailCard(" ");
 		
-		p.getAccount().recieveAntiJaulCard(card);
+		p.getAccount().recieveAntiJailCard(card);
 		
-		p.getAccount().removeAntiJaulCard();
+		p.getAccount().removeAntiJailCard();
 		
 		if (p.getAccount().getAmountOfCards() == 0)
 			test = true;

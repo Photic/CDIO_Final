@@ -242,7 +242,7 @@ public class GameController {
 
 			} else if (decision == 3) {
 
-				p.getAccount().removeAntiJaulCard();
+				p.getAccount().removeAntiJailCard();
 				p.setInJail(false);
 				this.gui.antiJailUsed(p);
 
