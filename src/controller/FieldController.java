@@ -55,15 +55,15 @@ public class FieldController {
 
 		} else if (field instanceof Tax) {
 
-			taxLogic(field, gui, p);
+			taxLogic(field, gui, p, dac);
 
 		} else if (field instanceof Company) {
 
-			companyLogic(field, gui, p, diceSum);
+			companyLogic(field, gui, p, diceSum, dac);
 
 		} else if (field instanceof Shipping) {
 
-			shippingLogic(field, gui, p);
+			shippingLogic(field, gui, p, dac);
 
 		} else if (field instanceof Jail) {
 
@@ -253,7 +253,7 @@ public class FieldController {
 	 * @param p
 	 * The current playing PLayer
 	 */
-	private void taxLogic(Field field, GUIController gui, Player p) {
+	private void taxLogic(Field field, GUIController gui, Player p, AudioPlayer dac) {
 
 		//if you land on the field "indkomstskat" you have to decisions. True = pay 400, False = pay 10% of playerworth
 		if (field.getPrice() == 4000) {
@@ -279,6 +279,7 @@ public class FieldController {
 			gui.updateBalance(p);
 
 		}
+		dac.playCoinSound();
 
 	}
 
@@ -293,7 +294,7 @@ public class FieldController {
 	 * @param diceSum
 	 * A int that takes in the dicesum.
 	 */
-	private void companyLogic(Field field, GUIController gui, Player p, int diceSum) {
+	private void companyLogic(Field field, GUIController gui, Player p, int diceSum, AudioPlayer dac) {
 
 		//if the field isn´t owned, the current playing player can buy it.
 		if(field.isOwned() == false) {
@@ -301,7 +302,7 @@ public class FieldController {
 
 			//if the player wants to buy it, then the action below runs.
 			if (decision == true) {
-
+				dac.playCoinSound();
 				p.getAccount().buyField(field.getPrice());
 				gui.updateBalance(p);
 
@@ -351,7 +352,7 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field.
 	 */
-	private void shippingLogic(Field field, GUIController gui, Player p) {
+	private void shippingLogic(Field field, GUIController gui, Player p, AudioPlayer dac) {
 
 		//if the field isn´t owned, the current playing player can buy it.
 		if(field.isOwned() == false) {
@@ -359,7 +360,7 @@ public class FieldController {
 
 			//if the player wants to buy it, then the action below runs.
 			if (decision == true) {
-
+				dac.playCoinSound();
 				p.getAccount().buyField(field.getPrice());
 				gui.updateBalance(p);
 
