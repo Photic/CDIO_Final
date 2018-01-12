@@ -14,6 +14,7 @@ public class AudioLibrary {
 		this.jail = new File("src/main/rsc/jail.wav");
 		this.move = new File("src/main/rsc/move.wav");
 		this.coin = new File("src/main/rsc/coin.wav");
+		this.birthday = new File("src/main/rsc/birthday.wav");
 		
 		this.dieThrow = new File[] {
 				new File ("src/main/rsc/die.wav"),
@@ -24,6 +25,10 @@ public class AudioLibrary {
 	
 	public File getJailSound() {
 		return this.jail;
+	}
+	
+	public File getBirthday() {
+		return this.birthday;
 	}
 	
 	public File getCoinSound() {
