@@ -32,6 +32,10 @@ public class AudioPlayer {
 		playSound(this.alibrary.getCoinSound());
 	}
 	
+	public void playBirthdaySound() {
+		playSound(this.alibrary.getBirthday());
+	}
+	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName

@@ -72,7 +72,7 @@ public class DeckController {
 			recieveMoneyCard(p, cardPicked.getAmount());
 		}
 		else if (cardPicked instanceof BirthdayCard) {
-			birthdayCard(p, plist, cardPicked.getAmount());
+			birthdayCard(p, plist, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof PayMoneyCard) {
 			payMoneyCard(p, cardPicked.getAmount());
@@ -116,7 +116,8 @@ public class DeckController {
 	 * @param plist
 	 * @param amount
 	 */
-	private void birthdayCard(Player p, PlayerList plist, int amount) {
+	private void birthdayCard(Player p, PlayerList plist, int amount, AudioPlayer dac) {
+		dac.playBirthdaySound();
 		for (int i = 0; i < plist.getLength(); i++) {
 			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.getAccount().addBalance(amount);
