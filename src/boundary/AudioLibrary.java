@@ -25,8 +25,8 @@ public class AudioLibrary {
 		
 		this.hello = new File[] {
 				new File ("src/main/rsc/hello.wav"),
-				new File ("src/main/rsc/hello1.wav"),
 				new File ("src/main/rsc/hello2.wav"),
+				new File ("src/main/rsc/hello3.wav"),
 				new File ("src/main/rsc/hello4.wav")
 		};
 	}
