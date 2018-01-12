@@ -13,7 +13,7 @@ public class AudioLibrary {
 	public AudioLibrary() {
 		this.jail = new File("src/main/rsc/jail.wav");
 		this.move = new File("src/main/rsc/move.wav");
-		this.coin = new File("src/main/rsc/coin.wav");
+		this.coin = new File("src/main/rsc/coins.wav");
 		this.birthday = new File("src/main/rsc/birthday.wav");
 		
 		this.dieThrow = new File[] {
