@@ -64,7 +64,7 @@ public class GUIController {
 	 * @return
 	 * A PlayerList with the registered players.
 	 */
-	public PlayerList registerPlayerCount() {
+	public PlayerList registerPlayerCount(AudioPlayer dac) {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};																// The array with the options of how many players to register
 		String nop = this.gui.getUserSelection(this.description[0], nopArray);										// The choice the players make
@@ -81,7 +81,7 @@ public class GUIController {
 		for (int i = 0; i <= this.playerCount - 1; i++) {																// Loop through the players
 			index = i + 1;																							// define the index
 			name = this.gui.getUserString(this.description[1] + index + this.description[2]);							// Ask for a name
-
+			dac.playHelloSound();
 			if (name.length() <= 0) 																					// if the player doesn't write anything, then let the player be called JaneDoe
 				name = "JaneDoe";
 
