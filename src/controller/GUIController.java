@@ -111,14 +111,6 @@ public class GUIController {
 
 		PlayerList playerList = new PlayerList(this.playerCount, names);												// Create the player list with the registered players
 
-		String output = this.description[3];																			// Prepare for a message that tells who was registered.
-		for (int i = 0; i < playerList.getLength(); i++) {
-			output = output + playerList.getPlayer(i).getName() + ", ";
-
-		}
-
-		this.gui.showMessage(output);
-
 		return playerList;
 
 	}

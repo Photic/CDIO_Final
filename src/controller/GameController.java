@@ -104,6 +104,7 @@ public class GameController {
 		this.gui.defineGUI(this.fc);
 		this.playerList = this.gui.registerPlayerCount();
 		this.gui.placePlayer();
+		this.dac.playCarSound();
 	}
 
 	/**
