@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 public class TextReader {		
 	
-	
 	public String[] textFromFile(InputStream in) throws IOException {
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in, "UTF-8"));

@@ -13,5 +13,4 @@ public class GetMoneyIfWorthIsLowCard extends Card {
 		this.actionOrAmount = amount;
 		this.advancedAmount = advancedAmount;
 	}
-
 }

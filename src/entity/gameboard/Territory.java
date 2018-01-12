@@ -8,7 +8,6 @@ import java.awt.Color;
  */
 public class Territory extends Field {
 
-	
 	public Territory(String name, String description, Color color, int price, int housePrice, int[] rent, int index, int pawnValue) {
 		super(name, description, color, index);
 		this.isOwned = false;
@@ -36,8 +35,6 @@ public class Territory extends Field {
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
-
-
 	public int getHouses() {
 		return houses;
 	}
@@ -53,6 +50,5 @@ public class Territory extends Field {
 	public int getHousePrice() {
 		return housePrice;
 	}
-	
 	
 }

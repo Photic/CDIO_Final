@@ -8,5 +8,4 @@ public class Chance extends Field {
 		super(navn, description, color, index);
 		// TODO Auto-generated constructor stub
 	}
-
 }

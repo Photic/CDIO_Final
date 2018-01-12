@@ -16,9 +16,6 @@ public abstract class Field {
 	protected Player owner;
 	protected boolean isOwned;
 	protected int price, housePrice, houses, hotels, index, pawnValue;
-
-
-
 	protected int[] rent;
 	
 	public Field(String name, String description, Color color, int index) {

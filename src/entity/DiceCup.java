@@ -12,6 +12,10 @@ public class DiceCup {
 		this.d2 = new Die();
 	}
 
+	/**
+	 * Rolle the Die
+	 * @param dac
+	 */
 	public void shake(AudioPlayer dac) {
 		dac.playDieSound();
 		this.d1.rollDie();
@@ -27,6 +31,10 @@ public class DiceCup {
 		return this.d1.getValue() + this.d2.getValue();
 	}
 
+	/**
+	 * Tells of the die are of same type.
+	 * @return
+	 */
 	public boolean equalsDice() {
 
 		boolean equals;

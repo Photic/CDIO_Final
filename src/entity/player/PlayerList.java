@@ -33,7 +33,6 @@ public class PlayerList {
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
-	
 	public Player[] getList() {
 		return players;
 	}

@@ -32,7 +32,6 @@ public class GameBoard {
 	private String[] fieldName;
 	private String[] fieldDescription;
 
-
 	/**
 	 * Creates the entire gameboard.
 	 */

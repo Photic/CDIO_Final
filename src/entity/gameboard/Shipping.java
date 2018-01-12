@@ -11,5 +11,4 @@ public class Shipping extends Field {
 		this.rent = rent;
 		this.pawnValue = pawnValue;
 	}
-
 }

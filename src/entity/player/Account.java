@@ -7,11 +7,8 @@ import entity.gameboard.Field;
 public class Account {
 
 	private int balance, actives, housesowned, companies, shipping, territoriesOwned, amountOfCards;
-
 	private Card jailCard;
-	
 	private Field[] blueFields, pinkFields, greenFields, greyFields, redFields, whiteFields, yellowFields, purpleFields;
-
 	private boolean allblue, allpink, allgreen, allgrey, allred, allwhite, allyellow, allpurple;
 
 	public Account() {
@@ -31,8 +28,6 @@ public class Account {
 		whiteFields = new Field[] {null, null, null};
 		yellowFields = new Field[] {null, null, null};
 		purpleFields = new Field[] {null, null};
-
-
 	}
 
 	public void recieveAntiJailCard(Card cardrecieved) {
@@ -49,7 +44,6 @@ public class Account {
 			this.jailCard = null;
 		}
 	}	
-
 
 	/**
 	 * Calculates Player Worth and returns the sum.
@@ -74,7 +68,6 @@ public class Account {
 		addBalance(price);
 		addActives(-price);
 	}
-
 
 	//--------------------------------------------------------
 	//

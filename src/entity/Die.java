@@ -6,8 +6,6 @@ public class Die {
 	
 	private int value;
 	
-	public Die() {}
-	
 	/**
 	 * ruller terningen
 	 * 
@@ -23,9 +21,7 @@ public class Die {
 	//
 	//--------------------------------------------------------
 	public int getValue() {
-		
 		return this.value;
-		
 	}
 
 }

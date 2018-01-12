@@ -417,7 +417,6 @@ public class AccountController {
 			if (temp[i] != null) 
 				count++;
 
-
 		Field[] output = new Field[count];
 		count = 0;
 		for (int i = 0; i < temp.length; i++) 
@@ -429,14 +428,8 @@ public class AccountController {
 		return output;
 	}
 	
-	
 	public int numberOfTerri() {
 		return getFields().length;
 	}
-	
-	
-	
-	
-	
 
 }

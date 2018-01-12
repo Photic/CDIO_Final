@@ -8,7 +8,4 @@ public class Start extends Field {
 		super(name, description, color, index);
 		this.price = price;
 	}
-	
-
-
 }
