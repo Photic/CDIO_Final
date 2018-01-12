@@ -111,17 +111,17 @@ public class GameController {
 	 */
 	private void checkForBankruptPlayers() {
 
-		int alivePlayers = 0;																// Set a counter to 0
+		int playersAlive = 0;																// Set a counter to 0
 
 		for (int j = 0; j < this.playerList.getLength(); j++)									// Loop through the playerlist
 			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {					// If the current players has a balance below 0:
 				this.playerList.getPlayer(j).setBankrupt(true);								// Set his boolean Bankrupt to true
 				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc);					// And use the guiController to remove him from the gui
 			} else {																			// if the player is not bankrupt
-				alivePlayers++;																// Proceed to the next player.
+				playersAlive++;																// Proceed to the next player.
 			}
 
-		this.alivePlayers = alivePlayers;													// set the alivePlayer counter to the new count.
+		this.alivePlayers = playersAlive;													// set the alivePlayer counter to the new count.
 
 	}
 

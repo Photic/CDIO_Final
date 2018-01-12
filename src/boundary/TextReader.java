@@ -3,7 +3,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 
 public class TextReader {		
 	
@@ -34,31 +33,6 @@ public class TextReader {
 			System.out.println(a[i]);
 		}
 	 }
-
-
-	 /**
-	  * This method calculates how many lines of text that the textreader will load, to make sure that the array that it returns is the propper size, 
-	  * and doesnt have spaces with null
-	  * @param fileName
-	  * @return int arrayCount
-	  * @throws IOException
-	  */
-	 private int countArray(Reader fileName) throws IOException{
-
-		 BufferedReader tempFile = new BufferedReader(fileName);
-		 int arrayCount = 0;
-		 String line = tempFile.readLine();
-		 
-		 while(line!=null){
-			 line = tempFile.readLine();
-			 arrayCount++;
-		 }
-
-		 return arrayCount; 
-	 }
-
-
-
 
 }
 
