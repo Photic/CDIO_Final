@@ -794,11 +794,7 @@ public class GUIController {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					p.setPosition(p.getPosition()+1);
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
-					try {
-						Thread.sleep(300);
-					} catch (Exception e) {
-						System.out.println(e);
-					}
+					dac.playMoveSound();
 				}
 
 
@@ -835,12 +831,7 @@ public class GUIController {
 						p.setPosition(fc.getBoardLength()-1);
 					}
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
-					
-					try {
-						Thread.sleep(300);
-					} catch (Exception e) {
-						System.out.println(e);
-					}
+					dac.playMoveSound();
 				}
 			}
 		}

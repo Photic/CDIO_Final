@@ -21,7 +21,7 @@ public class AudioPlayer {
 	}
 	
 	public void playMoveSound() {
-		playSound(alibrary.getMoveSound((int)(Math.random()*alibrary.getMoveLength())));
+		playSound(alibrary.getMoveSound());
 	}
 	
 	public void playDieSound() {

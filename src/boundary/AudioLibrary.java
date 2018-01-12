@@ -8,17 +8,12 @@ public class AudioLibrary {
 	 * Sounds to be used.
 	 */
 	private File jail;
-	private File[] move;
+	private File move;
 	private File[] dieThrow;
-	private File birthday;
 
 	public AudioLibrary() {
 		this.jail = new File("src/main/rsc/Jail.wav");
-		this.move = new File[] {
-				new File ("src/main/rsc/move1.wav"), 
-				new File ("src/main/rsc/move2.wav"), 
-				new File ("src/main/rsc/move3.wav")
-				};
+		this.move = new File("src/main/rsc/move.wav");
 		
 		this.dieThrow = new File[] {
 				new File ("src/main/rsc/die.wav"),
@@ -31,12 +26,8 @@ public class AudioLibrary {
 		return this.jail;
 	}
 	
-	public File getMoveSound(int n) {
-		return this.move[n];
-	}
-	
-	public int getMoveLength() {
-		return this.move.length;
+	public File getMoveSound() {
+		return this.move;
 	}
 	
 	public File getDieSound(int n) {
