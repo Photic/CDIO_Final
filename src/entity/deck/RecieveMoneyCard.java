@@ -11,5 +11,4 @@ public class RecieveMoneyCard extends Card {
 		super(description);
 		this.actionOrAmount = getMoney;
 	}
-
 }

@@ -1,19 +1,14 @@
 package entity.player;
 
 
-import controller.FieldController;
 import entity.deck.Card;
 import entity.gameboard.Field;
-import entity.gameboard.GameBoard;
 
 public class Account {
 
 	private int balance, actives, housesowned, companies, shipping, territoriesOwned, amountOfCards;
-
-	private Card antiJailCard;
-	
-	private Field[] blueFields, pinkFields, greenFields, greyFields, redFields, whiteFields, yellowFields,purpleFields;
-
+	private Card jailCard;
+	private Field[] blueFields, pinkFields, greenFields, greyFields, redFields, whiteFields, yellowFields, purpleFields;
 	private boolean allblue, allpink, allgreen, allgrey, allred, allwhite, allyellow, allpurple;
 
 	public Account() {
@@ -33,25 +28,22 @@ public class Account {
 		whiteFields = new Field[] {null, null, null};
 		yellowFields = new Field[] {null, null, null};
 		purpleFields = new Field[] {null, null};
-
-
 	}
 
-	public void recieveAntiJaulCard(Card cardrecieved) {
+	public void recieveAntiJailCard(Card cardrecieved) {
 		this.setAntiJailCard(cardrecieved);
 		this.amountOfCards++;
 	}
 
-	public void removeAntiJaulCard() {
+	public void removeAntiJailCard() {
 		if (this.amountOfCards > 1) {
 			this.amountOfCards--;
 		}
 		else {
 			this.amountOfCards--;
-			this.antiJailCard = null;
+			this.jailCard = null;
 		}
 	}	
-
 
 	/**
 	 * Calculates Player Worth and returns the sum.
@@ -59,7 +51,7 @@ public class Account {
 	 * @param gameboard
 	 * @return
 	 */
-	public int getPlayerWorth(Player p) {
+	public int getPlayerWorth() {
 		return this.balance + this.actives;
 	}
 
@@ -76,7 +68,6 @@ public class Account {
 		addBalance(price);
 		addActives(-price);
 	}
-
 
 	//--------------------------------------------------------
 	//
@@ -112,11 +103,11 @@ public class Account {
 	}
 
 	public Card getAntiJailCard() {
-		return antiJailCard;
+		return jailCard;
 	}
 
 	public void setAntiJailCard(Card antiJailCard) {
-		this.antiJailCard = antiJailCard;
+		this.jailCard = antiJailCard;
 	}
 
 	public int getShipping() {

@@ -4,11 +4,8 @@ import java.awt.Color;
 
 public class Start extends Field {
 
-	public Start(String name, String description, Color color, int index) {
+	public Start(String name, String description, Color color, int index, int price) {
 		super(name, description, color, index);
-		// TODO Auto-generated constructor stub
+		this.price = price;
 	}
-	
-
-
 }

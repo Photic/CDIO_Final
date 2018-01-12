@@ -11,5 +11,4 @@ public class MovePlayerBackCard extends Card {
 		super(description);
 		this.actionOrAmount = moveBack;
 	}
-
 }

@@ -11,5 +11,4 @@ public class MovePlayerCard extends Card {
 		super(description);
 		this.actionOrAmount = posistion;
 	}
-	
 }

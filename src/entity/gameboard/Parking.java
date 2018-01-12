@@ -6,11 +6,5 @@ public class Parking extends Field {
 
 	public Parking(String name, String description, Color color, int index) {
 		super(name, description, color, index);
-		// TODO Auto-generated constructor stub
 	}
-
-
-	
-
-
 }

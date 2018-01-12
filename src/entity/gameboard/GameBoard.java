@@ -32,7 +32,6 @@ public class GameBoard {
 	private String[] fieldName;
 	private String[] fieldDescription;
 
-
 	/**
 	 * Creates the entire gameboard.
 	 */
@@ -48,7 +47,7 @@ public class GameBoard {
 		// Evert field in game.
 		this.fields = new Field[] 
 				{
-						new Start(fieldName[0], fieldDescription[0], standard,0),																				// 0
+						new Start(fieldName[0], fieldDescription[0], standard,0, 4000),																				// 0
 						new Territory(fieldName[1], fieldDescription[1], blue, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000}, 1, 600),				// 1
 						new Chance(fieldName[2], fieldDescription[2], standard, 2),																			// 2
 						new Territory(fieldName[3], fieldDescription[3], blue, 1200,1000, new int[] {50, 250, 750, 2250, 4000, 6000}, 3, 600),					// 3

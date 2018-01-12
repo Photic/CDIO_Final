@@ -10,5 +10,4 @@ public class Company extends Field {
 		this.price = price; 
 		this.pawnValue = pawnValue;
 	}
-	
 }

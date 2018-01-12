@@ -10,18 +10,11 @@ import controller.AccountController;
 public class Player {
 		
 	private final int GAMEBOARDLENGTH = 40;
-	private String name, id;
-	private int position;
-	private boolean turn, bankrupt, inJail;
+	private int position, numberOfEqualDice, jailCounterDice;
+	private boolean bankrupt, inJail;
+	private String name;
 	private Account account;
-	private int numberOfEqualDice;
-	private int jailCounterDice; 
 	private AccountController ac;
-
-
-	public AccountController getAc() {
-		return ac;
-	}
 
 	public Player(String n) {
 		this.name = n;
@@ -31,12 +24,16 @@ public class Player {
 		this.position = 0;
 		ac = new AccountController(this);
 	}
-
+	
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
 	//
 	//--------------------------------------------------------
+	public AccountController getAc() {
+		return ac;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -65,7 +62,6 @@ public class Player {
 		this.inJail = inJail;
 	}
 
-
 	public Account getAccount() {
 		return account;
 	}
@@ -85,4 +81,3 @@ public class Player {
 		this.jailCounterDice = jailCounterDice;
 	}
 }
-

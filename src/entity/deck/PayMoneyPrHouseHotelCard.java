@@ -2,7 +2,6 @@ package entity.deck;
 
 public class PayMoneyPrHouseHotelCard extends Card {
 
-
 	/**
 	 * Constructor for PayMoneyPrHouseHotelCard, extends Card.
 	 * @param description
@@ -12,5 +11,4 @@ public class PayMoneyPrHouseHotelCard extends Card {
 		super(description);
 		this.housesHotels = needstopay;
 	}
-
 }

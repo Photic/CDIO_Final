@@ -11,5 +11,4 @@ public class GoToJailCard extends Card {
 		super(description);
 		this.actionOrAmount = posistion;
 	}
-	
 }

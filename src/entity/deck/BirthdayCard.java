@@ -11,5 +11,4 @@ public class BirthdayCard extends Card {
 		super(description);
 		this.actionOrAmount = prPlayer;
 	}
-	
 }

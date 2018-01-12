@@ -3,6 +3,7 @@ package controller;
 
 import java.io.IOException;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.DiceCup;
 import entity.gameboard.Field;
@@ -16,7 +17,6 @@ import entity.player.PlayerList;
  */
 public class GameController {
 
-
 	private GUIController gui;
 	private PlayerList playerList;
 	private FieldController fc;
@@ -25,6 +25,7 @@ public class GameController {
 	private boolean playing;
 	private TextReader textReader;
 	private int alivePlayers;
+	private AudioPlayer dac;
 
 	/**
 	 * Constructor setting up the gamecontroller.
@@ -39,7 +40,7 @@ public class GameController {
 		this.dc = new DeckController(this.textReader);
 		this.playing = true;
 		this.dicecup = new DiceCup();
-
+		this.dac = new AudioPlayer();
 	}
 
 	/**
@@ -60,10 +61,10 @@ public class GameController {
 	 */
 	private void gameLoop() {
 		boolean checker;
-
+//		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
 		if (this.alivePlayers == 1) {														// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
-				if (this.playerList.getPlayer(i).isBankrupt() == false) 					// Check if the current player is bankrupt
+				if (this.playerList.getPlayer(i).isBankrupt() == false) 						// Check if the current player is bankrupt
 					this.gui.showWinner(this.playerList.getPlayer(i));						// If he is not, he is the winner.
 		} else {
 			// Now starts the "normal game"
@@ -74,20 +75,20 @@ public class GameController {
 				if (this.playerList.getPlayer(j).isBankrupt() == false 						// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == false) {				// and if the player is not in jail
 
-					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);	// Let the fieldController handle the turn.
+					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);		// Let the fieldController handle the turn.
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false 				// If the player is not bankrupt
-						&& this.playerList.getPlayer(j).isInJail() == true) {				// and the player IS in jail
+						&& this.playerList.getPlayer(j).isInJail() == true) {					// and the player IS in jail
 					jailDecision(this.playerList.getPlayer(j), j);							// apply the jail logic
 				}
 
 				checkForBankruptPlayers();													// After the player has taken his turn, check if there is any bankrupt players, and apply logic
 
-				checker = checkForDoubleDice(j);											// Check if the player rolled a double
+				checker = checkForDoubleDice(j);												// Check if the player rolled a double
 
 				if (checker == false) {														// If the player did not roll a double
-					this.playerList.getPlayer(j).setNumberOfEqualDice(0);					// Set the players doubleDice counter to 0
-					j++;																	// and increase the index (so that it is the next players turn)
+					this.playerList.getPlayer(j).setNumberOfEqualDice(0);						// Set the players doubleDice counter to 0
+					j++;																		// and increase the index (so that it is the next players turn)
 				}
 
 			}
@@ -110,17 +111,17 @@ public class GameController {
 	 */
 	private void checkForBankruptPlayers() {
 
-		int alivePlayers = 0;																// Set a counter to 0
+		int playersAlive = 0;																// Set a counter to 0
 
-		for (int j = 0; j < this.playerList.getLength(); j++)								// Loop through the playerlist
-			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {				// If the current players has a balance below 0:
+		for (int j = 0; j < this.playerList.getLength(); j++)									// Loop through the playerlist
+			if (this.playerList.getPlayer(j).getAccount().getBalance() < 0) {					// If the current players has a balance below 0:
 				this.playerList.getPlayer(j).setBankrupt(true);								// Set his boolean Bankrupt to true
-				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc);				// And use the guiController to remove him from the gui
-			} else {																		// if the player is not bankrupt
-				alivePlayers++;																// Proceed to the next player.
+				this.gui.removeBankrupted(playerList.getPlayer(j), this.fc);					// And use the guiController to remove him from the gui
+			} else {																			// if the player is not bankrupt
+				playersAlive++;																// Proceed to the next player.
 			}
 
-		this.alivePlayers = alivePlayers;													// set the alivePlayer counter to the new count.
+		this.alivePlayers = playersAlive;													// set the alivePlayer counter to the new count.
 
 	}
 
@@ -138,9 +139,10 @@ public class GameController {
 
 			if (this.playerList.getPlayer(j).getNumberOfEqualDice() == 3) {
 
-				this.gui.doubleDiceJail(this.playerList.getPlayer(j)); 
-				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false);
+				this.gui.doubleDiceJail(this.playerList.getPlayer(j));
 				this.playerList.getPlayer(j).setInJail(true);
+				this.gui.movePlayerInstantly(this.playerList.getPlayer(j), 10, false, this.fc);
+				this.dac.playJailSound();
 				this.playerList.getPlayer(j).setNumberOfEqualDice(0);
 				return false;
 
@@ -194,13 +196,13 @@ public class GameController {
 	 */
 	public void takeTurn(Player p) {
 		Field currentField;
-		this.dicecup.shake();
+		this.dicecup.shake(this.dac);
 		this.gui.showDice(this.dicecup);
-		this.gui.movePlayer(p, this.dicecup.sum());
+		this.gui.movePlayer(p, this.dicecup.sum(), this.fc, this.dac);
 
 		currentField = this.fc.getField(p.getPosition());
 
-		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList);
+		fc.evaluateField(currentField, this.gui, p, this.dicecup.sum(), this.dc, this.playerList, this.dac);
 	}
 
 	/**
@@ -224,7 +226,7 @@ public class GameController {
 
 			} else if (decision == 2) {
 
-				this.dicecup.shake();
+				this.dicecup.shake(this.dac);
 				this.gui.showDice(this.dicecup);
 
 				if (this.dicecup.equalsDice() == true) {
@@ -240,7 +242,7 @@ public class GameController {
 
 			} else if (decision == 3) {
 
-				p.getAccount().removeAntiJaulCard();
+				p.getAccount().removeAntiJailCard();
 				p.setInJail(false);
 				this.gui.antiJailUsed(p);
 

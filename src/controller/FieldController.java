@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Color;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.gameboard.Chance;
 import entity.gameboard.Company;
@@ -25,13 +26,6 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 	private HouseController hc;
-
-
-
-	public HouseController getHc() {
-		return hc;
-	}
-
 	
 	/**
 	 * FieldControllers contructor 
@@ -52,13 +46,12 @@ public class FieldController {
 	 * @param p
 	 * The player who landed on the field
 	 */
-	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, PlayerList plist) {
+	public void evaluateField(Field field, GUIController gui, Player p, int diceSum, DeckController dc, PlayerList plist, AudioPlayer dac) {
 
-		
 		//Denne if/else if statement tager højde for hvilket felt der bliver landet på, og udfører den givne logik på feltet.
 		if (field instanceof Territory) {
 
-			territoryLogic(field, gui, plist, p, this.gameBoard);
+			territoryLogic(field, gui, plist, p);
 
 		} else if (field instanceof Tax) {
 
@@ -78,7 +71,7 @@ public class FieldController {
 
 		} else if (field instanceof GoToJail) {
 
-			goToJailLogic(gui, p);
+			goToJailLogic(gui, p, dac);
 
 		} else if (field instanceof Parking) {
 
@@ -86,7 +79,7 @@ public class FieldController {
 
 		} else if (field instanceof Chance) {
 
-			chanceLogic(gui, p, dc, plist);
+			chanceLogic(gui, p, dc, plist, dac);
 
 		}
 
@@ -105,7 +98,7 @@ public class FieldController {
 	 * @param gb
 	 * Instance of GameBoard
 	 */
-	private void territoryLogic(Field field, GUIController gui, PlayerList plist, Player p, GameBoard gb) {
+	private void territoryLogic(Field field, GUIController gui, PlayerList plist, Player p) {
 		
 		//is the field owned?
 		if(field.isOwned() == false) {
@@ -186,8 +179,7 @@ public class FieldController {
 		p.getAccount().setBalance(p.getAccount().getBalance() - field.getCurrentRent());
 		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getCurrentRent());
 
-
-		gui.payRentMessege(field, p);
+		gui.payRentMessage(field, p);
 		gui.updateBalance(p);
 		gui.updateBalance(field.getOwner());
 	}
@@ -208,8 +200,7 @@ public class FieldController {
 		p.getAccount().setBalance(p.getAccount().getBalance() - (field.getCurrentRent() * multiplier));
 		field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + (field.getCurrentRent()*multiplier));
 
-
-		gui.payRentMessege(field, p, multiplier);
+		gui.payRentMessage(field, p, multiplier);
 		gui.updateBalance(p);
 		gui.updateBalance(field.getOwner());
 	}
@@ -276,7 +267,7 @@ public class FieldController {
 
 			} else {
 				//pays 10% of playerworth
-				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth(p) * 0.1)); 
+				p.getAccount().setBalance(p.getAccount().getBalance() - (int)(p.getAccount().getPlayerWorth() * 0.1)); 
 				gui.updateBalance(p);
 
 			}
@@ -389,7 +380,7 @@ public class FieldController {
 				//the loop loops through 1-4 and applies the action acording to the number of owned shipping fields.
 				for (int i = 1; i < 5; i++) 
 					if (field.getOwner().getAccount().getShipping() == i) {
-						gui.payRentShippingMessege(field, p);
+						gui.payRentShippingMessage(field, p);
 						p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[i-1]);
 						field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[i-1]);
 					}
@@ -411,7 +402,7 @@ public class FieldController {
 	 * The current playing player
 	 */
 	private void jailLogic(GUIController gui, Player p) {
-		gui.visitJailMessege(p);
+		gui.visitJailMessage(p);
 	}
 
 	/**
@@ -421,10 +412,11 @@ public class FieldController {
 	 * @param p
 	 * The current playing player
 	 */
-	private void goToJailLogic(GUIController gui, Player p) {
-		gui.goToJailMessege(p);
+	private void goToJailLogic(GUIController gui, Player p, AudioPlayer dac) {
+		gui.goToJailMessage(p);
 		p.setInJail(true);
-		gui.movePlayerInstantly(p, 10, false);
+		gui.movePlayerInstantly(p, 10, false, this);
+		dac.playJailSound();
 	}
 
 	/**
@@ -435,9 +427,7 @@ public class FieldController {
 	 * The current playing player
 	 */
 	private void parkingLogic(GUIController gui, Player p) {
-
-		gui.parkingMessege(p);
-
+		gui.parkingMessage(p);
 	}
 
 	/**
@@ -451,10 +441,10 @@ public class FieldController {
 	 * @param plist
 	 * Instance of PlayerList
 	 */
-	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist) {
+	private void chanceLogic(GUIController gui, Player p, DeckController dc, PlayerList plist, AudioPlayer dac) {
 
 		//pick a card and do the logic from the card
-		dc.chanceField(p, plist, gui, this);
+		dc.chanceField(p, plist, gui, this, dac);
 
 		//loops through the playerlist and update the balance.
 		for (int i = 0; i < plist.getLength(); i++) 
@@ -478,6 +468,14 @@ public class FieldController {
 	 */
 	public int getBoardLength() {
 		return this.gameBoard.getLength();
+	}
+	
+	/**
+	 * Get HouseController
+	 * @return
+	 */
+	public HouseController getHc() {
+		return this.hc;
 	}
 
 	/**

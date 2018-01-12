@@ -6,7 +6,6 @@ import controller.FieldController;
 import controller.GUIController;
 import entity.DiceCup;
 import entity.deck.Deck;
-import entity.gameboard.GameBoard;
 import entity.player.Player;
 import entity.player.PlayerList;
 

@@ -11,5 +11,4 @@ public class PayMoneyCard extends Card {
 		super(description);
 		this.actionOrAmount = haveToPay;
 	}
-	
 }
