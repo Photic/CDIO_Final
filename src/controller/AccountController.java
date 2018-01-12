@@ -6,6 +6,7 @@ import entity.player.Player;
 public class AccountController {
 	
 	private Player p;
+	
 	public AccountController(Player p) {
 		this.p = p;
 	}
@@ -22,57 +23,57 @@ public class AccountController {
 		int count = 0;
 		while(true) {
 			if (field.getColor() == fc.getRed())
-				if (p.getAccount().getRedFields()[count] == null) {
-					p.getAccount().getRedFields()[count] = field;
+				if (this.p.getAccount().getRedFields()[count] == null) {
+					this.p.getAccount().getRedFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getBlue())
-				if (p.getAccount().getBlueFields()[count] == null) {
-					p.getAccount().getBlueFields()[count] = field;
+				if (this.p.getAccount().getBlueFields()[count] == null) {
+					this.p.getAccount().getBlueFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getPink())
-				if (p.getAccount().getPinkFields()[count] == null) {
-					p.getAccount().getPinkFields()[count] = field;
+				if (this.p.getAccount().getPinkFields()[count] == null) {
+					this.p.getAccount().getPinkFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getGreen())
-				if (p.getAccount().getGreenFields()[count] == null) {
-					p.getAccount().getGreenFields()[count] = field;
+				if (this.p.getAccount().getGreenFields()[count] == null) {
+					this.p.getAccount().getGreenFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getGrey())
-				if (p.getAccount().getGreyFields()[count] == null) {
-					p.getAccount().getGreyFields()[count] = field;
+				if (this.p.getAccount().getGreyFields()[count] == null) {
+					this.p.getAccount().getGreyFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getWhite())
-				if (p.getAccount().getWhiteFields()[count] == null) {
-					p.getAccount().getWhiteFields()[count] = field;
+				if (this.p.getAccount().getWhiteFields()[count] == null) {
+					this.p.getAccount().getWhiteFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getYellow())
-				if (p.getAccount().getYellowFields()[count] == null) {
-					p.getAccount().getYellowFields()[count] = field;
+				if (this.p.getAccount().getYellowFields()[count] == null) {
+					this.p.getAccount().getYellowFields()[count] = field;
 					break;
 				} else {
 					count++;
 				}
 			if (field.getColor() == fc.getPurple())
-				if (p.getAccount().getPurpleFields()[count] == null) {
-					p.getAccount().getPurpleFields()[count] = field;
+				if (this.p.getAccount().getPurpleFields()[count] == null) {
+					this.p.getAccount().getPurpleFields()[count] = field;
 					break;
 				} else {
 					count++;
@@ -94,39 +95,39 @@ public class AccountController {
 	public void removeField(FieldController fc, Field field){
 		field = fc.getField(field.getIndex());
 		if(field.getColor() == fc.getRed()){
-			int count = p.getAccount().getRedFields().length-1;
+			int count = this.p.getAccount().getRedFields().length-1;
 			while(true){
-				if(p.getAccount().getRedFields()[count]==null){
+				if(this.p.getAccount().getRedFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getRedFields()[count]=null;
+					this.p.getAccount().getRedFields()[count]=null;
 					break;
 				}
 			}
 		}
 
 		else if(field.getColor() == fc.getBlue()){
-			int count = p.getAccount().getBlueFields().length-1;
+			int count = this.p.getAccount().getBlueFields().length-1;
 			while(true){
-				if(p.getAccount().getBlueFields()[count]==null){
+				if(this.p.getAccount().getBlueFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getBlueFields()[count]=null;
+					this.p.getAccount().getBlueFields()[count]=null;
 					break;
 				}
 			}
 		}
 
 		else if(field.getColor() == fc.getPink()){
-			int count = p.getAccount().getPinkFields().length-1;
+			int count = this.p.getAccount().getPinkFields().length-1;
 			while(true){
-				if(p.getAccount().getPinkFields()[count]==null){
+				if(this.p.getAccount().getPinkFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getPinkFields()[count]=null;
+					this.p.getAccount().getPinkFields()[count]=null;
 					break;
 				}
 			}
@@ -134,13 +135,13 @@ public class AccountController {
 
 
 		else if(field.getColor() == fc.getGreen()){
-			int count = p.getAccount().getGreenFields().length-1;
+			int count = this.p.getAccount().getGreenFields().length-1;
 			while(true){
-				if(p.getAccount().getGreenFields()[count]==null){
+				if(this.p.getAccount().getGreenFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getGreenFields()[count]=null;
+					this.p.getAccount().getGreenFields()[count]=null;
 					break;
 				}
 			}
@@ -148,52 +149,52 @@ public class AccountController {
 
 
 		else if(field.getColor() == fc.getGrey()){
-			int count = p.getAccount().getGreyFields().length-1;
+			int count = this.p.getAccount().getGreyFields().length-1;
 			while(true){
-				if(p.getAccount().getGreyFields()[count]==null){
+				if(this.p.getAccount().getGreyFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getGreyFields()[count]=null;
+					this.p.getAccount().getGreyFields()[count]=null;
 					break;
 				}
 			}
 		}
 
 		else if(field.getColor() == fc.getWhite()){
-			int count = p.getAccount().getWhiteFields().length-1;
+			int count = this.p.getAccount().getWhiteFields().length-1;
 			while(true){
-				if(p.getAccount().getWhiteFields()[count]==null){
+				if(this.p.getAccount().getWhiteFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getWhiteFields()[count]=null;
+					this.p.getAccount().getWhiteFields()[count]=null;
 					break;
 				}
 			}
 		}
 
 		else if(field.getColor() == fc.getYellow()){
-			int count = p.getAccount().getYellowFields().length-1;
+			int count = this.p.getAccount().getYellowFields().length-1;
 			while(true){
-				if(p.getAccount().getYellowFields()[count]==null){
+				if(this.p.getAccount().getYellowFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getYellowFields()[count]=null;
+					this.p.getAccount().getYellowFields()[count]=null;
 					break;
 				}
 			}
 		}
 
 		else if(field.getColor() == fc.getPurple()){
-			int count = p.getAccount().getPurpleFields().length-1;
+			int count = this.p.getAccount().getPurpleFields().length-1;
 			while(true){
-				if(p.getAccount().getPurpleFields()[count]==null){
+				if(this.p.getAccount().getPurpleFields()[count]==null){
 					count--;	
 				}
 				else{
-					p.getAccount().getPurpleFields()[count]=null;
+					this.p.getAccount().getPurpleFields()[count]=null;
 					break;
 				}
 			}
@@ -208,79 +209,72 @@ public class AccountController {
 
 		int length = 0;
 		if (hasAllOfAKind()) {
-			if (p.getAccount().isAllblue()) 
-				length += p.getAccount().getBlueFields().length;
-			if (p.getAccount().isAllpink())
-				length += p.getAccount().getPinkFields().length;
-			if (p.getAccount().isAllgreen())
-				length += p.getAccount().getGreenFields().length;
-			if (p.getAccount().isAllgrey())
-				length += p.getAccount().getGreyFields().length;
-			if (p.getAccount().isAllred())
-				length += p.getAccount().getRedFields().length;
-			if (p.getAccount().isAllwhite())
-				length += p.getAccount().getWhiteFields().length;
-			if (p.getAccount().isAllyellow())
-				length += p.getAccount().getYellowFields().length;
-			if (p.getAccount().isAllpurple())
-				length += p.getAccount().getPurpleFields().length;
+			if (this.p.getAccount().isAllblue()) 
+				length += this.p.getAccount().getBlueFields().length;
+			if (this.p.getAccount().isAllpink())
+				length += this.p.getAccount().getPinkFields().length;
+			if (this.p.getAccount().isAllgreen())
+				length += this.p.getAccount().getGreenFields().length;
+			if (this.p.getAccount().isAllgrey())
+				length += this.p.getAccount().getGreyFields().length;
+			if (this.p.getAccount().isAllred())
+				length += this.p.getAccount().getRedFields().length;
+			if (this.p.getAccount().isAllwhite())
+				length += this.p.getAccount().getWhiteFields().length;
+			if (this.p.getAccount().isAllyellow())
+				length += this.p.getAccount().getYellowFields().length;
+			if (this.p.getAccount().isAllpurple())
+				length += this.p.getAccount().getPurpleFields().length;
 
 			Field[] output = new Field[length];
 
 			int count = 0;
-			if (p.getAccount().isAllblue()) 
+			if (this.p.getAccount().isAllblue()) 
 				for (int i = 0; i<2; i++) {
-					output[count] = p.getAccount().getBlueFields()[i];
+					output[count] = this.p.getAccount().getBlueFields()[i];
 					count++;
 				}
 			
-
-			if (p.getAccount().isAllpink()) 
+			if (this.p.getAccount().isAllpink()) 
 				for (int i = 0; i<3; i++) {
-					output[count] = p.getAccount().getPinkFields()[i];
+					output[count] = this.p.getAccount().getPinkFields()[i];
 					count++;
 				}
 			
-
-			if (p.getAccount().isAllgreen()) 
+			if (this.p.getAccount().isAllgreen()) 
 				for (int i = 0; i<3; i++) {
 					output[count] = p.getAccount().getGreenFields()[i];
 					count++;
 				}
-			
 
-
-			if (p.getAccount().isAllgrey()) 
+			if (this.p.getAccount().isAllgrey()) 
 				for (int i = 0; i<3; i++) {
-					output[count] = p.getAccount().getGreyFields()[i];
+					output[count] = this.p.getAccount().getGreyFields()[i];
 					count++;
 				}
 			
-
-			if (p.getAccount().isAllred()) 
+			if (this.p.getAccount().isAllred()) 
 				for (int i = 0; i<3; i++) {
-					output[count] = p.getAccount().getRedFields()[i];
+					output[count] = this.p.getAccount().getRedFields()[i];
 					count++;
 				}
 			
-
-			if (p.getAccount().isAllwhite()) 
+			if (this.p.getAccount().isAllwhite()) 
 				for (int i = 0; i<3; i++) {
-					output[count] = p.getAccount().getWhiteFields()[i];
+					output[count] = this.p.getAccount().getWhiteFields()[i];
 					count++;
 				}
 
-
-			if (p.getAccount().isAllyellow()) {
+			if (this.p.getAccount().isAllyellow()) {
 				for (int i = 0; i<3; i++) {
-					output[count] = p.getAccount().getYellowFields()[i];
+					output[count] = this.p.getAccount().getYellowFields()[i];
 					count++;
 				}
 			}
 
-			if (p.getAccount().isAllpurple()) {
+			if (this.p.getAccount().isAllpurple()) {
 				for (int i = 0; i<2; i++) {
-					output[count] = p.getAccount().getPurpleFields()[i];
+					output[count] = this.p.getAccount().getPurpleFields()[i];
 					count++;
 				}
 			}
@@ -300,91 +294,90 @@ public class AccountController {
 		boolean output = false;
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getBlueFields().length; i++) 
-			if (p.getAccount().getBlueFields()[i] != null) 
+		for (int i = 0; i < this.p.getAccount().getBlueFields().length; i++) 
+			if (this.p.getAccount().getBlueFields()[i] != null) 
 				count++;
 			
 		
-		if (count == p.getAccount().getBlueFields().length) {
+		if (count == this.p.getAccount().getBlueFields().length) {
 			output = true;
-			p.getAccount().setAllblue(true);
+			this.p.getAccount().setAllblue(true);
 		}
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getPinkFields().length; i++) 
-			if (p.getAccount().getPinkFields()[i] != null) 
+		for (int i = 0; i < this.p.getAccount().getPinkFields().length; i++) 
+			if (this.p.getAccount().getPinkFields()[i] != null) 
 				count++;
 			
 		
-		if (count == p.getAccount().getPinkFields().length) {
+		if (count == this.p.getAccount().getPinkFields().length) {
 			output = true;
-			p.getAccount().setAllpink(true);
+			this.p.getAccount().setAllpink(true);
 		}
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getGreenFields().length; i++) 
-			if (p.getAccount().getGreenFields()[i] != null) 
+		for (int i = 0; i < this.p.getAccount().getGreenFields().length; i++) 
+			if (this.p.getAccount().getGreenFields()[i] != null) 
+				count++;
+			
+		if (count == this.p.getAccount().getGreenFields().length) {
+			output = true;
+			this.p.getAccount().setAllgreen(true);
+		}
+
+		count = 0;
+		for (int i = 0; i < this.p.getAccount().getGreyFields().length; i++) 
+			if (this.p.getAccount().getGreyFields()[i] != null) 
 				count++;
 			
 		
-		if (count == p.getAccount().getGreenFields().length) {
+		if (count == this.p.getAccount().getGreyFields().length) {
 			output = true;
-			p.getAccount().setAllgreen(true);
+			this.p.getAccount().setAllgrey(true);
 		}
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getGreyFields().length; i++) 
-			if (p.getAccount().getGreyFields()[i] != null) 
+		for (int i = 0; i < this.p.getAccount().getRedFields().length; i++) 
+			if (this.p.getAccount().getRedFields()[i] != null) 
 				count++;
 			
 		
-		if (count == p.getAccount().getGreyFields().length) {
+		if (count == this.p.getAccount().getRedFields().length) {
 			output = true;
-			p.getAccount().setAllgrey(true);
+			this.p.getAccount().setAllred(true);
 		}
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getRedFields().length; i++) 
-			if (p.getAccount().getRedFields()[i] != null) 
+		for (int i = 0; i < this.p.getAccount().getWhiteFields().length; i++) 
+			if (this.p.getAccount().getWhiteFields()[i] != null) 
 				count++;
 			
 		
-		if (count == p.getAccount().getRedFields().length) {
+		if (count == this.p.getAccount().getWhiteFields().length) {
 			output = true;
-			p.getAccount().setAllred(true);
+			this.p.getAccount().setAllwhite(true);
 		}
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getWhiteFields().length; i++) 
-			if (p.getAccount().getWhiteFields()[i] != null) 
+		for (int i = 0; i < this.p.getAccount().getYellowFields().length; i++) 
+			if (this.p.getAccount().getYellowFields()[i] != null) 
 				count++;
 			
 		
-		if (count == p.getAccount().getWhiteFields().length) {
+		if (count == this.p.getAccount().getYellowFields().length) {
 			output = true;
-			p.getAccount().setAllwhite(true);
+			this.p.getAccount().setAllyellow(true);
 		}
 
 		count = 0;
-		for (int i = 0; i < p.getAccount().getYellowFields().length; i++) 
-			if (p.getAccount().getYellowFields()[i] != null) 
-				count++;
-			
-		
-		if (count == p.getAccount().getYellowFields().length) {
-			output = true;
-			p.getAccount().setAllyellow(true);
-		}
-
-		count = 0;
-		for (int i = 0; i < p.getAccount().getPurpleFields().length; i++) {
-			if (p.getAccount().getPurpleFields()[i] != null) {
+		for (int i = 0; i < this.p.getAccount().getPurpleFields().length; i++) {
+			if (this.p.getAccount().getPurpleFields()[i] != null) {
 				count++;
 			}
 		}
-		if (count == p.getAccount().getPurpleFields().length) {
+		if (count == this.p.getAccount().getPurpleFields().length) {
 			output = true;
-			p.getAccount().setAllpurple(true);
+			this.p.getAccount().setAllpurple(true);
 		}
 
 		return output;
@@ -398,14 +391,14 @@ public class AccountController {
 	 */
 	public Field[] getFields() {
 
-		Field[] temp = new Field[] {p.getAccount().getBlueFields()[0], p.getAccount().getBlueFields()[1], 
-				p.getAccount().getPinkFields()[0], p.getAccount().getPinkFields()[1], p.getAccount().getPinkFields()[2], 
-				p.getAccount().getGreenFields()[0],p.getAccount().getGreenFields()[1], p.getAccount().getGreenFields()[2],
-				p.getAccount().getGreyFields()[0], p.getAccount().getGreyFields()[1], p.getAccount().getGreyFields()[2],
-				p.getAccount().getRedFields()[0], p.getAccount().getRedFields()[1], p.getAccount().getRedFields()[2],
-				p.getAccount().getWhiteFields()[0], p.getAccount().getWhiteFields()[1], p.getAccount().getWhiteFields()[2],
-				p.getAccount().getYellowFields()[0], p.getAccount().getYellowFields()[1], p.getAccount().getYellowFields()[2],
-				p.getAccount().getPurpleFields()[0], p.getAccount().getPurpleFields()[1]};
+		Field[] temp = new Field[] {this.p.getAccount().getBlueFields()[0], this.p.getAccount().getBlueFields()[1], 
+				this.p.getAccount().getPinkFields()[0], this.p.getAccount().getPinkFields()[1], this.p.getAccount().getPinkFields()[2], 
+				this.p.getAccount().getGreenFields()[0],this.p.getAccount().getGreenFields()[1], this.p.getAccount().getGreenFields()[2],
+				this.p.getAccount().getGreyFields()[0], this.p.getAccount().getGreyFields()[1], this.p.getAccount().getGreyFields()[2],
+				this.p.getAccount().getRedFields()[0], this.p.getAccount().getRedFields()[1], this.p.getAccount().getRedFields()[2],
+				this.p.getAccount().getWhiteFields()[0], this.p.getAccount().getWhiteFields()[1], this.p.getAccount().getWhiteFields()[2],
+				this.p.getAccount().getYellowFields()[0], this.p.getAccount().getYellowFields()[1], this.p.getAccount().getYellowFields()[2],
+				this.p.getAccount().getPurpleFields()[0], this.p.getAccount().getPurpleFields()[1]};
 
 		int count = 0;
 		for (int i = 0; i < temp.length; i++) 
