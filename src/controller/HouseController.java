@@ -9,9 +9,9 @@ import entity.player.PlayerList;
 import main.Main;
 
 public class HouseController {
-	String[] description;
-	
-	
+
+	private String[] description;
+
 	public HouseController(TextReader tr){
 		try {
 			this.description = tr.textFromFile(Main.class.getResourceAsStream("rsc/houseController.txt"));
@@ -20,42 +20,38 @@ public class HouseController {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-/**
- * 
- * @param playerList
- * @param i
- * @param gc
- * @param gui
- * @param fc
- */
 
+	/**
+	 * 
+	 * @param playerList
+	 * @param i
+	 * @param gc
+	 * @param gui
+	 * @param fc
+	 */
 	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, FieldController fc) {
 
 		boolean decision;
 		String option;
 		boolean finished = false;
-		
+
 		while(finished != true) {
-			
+
 			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {									//if player does not own a propperty
 				gui.rollDiceMessage(playerList.getPlayer(i));
 				gc.takeTurn(playerList.getPlayer(i));
 				finished = true;
-				
+
 			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {								//if amount of propperties that player owns is > 0 
 				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));									//offered the oppertunity to manage houses.
-				
 
-				
+
+
 				if (decision == true) {																			// If he decides to roll dice, do so.
 					gc.takeTurn(playerList.getPlayer(i));
 					finished = true;
 				} 
-				
+
 				else {																							// or if he decides to manage properties, find out exactly what he wants.
 					option = description[0];
 					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAc().hasAllOfAKind());
@@ -72,10 +68,6 @@ public class HouseController {
 		}
 	}
 
-	
-	
-
-	
 	/**
 	 * This method uses either of the next 2 methods (sellPropToBank & sellPropToPlayer) by determine which to run 
 	 * 
@@ -84,40 +76,39 @@ public class HouseController {
 	 * @param fc
 	 * @param i
 	 */
+	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i) {
+		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));									//field to sell
+		if (terriToSell != null) {
+			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
+			if (!(buyer.equals(description[4]))) {																//if the seller wants to sell to somebody else than the bank
+				int sellPrice = gui.priceToSell();
 
-		private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i) {
-			Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));									//field to sell
-			if (terriToSell != null) {
-				String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
-				if (!(buyer.equals(description[4]))) {																//if the seller wants to sell to somebody else than the bank
-					int sellPrice = gui.priceToSell();
-					
-					for (int j = 0; j < playerList.getLength(); j++) 											//loops through the playerlist to find the matching buyer
-						if (buyer.equals(playerList.getPlayer(j).getName())) 									
-							sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
-				}
-				if (buyer.equals(description[4])) {																	//if the seller wants to sell to the bank
-					sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
-				}
+				for (int j = 0; j < playerList.getLength(); j++) 											//loops through the playerlist to find the matching buyer
+					if (buyer.equals(playerList.getPlayer(j).getName())) 									
+						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
-
+			if (buyer.equals(description[4])) {																	//if the seller wants to sell to the bank
+				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
+			}
 		}
-	
-	
-		/**
-		 * This method resets the field back to a point with no owner, and houses = 0, and gives the seller 50% of the value of the prop
-		 * @param seller
-		 * @param fc
-		 * @param field
-		 * @param gui
-		 */
-		
+
+	}
+
+
+	/**
+	 * This method resets the field back to a point with no owner, and houses = 0, and gives the seller 50% of the value of the prop
+	 * @param seller
+	 * @param fc
+	 * @param field
+	 * @param gui
+	 */
+
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());								//calculates value of the propperty
 		seller.getAc().removeField(fc, field);																//removes field from players index
 		seller.getAccount().sellField((int)(price * 0.5));														//sells field to a reduced price of 50%
-		
+
 		//resets current field
 		field.setOwned(false);
 		field.setOwner(null);
