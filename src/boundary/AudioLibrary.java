@@ -17,7 +17,7 @@ public class AudioLibrary {
 		this.birthday = new File("src/main/rsc/birthday.wav");
 		this.car = new File ("src/main/rsc/car.wav");
 		this.win = new File ("src/main/rsc/win.wav");
-		this.yay = new File ("src/main/rsc/car.wav");
+		this.yay = new File ("src/main/rsc/yay.wav");
 		
 		this.dieThrow = new File[] {
 				new File ("src/main/rsc/die.wav"),
