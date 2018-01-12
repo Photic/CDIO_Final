@@ -51,7 +51,7 @@ public class FieldController {
 		//Denne if/else if statement tager højde for hvilket felt der bliver landet på, og udfører den givne logik på feltet.
 		if (field instanceof Territory) {
 
-			territoryLogic(field, gui, plist, p);
+			territoryLogic(field, gui, plist, p, dac);
 
 		} else if (field instanceof Tax) {
 
@@ -98,7 +98,7 @@ public class FieldController {
 	 * @param gb
 	 * Instance of GameBoard
 	 */
-	private void territoryLogic(Field field, GUIController gui, PlayerList plist, Player p) {
+	private void territoryLogic(Field field, GUIController gui, PlayerList plist, Player p, AudioPlayer dac) {
 		
 		//is the field owned?
 		if(field.isOwned() == false) {
@@ -107,7 +107,7 @@ public class FieldController {
 
 			//make the logic if the user want to buy the current field.
 			if (decision == true) {
-		
+				dac.playCoinSound();
 				p.getAccount().buyField(field.getPrice()); 														
 				p.getAccount().setTerritories((p.getAccount().getTerritories() + 1)); 							
 				p.getAc().addField(field, this); 															
@@ -125,7 +125,7 @@ public class FieldController {
 				if (!(buyer.equals("Ingen Køber"))) {
 					//the input price from the user
 					int price = gui.priceToSell();
-					
+					dac.playCoinSound();
 					//loop through the playerlist, and when the player(i) matches the buyer, then begin all the buy field things.
 					for (int i = 0; i < plist.getLength(); i++) 
 						if (plist.getPlayer(i).getName().equals(buyer)) {

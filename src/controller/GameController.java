@@ -61,10 +61,10 @@ public class GameController {
 	 */
 	private void gameLoop() {
 		boolean checker;
-//		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
+
 		if (this.alivePlayers == 1) {														// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
-				if (this.playerList.getPlayer(i).isBankrupt() == false) 						// Check if the current player is bankrupt
+				if (this.playerList.getPlayer(i).isBankrupt() == false) 					// Check if the current player is bankrupt
 					this.gui.showWinner(this.playerList.getPlayer(i));						// If he is not, he is the winner.
 		} else {
 			// Now starts the "normal game"
@@ -75,7 +75,7 @@ public class GameController {
 				if (this.playerList.getPlayer(j).isBankrupt() == false 						// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == false) {				// and if the player is not in jail
 
-					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);		// Let the fieldController handle the turn.
+					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc, this.dac);		// Let the fieldController handle the turn.
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false 				// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == true) {					// and the player IS in jail
