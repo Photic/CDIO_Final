@@ -81,9 +81,7 @@ public class AccountController {
 			if (count == 4) {
 				break;
 			}
-
 		}
-
 	}
 	
 	/**
@@ -200,8 +198,6 @@ public class AccountController {
 				}
 			}
 		}
-			
-
 	}
 	
 	/**
@@ -292,7 +288,6 @@ public class AccountController {
 		} else {
 			return null;
 		}
-
 	}
 	
 	/**
