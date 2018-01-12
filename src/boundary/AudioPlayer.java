@@ -32,7 +32,7 @@ public class AudioPlayer {
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName
 	 */
-	private static void playSound(File file) {
+	private void playSound(File file) {
 		try {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
