@@ -40,6 +40,10 @@ public class AudioPlayer {
 		playSound(this.alibrary.getCarSound());
 	}
 	
+	public void playHelloSound() {
+		playSound(this.alibrary.getHelloSound((int)(Math.random()*this.alibrary.getHelloLenght())));
+	}
+	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName
