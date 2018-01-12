@@ -218,7 +218,7 @@ public class GameController {
 			int decision = this.gui.inJailDecision(p);
 
 			if (decision == 1) {
-
+				dac.playCoinSound();
 				p.getAccount().addBalance(-1000);
 				p.setInJail(false);
 				this.gui.updateBalance(p);
