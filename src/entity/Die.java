@@ -8,23 +8,15 @@ public class Die {
 	
 	public Die() {}
 	
-	
-	
 	/**
 	 * ruller terningen
 	 * 
 	 */
 	public void rollDie() {
-		
 		Random rng = new Random();
 		this.value = rng.nextInt(6) + 1;
-		
 	}
-	
-	
-	
 
-	
 	//--------------------------------------------------------
 	//
 	//                   Getters & Setters!
@@ -36,6 +28,4 @@ public class Die {
 		
 	}
 
-	
-	
 }
