@@ -65,7 +65,7 @@ public class GameController {
 		if (this.alivePlayers == 1) {														// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
 				if (this.playerList.getPlayer(i).isBankrupt() == false) 					// Check if the current player is bankrupt
-					this.gui.showWinner(this.playerList.getPlayer(i));						// If he is not, he is the winner.
+					this.gui.showWinner(this.playerList.getPlayer(i), this.dac);						// If he is not, he is the winner.
 		} else {
 			// Now starts the "normal game"
 			int j = 0;

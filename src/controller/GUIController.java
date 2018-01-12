@@ -314,9 +314,11 @@ public class GUIController {
 	 * Use the gui to show a winner message
 	 * @param p
 	 */
-	public void showWinner(Player p) {
+	public void showWinner(Player p, AudioPlayer dac) {
 		String output = p.getName() + this.description[12];
 		this.gui.showMessage(output);
+		dac.playWinSound();
+		dac.playYaySound();
 	}
 
 	/**

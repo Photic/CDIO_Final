@@ -7,7 +7,7 @@ public class AudioLibrary {
 	/*
 	 * Sounds to be used.
 	 */
-	private File jail, move, coin, birthday, car;
+	private File jail, move, coin, birthday, car, win, yay;
 	private File[] dieThrow, hello;
 
 	public AudioLibrary() {
@@ -16,6 +16,8 @@ public class AudioLibrary {
 		this.coin = new File("src/main/rsc/coins.wav");
 		this.birthday = new File("src/main/rsc/birthday.wav");
 		this.car = new File ("src/main/rsc/car.wav");
+		this.win = new File ("src/main/rsc/win.wav");
+		this.yay = new File ("src/main/rsc/car.wav");
 		
 		this.dieThrow = new File[] {
 				new File ("src/main/rsc/die.wav"),
@@ -66,4 +68,13 @@ public class AudioLibrary {
 	public int getHelloLenght() {
 		return this.hello.length;
 	}
+	
+	public File getWinSound() {
+		return this.win;
+	}
+	
+	public File getYaySound() {
+		return this.yay;
+	}
+	
 }

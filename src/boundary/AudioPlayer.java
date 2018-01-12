@@ -44,6 +44,14 @@ public class AudioPlayer {
 		playSound(this.alibrary.getHelloSound((int)(Math.random()*this.alibrary.getHelloLenght())));
 	}
 	
+	public void playWinSound() {
+		playSound(this.alibrary.getWinSound());
+	}
+	
+	public void playYaySound() {
+		playSound(this.alibrary.getYaySound());
+	}
+	
 	/**
 	 * Play the inputed file, sleeps for the durations of the sound.
 	 * @param fileName
