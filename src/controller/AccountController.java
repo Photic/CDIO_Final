@@ -86,6 +86,13 @@ public class AccountController {
 
 	}
 	
+	/**
+	 * This method take a field and removes it from the owners field array.
+	 * @param fc
+	 * The field Controller
+	 * @param field
+	 * The field to be removed
+	 */
 	public void removeField(FieldController fc, Field field){
 		field = fc.getField(field.getIndex());
 		if(field.getColor() == fc.getRed()){
@@ -197,6 +204,10 @@ public class AccountController {
 
 	}
 	
+	/**
+	 * This method fiends all the fieldarray where the players has all of a color. If the player has all blue and white fields, it return a field[] containing both the blue and white fields.
+	 * @return
+	 */
 	public Field[] allOfAKindFields() {
 
 		int length = 0;
@@ -385,6 +396,11 @@ public class AccountController {
 
 	}
 	
+	/**
+	 * This mehod combines all the colors field arrays in the players account.
+	 * @return
+	 * All the field a player owns.
+	 */
 	public Field[] getFields() {
 
 		Field[] temp = new Field[] {p.getAccount().getBlueFields()[0], p.getAccount().getBlueFields()[1], 
