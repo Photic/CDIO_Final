@@ -845,7 +845,7 @@ public class GUIController {
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
+						System.out.println("Something went wrong in movePlayerInstantly() in GUIController: " + e);
 						e.printStackTrace();
 					}
 				}
@@ -865,11 +865,18 @@ public class GUIController {
 	 * @param p
 	 */
 	public void doubleDiceMessage(Player p) {
-		this.gui.showMessage(p.getName() + this.description[61] + p.getName() + this.description[62] +p.getNumberOfEqualDice() + this.description[63]);
+		this.gui.showMessage(
+				p.getName() + this.description[61] + 
+				p.getName() + this.description[62] +
+				p.getNumberOfEqualDice() + this.description[63]
+				);
 	}
 
 	public void doubleDiceJail(Player p) {
-		this.gui.showMessage(p.getName() + this.description[64] + p.getName() + this.description[65]);
+		this.gui.showMessage(
+				p.getName() + this.description[64] + 
+				p.getName() + this.description[65]
+				);
 	}
 
 	public void rollDiceMessage(Player p) {
@@ -885,14 +892,13 @@ public class GUIController {
 	}
 
 	public void updateBalance(Player p) {
-
 		for (int i = 0; i < this.gui_players.length; i++) 
 			if (this.gui_players[i].getName() == p.getName()) 
 				this.gui_players[i].setBalance(p.getAccount().getBalance());
 	}
 
 	public void showMessage() {
-		gui.showMessage(this.description[69]);
+		this.gui.showMessage(this.description[69]);
 	}
 
 }
