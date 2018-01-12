@@ -120,7 +120,6 @@ public class FieldController {
 
 				String buyer = gui.auctionTerritory(p, plist, field);
 
-				
 				//is there a owner?
 				if (!(buyer.equals("Ingen Køber"))) {
 					//the input price from the user

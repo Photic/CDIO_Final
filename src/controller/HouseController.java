@@ -104,7 +104,7 @@ public class HouseController {
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());								//calculates value of the propperty
-		seller.getAc().removeField(fc, field);																//removes field from players index
+		seller.getAc().removeField(fc, field);															 		//removes field from players index
 		seller.getAccount().sellField((int)(price * 0.5));														//sells field to a reduced price of 50%
 
 		//resets current field
