@@ -16,7 +16,7 @@ public class HouseController {
 		try {
 			this.description = tr.textFromFile(Main.class.getResourceAsStream("rsc/houseController.txt"));
 		} catch (IOException e) {
-			System.out.println("Something went wrong in the GUIController constructor");
+			System.out.println("Something went wrong in the GUIController constructor: " + e);
 			e.printStackTrace();
 		}
 	}
@@ -44,8 +44,6 @@ public class HouseController {
 
 			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {								//if amount of propperties that player owns is > 0 
 				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));									//offered the oppertunity to manage houses.
-
-
 
 				if (decision == true) {																			// If he decides to roll dice, do so.
 					gc.takeTurn(playerList.getPlayer(i));
@@ -94,7 +92,6 @@ public class HouseController {
 
 	}
 
-
 	/**
 	 * This method resets the field back to a point with no owner, and houses = 0, and gives the seller 50% of the value of the prop
 	 * @param seller
@@ -102,7 +99,6 @@ public class HouseController {
 	 * @param field
 	 * @param gui
 	 */
-
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());								//calculates value of the propperty
@@ -114,16 +110,10 @@ public class HouseController {
 		field.setOwner(null);
 		field.setHouses(0);
 
-
 		gui.updateSubtextReversed(field);
 		gui.updateBalance(seller);
 
-
 	}
-
-
-
-
 
 	/**
 	 * Sells a territory to a player, by resetting the field, and buying it for the new player
@@ -134,7 +124,6 @@ public class HouseController {
 	 * @param gui
 	 * @param price
 	 */
-
 	private void sellPropToPlayer(Player seller, Player buyer, FieldController fc, Field fieldToSell, GUIController gui, int price){
 		seller.getAccount().sellField(price);																
 		buyer.getAccount().buyField(price);
@@ -144,7 +133,5 @@ public class HouseController {
 		gui.updateBalance(seller);
 		gui.updateBalance(buyer);
 	}
-
-
 
 }
