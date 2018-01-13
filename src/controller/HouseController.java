@@ -36,7 +36,7 @@ public class HouseController {
 		String option;
 		boolean finished = false;
 
-		while(finished != true) {
+		while(!finished) {
 
 			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {															//if player does not own a propperty
 				gui.rollDiceMessage(playerList.getPlayer(i));
@@ -46,7 +46,7 @@ public class HouseController {
 			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {														//if amount of propperties that player owns is > 0 
 				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));													//offered the oppertunity to manage houses.
 
-				if (decision == true) {																							// If he decides to roll dice, do so.
+				if (decision) {																							// If he decides to roll dice, do so.
 					gc.takeTurn(playerList.getPlayer(i));
 					finished = true;
 				} 
@@ -103,7 +103,6 @@ public class HouseController {
 	 * @param gui
 	 */
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
-
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());								//calculates value of the propperty
 		seller.getAc().removeField(fc, field);															 		//removes field from players index
 		seller.getAccount().sellField((int)(price * 0.5));														//sells field to a reduced price of 50%
@@ -112,7 +111,6 @@ public class HouseController {
 		field.setOwned(false);
 		field.setOwner(null);
 		field.setHouses(0);
-
 		gui.updateSubtextReversed(field);
 		gui.updateBalance(seller);
 
