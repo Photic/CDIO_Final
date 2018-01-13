@@ -52,14 +52,14 @@ public class HouseController {
 				} 
 
 				else {																											// or if he decides to manage properties, find out exactly what he wants.
-					option = description[0];
+					option = this.description[0];
 					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAc().hasAllOfAKind());
 
-					if (option.equals(description[1])) {																			//if "Buy houses" 
+					if (option.equals(this.description[1])) {																			//if "Buy houses" 
 						gui.buyHouses(playerList.getPlayer(i).getAc().allOfAKindFields(), dac);
-					} else if (option.equals(description[2])) {																	//if "Sell houses to bank"
+					} else if (option.equals(this.description[2])) {																	//if "Sell houses to bank"
 						gui.sellHouses(playerList.getPlayer(i).getAc().getFields(), dac);
-					} else if (option.equals(description[3])) {																	//if sell propperty
+					} else if (option.equals(this.description[3])) {																	//if sell propperty
 						sellProp(gui, playerList, fc, i, dac);
 					}
 				}

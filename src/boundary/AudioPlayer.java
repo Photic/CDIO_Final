@@ -61,7 +61,7 @@ public class AudioPlayer {
 			Clip clip = AudioSystem.getClip();
 			clip.open(AudioSystem.getAudioInputStream(file));
 			clip.start();
-			// Makes the game sleep for lenght of clip. Sinece clip.get length is in microseconds, devide then by 1000.
+			// Makes the game sleep for lenght of clip. Since clip.get length is in microseconds, divide then by 1000.
 			Thread.sleep(clip.getMicrosecondLength()/1000);
 
 		} catch (Exception e) {
