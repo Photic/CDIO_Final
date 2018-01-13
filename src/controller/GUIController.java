@@ -64,7 +64,7 @@ public class GUIController {
 	 * @return
 	 * A PlayerList with the registered players.
 	 */
-	public PlayerList registerPlayerCount() {
+	public PlayerList registerPlayerCount(AudioPlayer dac) {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};																// The array with the options of how many players to register
 		String nop = this.gui.getUserSelection(this.description[0], nopArray);										// The choice the players make
@@ -81,7 +81,7 @@ public class GUIController {
 		for (int i = 0; i <= this.playerCount - 1; i++) {																// Loop through the players
 			index = i + 1;																							// define the index
 			name = this.gui.getUserString(this.description[1] + index + this.description[2]);							// Ask for a name
-
+			dac.playHelloSound();
 			if (name.length() <= 0) 																					// if the player doesn't write anything, then let the player be called JaneDoe
 				name = "JaneDoe";
 
@@ -110,14 +110,6 @@ public class GUIController {
 		}
 
 		PlayerList playerList = new PlayerList(this.playerCount, names);												// Create the player list with the registered players
-
-		String output = this.description[3];																			// Prepare for a message that tells who was registered.
-		for (int i = 0; i < playerList.getLength(); i++) {
-			output = output + playerList.getPlayer(i).getName() + ", ";
-
-		}
-
-		this.gui.showMessage(output);
 
 		return playerList;
 
@@ -155,7 +147,7 @@ public class GUIController {
 	 * @param fields
 	 * The owned fields that the player has all of the kind in.
 	 */
-	public void buyHouses(Field[] fields) {
+	public void buyHouses(Field[] fields, AudioPlayer dac) {
 		boolean sameHeight = true;
 		int highestHouse = 0;
 		String[] output = new String[] {};
@@ -241,7 +233,8 @@ public class GUIController {
 		String selected = this.gui.getUserSelection(this.description[6], output);																		// Ask for user selection
 		String real = selected.split(",")[0];																								// Split the string (so that we only have the name of the territory in a string.
 
-		if (!(real.equals(this.description[55]))) 																								// If the return button is not pressed
+		if (!(real.equals(this.description[55]))) { 																						// If the return button is not pressed
+			dac.playCoinSound();
 			for (int i = 0; i < fields.length; i++) 																						// find the field chosen, and but a house on it and make the owner pay for it.
 				if (fields[i].getName().equals(real)) {
 					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
@@ -258,6 +251,7 @@ public class GUIController {
 							this.description[10] + fields[i].getHouses() + 
 							this.description[11]);
 				}
+		}
 	} 
 
 	/**
@@ -265,7 +259,7 @@ public class GUIController {
 	 * @param fields
 	 * All the player's fields
 	 */
-	public void sellHouses(Field[] fields) {
+	public void sellHouses(Field[] fields, AudioPlayer dac) {
 		int count = 0;
 
 		for (int i = 0; i < fields.length; i++) 
@@ -291,7 +285,8 @@ public class GUIController {
 			String selected = this.gui.getUserSelection(this.description[56], hasHouses);
 			String real = selected.split(",")[0];
 
-			if (!(real.equals(this.description[55]))) 
+			if (!(real.equals(this.description[55]))) {
+				dac.playCoinSound();
 				for (int i = 0; i < fields.length; i++) 
 					//sell a house on the selected territory
 					if (fields[i].getName().equals(real)) {
@@ -311,6 +306,7 @@ public class GUIController {
 								this.description[11]
 								);
 					}
+			}
 		}
 	}
 
@@ -318,9 +314,11 @@ public class GUIController {
 	 * Use the gui to show a winner message
 	 * @param p
 	 */
-	public void showWinner(Player p) {
+	public void showWinner(Player p, AudioPlayer dac) {
 		String output = p.getName() + this.description[12];
 		this.gui.showMessage(output);
+		dac.playWinSound();
+		dac.playYaySound();
 	}
 
 	/**

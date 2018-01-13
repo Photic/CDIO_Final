@@ -61,34 +61,34 @@ public class GameController {
 	 */
 	private void gameLoop() {
 		boolean checker;
-//		fc.evaluateField(fc.getField(30), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
-		if (this.alivePlayers == 1) {														// If there is only 1 player alive
-			for (int i = 0; i < this.playerList.getLength(); i++) 							// Loop through the playerlist
-				if (this.playerList.getPlayer(i).isBankrupt() == false) 						// Check if the current player is bankrupt
-					this.gui.showWinner(this.playerList.getPlayer(i));						// If he is not, he is the winner.
+
+		if (this.alivePlayers == 1) {																	// If there is only 1 player alive
+			for (int i = 0; i < this.playerList.getLength(); i++) 										// Loop through the playerlist
+				if (this.playerList.getPlayer(i).isBankrupt() == false) 									// Check if the current player is bankrupt
+					this.gui.showWinner(this.playerList.getPlayer(i), this.dac);							// If he is not, he is the winner.
 		} else {
 			// Now starts the "normal game"
 			int j = 0;
-			while (j < this.playerList.getLength()) {										// Loop through the playerlist
+			while (j < this.playerList.getLength()) {													// Loop through the playerlist
 
 
-				if (this.playerList.getPlayer(j).isBankrupt() == false 						// If the player is not bankrupt
-						&& this.playerList.getPlayer(j).isInJail() == false) {				// and if the player is not in jail
+				if (this.playerList.getPlayer(j).isBankrupt() == false 									// If the player is not bankrupt
+						&& this.playerList.getPlayer(j).isInJail() == false) {							// and if the player is not in jail
 
-					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc);		// Let the fieldController handle the turn.
+					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc, this.dac);		// Let the fieldController handle the turn.
 
-				} else if (this.playerList.getPlayer(j).isBankrupt() == false 				// If the player is not bankrupt
-						&& this.playerList.getPlayer(j).isInJail() == true) {					// and the player IS in jail
-					jailDecision(this.playerList.getPlayer(j), j);							// apply the jail logic
+				} else if (this.playerList.getPlayer(j).isBankrupt() == false 							// If the player is not bankrupt
+						&& this.playerList.getPlayer(j).isInJail() == true) {								// and the player IS in jail
+					jailDecision(this.playerList.getPlayer(j), j);										// apply the jail logic
 				}
 
-				checkForBankruptPlayers();													// After the player has taken his turn, check if there is any bankrupt players, and apply logic
+				checkForBankruptPlayers();																// After the player has taken his turn, check if there is any bankrupt players, and apply logic
 
-				checker = checkForDoubleDice(j);												// Check if the player rolled a double
-
-				if (checker == false) {														// If the player did not roll a double
-					this.playerList.getPlayer(j).setNumberOfEqualDice(0);						// Set the players doubleDice counter to 0
-					j++;																		// and increase the index (so that it is the next players turn)
+				checker = checkForDoubleDice(j);															// Check if the player rolled a double
+				
+				if (checker == false) {																	// If the player did not roll a double
+					this.playerList.getPlayer(j).setNumberOfEqualDice(0);									// Set the players doubleDice counter to 0
+					j++;																					// and increase the index (so that it is the next players turn)
 				}
 
 			}
@@ -102,8 +102,9 @@ public class GameController {
 	 */
 	private void initGui() {
 		this.gui.defineGUI(this.fc);
-		this.playerList = this.gui.registerPlayerCount();
+		this.playerList = this.gui.registerPlayerCount(this.dac);
 		this.gui.placePlayer();
+		this.dac.playCarSound();
 	}
 
 	/**
@@ -218,7 +219,7 @@ public class GameController {
 			int decision = this.gui.inJailDecision(p);
 
 			if (decision == 1) {
-
+				dac.playCoinSound();
 				p.getAccount().addBalance(-1000);
 				p.setInJail(false);
 				this.gui.updateBalance(p);

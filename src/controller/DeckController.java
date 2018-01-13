@@ -69,19 +69,19 @@ public class DeckController {
 		
 		// Logic that looks at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
-			recieveMoneyCard(p, cardPicked.getAmount());
+			recieveMoneyCard(p, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof BirthdayCard) {
-			birthdayCard(p, plist, cardPicked.getAmount());
+			birthdayCard(p, plist, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof PayMoneyCard) {
-			payMoneyCard(p, cardPicked.getAmount());
+			payMoneyCard(p, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
 			payMoneyPrHouseHotelCard(p, plist, fc, cardPicked.getHousePrices());
 		}
 		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
-			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount());
+			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount(), dac);
 		}
 		else if (cardPicked instanceof AntiJailCard) {
 			antiJailCard(p, cardPicked);
@@ -106,8 +106,9 @@ public class DeckController {
 	 * @param p
 	 * @param amount
 	 */
-	private void recieveMoneyCard(Player p, int amount) {
+	private void recieveMoneyCard(Player p, int amount, AudioPlayer dac) {
 		p.getAccount().addBalance(amount);
+		dac.playCoinSound();
 	}
 
 	/**
@@ -116,13 +117,15 @@ public class DeckController {
 	 * @param plist
 	 * @param amount
 	 */
-	private void birthdayCard(Player p, PlayerList plist, int amount) {
+	private void birthdayCard(Player p, PlayerList plist, int amount, AudioPlayer dac) {
+		dac.playBirthdaySound();
 		for (int i = 0; i < plist.getLength(); i++) {
 			if (plist.getPlayer(i).getName() != p.getName()) {
 				p.getAccount().addBalance(amount);
 				plist.getPlayer(i).getAccount().addBalance(-amount);
 			}
 		}
+		dac.playCoinSound();
 	}
 
 	/**
@@ -130,8 +133,9 @@ public class DeckController {
 	 * @param p
 	 * @param amount
 	 */
-	private void payMoneyCard(Player p, int amount) {
+	private void payMoneyCard(Player p, int amount, AudioPlayer dac) {
 		p.getAccount().addBalance(-amount);
+		dac.playCoinSound();
 	}
 
 	/**
@@ -158,9 +162,11 @@ public class DeckController {
 	 * @param amount
 	 * @param advancedAmount
 	 */
-	private void GetMoneyIfWorthIsLowCard(Player p, PlayerList plist, int amount, int advancedAmount) {
-		if (p.getAccount().getPlayerWorth() <= amount)
+	private void GetMoneyIfWorthIsLowCard(Player p, PlayerList plist, int amount, int advancedAmount, AudioPlayer dac) {
+		if (p.getAccount().getPlayerWorth() <= amount) {
 			p.getAccount().addBalance(advancedAmount);
+			dac.playCoinSound();
+		}
 	}
 
 	/**
@@ -237,6 +243,7 @@ public class DeckController {
 			int payRecieve = (fc.getField(iMod).getRent()[fc.getField(iMod).getOwner().getAccount().getShipping()]*2);
 			p.getAccount().addBalance(-payRecieve);
 			fc.getField(iMod).getOwner().getAccount().addBalance(payRecieve);
+			dac.playCoinSound();
 		} else {
 			fc.evaluateField(fc.getField(p.getPosition()), gui, p, 0, this, plist, dac);
 		}

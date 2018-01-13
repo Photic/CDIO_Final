@@ -10,22 +10,46 @@ public class AudioPlayer {
 	private AudioLibrary alibrary;
 		
 	public AudioPlayer() {
-		alibrary = new AudioLibrary();
+		this.alibrary = new AudioLibrary();
 	}
 	
 	/**
 	 * Jail door closes shut sound.
 	 */
 	public void playJailSound() {
-		playSound(alibrary.getJailSound());
+		playSound(this.alibrary.getJailSound());
 	}
 	
 	public void playMoveSound() {
-		playSound(alibrary.getMoveSound());
+		playSound(this.alibrary.getMoveSound());
 	}
 	
 	public void playDieSound() {
-		playSound(alibrary.getDieSound((int)(Math.random()*alibrary.getDieLength())));
+		playSound(this.alibrary.getDieSound((int)(Math.random()*this.alibrary.getDieLength())));
+	}
+	
+	public void playCoinSound() {
+		playSound(this.alibrary.getCoinSound());
+	}
+	
+	public void playBirthdaySound() {
+		playSound(this.alibrary.getBirthday());
+	}
+	
+	public void playCarSound() {
+		playSound(this.alibrary.getCarSound());
+	}
+	
+	public void playHelloSound() {
+		playSound(this.alibrary.getHelloSound((int)(Math.random()*this.alibrary.getHelloLenght())));
+	}
+	
+	public void playWinSound() {
+		playSound(this.alibrary.getWinSound());
+	}
+	
+	public void playYaySound() {
+		playSound(this.alibrary.getYaySound());
 	}
 	
 	/**

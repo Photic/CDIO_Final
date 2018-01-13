@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import boundary.AudioPlayer;
 import boundary.TextReader;
 import entity.gameboard.Field;
 import entity.player.Player;
@@ -29,7 +30,7 @@ public class HouseController {
 	 * @param gui
 	 * @param fc
 	 */
-	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, FieldController fc) {
+	public void houseControl(PlayerList playerList, int i, GameController gc, GUIController gui, FieldController fc, AudioPlayer dac) {
 
 		boolean decision;
 		String option;
@@ -37,29 +38,29 @@ public class HouseController {
 
 		while(finished != true) {
 
-			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {									//if player does not own a propperty
+			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {															//if player does not own a propperty
 				gui.rollDiceMessage(playerList.getPlayer(i));
 				gc.takeTurn(playerList.getPlayer(i));
 				finished = true;
 
-			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {								//if amount of propperties that player owns is > 0 
-				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));									//offered the oppertunity to manage houses.
+			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {														//if amount of propperties that player owns is > 0 
+				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));													//offered the oppertunity to manage houses.
 
-				if (decision == true) {																			// If he decides to roll dice, do so.
+				if (decision == true) {																							// If he decides to roll dice, do so.
 					gc.takeTurn(playerList.getPlayer(i));
 					finished = true;
 				} 
 
-				else {																							// or if he decides to manage properties, find out exactly what he wants.
+				else {																											// or if he decides to manage properties, find out exactly what he wants.
 					option = description[0];
 					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAc().hasAllOfAKind());
 
-					if (option.equals(description[1])) {															//if "Buy houses" 
-						gui.buyHouses(playerList.getPlayer(i).getAc().allOfAKindFields());
-					} else if (option.equals(description[2])) {													//if "Sell houses to bank"
-						gui.sellHouses(playerList.getPlayer(i).getAc().getFields());
-					} else if (option.equals(description[3])) {													//if sell propperty
-						sellProp(gui, playerList, fc, i);
+					if (option.equals(description[1])) {																			//if "Buy houses" 
+						gui.buyHouses(playerList.getPlayer(i).getAc().allOfAKindFields(), dac);
+					} else if (option.equals(description[2])) {																	//if "Sell houses to bank"
+						gui.sellHouses(playerList.getPlayer(i).getAc().getFields(), dac);
+					} else if (option.equals(description[3])) {																	//if sell propperty
+						sellProp(gui, playerList, fc, i, dac);
 					}
 				}
 			}
@@ -68,24 +69,26 @@ public class HouseController {
 
 	/**
 	 * This method uses either of the next 2 methods (sellPropToBank & sellPropToPlayer) by determine which to run 
-	 * 
 	 * @param gui
 	 * @param playerList
 	 * @param fc
 	 * @param i
 	 */
-	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i) {
-		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));									//field to sell
+	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i, AudioPlayer dac) {
+		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));	
+		//Field to sell
 		if (terriToSell != null) {
 			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
-			if (!(buyer.equals(description[4]))) {																//if the seller wants to sell to somebody else than the bank
+			if (!(buyer.equals(this.description[4]))) {																			//if the seller wants to sell to somebody else than the bank
 				int sellPrice = gui.priceToSell();
-
-				for (int j = 0; j < playerList.getLength(); j++) 											//loops through the playerlist to find the matching buyer
+				dac.playCoinSound();
+				
+				for (int j = 0; j < playerList.getLength(); j++) 																//loops through the playerlist to find the matching buyer
 					if (buyer.equals(playerList.getPlayer(j).getName())) 									
 						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
-			if (buyer.equals(description[4])) {																	//if the seller wants to sell to the bank
+			if (buyer.equals(this.description[4])) {																				//if the seller wants to sell to the bank
+				dac.playCoinSound();
 				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
 			}
 		}
@@ -102,7 +105,7 @@ public class HouseController {
 	private void sellPropToBank(Player seller, FieldController fc, Field field, GUIController gui) {
 
 		int price = field.getPrice() + (field.getHouses() * field.getHousePrice());								//calculates value of the propperty
-		seller.getAc().removeField(fc, field);																//removes field from players index
+		seller.getAc().removeField(fc, field);															 		//removes field from players index
 		seller.getAccount().sellField((int)(price * 0.5));														//sells field to a reduced price of 50%
 
 		//resets current field
@@ -129,6 +132,7 @@ public class HouseController {
 		buyer.getAccount().buyField(price);
 		seller.getAc().removeField(fc, fieldToSell);
 		buyer.getAc().addField(fieldToSell, fc);
+		fc.getField(fieldToSell.getIndex()).setOwner(buyer);
 		gui.updateSubtext(buyer, fieldToSell);
 		gui.updateBalance(seller);
 		gui.updateBalance(buyer);

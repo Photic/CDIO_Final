@@ -2,4 +2,4 @@ fortryd_
 Køb huse_
 Sælg huse_
 Sælg grund_
-Banken_
+Banken til 50% af værdien_
