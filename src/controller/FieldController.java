@@ -157,8 +157,10 @@ public class FieldController {
 				//if you have all fields in a color code, and have no houses rent * 2. Else pay the normal rent.
 				if (checker == true && field.getHouses() == 0) {
 					payRent(p, field, gui, 2); 
+					dac.playCoinSound();
 				} else {
 					payRent(p, field, gui);
+					dac.playCoinSound();
 				}	
 			}
 		}
@@ -331,6 +333,7 @@ public class FieldController {
 					field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + payment);
 				}
 
+				dac.playCoinSound();
 				gui.updateBalance(p);
 				gui.updateBalance(field.getOwner());
 
@@ -384,7 +387,7 @@ public class FieldController {
 						p.getAccount().setBalance(p.getAccount().getBalance() - field.getRent()[i-1]);
 						field.getOwner().getAccount().setBalance(field.getOwner().getAccount().getBalance() + field.getRent()[i-1]);
 					}
-
+				dac.playCoinSound();
 				gui.updateBalance(p);
 				gui.updateBalance(field.getOwner());
 
