@@ -69,24 +69,25 @@ public class HouseController {
 
 	/**
 	 * This method uses either of the next 2 methods (sellPropToBank & sellPropToPlayer) by determine which to run 
-	 * 
 	 * @param gui
 	 * @param playerList
 	 * @param fc
 	 * @param i
 	 */
 	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i, AudioPlayer dac) {
-		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));									//field to sell
+		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));	
+		//Field to sell
 		if (terriToSell != null) {
 			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
-			if (!(buyer.equals(description[4]))) {																//if the seller wants to sell to somebody else than the bank
+			if (!(buyer.equals(this.description[4]))) {																			//if the seller wants to sell to somebody else than the bank
 				int sellPrice = gui.priceToSell();
 				dac.playCoinSound();
-				for (int j = 0; j < playerList.getLength(); j++) 											//loops through the playerlist to find the matching buyer
+				
+				for (int j = 0; j < playerList.getLength(); j++) 																//loops through the playerlist to find the matching buyer
 					if (buyer.equals(playerList.getPlayer(j).getName())) 									
 						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
-			if (buyer.equals(description[4])) {																	//if the seller wants to sell to the bank
+			if (buyer.equals(this.description[4])) {																				//if the seller wants to sell to the bank
 				dac.playCoinSound();
 				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
 			}
@@ -131,6 +132,7 @@ public class HouseController {
 		buyer.getAccount().buyField(price);
 		seller.getAc().removeField(fc, fieldToSell);
 		buyer.getAc().addField(fieldToSell, fc);
+		fc.getField(fieldToSell.getIndex()).setOwner(buyer);
 		gui.updateSubtext(buyer, fieldToSell);
 		gui.updateBalance(seller);
 		gui.updateBalance(buyer);
