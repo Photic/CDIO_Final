@@ -32,7 +32,12 @@ public class AudioLibrary {
 				new File ("src/main/rsc/hello4.wav")
 				};
 	}
-
+	
+	//--------------------------------------------------------//
+	//														 //
+	//                   Getters & Setters!					 //
+	//														 //
+	//--------------------------------------------------------//
 	public File getJailSound() {
 		return this.jail;
 	}
