@@ -63,10 +63,10 @@ public class Player {
 	}
 
 	public Account getAccount() {
-		return account;
+		return this.account;
 	}
 	public int getNumberOfEqualDice() {
-		return numberOfEqualDice;
+		return this.numberOfEqualDice;
 	}
 
 	public void setNumberOfEqualDice(int numberOfEqualDice) {
@@ -74,7 +74,7 @@ public class Player {
 	}
 	
 	public int getJailCounterDice() {
-		return jailCounterDice;
+		return this.jailCounterDice;
 	}
 
 	public void setJailCounterDice(int jailCounterDice) {
