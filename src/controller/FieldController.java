@@ -266,7 +266,7 @@ public class FieldController {
 	 */
 	private void taxLogic(Field field, GUIController gui, Player p, AudioPlayer dac) {
 
-		//if you land on the field "indkomstskat" you have to decisions. True = pay 400, False = pay 10% of playerworth
+		//if you land on the field "indkomstskat" you have two decisions. True = pay 400, False = pay 10% of playerworth
 		if (field.getPrice() == 4000) {
 
 			boolean dicision = gui.taxDecision(p);
