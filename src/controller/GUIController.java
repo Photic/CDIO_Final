@@ -773,7 +773,7 @@ public class GUIController {
 			if (this.gui_players[i].getName() == p.getName()) 
 				while(p.getPosition() != newPosition) {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
-					p.setPosition(p.getPosition()+1);
+					p.setPosition(p.getPosition()+1, fc);
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 					dac.playMoveSound();
 				}
@@ -806,9 +806,9 @@ public class GUIController {
 				while(p.getPosition() != newPosition) {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
 					if (p.getPosition() != 0) {
-						p.setPosition(p.getPosition()-1);
+						p.setPosition(p.getPosition()-1, fc);
 					} else {
-						p.setPosition(fc.getBoardLength()-1);
+						p.setPosition(fc.getBoardLength()-1, fc);
 					}
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 					dac.playMoveSound();
@@ -837,7 +837,7 @@ public class GUIController {
 
 				while(p.getPosition() != newPosition) {
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], false);
-					p.setPosition(p.getPosition()+1);
+					p.setPosition(p.getPosition()+1, fc);
 					this.gui.getFields()[p.getPosition()].setCar(this.gui_players[i], true);
 
 					try {

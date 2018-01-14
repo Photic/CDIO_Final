@@ -1,6 +1,7 @@
 package entity.player;
 
 import controller.AccountController;
+import controller.FieldController;
 
 /**
  * Player class describing the player in the game.
@@ -9,7 +10,6 @@ import controller.AccountController;
  */
 public class Player {
 		
-	private final int GAMEBOARDLENGTH = 40;
 	private int position, numberOfEqualDice, jailCounterDice;
 	private boolean bankrupt, inJail;
 	private String name;
@@ -22,7 +22,7 @@ public class Player {
 		this.bankrupt = false;
 		this.inJail = false;
 		this.position = 0;
-		ac = new AccountController(this);
+		this.ac = new AccountController(this);
 	}
 	
 	//--------------------------------------------------------
@@ -31,15 +31,15 @@ public class Player {
 	//
 	//--------------------------------------------------------
 	public AccountController getAc() {
-		return ac;
+		return this.ac;
 	}
 	
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public boolean isBankrupt() {
-		return bankrupt;
+		return this.bankrupt;
 	}
 
 	public void setBankrupt(boolean isDead) {
@@ -50,12 +50,12 @@ public class Player {
 		return position;
 	}
 
-	public void setPosition(int position) {
-		this.position = position % GAMEBOARDLENGTH;
+	public void setPosition(int position, FieldController fc) {
+		this.position = position % fc.getBoardLength();
 	}
 	
 	public boolean isInJail() {
-		return inJail;
+		return this.inJail;
 	}
 
 	public void setInJail(boolean inJail) {
