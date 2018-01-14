@@ -81,7 +81,7 @@ public class HouseController {
 			String buyer = gui.sellTerritory(pList.getPlayer(i), pList);
 			if (!(buyer.equals(description[0]))) {
 				if (!(buyer.equals(this.description[4]))) {																			//if the seller wants to sell to somebody else than the bank
-					int sellPrice = gui.priceToSell();
+					int sellPrice = gui.priceToSellToOther();
 					dac.playCoinSound();
 					
 					for (int j = 0; j < pList.getLength(); j++) 																//loops through the playerlist to find the matching buyer

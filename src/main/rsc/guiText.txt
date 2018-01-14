@@ -79,4 +79,3 @@ Hvad er den aftalte pris?_
 Gør intet_
  Huspris: _ 
  kr._
- Hvad vil du give for grunden?_

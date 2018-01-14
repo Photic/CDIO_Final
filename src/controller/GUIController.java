@@ -428,13 +428,13 @@ public class GUIController {
 
 		return outField;
 	}
-
+	
 	/**
 	 * A message to ask for how much a player will pay + the fields price
 	 * @return
 	 */
 	public int priceToSell() {
-		return this.gui.getUserInteger(this.description[81]); //her er vi
+		return this.gui.getUserInteger(this.description[76]); //her er vi
 	}
 
 	/**
