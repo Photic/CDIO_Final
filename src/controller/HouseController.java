@@ -38,24 +38,24 @@ public class HouseController {
 
 		while(!finished) {
 
-			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {															//if player does not own a propperty
+			if (playerList.getPlayer(i).getAc().numberOfTerri() == 0) {																//if player does not own a propperty
 				gui.rollDiceMessage(playerList.getPlayer(i));
 				gc.takeTurn(playerList.getPlayer(i));
 				finished = true;
+				
+			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {															//if amount of propperties that player owns is > 0 
+				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));														//offered the oppertunity to manage houses.
 
-			} else if (playerList.getPlayer(i).getAc().numberOfTerri() > 0) {														//if amount of propperties that player owns is > 0 
-				decision = gui.rollDiceMessageUpdated(playerList.getPlayer(i));													//offered the oppertunity to manage houses.
-
-				if (decision) {																							// If he decides to roll dice, do so.
+				if (decision) {																										// If he decides to roll dice, do so.
 					gc.takeTurn(playerList.getPlayer(i));
 					finished = true;
 				} 
 
-				else {																											// or if he decides to manage properties, find out exactly what he wants.
+				else {																												// or if he decides to manage properties, find out exactly what he wants.
 					option = this.description[0];
 					option = gui.territoryOptions(playerList.getPlayer(i), playerList.getPlayer(i).getAc().hasAllOfAKind());
 
-					if (option.equals(this.description[1])) {																			//if "Buy houses" 
+					if (option.equals(this.description[1])) {																		//if "Buy houses" 
 						gui.buyHouses(playerList.getPlayer(i).getAc().allOfAKindFields(), dac);
 					} else if (option.equals(this.description[2])) {																	//if "Sell houses to bank"
 						gui.sellHouses(playerList.getPlayer(i).getAc().getFields(), dac);
