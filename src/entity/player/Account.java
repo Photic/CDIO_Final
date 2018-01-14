@@ -20,14 +20,14 @@ public class Account {
 		this.housesowned = 0;
 		this.amountOfCards = 0;
 
-		blueFields = new Field[] {null, null};
-		pinkFields = new Field[] {null, null, null};
-		greenFields = new Field[] {null, null, null};
-		greyFields = new Field[] {null, null, null};
-		redFields = new Field[] {null, null, null};
-		whiteFields = new Field[] {null, null, null};
-		yellowFields = new Field[] {null, null, null};
-		purpleFields = new Field[] {null, null};
+		this.blueFields = new Field[] {null, null};
+		this.pinkFields = new Field[] {null, null, null};
+		this.greenFields = new Field[] {null, null, null};
+		this.greyFields = new Field[] {null, null, null};
+		this.redFields = new Field[] {null, null, null};
+		this.whiteFields = new Field[] {null, null, null};
+		this.yellowFields = new Field[] {null, null, null};
+		this.purpleFields = new Field[] {null, null};
 	}
 
 	public void recieveAntiJailCard(Card cardrecieved) {
@@ -75,11 +75,11 @@ public class Account {
 	//
 	//--------------------------------------------------------
 	public int getActives() {
-		return actives;
+		return this.actives;
 	}
 
 	public int getBalance() {
-		return balance;
+		return this.balance;
 	}
 
 	public void addBalance(int credit) {
@@ -91,11 +91,11 @@ public class Account {
 	}
 
 	public int getHousesowned() {
-		return housesowned;
+		return this.housesowned;
 	}
 
 	public int getCompanies() {
-		return companies;
+		return this.companies;
 	}
 
 	public void setCompanies(int companies) {
@@ -103,7 +103,7 @@ public class Account {
 	}
 
 	public Card getAntiJailCard() {
-		return jailCard;
+		return this.jailCard;
 	}
 
 	public void setAntiJailCard(Card antiJailCard) {
@@ -111,23 +111,22 @@ public class Account {
 	}
 
 	public int getShipping() {
-		return shipping;
+		return this.shipping;
 	}
 
 	public void setShipping(int shipping) {
 		this.shipping = shipping;
 	}
 
-
 	public int getAmountOfCards() {
-		return amountOfCards;
+		return this.amountOfCards;
 	}
 
 	public void setAmountOfCards(int amountOfCards) {
 		this.amountOfCards = amountOfCards;
 	}
 	public int getTerritories() {
-		return territoriesOwned;
+		return this.territoriesOwned;
 	}
 
 	public void setTerritories(int territories) {
@@ -135,7 +134,7 @@ public class Account {
 	}
 
 	public Field[] getBlueFields() {
-		return blueFields;
+		return this.blueFields;
 	}
 
 	public void setBlueFields(Field[] blueFields) {
@@ -143,7 +142,7 @@ public class Account {
 	}
 
 	public Field[] getPinkFields() {
-		return pinkFields;
+		return this.pinkFields;
 	}
 
 	public void setPinkFields(Field[] pinkFields) {
@@ -151,7 +150,7 @@ public class Account {
 	}
 
 	public Field[] getGreenFields() {
-		return greenFields;
+		return this.greenFields;
 	}
 
 	public void setGreenFields(Field[] greenFields) {
@@ -159,7 +158,7 @@ public class Account {
 	}
 
 	public Field[] getGreyFields() {
-		return greyFields;
+		return this.greyFields;
 	}
 
 	public void setGreyFields(Field[] greyFields) {
@@ -167,7 +166,7 @@ public class Account {
 	}
 
 	public Field[] getRedFields() {
-		return redFields;
+		return this.redFields;
 	}
 
 	public void setRedFields(Field[] redFields) {
@@ -175,7 +174,7 @@ public class Account {
 	}
 
 	public Field[] getWhiteFields() {
-		return whiteFields;
+		return this.whiteFields;
 	}
 
 	public void setWhiteFields(Field[] whiteFields) {
@@ -183,7 +182,7 @@ public class Account {
 	}
 
 	public Field[] getYellowFields() {
-		return yellowFields;
+		return this.yellowFields;
 	}
 
 	public void setYellowFields(Field[] yellowFields) {
@@ -191,7 +190,7 @@ public class Account {
 	}
 
 	public Field[] getPurpleFields() {
-		return purpleFields;
+		return this.purpleFields;
 	}
 
 	public void setPurpleFields(Field[] purpleFields) {
@@ -199,7 +198,7 @@ public class Account {
 	}
 
 	public boolean isAllblue() {
-		return allblue;
+		return this.allblue;
 	}
 
 	public void setAllblue(boolean allblue) {
@@ -207,7 +206,7 @@ public class Account {
 	}
 
 	public boolean isAllpink() {
-		return allpink;
+		return this.allpink;
 	}
 
 	public void setAllpink(boolean allpink) {
@@ -215,7 +214,7 @@ public class Account {
 	}
 
 	public boolean isAllgreen() {
-		return allgreen;
+		return this.allgreen;
 	}
 
 	public void setAllgreen(boolean allgreen) {
@@ -223,7 +222,7 @@ public class Account {
 	}
 
 	public boolean isAllgrey() {
-		return allgrey;
+		return this.allgrey;
 	}
 
 	public void setAllgrey(boolean allgrey) {
@@ -231,7 +230,7 @@ public class Account {
 	}
 
 	public boolean isAllred() {
-		return allred;
+		return this.allred;
 	}
 
 	public void setAllred(boolean allred) {
@@ -239,7 +238,7 @@ public class Account {
 	}
 
 	public boolean isAllwhite() {
-		return allwhite;
+		return this.allwhite;
 	}
 
 	public void setAllwhite(boolean allwhite) {
@@ -247,7 +246,7 @@ public class Account {
 	}
 
 	public boolean isAllyellow() {
-		return allyellow;
+		return this.allyellow;
 	}
 
 	public void setAllyellow(boolean allyellow) {
@@ -255,7 +254,7 @@ public class Account {
 	}
 
 	public boolean isAllpurple() {
-		return allpurple;
+		return this.allpurple;
 	}
 
 	public void setAllpurple(boolean allpurple) {
