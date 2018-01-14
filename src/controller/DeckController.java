@@ -163,7 +163,7 @@ public class DeckController {
 	 * @param advancedAmount
 	 */
 	private void GetMoneyIfWorthIsLowCard(Player p, PlayerList plist, int amount, int advancedAmount, AudioPlayer dac) {
-		if (p.getAccount().getPlayerWorth() <= amount) {
+		if (p.getAccount().getPlayerWorth() < amount) {
 			p.getAccount().addBalance(advancedAmount);
 			dac.playCoinSound();
 		}
