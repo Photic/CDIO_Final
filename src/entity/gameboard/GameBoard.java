@@ -45,9 +45,8 @@ public class GameBoard {
 		}
 
 		// Evert field in game.
-		this.fields = new Field[] 
-				{
-						new Start(fieldName[0], fieldDescription[0], standard,0, 4000),																				// 0
+		this.fields = new Field[] {
+						new Start(fieldName[0], fieldDescription[0], standard,0, 4000),																		// 0
 						new Territory(fieldName[1], fieldDescription[1], blue, 1200, 1000, new int[] {50, 250, 750, 2250, 4000, 6000}, 1, 600),				// 1
 						new Chance(fieldName[2], fieldDescription[2], standard, 2),																			// 2
 						new Territory(fieldName[3], fieldDescription[3], blue, 1200,1000, new int[] {50, 250, 750, 2250, 4000, 6000}, 3, 600),					// 3
@@ -87,7 +86,7 @@ public class GameBoard {
 						new Territory(fieldName[37], fieldDescription[37], purple, 7000, 4000, new int[] {700, 3500, 10000, 22000, 26000, 30000}, 37, 3500),	// 37
 						new Tax(fieldName[38], fieldDescription[38], standard, 2000, 38),																		// 38
 						new Territory(fieldName[39], fieldDescription[39], purple, 8000, 4000, new int[] {1000, 4000, 1000, 28000, 34000, 40000}, 39, 4000)	// 39
-				};
+						};
 		
 	}
 
