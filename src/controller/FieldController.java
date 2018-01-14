@@ -60,37 +60,21 @@ public class FieldController {
 
 		//Denne if/else if statement tager højde for hvilket felt der bliver landet på, og udfører den givne logik på feltet.
 		if (field instanceof Territory) {
-
 			territoryLogic(field, gui, plist, p, dac);
-
 		} else if (field instanceof Tax) {
-
 			taxLogic(field, gui, p, dac);
-
 		} else if (field instanceof Company) {
-
 			companyLogic(field, gui, p, diceSum, dac);
-
 		} else if (field instanceof Shipping) {
-
 			shippingLogic(field, gui, p, dac);
-
 		} else if (field instanceof Jail) {
-
 			jailLogic(gui, p);
-
 		} else if (field instanceof GoToJail) {
-
 			goToJailLogic(gui, p, dac);
-
 		} else if (field instanceof Parking) {
-
 			parkingLogic(gui, p);
-
 		} else if (field instanceof Chance) {
-
 			chanceLogic(gui, p, dc, plist, dac);
-
 		}
 
 	}
@@ -266,7 +250,7 @@ public class FieldController {
 	 */
 	private void taxLogic(Field field, GUIController gui, Player p, AudioPlayer dac) {
 
-		//if you land on the field "indkomstskat" you have two decisions. True = pay 400, False = pay 10% of playerworth
+		//if you land on the field "indkomstskat" you have two decisions. True = pay x amount, False = pay 10% of playerworth
 		if (field == this.getField(4)) {
 
 			boolean dicision = gui.taxDecision(p);
