@@ -58,7 +58,7 @@ Hvilken grund vil du sælge et hus fra?_
 Du solgte et hus fra _
 , hvad vil du gøre?_
 Køb huse_
-Sælg Huse_
+Sælg huse_
  slog to ens og får derfor en ekstra tur. _
  har nu slået to ens _
  gang(e) i træk._

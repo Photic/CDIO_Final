@@ -194,10 +194,9 @@ public class GUIController {
 			}
 
 			// Now we need to figure out which options the player should have. The player should not be able to build uneven, and thus same heigth defines the options
+																									// If the highest House is not 5 (else nothing happens)
 
-			if (highestHouse != 5) {																										// If the highest House is not 5 (else nothing happens)
-
-				if (sameHeight == true) {																									// If they are the same heigth
+				if (sameHeight == true && highestHouse != 5) {																									// If they are the same heigth
 					territories = new String[currentFields.length];																			// All the current fields should be presented as a option to the player
 
 					for (int i = 0; i < territories.length; i++) 
@@ -214,19 +213,18 @@ public class GUIController {
 
 					int countere = 0;
 					for (int i = 0; i < currentFields.length; i++) 																			// Put the fields with low houses in that array
-						if (currentFields[i].getHouses() < highestHouse) {
+						if ((currentFields[i].getHouses() < highestHouse) && currentFields[i].getHouses()<5) {
 							territories[countere] = currentFields[i].getName() + this.description[4] + currentFields[i].getHouses() + this.description[5];
 							countere++;
 						}
 				}
-			}
+			
 
 			output = combineStringArrays(output, territories);																				// Combine the current territories into the output array. (So that different colors are handled seperately)
-
+			
 		}
 
 		//Now we have fields to be represented ready and ask the user which one he would like to build on.
-
 		String[] fortryd = new String[] {this.description[55]};																					// Create a return button.
 		output = combineStringArrays(output, fortryd);
 
@@ -252,6 +250,7 @@ public class GUIController {
 							this.description[11]);
 				}
 		}
+		
 	} 
 
 	/**
