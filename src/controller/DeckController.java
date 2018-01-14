@@ -47,11 +47,11 @@ public class DeckController {
 	public void chanceField(Player p, PlayerList plist, GUIController gui, FieldController fc, AudioPlayer dac) {
 
 		// Picks the first card in a deck, using the helping method form deck "pickACard()".
- 		Card cardPicked = this.deck.pickACard();
+		Card cardPicked = this.deck.pickACard();
 
 		// Pick another card if the card picked is already owned by someone.
 		if (cardPicked instanceof AntiJailCard && cardPicked.isCardOwned() == true) {
-			chanceField(p, plist, gui, fc, dac);
+			this.chanceField(p, plist, gui, fc, dac);
 		}
 
 		// Saves the first card picked, If the first card picked is then picked again later in game, then shuffle the deck and pick another card.
@@ -60,43 +60,43 @@ public class DeckController {
 			firstGameCycle = true;
 		} else if (cardPicked == firstCardPicked) {
 			this.deck.shuffleCards();
-			chanceField(p, plist, gui, fc, dac);
+			this.chanceField(p, plist, gui, fc, dac);
 			firstGameCycle = false;
 		}
 
 		gui.chanceMessage(cardPicked.getDescription());
 		gui.showMessage();
-		
+
 		// Logic that looks at which card is picked, and afterwords runs the appopriate function.
 		if (cardPicked instanceof RecieveMoneyCard) {
-			recieveMoneyCard(p, cardPicked.getAmount(), dac);
+			this.recieveMoneyCard(p, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof BirthdayCard) {
-			birthdayCard(p, plist, cardPicked.getAmount(), dac);
+			this.birthdayCard(p, plist, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof PayMoneyCard) {
-			payMoneyCard(p, cardPicked.getAmount(), dac);
+			this.payMoneyCard(p, cardPicked.getAmount(), dac);
 		}
 		else if (cardPicked instanceof PayMoneyPrHouseHotelCard) {
-			payMoneyPrHouseHotelCard(p, plist, fc, cardPicked.getHousePrices());
+			this.payMoneyPrHouseHotelCard(p, plist, fc, cardPicked.getHousePrices());
 		}
 		else if (cardPicked instanceof GetMoneyIfWorthIsLowCard) {
-			GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount(), dac);
+			this.GetMoneyIfWorthIsLowCard(p, plist, cardPicked.getAmount(), cardPicked.getAdvancedAmount(), dac);
 		}
 		else if (cardPicked instanceof AntiJailCard) {
-			antiJailCard(p, cardPicked);
+			this.antiJailCard(p, cardPicked);
 		}
 		else if (cardPicked instanceof GoToJailCard) {
-			goToJailCard(p, cardPicked.getAmount(), gui, dac, fc);
+			this.goToJailCard(p, cardPicked.getAmount(), gui, dac, fc);
 		}
 		else if (cardPicked instanceof MovePlayerCard) {
-			movePlayerCard(p, plist, cardPicked.getAmount(), gui, fc, dac);
+			this.movePlayerCard(p, plist, cardPicked.getAmount(), gui, fc, dac);
 		}
 		else if (cardPicked instanceof MovePlayerBackCard) {
-			movePlayerBackCard(p, plist, cardPicked.getAmount(), gui, fc, dac);
+			this.movePlayerBackCard(p, plist, cardPicked.getAmount(), gui, fc, dac);
 		}
 		else if (cardPicked instanceof MovePlayerToNearestShippingCard) {
-			moverPlayerToNearestShippingCard(p, plist, gui, fc, dac);
+			this.moverPlayerToNearestShippingCard(p, plist, gui, fc, dac);
 		}
 
 	}
@@ -219,13 +219,13 @@ public class DeckController {
 	 * @param fc
 	 */
 	private void moverPlayerToNearestShippingCard(Player p, PlayerList plist, GUIController gui, FieldController fc, AudioPlayer dac) {
-		
+
 		// Value of the location the player needs to move to.
 		int iMod = 0;
-		
+
 		// The amount of speces between the player and the shipping field.
 		int calculateNewPosition = 0;
-		
+
 		// Loops the gameboard twice, but breaks if it finds a shipping field.
 		for (int i = p.getPosition(); i < fc.getBoardLength()*2; i++) {
 			iMod = i%fc.getBoardLength();
@@ -262,5 +262,5 @@ public class DeckController {
 			}
 		}
 	}
-	
+
 }

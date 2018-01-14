@@ -65,7 +65,7 @@ public class AudioPlayer {
 			Thread.sleep(clip.getMicrosecondLength()/1000);
 
 		} catch (Exception e) {
-			System.out.println(e + " MY ASS");
+			System.out.println("Something went wrong in the AudioPlayers method, playSound(File file)" + e);
 			// TODO: handle exception
 		}
 		

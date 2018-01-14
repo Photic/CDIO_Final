@@ -15,9 +15,7 @@ public class TextReader {
 		while ((line = reader.readLine()) != null) 
             out.append(line);
         
-		
 		String output = out.toString();
-		
 		
 		reader.close();
 		return output.split("_");
