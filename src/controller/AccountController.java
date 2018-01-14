@@ -202,7 +202,7 @@ public class AccountController {
 	}
 	
 	/**
-	 * This method fiends all the fieldarray where the players has all of a color. If the player has all blue and white fields, it return a field[] containing both the blue and white fields.
+	 * This method fiends all the fieldarray where the players has all of a color. If the player has all blue and white fields, it return a Field[] containing both the blue and white fields.
 	 * @return
 	 */
 	public Field[] allOfAKindFields() {
@@ -391,14 +391,16 @@ public class AccountController {
 	 */
 	public Field[] getFields() {
 
-		Field[] temp = new Field[] {this.p.getAccount().getBlueFields()[0], this.p.getAccount().getBlueFields()[1], 
+		Field[] temp = new Field[] {
+				this.p.getAccount().getBlueFields()[0], this.p.getAccount().getBlueFields()[1], 
 				this.p.getAccount().getPinkFields()[0], this.p.getAccount().getPinkFields()[1], this.p.getAccount().getPinkFields()[2], 
 				this.p.getAccount().getGreenFields()[0],this.p.getAccount().getGreenFields()[1], this.p.getAccount().getGreenFields()[2],
 				this.p.getAccount().getGreyFields()[0], this.p.getAccount().getGreyFields()[1], this.p.getAccount().getGreyFields()[2],
 				this.p.getAccount().getRedFields()[0], this.p.getAccount().getRedFields()[1], this.p.getAccount().getRedFields()[2],
 				this.p.getAccount().getWhiteFields()[0], this.p.getAccount().getWhiteFields()[1], this.p.getAccount().getWhiteFields()[2],
 				this.p.getAccount().getYellowFields()[0], this.p.getAccount().getYellowFields()[1], this.p.getAccount().getYellowFields()[2],
-				this.p.getAccount().getPurpleFields()[0], this.p.getAccount().getPurpleFields()[1]};
+				this.p.getAccount().getPurpleFields()[0], this.p.getAccount().getPurpleFields()[1]
+				};
 
 		int count = 0;
 		for (int i = 0; i < temp.length; i++) 
