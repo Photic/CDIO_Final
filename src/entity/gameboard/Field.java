@@ -25,6 +25,11 @@ public abstract class Field {
 		this.index = index;
 	}
 	
+	//--------------------------------------------------------//
+	//														 //
+	//                   Getters & Setters!					 //
+	//														 //
+	//--------------------------------------------------------//
 	public String getName() {
 		return this.name;
 	}

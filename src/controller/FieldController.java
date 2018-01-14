@@ -234,7 +234,6 @@ public class FieldController {
 		if (field.getColor() == this.gameBoard.getPurple())
 			checker = field.getOwner().getAccount().isAllpurple();
 
-
 		return checker;
 	}
 
@@ -474,9 +473,11 @@ public class FieldController {
 		return this.hc;
 	}
 
-	/**
-	 * Get all Colors.
-	 */
+	//--------------------------------------------------------//
+	//														 //
+	//                   Getters & Setters!					 //
+	//														 //
+	//--------------------------------------------------------//
 	public Color getBlue() {
 		return this.gameBoard.getBlue();
 	}
