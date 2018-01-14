@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import boundary.AudioPlayer;
 import boundary.TextReader;
@@ -16,6 +17,7 @@ import entity.gameboard.Tax;
 import entity.gameboard.Territory;
 import entity.player.Player;
 import entity.player.PlayerList;
+import main.Main;
 
 /**
  * The FieldController controls the gameboard and the main responsibility of the controller, is to evaluate actions to be executed, when a player lands on a given field.
@@ -26,15 +28,23 @@ public class FieldController {
 
 	private GameBoard gameBoard;
 	private HouseController hc;
+	private String[] description;
 	
 	/**
 	 * FieldControllers contructor 
-	 * @param name
+	 * @param text
 	 * a text reader loaded from a TextReader class
 	 */
-	public FieldController(TextReader name) {
-		this.gameBoard = new GameBoard(name);
-		this.hc = new HouseController(name);
+	public FieldController(TextReader text) {
+		this.gameBoard = new GameBoard(text);
+		this.hc = new HouseController(text);
+		
+		try {
+			this.description = text.textFromFile(Main.class.getResourceAsStream("rsc/FieldController.txt"));
+		} catch (IOException e) {
+			System.err.println("Something went wrong when trying to import Text from TextReader in FieldController: " + e);
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -121,7 +131,7 @@ public class FieldController {
 				String buyer = gui.auctionTerritory(p, plist, field);
 
 				//is there a owner?
-				if (!(buyer.equals("Ingen Køber"))) {
+				if (!(buyer.equals(this.description[0]))) {
 					//the input price from the user
 					int price = gui.priceToSell();
 					dac.playCoinSound();
@@ -311,7 +321,6 @@ public class FieldController {
 				field.setOwner(p);
 				field.setOwned(true);
 				gui.setOwnerText(p);
-
 
 			}
 			//GUI messege about the transaction

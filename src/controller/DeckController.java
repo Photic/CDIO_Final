@@ -254,7 +254,7 @@ public class DeckController {
 	 * @param p
 	 */
 	public void removeAntiJailCard(Player p) {
-		for (int i = 0; i <= deck.getLength(); i++) {
+		for (int i = 0; i <= this.deck.getLength(); i++) {
 			if (this.deck.getCard(i) instanceof AntiJailCard && p.getName() == this.deck.getCard(i).getCardOwner()) {
 				this.deck.getCard(i).addRemoveCardOwner(null, false);
 				p.getAccount().removeAntiJailCard();

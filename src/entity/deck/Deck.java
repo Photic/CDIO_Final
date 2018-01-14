@@ -19,7 +19,7 @@ public class Deck {
 		try {
 			this.description = text.textFromFile(Main.class.getResourceAsStream("rsc/DescriptionsChanceCards.txt"));
 		} catch (IOException e) {
-			System.err.println("Something went wrong when trying to import Text from TextReader in Deck");
+			System.err.println("Something went wrong when trying to import Text from TextReader in Deck: " + e);
 			e.printStackTrace();
 		}
 		
