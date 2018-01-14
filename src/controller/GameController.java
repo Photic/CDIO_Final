@@ -61,9 +61,6 @@ public class GameController {
 	 */
 	private void gameLoop() {
 		boolean checker;
-
-//		fc.evaluateField(fc.getField(1), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
-//		fc.evaluateField(fc.getField(3), gui, playerList.getPlayer(0), 0, dc, playerList, dac);
 			
 		if (this.alivePlayers == 1) {																	// If there is only 1 player alive
 			for (int i = 0; i < this.playerList.getLength(); i++) 										// Loop through the playerlist
