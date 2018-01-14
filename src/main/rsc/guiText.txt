@@ -2,8 +2,8 @@ Hvor mange spillere er i?_
 Spiller _
 ' navn?_
 De registrede spillere er: _
-, har i forvejen _
- hus(e)._
+, _
+, Huse: _
 Hvilken grund vil du bygge et hus på?_
 Du købte et hus til _
  til _
@@ -77,4 +77,5 @@ Hvilket territory vil du sælge?_
 Hvor meget oven i grundens pris vil du give?_
 Hvad er den aftalte pris?_
 Gør intet_
- 
+ Huspris: _ 
+ kr._

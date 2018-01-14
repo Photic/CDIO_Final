@@ -168,7 +168,6 @@ public class GUIController {
 			colorCheck[i] = c[i];
 
 		for (int k = 0; k < colorCheck.length; k++) {																						// Loop through the unique colors
-
 			int lengthOfArray = 0;
 			for (int l = 0; l < fields.length; l++) 																							// Loop through the fields
 				if (fields[l].getColor().toString().equals(colorCheck[k])) 																	// I the current field's color is the current color in the unique color list
@@ -184,7 +183,8 @@ public class GUIController {
 					count++;
 				}
 
-
+			sameHeight = true;
+			highestHouse = currentFields[0].getHouses();
 			for (int i = 0; i < currentFields.length; i++) {																				// Loop through the current fields
 				if (currentFields[i].getHouses()>highestHouse)																				// Find the highest house
 					highestHouse = currentFields[i].getHouses();																			
@@ -194,34 +194,34 @@ public class GUIController {
 			}
 
 			// Now we need to figure out which options the player should have. The player should not be able to build uneven, and thus same heigth defines the options
-																									// If the highest House is not 5 (else nothing happens)
+			// If the highest House is not 5 (else nothing happens)
 
-				if (sameHeight == true && highestHouse != 5) {																									// If they are the same heigth
-					territories = new String[currentFields.length];																			// All the current fields should be presented as a option to the player
+			if (sameHeight == true && highestHouse != 5) {																									// If they are the same heigth
+				territories = new String[currentFields.length];																			// All the current fields should be presented as a option to the player
 
-					for (int i = 0; i < territories.length; i++) 
-						territories[i] = currentFields[i].getName() + this.description[4] + currentFields[i].getHouses() + this.description[5];	
+				for (int i = 0; i < territories.length; i++) 
+					territories[i] = currentFields[i].getName() + this.description[5] + currentFields[i].getHouses() + this.description[4] + this.description[79] + currentFields[i].getHousePrice() + this.description[80];	
 
-				} else {																													// If they are not the same heigth, only the lower ones should be an option
+			} else {																													// If they are not the same heigth, only the lower ones should be an option
 
-					int counting = 0;
-					for (int i = 0; i < currentFields.length; i++) 																			// Figure out how many of the current fields have lower houses
-						if (currentFields[i].getHouses() < highestHouse) 
-							counting++;
+				int counting = 0;
+				for (int i = 0; i < currentFields.length; i++) 																			// Figure out how many of the current fields have lower houses
+					if (currentFields[i].getHouses() < highestHouse) 
+						counting++;
 
-					territories = new String[counting];																						// Create a new array with that amount.
+				territories = new String[counting];																						// Create a new array with that amount.
 
-					int countere = 0;
-					for (int i = 0; i < currentFields.length; i++) 																			// Put the fields with low houses in that array
-						if ((currentFields[i].getHouses() < highestHouse) && currentFields[i].getHouses()<5) {
-							territories[countere] = currentFields[i].getName() + this.description[4] + currentFields[i].getHouses() + this.description[5];
-							countere++;
-						}
-				}
-			
+				int countere = 0;
+				for (int i = 0; i < currentFields.length; i++) 																			// Put the fields with low houses in that array
+					if ((currentFields[i].getHouses() < highestHouse) && currentFields[i].getHouses()<5) {
+						territories[countere] =currentFields[i].getName() + this.description[5] + currentFields[i].getHouses() + this.description[4] + this.description[79] + currentFields[i].getHousePrice() + this.description[80];
+						countere++;
+					}
+			}
+
 
 			output = combineStringArrays(output, territories);																				// Combine the current territories into the output array. (So that different colors are handled seperately)
-			
+
 		}
 
 		//Now we have fields to be represented ready and ask the user which one he would like to build on.
@@ -250,7 +250,7 @@ public class GUIController {
 							this.description[11]);
 				}
 		}
-		
+
 	} 
 
 	/**
@@ -274,7 +274,7 @@ public class GUIController {
 
 			for (int i = 0; i < fields.length; i++) 
 				if (fields[i].getHouses()>0) {
-					hasHouses[counter] = fields[i].getName() + this.description[4] + fields[i].getHouses() + this.description[5];
+					hasHouses[counter] = fields[i].getName() + this.description[5] + fields[i].getHouses() + this.description[4] + this.description[79] + fields[i].getHousePrice() + this.description[80];
 					counter++;
 				}
 
