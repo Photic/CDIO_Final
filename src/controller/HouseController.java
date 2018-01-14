@@ -79,18 +79,21 @@ public class HouseController {
 		//Field to sell
 		if (terriToSell != null) {
 			String buyer = gui.sellTerritory(pList.getPlayer(i), pList);
-			if (!(buyer.equals(this.description[4]))) {																			//if the seller wants to sell to somebody else than the bank
-				int sellPrice = gui.priceToSell();
-				dac.playCoinSound();
-				
-				for (int j = 0; j < pList.getLength(); j++) 																//loops through the playerlist to find the matching buyer
-					if (buyer.equals(pList.getPlayer(j).getName())) 									
-						sellPropToPlayer(pList.getPlayer(i), pList.getPlayer(j), fc, terriToSell, gui, sellPrice);
+			if (!(buyer.equals(description[0]))) {
+				if (!(buyer.equals(this.description[4]))) {																			//if the seller wants to sell to somebody else than the bank
+					int sellPrice = gui.priceToSell();
+					dac.playCoinSound();
+					
+					for (int j = 0; j < pList.getLength(); j++) 																//loops through the playerlist to find the matching buyer
+						if (buyer.equals(pList.getPlayer(j).getName())) 									
+							sellPropToPlayer(pList.getPlayer(i), pList.getPlayer(j), fc, terriToSell, gui, sellPrice);
+				}
+				if (buyer.equals(this.description[4])) {																				//if the seller wants to sell to the bank
+					dac.playCoinSound();
+					sellPropToBank(pList.getPlayer(i), fc, terriToSell, gui);
+				}
 			}
-			if (buyer.equals(this.description[4])) {																				//if the seller wants to sell to the bank
-				dac.playCoinSound();
-				sellPropToBank(pList.getPlayer(i), fc, terriToSell, gui);
-			}
+
 		}
 
 	}
