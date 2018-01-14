@@ -117,7 +117,7 @@ public class FieldController {
 				//is there a owner?
 				if (!(buyer.equals(this.description[0]))) {
 					//the input price from the user
-					int price = gui.priceToSell(true);//ændring her
+					int price = gui.priceToSellToOther();//ændring her
 					dac.playCoinSound();
 					//loop through the playerlist, and when the player(i) matches the buyer, then begin all the buy field things.
 					for (int i = 0; i < plist.getLength(); i++) 

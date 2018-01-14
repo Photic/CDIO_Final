@@ -436,14 +436,6 @@ public class GUIController {
 	public int priceToSell() {
 		return this.gui.getUserInteger(this.description[81]); //her er vi
 	}
-	
-	/**
-	 * A message to ask for how much a player will pay + the fields price
-	 * @return
-	 */
-	public int priceToSell(boolean y) {
-		return this.gui.getUserInteger(this.description[76]); //her er vi
-	}
 
 	/**
 	 * A message when you want to sell to another player
