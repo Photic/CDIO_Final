@@ -13,9 +13,9 @@ public class HouseController {
 
 	private String[] description;
 
-	public HouseController(TextReader tr){
+	public HouseController(TextReader text){
 		try {
-			this.description = tr.textFromFile(Main.class.getResourceAsStream("rsc/houseController.txt"));
+			this.description = text.textFromFile(Main.class.getResourceAsStream("rsc/houseController.txt"));
 		} catch (IOException e) {
 			System.out.println("Something went wrong in the GUIController constructor: " + e);
 			e.printStackTrace();
@@ -70,26 +70,26 @@ public class HouseController {
 	/**
 	 * This method uses either of the next 2 methods (sellPropToBank & sellPropToPlayer) by determine which to run 
 	 * @param gui
-	 * @param playerList
+	 * @param pList
 	 * @param fc
 	 * @param i
 	 */
-	private void sellProp(GUIController gui, PlayerList playerList, FieldController fc, int i, AudioPlayer dac) {
-		Field terriToSell = gui.sellTerritoryProp(playerList.getPlayer(i));	
+	private void sellProp(GUIController gui, PlayerList pList, FieldController fc, int i, AudioPlayer dac) {
+		Field terriToSell = gui.sellTerritoryProp(pList.getPlayer(i));	
 		//Field to sell
 		if (terriToSell != null) {
-			String buyer = gui.sellTerritory(playerList.getPlayer(i), playerList);
+			String buyer = gui.sellTerritory(pList.getPlayer(i), pList);
 			if (!(buyer.equals(this.description[4]))) {																			//if the seller wants to sell to somebody else than the bank
 				int sellPrice = gui.priceToSell();
 				dac.playCoinSound();
 				
-				for (int j = 0; j < playerList.getLength(); j++) 																//loops through the playerlist to find the matching buyer
-					if (buyer.equals(playerList.getPlayer(j).getName())) 									
-						sellPropToPlayer(playerList.getPlayer(i), playerList.getPlayer(j), fc, terriToSell, gui, sellPrice);
+				for (int j = 0; j < pList.getLength(); j++) 																//loops through the playerlist to find the matching buyer
+					if (buyer.equals(pList.getPlayer(j).getName())) 									
+						sellPropToPlayer(pList.getPlayer(i), pList.getPlayer(j), fc, terriToSell, gui, sellPrice);
 			}
 			if (buyer.equals(this.description[4])) {																				//if the seller wants to sell to the bank
 				dac.playCoinSound();
-				sellPropToBank(playerList.getPlayer(i), fc, terriToSell, gui);
+				sellPropToBank(pList.getPlayer(i), fc, terriToSell, gui);
 			}
 		}
 
