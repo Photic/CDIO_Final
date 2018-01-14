@@ -55,13 +55,13 @@ public class DeckController {
 		}
 
 		// Saves the first card picked, If the first card picked is then picked again later in game, then shuffle the deck and pick another card.
-		if(!firstGameCycle) {
-			firstCardPicked = this.deck.getLastCard();
-			firstGameCycle = true;
-		} else if (cardPicked == firstCardPicked) {
+		if(!this.firstGameCycle) {
+			this.firstCardPicked = this.deck.getLastCard();
+			this.firstGameCycle = true;
+		} else if (cardPicked == this.firstCardPicked) {
 			this.deck.shuffleCards();
 			this.chanceField(p, plist, gui, fc, dac);
-			firstGameCycle = false;
+			this.firstGameCycle = false;
 		}
 
 		gui.chanceMessage(cardPicked.getDescription());
