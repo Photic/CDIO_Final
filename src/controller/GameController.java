@@ -75,7 +75,7 @@ public class GameController {
 				if (this.playerList.getPlayer(j).isBankrupt() == false 									// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == false) {							// and if the player is not in jail
 
-					fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc, this.dac);		// Let the fieldController handle the turn.
+					this.fc.getHc().houseControl(this.playerList, j, this, this.gui, this.fc, this.dac);		// Let the fieldController handle the turn.
 
 				} else if (this.playerList.getPlayer(j).isBankrupt() == false 							// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == true) {								// and the player IS in jail
@@ -90,11 +90,8 @@ public class GameController {
 					this.playerList.getPlayer(j).setNumberOfEqualDice(0);									// Set the players doubleDice counter to 0
 					j++;																					// and increase the index (so that it is the next players turn)
 				}
-
 			}
 		}
-
-
 	}
 	
 	/**
@@ -219,7 +216,7 @@ public class GameController {
 			int decision = this.gui.inJailDecision(p);
 
 			if (decision == 1) {
-				dac.playCoinSound();
+				this.dac.playCoinSound();
 				p.getAccount().addBalance(-1000);
 				p.setInJail(false);
 				this.gui.updateBalance(p);
@@ -255,6 +252,4 @@ public class GameController {
 
 	}
 
-
 }
-
