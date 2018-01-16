@@ -243,7 +243,8 @@ public class GameController {
 				p.getAccount().removeAntiJailCard();
 				p.setInJail(false);
 				this.gui.antiJailUsed(p);
-
+				this.dc.removeAntiJailCard(p);
+				
 			}
 
 		}

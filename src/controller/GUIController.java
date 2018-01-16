@@ -67,7 +67,7 @@ public class GUIController {
 	public PlayerList registerPlayerCount(AudioPlayer dac) {
 
 		String[] nopArray = {"2", "3", "4", "5", "6"};																// The array with the options of how many players to register
-		String nop = this.gui.getUserSelection(this.description[0], nopArray);										// The choice the players make
+		String nop = this.gui.getUserSelection(this.description[0], nopArray);										// The choice the players makes
 		GUI_Car gui_car;																								// Get ready to make a car for every player
 		String name;																									// Get ready to save a given playername
 		Color[] colors = new Color[] {Color.red, Color.black, Color.blue, Color.yellow, Color.white, Color.green};
@@ -167,14 +167,14 @@ public class GUIController {
 		for (int i = 0; i < colorCheck.length; i++) 
 			colorCheck[i] = c[i];
 
-		for (int k = 0; k < colorCheck.length; k++) {																						// Loop through the unique colors
+		for (int k = 0; k < colorCheck.length; k++) {												// Loop through the unique colors
 			int lengthOfArray = 0;
-			for (int l = 0; l < fields.length; l++) 																							// Loop through the fields
-				if (fields[l].getColor().toString().equals(colorCheck[k])) 																	// I the current field's color is the current color in the unique color list
+			for (int l = 0; l < fields.length; l++) 													// Loop through the fields
+				if (fields[l].getColor().toString().equals(colorCheck[k])) 							// I the current field's color is the current color in the unique color list
 					lengthOfArray++;
 
 
-			Field[] currentFields = new Field[lengthOfArray];																					// Now it creates an array with fields of the current color
+			Field[] currentFields = new Field[lengthOfArray];										// Now it creates an array with fields of the current color
 			int count = 0;
 
 			for (int l = 0; l < fields.length; l++) 
@@ -185,55 +185,61 @@ public class GUIController {
 
 			sameHeight = true;
 			highestHouse = currentFields[0].getHouses();
-			for (int i = 0; i < currentFields.length; i++) {																				// Loop through the current fields
-				if (currentFields[i].getHouses()>highestHouse)																				// Find the highest house
+			for (int i = 0; i < currentFields.length; i++) {											// Loop through the current fields
+				if (currentFields[i].getHouses()>highestHouse)										// Find the highest house
 					highestHouse = currentFields[i].getHouses();																			
 
-				if (!(currentFields[i].getHouses() == currentFields[0].getHouses())) 														// If the current house is different from the first in the array
-					sameHeight = false;																										// Then they are not the same height.
+				if (!(currentFields[i].getHouses() == currentFields[0].getHouses())) 					// If the current house is different from the first in the array
+					sameHeight = false;																// Then they are not the same height.
 			}
 
 			// Now we need to figure out which options the player should have. The player should not be able to build uneven, and thus same heigth defines the options
 			// If the highest House is not 5 (else nothing happens)
 
-			if (sameHeight == true && highestHouse != 5) {																									// If they are the same heigth
-				territories = new String[currentFields.length];																			// All the current fields should be presented as a option to the player
+			if (sameHeight == true && highestHouse != 5) {											// If they are the same heigth
+				territories = new String[currentFields.length];										// All the current fields should be presented as a option to the player
 
 				for (int i = 0; i < territories.length; i++) 
-					territories[i] = currentFields[i].getName() + this.description[5] + currentFields[i].getHouses() + this.description[4] + this.description[79] + currentFields[i].getHousePrice() + this.description[80];	
+					territories[i] = 
+						currentFields[i].getName() + this.description[5] + 
+						currentFields[i].getHouses() + this.description[4] + this.description[79] + 
+						currentFields[i].getHousePrice() + this.description[80];	
 
-			} else {																													// If they are not the same heigth, only the lower ones should be an option
+			} else {																					// If they are not the same heigth, only the lower ones should be an option
 
 				int counting = 0;
-				for (int i = 0; i < currentFields.length; i++) 																			// Figure out how many of the current fields have lower houses
+				for (int i = 0; i < currentFields.length; i++) 										// Figure out how many of the current fields have lower houses
 					if (currentFields[i].getHouses() < highestHouse) 
 						counting++;
 
-				territories = new String[counting];																						// Create a new array with that amount.
+				territories = new String[counting];													// Create a new array with that amount.
 
 				int countere = 0;
-				for (int i = 0; i < currentFields.length; i++) 																			// Put the fields with low houses in that array
+				for (int i = 0; i < currentFields.length; i++) 										// Put the fields with low houses in that array
 					if ((currentFields[i].getHouses() < highestHouse) && currentFields[i].getHouses()<5) {
-						territories[countere] =currentFields[i].getName() + this.description[5] + currentFields[i].getHouses() + this.description[4] + this.description[79] + currentFields[i].getHousePrice() + this.description[80];
+						territories[countere] = 
+								currentFields[i].getName() + this.description[5] + 
+								currentFields[i].getHouses() + this.description[4] + this.description[79] + 
+								currentFields[i].getHousePrice() + this.description[80];
 						countere++;
 					}
 			}
 
 
-			output = combineStringArrays(output, territories);																				// Combine the current territories into the output array. (So that different colors are handled seperately)
+			output = combineStringArrays(output, territories);				// Combine the current territories into the output array. (So that different colors are handled seperately)
 
 		}
 
 		//Now we have fields to be represented ready and ask the user which one he would like to build on.
-		String[] fortryd = new String[] {this.description[55]};																					// Create a return button.
+		String[] fortryd = new String[] {this.description[55]};											// Create a return button.
 		output = combineStringArrays(output, fortryd);
 
-		String selected = this.gui.getUserSelection(this.description[6], output);																		// Ask for user selection
-		String real = selected.split(",")[0];																								// Split the string (so that we only have the name of the territory in a string.
+		String selected = this.gui.getUserSelection(this.description[6], output);							// Ask for user selection
+		String real = selected.split(",")[0];															// Split the string (so that we only have the name of the territory in a string).
 
-		if (!(real.equals(this.description[55]))) { 																						// If the return button is not pressed
+		if (!(real.equals(this.description[55]))) { 														// If the return button is not pressed
 			dac.playCoinSound();
-			for (int i = 0; i < fields.length; i++) 																						// find the field chosen, and but a house on it and make the owner pay for it.
+			for (int i = 0; i < fields.length; i++) 													    // find the field chosen, and buy a house on it and make the owner pay for it.
 				if (fields[i].getName().equals(real)) {
 					fields[i].getOwner().getAccount().setHousesowned(fields[i].getOwner().getAccount().getHousesowned() + 1);
 
@@ -274,7 +280,10 @@ public class GUIController {
 
 			for (int i = 0; i < fields.length; i++) 
 				if (fields[i].getHouses()>0) {
-					hasHouses[counter] = fields[i].getName() + this.description[5] + fields[i].getHouses() + this.description[4] + this.description[79] + fields[i].getHousePrice() + this.description[80];
+					hasHouses[counter] = 
+							fields[i].getName() + this.description[5] + 
+							fields[i].getHouses() + this.description[4] + this.description[79] + 
+							fields[i].getHousePrice() + this.description[80];
 					counter++;
 				}
 
