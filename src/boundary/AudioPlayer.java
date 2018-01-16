@@ -66,7 +66,6 @@ public class AudioPlayer {
 
 		} catch (Exception e) {
 			System.out.println("Something went wrong in the AudioPlayers method, playSound(File file)" + e);
-			// TODO: handle exception
 		}
 		
 	}

@@ -69,8 +69,7 @@ public class GameController {
 		} else {
 			// Now starts the "normal game"
 			int j = 0;
-			while (j < this.playerList.getLength()) {													// Loop through the playerlist
-
+			while (j < this.playerList.getLength()) {													// Loop through the playerlist.
 
 				if (this.playerList.getPlayer(j).isBankrupt() == false 									// If the player is not bankrupt
 						&& this.playerList.getPlayer(j).isInJail() == false) {							// and if the player is not in jail
